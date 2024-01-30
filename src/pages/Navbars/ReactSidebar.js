@@ -49,7 +49,8 @@ const ReactSidebar = ({ sidebarItems , onClick}) => {
         fontWeight:"bolder",
         width:"100%",
         height:"100%",
-        borderColor:"#313947"
+        borderColor:"#313947",
+       
   }}>
         <Menu  iconShape="circle">
           {renderMenuItems(sidebarItems)}

@@ -15,14 +15,14 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<MdOutlineAdminPanelSettings size={20} />,
     "order_index": 1,
-    "url": "/Dashboard"
+    "url": "/admin/Dashboard"
   },{
     "id": 2,
     "label": "User List",
     "parent_id": null,
     "icon":<PiUserListBold size={20}/>,
     "order_index": 2,
-    "url": "/Traininfo",
+    "url": "/admin/Traininfo",
   },
   {
     "id": 3,
@@ -30,7 +30,7 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<FaTrainSubway size={20}/>,
     "order_index": 3,
-    "url": "/Train",
+    "url": "/admin/Train",
   },
   {
     "id": 4,
@@ -38,7 +38,7 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<BiStation  size={20}/>,
     "order_index": 4,
-    "url": "/Station",
+    "url": "/admin/Station",
   },
   {
     "id": 5,
@@ -46,7 +46,7 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<IoMdNotifications  size={20}/>,
     "order_index": 5,
-    "url": "/Notification",
+    "url": "/admin/Notification",
   },  
   {
     "id": 6,
@@ -54,7 +54,7 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<CiSquareQuestion size={20}/>,
     "order_index": 6,
-    "url": "/Withdrawrequest",
+    "url": "/admin/Withdrawrequest",
   },
   {
     "id": 7,
@@ -62,7 +62,7 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<MdOutlineWorkHistory  size={20}/>,
     "order_index": 7,
-    "url": "/Withdrawhistory",
+    "url": "/admin/Withdrawhistory",
   },
   {
     "id": 8,
@@ -70,6 +70,6 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<MdFeedback   size={20}/>,
     "order_index": 8,
-    "url": "/FeedBack",
+    "url": "/admin/FeedBack",
   },
 ];

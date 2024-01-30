@@ -33,72 +33,64 @@ export default function Router() {
      
       children: [
         {
-          path: "/Dashboard",
+          path: "/admin",
           element: (
             <AuthGuard>
               <DashboardLayout/>
             </AuthGuard>
           ),
           children:[
+            {
+              path: "/admin/Train",
+              element: (
+                <AuthGuard>
+                  <Train/>
+                </AuthGuard>
+              ),
+            },
+            {
+              path: "/admin/Station",
+              element: (
+                <AuthGuard>
+                  <Station/>
+                </AuthGuard>
+              ),
+            },
+    
+    
+            {
+              path: "/admin/Traininfo",
+              element: (
+                <AuthGuard>
+                  <TrainInfo/>
+                </AuthGuard>
+              ),
+            },
+    
 
+            {
+              path: "/admin/Dash",
+              element: (
+                <AuthGuard>
+                  <Dash/>
+                </AuthGuard>
+              ),
+            },
+    
+            {
+              path: "/admin/Notification",
+              element: (
+                <AuthGuard>
+                  <Notification/>
+                </AuthGuard>
+              ),
+            },
           ]
         },
-        {
-          path: "Traininfo",
-          element: (
-            <AuthGuard>
-              <TrainInfo/>
-            </AuthGuard>
-          ),
-          children:[
-
-          ]
-        },
-        {
-          path: "Train",
-          element: (
-            <AuthGuard>
-              <Train/>
-            </AuthGuard>
-          ),
-          children:[
-
-          ]
-        },
+      
+        
        
-        {
-          path: "Station",
-          element: (
-            <AuthGuard>
-              <Station/>
-            </AuthGuard>
-          ),
-          children:[
-
-          ]
-        },
-        {
-          path: "Notification",
-          element: (
-            <AuthGuard>
-              <Notification/>
-            </AuthGuard>
-          ),
-          children:[
-
-          ]
-        },
-        {
-          path: "Dash",
-          element: (
-            <AuthGuard>
-              <Dash/>
-            </AuthGuard>
-          ),
-          children:[
-
-          ]
-        },
+      
       ],
     },
     // {

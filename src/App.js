@@ -1,18 +1,14 @@
-
-import './App.css';
-import Router from './routes';
+import React from "react";
+import Router from "./routes";
+import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 
 
 function App() {
   return (
-    <div className="App">
+    <div style={{ backgroundColor: "#f0f4f7" }}>
+      <Router />
     
-    <Router/>
-    
-        
     </div>
   );
 }
