@@ -24,8 +24,8 @@ const Station = () => {
   const navigate = useNavigate();
   const handleNavigateAddForm = () => navigate(`/StationAddForm`);
    useEffect(() => {
-    if (getStationData && getStationData.data) {
-      setData(getStationData.data);
+    if (getStationData && getStationData) {
+      setData(getStationData.data.data);
       setTotalPages(getStationData.totalPages);
       setCurrentPage(getStationData.currentPage);
     }

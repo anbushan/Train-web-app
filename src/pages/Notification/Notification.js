@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
@@ -59,20 +59,20 @@ const Notification = () => {
       accessor: (d, i) => i + 1,
     },
     {
-      Header: "Email",
-      accessor: "email",
+      Header: "Title",
+      accessor: "title",
       width: "auto",
       minWidth: 100,
     },
     {
-      Header: "Password",
-      accessor: "password",
+      Header: "Body",
+      accessor: "body",
       width: "auto",
       minWidth: 100,
     },
     {
-      Header: "Referal ID",
-      accessor: "referralId",
+      Header: "Image",
+      accessor: "image",
     },
     {
       Header: "ACTIONS",
@@ -84,11 +84,13 @@ const Notification = () => {
         return (
           <div className="d-flex align-items-center justify-content-center flex-row">
             <Link to={`/admin/edit-Notification/`}>
-              <FaEdit size={20} color="#5046e5" />
-            </Link>
-            <span className="m-1">
-              <MdDelete size={20} color="#5046e5" />
-            </span>
+            <Button variant="warning">
+              <FaEdit />
+            </Button>
+          </Link>
+          <Button variant="danger" className="m-1" >
+            <MdDelete />
+          </Button>
           </div>
         );
    },
@@ -104,7 +106,7 @@ const Notification = () => {
               <Col className="">
                 <Header
                   ONCLICK={handleNavigateAddForm}
-                  HEADING="Notification"
+                  HEADING=" Notification"
                   BUTTON_NAME="Add Notification"
                   headingClassName="text-center text-md-start m-md-4 m-xl-2"
                 />
@@ -122,7 +124,7 @@ const Notification = () => {
               >
                 <BasicTable
                   COLUMNS={COLUMNS}
-                  MOCK_DATA={data}
+                  MOCK_DATA={NotificationData}
                   currentPage={currentPage}
                   totalPages={totalPages}
                   setCurrentPage={setCurrentPage}
