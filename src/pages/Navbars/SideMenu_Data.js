@@ -2,11 +2,11 @@
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { PiUserListBold } from "react-icons/pi";
 import { FaTrainSubway } from "react-icons/fa6";
-import { BiStation } from "react-icons/bi";
 import { IoMdNotifications } from "react-icons/io";
-import { CiSquareQuestion } from "react-icons/ci";
 import { MdOutlineWorkHistory } from "react-icons/md";
 import { MdFeedback } from "react-icons/md";
+import { GiRailway } from "react-icons/gi";
+import { BiMoneyWithdraw } from "react-icons/bi";
 
 export const sidebarItems = [
   {
@@ -22,7 +22,7 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<PiUserListBold size={20}/>,
     "order_index": 2,
-    "url": "/admin/Traininfo",
+    "url": "/admin/Userlist",
   },
   {
     "id": 3,
@@ -36,7 +36,7 @@ export const sidebarItems = [
     "id": 4,
     "label": "Station",
     "parent_id": null,
-    "icon":<BiStation  size={20}/>,
+    "icon":<GiRailway  size={20}/>,
     "order_index": 4,
     "url": "/admin/Station",
   },
@@ -52,7 +52,7 @@ export const sidebarItems = [
     "id": 6,
     "label": "Withdraw request",
     "parent_id": null,
-    "icon":<CiSquareQuestion size={20}/>,
+    "icon":<BiMoneyWithdraw size={20}/>,
     "order_index": 6,
     "url": "/admin/Withdrawrequest",
   },
@@ -70,6 +70,6 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<MdFeedback   size={20}/>,
     "order_index": 8,
-    "url": "/admin/FeedBack",
+    "url": "/admin/Feedback",
   },
 ];
