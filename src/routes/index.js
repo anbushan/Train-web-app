@@ -59,7 +59,7 @@ export default function Router() {
     
     
             {
-              path: "/admin/Traininfo",
+              path: "/admin/Userlist",
               element: (
                 <AuthGuard>
                   <TrainInfo/>
@@ -69,10 +69,10 @@ export default function Router() {
     
 
             {
-              path: "/admin/Dash",
+              path: "/admin/Dashboard",
               element: (
                 <AuthGuard>
-                  <Dash/>
+                  <Dashboard/>
                 </AuthGuard>
               ),
             },
@@ -82,6 +82,15 @@ export default function Router() {
               element: (
                 <AuthGuard>
                   <Notification/>
+                </AuthGuard>
+              ),
+            },
+
+            {
+              path: "/admin/Feedback",
+              element: (
+                <AuthGuard>
+                  <FeedBack/>
                 </AuthGuard>
               ),
             },
@@ -117,7 +126,10 @@ const Station = Loadable(lazy(()=>import("../pages/Station/Station")));
 const Notification = Loadable(lazy(()=>import("../pages/Notification/Notification")));
 
 
-const Dash = Loadable(lazy(()=>import("../pages/Dashboard/Dashboard")));
+const Dashboard = Loadable(lazy(()=>import("../pages/Dashboard/Dashboard")));
+
+
+const FeedBack = Loadable(lazy(()=>import("../pages/FeedBack/FeedBack")));
 
 
 // const NotFound = Loadable(lazy(() => import("../pages/404/Page404")));
