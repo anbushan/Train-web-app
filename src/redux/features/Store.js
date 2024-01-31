@@ -5,6 +5,7 @@ import { TrainInfoApi } from "./api/TrainInfoApi";
 import { TrainApi } from "./api/TrainApi";
 import { StationApi } from "./api/StationApi";
 import { NotificationApi } from "./api/NotificationApi";
+import { FeedbackApi } from "./api/FeedBackApi";
 
 export const store = configureStore({
   reducer: {
@@ -14,11 +15,12 @@ export const store = configureStore({
     [TrainApi.reducerPath]:TrainApi.reducer,
     [StationApi.reducerPath]:StationApi.reducer,
     [NotificationApi.reducerPath]:NotificationApi.reducer,
+    [FeedbackApi.reducerPath]:FeedbackApi.reducer,
     },
   devTools: process.env.NODE_ENV === "development",
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
-      AuthApi.middleware,TrainInfoApi.middleware,TrainApi.middleware,StationApi.middleware,NotificationApi.middleware,
+      AuthApi.middleware,TrainInfoApi.middleware,TrainApi.middleware,StationApi.middleware,NotificationApi.middleware,FeedbackApi.middleware,
 
        ]),
 });
