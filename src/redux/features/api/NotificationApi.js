@@ -7,8 +7,8 @@ export const NotificationApi = createApi({
   tagTypes: ["NOTIFICATION"],
   endpoints: (build) => ({
     getNotification: build.query({
-      query: (page) => ({
-        url: `/getNotification${page}`,
+      query: () => ({
+        url: `/getNotification`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
