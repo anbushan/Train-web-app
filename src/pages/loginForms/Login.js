@@ -43,10 +43,13 @@ const Login = () => {
 
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
-        history("/admin/Traininfo");
+        console.log(response);
+        history("/admin/Dashboard");
       } else {
-        toast.error(response?.error?.data?.message, { autoClose: 1000 });
-      }
+        toast.error(response?.error?.data.error, { autoClose: 1000 });
+        console.log("else part");
+        console.log(response.error);
+       }
     } catch (error) {
       console.error(error);
     }
