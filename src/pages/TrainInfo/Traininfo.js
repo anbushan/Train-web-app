@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import BasicTable from "../../components/BasicTable";
 import Header from "../../components/Header";
 import Loader from "../../pages/loginForms/loader/Loader";
 import {
   useGetTrainInfoApiQuery,
 } from "../../redux/features/api/TrainInfoApi";
-import { toast } from "react-toastify";
+
 
 const TrainInfo = () => {
   const navigate = useNavigate();
@@ -18,7 +16,7 @@ const TrainInfo = () => {
 //   const [idToDelete, setIdToDelete] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const { data: getTrainData, isLoading } = useGetTrainInfoApiQuery(currentPage);
-  const handleNavigateAddForm = () => navigate("/admin/add-info");
+  const handleNavigateAddForm = () => navigate("/admin/Add-User");
   useEffect(() => {
     if (getTrainData && getTrainData.data) {
       setData(getTrainData.data);
@@ -61,51 +59,52 @@ const TrainInfo = () => {
     {
       Header: "Email",
       accessor: "email",
-      width: "auto",
-      minWidth: 100,
+      // width: "auto",
+      // minWidth: 100,
     },
     {
       Header: "Password",
       accessor: "password",
-      width: "auto",
-      minWidth: 100,
+      // width: "auto",
+      // minWidth: 100,
     },
     {
       Header: "Referal ID",
       accessor: "referralId",
     },
-    {
-      Header: "ACTIONS",
-      accessor: "action",
-      fixed: "right",
-      Cell: (props) => {
-        const rowIdx = props.row.original._id;
+  //   {
+  //     Header: "ACTIONS",
+  //     accessor: "action",
+  //     fixed: "right",
+  //     Cell: (props) => {
+  //       const rowIdx = props.row.original._id;
 
-        return (
-          <div className="d-flex align-items-center justify-content-center flex-row">
-            <Link to={`/admin/edit-scheme/`}>
-              <FaEdit size={20} color="#5046e5" />
-            </Link>
-            <span className="m-1">
-              <MdDelete size={20} color="#5046e5" />
-            </span>
-          </div>
-        );
-   },
-    },
+  //       return (
+  //         <div className="d-flex align-items-center justify-content-center flex-row">
+  //           <Link to={`/admin/edit-scheme/`}>
+  //             <FaEdit size={20} color="#5046e5" />
+  //           </Link>
+  //           <span className="m-1">
+  //             <MdDelete size={20} color="#5046e5" />
+  //           </span>
+  //         </div>
+  //       );
+  //  },
+  //   },
   ];
 
   return (
     <>
-    
+  
+    {!isLoading ? (
         <>
-          <Container fluid className="my-4">
+          <Container fluid className="my-4" style={{overflow:"hidden"}}>
             <Row>
               <Col className="">
                 <Header
                   ONCLICK={handleNavigateAddForm}
-                  HEADING="Train Info"
-                  BUTTON_NAME="Add UserList"
+                  HEADING="User List"
+                  // BUTTON_NAME="Add UserList"
                   headingClassName="text-center text-md-start m-md-4 m-xl-2"
                 />
               </Col>
@@ -138,7 +137,11 @@ const TrainInfo = () => {
             DELETETITLE="Schemes"
           /> */}
         </>
-      
+   
+      ):(
+        <Loader/>
+        
+      )}
       </>
   );
 };
