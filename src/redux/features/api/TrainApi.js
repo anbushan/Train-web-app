@@ -8,7 +8,7 @@ export const TrainApi = createApi({
   endpoints: (build) => ({
     getTrain: build.query({
       query: (page) => ({
-        url: `/info/trainNames=${page}`,
+        url: `/info/trainNames?page=1&search${page}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -59,7 +59,7 @@ export const TrainApi = createApi({
           "Content-Type": "application/json; charset=UTF-8",
         },
       }),
-      invalidatesTags: ["Train"],
+      invalidatesTags: ["TRAIN"],
     }),
     deleteTrain: build.mutation({
       query: (id) => ({
@@ -69,7 +69,7 @@ export const TrainApi = createApi({
           "Content-Type": "application/json; charset=UTF-8",
         },
       }),
-      invalidatesTags: ["Train"],
+      invalidatesTags: ["TRAIN"],
     }),
   }),
 });
