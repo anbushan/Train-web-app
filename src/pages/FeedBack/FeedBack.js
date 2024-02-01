@@ -26,7 +26,7 @@ const Feedback = () => {
    useEffect(() => {
     if (getFeedbackData && getFeedbackData.data) {
       setData(getFeedbackData.data);
-      setTotalPages(getFeedbackData.totalPages);
+      setTotalPages(getFeedbackData.pagination.totalPages);
       setCurrentPage(getFeedbackData.currentPage);
     }
   }, [getFeedbackData, currentPage]);
