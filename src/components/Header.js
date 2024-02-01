@@ -22,7 +22,7 @@ const Header = (props) => {
             className="d-lg-block d-xxl-block d-none d-sm-none rounded fw-bold text-light"
             onClick={props.ONCLICK}
           >
-            <FaPlus size={20} className="mr-2 fw-bold" />
+            <FaPlus size={18} className="mr-2 fw-bold mx-1" />
             {props.BUTTON_NAME}
           </Button>
         </Col>
