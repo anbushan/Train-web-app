@@ -26,8 +26,8 @@ const Train = () => {
    useEffect(() => {
     if (getTrainData && getTrainData.data) {
       setData(getTrainData.data);
-      setTotalPages(getTrainData.totalPages);
-      setCurrentPage(getTrainData.currentPage);
+      setTotalPages(getTrainData.pagination.totalPages);
+      setCurrentPage(getTrainData.pagination.currentPage);
     }
   }, [getTrainData, currentPage]);
  

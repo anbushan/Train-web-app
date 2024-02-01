@@ -20,7 +20,7 @@ const TrainInfo = () => {
   useEffect(() => {
     if (getTrainData && getTrainData.data) {
       setData(getTrainData.data);
-      setTotalPages(getTrainData.totalPages);
+      setTotalPages(getTrainData.pagination.totalPages);
       setCurrentPage(currentPage);
     }
   }, [getTrainData, currentPage]);
