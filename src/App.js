@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <div style={{ backgroundColor: "#f0f4f7" }}>
+    <div style={{ backgroundColor: "white" }}>
       <Router />
     
     </div>
