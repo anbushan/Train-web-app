@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { useRoutes } from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 import Loader from "../pages/Loader/Loader";
 import GuestGuard from "../guards/GuestGuard";
 import AuthGuard from "../guards/AuthGuard";
@@ -94,6 +94,15 @@ export default function Router() {
                 </AuthGuard>
               ),
             },
+
+            {
+              path: "/admin/Setting",
+              element: (
+                <AuthGuard>
+                  <Setting/>
+                </AuthGuard>
+              ),
+            },
           ]
         },
       
@@ -102,13 +111,13 @@ export default function Router() {
       
       ],
     },
-    // {
-    //   path: "*",
-    //   children: [
-    //     { path: "404", element: <NotFound /> },
-    //     { path: "*", element: <Navigate to="/404" replace /> },
-    //   ],
-    // },
+    {
+       path: "*",
+       children: [
+         { path: "404", element: <NotFound /> },
+         { path: "*", element: <Navigate to="/404" replace /> },
+       ],
+     },
   ]);
 }
 
@@ -131,5 +140,7 @@ const Dashboard = Loadable(lazy(()=>import("../pages/Dashboard/Dashboard")));
 
 const FeedBack = Loadable(lazy(()=>import("../pages/FeedBack/FeedBack")));
 
+const Setting = Loadable(lazy(()=>import("../pages/Setting page/Setting")));
 
-// const NotFound = Loadable(lazy(() => import("../pages/404/Page404")));
+
+const NotFound = Loadable(lazy(() => import("../pages/404/Page404")));
