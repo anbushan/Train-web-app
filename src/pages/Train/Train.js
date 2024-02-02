@@ -22,7 +22,7 @@ const Train = () => {
   const { data: getTrainData, isLoading } = useGetTrainQuery(currentPage);
   
   const navigate = useNavigate();
-  const handleNavigateAddForm = () => navigate(`/TrainAddForm`);
+  const handleNavigateAddForm = () => navigate(`/admin/AddTrain`);
    useEffect(() => {
     if (getTrainData && getTrainData.data) {
       setData(getTrainData.data);
@@ -81,7 +81,7 @@ console.log(getTrainData);
         return (
         
         <div className="d-flex align-items-center justify-content-center flex-row">
-          <Link to={`/TrainEditForm/${rowIdx}`}>
+          <Link to="/admin/EditTrain">
             <Button variant="warning">
               <FaEdit />
             </Button>
