@@ -103,6 +103,24 @@ export default function Router() {
                 </AuthGuard>
               ),
             },
+
+            {
+              path: "/admin/AddTrain",
+              element: (
+                <AuthGuard>
+                  <AddTrain/>
+                </AuthGuard>
+              ),
+            },
+
+            {
+              path: "/admin/EditTrain",
+              element: (
+                <AuthGuard>
+                  <EditTrain/>
+                </AuthGuard>
+              ),
+            },
           ]
         },
       
@@ -141,6 +159,10 @@ const Dashboard = Loadable(lazy(()=>import("../pages/Dashboard/Dashboard")));
 const FeedBack = Loadable(lazy(()=>import("../pages/FeedBack/FeedBack")));
 
 const Setting = Loadable(lazy(()=>import("../pages/Setting page/Setting")));
+
+const AddTrain = Loadable(lazy(()=>import("../pages/Train/AddTrain")));
+
+const EditTrain = Loadable(lazy(()=>import("../pages/Train/EditTrain")));
 
 
 const NotFound = Loadable(lazy(() => import("../pages/404/Page404")));
