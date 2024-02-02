@@ -61,7 +61,7 @@ const AddTrain = () => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("Internal Server Error",{autoClose:2000});
+    //   toast.error("Internal Server Error",{autoClose:2000});
     }
   };
 
