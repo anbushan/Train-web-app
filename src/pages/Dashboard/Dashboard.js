@@ -23,7 +23,7 @@ const Dashboard = () => {
   });
 
   return (
-    <Container>
+    <Container fluid>
       <Row className="mt-4 mx-2">
         <Col className="d-flex align-items-start shadow rounded p-3">
           <h4>Dashboard</h4>
@@ -69,11 +69,11 @@ const Dashboard = () => {
             </div>
           </div>
         </Col>
-
-        <Col sm={12} lg={8} className="mt-3">
-          <Chart options={state.options} series={state.series} type="area" width="80%" />
-        </Col>
       </Row>
+
+      <Row sm={12} lg={4} className="mt-3 d-flex justify-content-center align-items-center shadow rounded">
+          <Chart options={state.options} series={state.series} type="area" width="100%" />
+        </Row>
 
       <Row className="d-flex flex-row justify-content-center align-items-center mb-3">
         <Col sm={12} md={6} lg={6} className="mb-3">
