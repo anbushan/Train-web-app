@@ -22,7 +22,7 @@ const Train = () => {
   const { data: getTrainData, isLoading } = useGetTrainQuery(currentPage);
   
   const navigate = useNavigate();
-  const handleNavigateAddForm = () => navigate(`/admin/AddTrain`);
+  const handleNavigateAddForm = () => navigate(`/admin/add-train`);
    useEffect(() => {
     if (getTrainData && getTrainData.data) {
       setData(getTrainData.data);
@@ -81,7 +81,7 @@ console.log(getTrainData);
         return (
         
         <div className="d-flex align-items-center justify-content-center flex-row">
-          <Link to="/admin/EditTrain">
+          <Link to="/admin/edit-train">
             <Button variant="warning">
               <FaEdit />
             </Button>
@@ -100,13 +100,15 @@ console.log(getTrainData);
     {!isLoading ? (
       <>
     <Container fluid className="mt-3">
-        <Row>
+        <Row className="">
           <Header
             ONCLICK={handleNavigateAddForm}
             HEADING="Train"
             BUTTON_NAME="Add Train"
             
           />
+
+          <hr className="mt-3"/>
          </Row>
          <Row>
           {/* <Filter datePicker={true} textInput={true} textSelect={true}/> */}

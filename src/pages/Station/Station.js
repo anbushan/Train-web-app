@@ -26,8 +26,8 @@ const Station = () => {
    useEffect(() => {
     if (getStationData && getStationData) {
       setData(getStationData.data.StationList);
-      setTotalPages(getStationData.totalPages);
-      setCurrentPage(getStationData.currentPage);
+      setTotalPages(getStationData.pagination.totalPages);
+      setCurrentPage(getStationData.pagination.currentPage);
     }
   }, [getStationData, currentPage]);
  
@@ -114,6 +114,7 @@ console.log(getStationData);
             BUTTON_NAME="Add Station"
             
           />
+                 <hr className="mt-3"/>
          </Row>
          <Row>
           {/* <Filter datePicker={true} textInput={true} textSelect={true}/> */}

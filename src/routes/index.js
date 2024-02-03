@@ -41,7 +41,7 @@ export default function Router() {
           ),
           children:[
             {
-              path: "/admin/Train",
+              path: "/admin/train",
               element: (
                 <AuthGuard>
                   <Train/>
@@ -49,7 +49,7 @@ export default function Router() {
               ),
             },
             {
-              path: "/admin/Station",
+              path: "/admin/station",
               element: (
                 <AuthGuard>
                   <Station/>
@@ -59,7 +59,7 @@ export default function Router() {
     
     
             {
-              path: "/admin/Userlist",
+              path: "/admin/user-list",
               element: (
                 <AuthGuard>
                   <TrainInfo/>
@@ -69,7 +69,7 @@ export default function Router() {
     
 
             {
-              path: "/admin/Dashboard",
+              path: "/admin/dashboard",
               element: (
                 <AuthGuard>
                   <Dashboard/>
@@ -78,7 +78,7 @@ export default function Router() {
             },
     
             {
-              path: "/admin/Notification",
+              path: "/admin/notification",
               element: (
                 <AuthGuard>
                   <Notification/>
@@ -87,7 +87,7 @@ export default function Router() {
             },
 
             {
-              path: "/admin/Feedback",
+              path: "/admin/feedback",
               element: (
                 <AuthGuard>
                   <FeedBack/>
@@ -96,7 +96,7 @@ export default function Router() {
             },
 
             {
-              path: "/admin/Setting",
+              path: "/admin/settings",
               element: (
                 <AuthGuard>
                   <Setting/>
@@ -105,7 +105,7 @@ export default function Router() {
             },
 
             {
-              path: "/admin/AddTrain",
+              path: "/admin/add-train",
               element: (
                 <AuthGuard>
                   <AddTrain/>
@@ -114,10 +114,26 @@ export default function Router() {
             },
 
             {
-              path: "/admin/EditTrain",
+              path: "/admin/edit-train",
               element: (
                 <AuthGuard>
                   <EditTrain/>
+                </AuthGuard>
+              ),
+            },
+            {
+              path: "/admin/withdraw-history",
+              element: (
+                <AuthGuard>
+                  <WithdrawHistory/>
+                </AuthGuard>
+              ),
+            },
+            {
+              path: "/admin/withdraw-request",
+              element: (
+                <AuthGuard>
+                  <WithdrawRequest/>
                 </AuthGuard>
               ),
             },
@@ -144,7 +160,7 @@ const Login = Loadable(lazy(() => import("../pages/loginForms/Login")));
 
 const DashboardLayout = Loadable(lazy(() => import("../pages/Dashboard/DashboardLayout")));
 
-const TrainInfo = Loadable(lazy(()=>import("../pages/TrainInfo/Traininfo")));
+const TrainInfo = Loadable(lazy(()=>import("../pages/Userlist/UserList")));
 
 const Train = Loadable(lazy(()=>import("../pages/Train/Train")));
 
@@ -163,6 +179,10 @@ const Setting = Loadable(lazy(()=>import("../pages/Setting page/Setting")));
 const AddTrain = Loadable(lazy(()=>import("../pages/Train/AddTrain")));
 
 const EditTrain = Loadable(lazy(()=>import("../pages/Train/EditTrain")));
+
+const WithdrawHistory = Loadable(lazy(()=>import("../pages/WithdrawHistory/WithdrawHistory")));
+
+const WithdrawRequest = Loadable(lazy(()=>import("../pages/WithdrawRequest/WithdrawRequest")));
 
 
 const NotFound = Loadable(lazy(() => import("../pages/404/Page404")));

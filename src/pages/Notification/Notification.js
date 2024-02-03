@@ -65,7 +65,7 @@ const Notification = () => {
       minWidth: 100,
     },
     {
-      Header: "Body",
+      Header: "Comments",
       accessor: "body",
       width: "auto",
       minWidth: 100,
@@ -98,9 +98,10 @@ const Notification = () => {
   ];
 
   return (
-    <>
-    
-        <>
+   
+     <div>
+    {!isLoading ? (
+      <>
           <Container fluid className="my-4">
             <Row>
               <Col className="">
@@ -139,9 +140,13 @@ const Notification = () => {
             DESCRIPTION="Confirm to Delete this Scheme"
             DELETETITLE="Schemes"
           /> */}
-        </>
-      
+           
       </>
+      ):(
+        <Loader/>
+        
+      )} 
+    </div>
   );
 };
 

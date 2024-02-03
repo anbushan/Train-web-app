@@ -14,8 +14,8 @@ const ReactSidebar = ({ sidebarItems, onClick }) => {
             className='fs-15 text-bolder'
             active={isActive}
             rootStyles={{
-              backgroundColor: '#313947',
-              color: 'white',
+              backgroundColor: isActive ? 'white' : '#313947',
+              color: isActive ? 'white' : 'black',
               ':hover': {
                 color: 'black',
               },
@@ -40,8 +40,8 @@ const ReactSidebar = ({ sidebarItems, onClick }) => {
               className='fs-15 text-bolder'
               active={isActive}
               rootStyles={{
-                backgroundColor: '#313947',
-                color: 'white',
+                backgroundColor: isActive ? 'white' : '#313947',
+                color: isActive ? 'black' : 'white',
                 ':hover': {
                   color: 'black',
                 },
@@ -58,8 +58,8 @@ const ReactSidebar = ({ sidebarItems, onClick }) => {
   };
 
   return (
-    <div style={{ height: '100vh', overflow:'hidden'}}>
-      <Sidebar 
+    <div style={{ height: '100vh', overflow: 'hidden',backgroundColor:"313947" }}>
+      <Sidebar
         backgroundColor='#313947'
         rootStyles={{
           backgroundColor: '#313947',

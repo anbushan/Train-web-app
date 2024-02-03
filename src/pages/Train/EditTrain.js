@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import BasicButton from "../../components/BasicButton";
 import TextInput from "../../components/TextInput";
-import { useEditTrainMutation, useGetTrainByIdQuery } from "../../redux/features/api/TrainApi";
+import { useEditTrainMutation } from "../../redux/features/api/TrainApi";
 import { toast } from "react-toastify";
 
 const EditTrain = () => {
@@ -86,7 +86,7 @@ const EditTrain = () => {
           }) => (
             <>
               <Form>
-                <Row className="d-flex flex-row justify-content-between align-items-center">
+                <Row className="d-flex flex-row justify-content-between align-items-center mt-3">
                   <Col className="d-flex justify-content-start mb-3">
                     <h4 onClick={handleCancel}>
                       <AiOutlineArrowLeft />

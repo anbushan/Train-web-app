@@ -22,14 +22,14 @@ const Feedback = () => {
   const { data: getFeedbackData, isLoading } = useGetFeedbackQuery(currentPage);
   
   const navigate = useNavigate();
-  const handleNavigateAddForm = () => navigate(`/FeedbackAddForm`);
+  // const handleNavigateAddForm = () => navigate(`/FeedbackAddForm`);
    useEffect(() => {
     if (getFeedbackData && getFeedbackData.data) {
       setData(getFeedbackData.data);
       setTotalPages(getFeedbackData.pagination.totalPages);
       setCurrentPage(getFeedbackData.currentPage);
     }
-  }, [getFeedbackData, currentPage]);
+  }, [getFeedbackData, currentPage  ]);
  
 console.log(getFeedbackData);
   const deleteHandleClose = () => {
@@ -122,11 +122,13 @@ console.log(getFeedbackData);
     <Container fluid className="mt-3">
         <Row>
           <Header
-            ONCLICK={handleNavigateAddForm}
+            // ONCLICK={handleNavigateAddForm}
             HEADING="Feedback"
-            BUTTON_NAME="Add Feedback"
+            // BUTTON_NAME="Add Feedback"
             
           />
+          
+          <hr className="mt-3"/>
          </Row>
          <Row>
           {/* <Filter datePicker={true} textInput={true} textSelect={true}/> */}

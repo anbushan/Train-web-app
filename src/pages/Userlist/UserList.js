@@ -3,19 +3,18 @@ import { Col, Container, Row } from "react-bootstrap";
 import {  useNavigate } from "react-router-dom";
 import BasicTable from "../../components/BasicTable";
 import Header from "../../components/Header";
-import Loader from "../../pages/loginForms/loader/Loader";
+import Loader from "../loginForms/loader/Loader";
 import {
-  useGetTrainInfoApiQuery,
-} from "../../redux/features/api/TrainInfoApi";
+  useGetUserListQuery,
+} from "../../redux/features/api/UserListApi";
 
 
-const TrainInfo = () => {
+const UserList = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
-//   const [idToDelete, setIdToDelete] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: getTrainData, isLoading } = useGetTrainInfoApiQuery(currentPage);
+  const { data: getTrainData, isLoading } = useGetUserListQuery(currentPage);
   const handleNavigateAddForm = () => navigate("/admin/Add-User");
   useEffect(() => {
     if (getTrainData && getTrainData.data) {
@@ -26,71 +25,27 @@ const TrainInfo = () => {
   }, [getTrainData, currentPage]);
 
   console.log(getTrainData);
-//   const deleteHandleClose = () => {
-//     setDeleteShow(false);
-//   };
 
- 
-//   const deleteHandleShow = (id) => {
-//     setIdToDelete(id);
-//     setDeleteShow(true);
-//   };
-
-//   const delTimeSheetData = async () => {
-//     try {
-//       const response = await deleteSchemeMutation(idToDelete);
-//       setDeleteShow(false);
-//       setIdToDelete("");
-//       if (response.error.originalStatus === 200) {
-//         toast.success(response.error.data, { autoClose: 1000 });
-//       } else {
-//         toast.error(response.error.data, { autoClose: 1000 });
-//       }
-//     } catch (error) {
-//       toast.error("Internal Server Error");
-//     }
-//   };
 
   const COLUMNS = [
     {
       Header: "ID",
       accessor: (d, i) => i + 1,
+  
+      minWidth: 10,
     },
     {
       Header: "Email",
       accessor: "email",
       // width: "auto",
-      // minWidth: 100,
+      // minWidth: 100
     },
-    {
-      Header: "Password",
-      accessor: "password",
-      // width: "auto",
-      // minWidth: 100,
-    },
+    
     {
       Header: "Referal ID",
       accessor: "referralId",
     },
-  //   {
-  //     Header: "ACTIONS",
-  //     accessor: "action",
-  //     fixed: "right",
-  //     Cell: (props) => {
-  //       const rowIdx = props.row.original._id;
-
-  //       return (
-  //         <div className="d-flex align-items-center justify-content-center flex-row">
-  //           <Link to={`/admin/edit-scheme/`}>
-  //             <FaEdit size={20} color="#5046e5" />
-  //           </Link>
-  //           <span className="m-1">
-  //             <MdDelete size={20} color="#5046e5" />
-  //           </span>
-  //         </div>
-  //       );
-  //  },
-  //   },
+ 
   ];
 
   return (
@@ -146,4 +101,4 @@ const TrainInfo = () => {
   );
 };
 
-export default TrainInfo;
+export default UserList;

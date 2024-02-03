@@ -15,14 +15,14 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<MdOutlineAdminPanelSettings size={20} />,
     "order_index": 1,
-    "url": "/admin/Dashboard"
+    "url": "/admin/dashboard"
   },{
     "id": 2,
     "label": "User List",
     "parent_id": null,
     "icon":<PiUserListBold size={20}/>,
     "order_index": 2,
-    "url": "/admin/Userlist",
+    "url": "/admin/user-list",
   },
   {
     "id": 3,
@@ -30,7 +30,7 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<FaTrainSubway size={20}/>,
     "order_index": 3,
-    "url": "/admin/Train",
+    "url": "/admin/train",
   },
   {
     "id": 4,
@@ -38,7 +38,7 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<GiRailway  size={20}/>,
     "order_index": 4,
-    "url": "/admin/Station",
+    "url": "/admin/station",
   },
   {
     "id": 5,
@@ -46,7 +46,7 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<IoMdNotifications  size={20}/>,
     "order_index": 5,
-    "url": "/admin/Notification",
+    "url": "/admin/notification",
   },  
   {
     "id": 6,
@@ -54,7 +54,7 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<BiMoneyWithdraw size={20}/>,
     "order_index": 6,
-    "url": "/admin/Withdrawrequest",
+    "url": "/admin/withdraw-request",
   },
   {
     "id": 7,
@@ -62,7 +62,7 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<MdOutlineWorkHistory  size={20}/>,
     "order_index": 7,
-    "url": "/admin/Withdrawhistory",
+    "url": "/admin/withdraw-history",
   },
   {
     "id": 8,
@@ -70,14 +70,14 @@ export const sidebarItems = [
     "parent_id": null,
     "icon":<MdFeedback   size={20}/>,
     "order_index": 8,
-    "url": "/admin/Feedback",
+    "url": "/admin/feedback",
   },
   {
     "id": 8,
-    "label": "Setting",
+    "label": "Settings",
     "parent_id": null,
     "icon":<IoSettingsOutline   size={20}/>,
     "order_index": 8,
-    "url": "/admin/Setting",
+    "url": "/admin/settings",
   },
 ];

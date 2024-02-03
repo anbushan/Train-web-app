@@ -14,8 +14,7 @@ import { toast } from "react-toastify";
 const AddTrain = () => {
   const [TrainNo, setTrainNo] = useState("");
   const [TrainName, setTrainName] = useState("");
-//   const [city, setCity] = useState("");
-//   const [state, setState] = useState("");
+
   
   const [TrainAddData,{isLoading}]=useAddTrainMutation();
   
@@ -23,7 +22,7 @@ const AddTrain = () => {
 
   const navigate = useNavigate();
   const handleCancel = () => {
-    navigate("/admin/Train");
+    navigate("/admin/train");
   };
 
  
@@ -49,9 +48,9 @@ const AddTrain = () => {
         setTrainName("");
       
       
-        navigate("/admin/Train");
+        navigate("/admin/train");
         toast.success(response?.data?.message, { autoClose: 1000 });
-        setTimeout(() => navigate("/admin/Train"), 3000);
+        setTimeout(() => navigate("/admin/train"), 3000);
         console.log(response.error.data);
        
       } else {
@@ -61,48 +60,11 @@ const AddTrain = () => {
       }
     } catch (error) {
       console.error(error);
-    //   toast.error("Internal Server Error",{autoClose:2000});
+   
     }
   };
 
-  
-//   const nameOptions = [
-//     {
-//       value: "Frontend",
-//       label: "Frontend",
-//     },
-//     {
-//       value: "Backend",
-//       label: "Backend",
-//     },
-//     {
-//       value: "Web Design",
-//       label: "Web Design",
-//     },
-//     {
-//       value: "Q/A",
-//       label: "Q/A",
-//     },
-//   ];
-//   const options = [
-//     {
-//       value: "Ranjith",
-//       label: "Ranjith",
-//     },
-//     {
-//       value: "Sindhu",
-//       label: "Sindhu",
-//     },
-//     {
-//       value: "Monika",
-//       label: "Monika",
-//     },
-//     {
-//       value: "Tamil",
-//       label: "Tamil",
-//     },
-//   ];
- 
+
   return (
     <div>
       <Container fluid>
@@ -224,66 +186,7 @@ const AddTrain = () => {
                 
 
 
-                    {/* <Col
-                      className="m-2"
-                      lg="6"
-                      xxl="6"
-                      xl="12"
-                      md="12"
-                      sm="12"
-                    >
-                      <TextInput
-                        label="city "
-                        type=""
-                        name="city"
-                        className={`form-control ${
-                          touched.city && errors.city ? "is-invalid" : ""
-                        }`}
-                        onChange={(e) => {
-                            setCity(e.target.value);
-                          handleChange(e);
-                        }}
-                        onBlur={handleBlur}
-                        validation={
-                          touched.city && errors.city ? (
-                            <p className="text-danger">{errors.city}</p>
-                          ) : (
-                            ""
-                          )
-                        }
-                      />
-                    </Col>
-                
-
-                    <Col
-                      className="m-2"
-                      lg="6"
-                      xxl="6"
-                      xl="12"
-                      md="12"
-                      sm="12"
-                    >
-                      <TextInput
-                        label="state "
-                        type=""
-                        name="state"
-                        className={`form-control ${
-                          touched.state && errors.state ? "is-invalid" : ""
-                        }`}
-                        onChange={(e) => {
-                            setState(e.target.value);
-                          handleChange(e);
-                        }}
-                        onBlur={handleBlur}
-                        validation={
-                          touched.state && errors.state ? (
-                            <p className="text-danger">{errors.state}</p>
-                          ) : (
-                            ""
-                          )
-                        }
-                      />
-                    </Col> */}
+                 
 
                  
                     </Col>

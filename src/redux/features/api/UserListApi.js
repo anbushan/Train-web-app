@@ -1,12 +1,12 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import customFetchBase from "./CustomFetchBase";
 
-export const TrainInfoApi = createApi({
-  reducerPath: "TrainInfoApi",
+export const UserListApi = createApi({
+  reducerPath: "UserList",
   baseQuery: customFetchBase,
-  tagTypes: ["  TRAININFO"],
+  tagTypes: [" USERLIST"],
   endpoints: (builder) => ({
-    getTrainInfoApi: builder.query({
+    getUserList: builder.query({
       query: (page) => ({
         url: `/admin/users?page=${page}`,
         method: "GET",
@@ -14,17 +14,11 @@ export const TrainInfoApi = createApi({
           "Content-Type": "application/json; charset=UTF-8",
         },
       }),
-      providesTags: ["TRAININFO"],
+      providesTags: ["USERLIST"],
     }),
 
   
   }),
 });
 
-export const {
-  useAddTrainInfoApiMutation,
-  useDeleteTrainInfoApiMutation,
-  useEditTrainInfoApiMutation,
-  useGetTrainInfoApiByIdQuery,
-  useGetTrainInfoApiQuery,
-} = TrainInfoApi;
+export const { useGetUserListQuery} = UserListApi;

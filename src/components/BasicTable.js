@@ -68,7 +68,7 @@ const BasicTable = (props) => {
           </Col>
         </Row>
         <Row>
-          <Table
+          <Table className="justify-content-center align-items-center"
             striped
             bordered
             hover
@@ -77,31 +77,33 @@ const BasicTable = (props) => {
             style={{ width: "100%" }}
           >
             <thead>
-              {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-                  {headerGroup.headers.map((column) => (
-                    <th
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                      key={column.id}
-                      className="text-dark"
-                      style={{
-                        width: `${column.width}px`,
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {column.render("Header") === "ACTIONS" ? (
-                        <>{column.render("Header")}</>
-                      ) : (
-                        <>
-                          {column.render("Header")}
-                          <FaSort className="mx-2" />
-                        </>
-                      )}
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
+  {headerGroups.map((headerGroup) => (
+    <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
+      {headerGroup.headers.map((column) => (
+        <th
+          {...column.getHeaderProps(column.getSortByToggleProps())}
+          key={column.id}
+          className="text-center text-dark" 
+          style={{
+            width: `${column.width}px`,
+            whiteSpace: "nowrap",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {column.render("Header") === "ACTIONS" ? (
+            <>{column.render("Header")}</>
+          ) : (
+            <>
+              {column.render("Header")}
+              <FaSort className="mx-2" />
+            </>
+          )}
+        </th>
+      ))}
+    </tr>
+  ))}
+</thead>
             <tbody {...getTableBodyProps()}>
               {page.length > 0 ? (
                 page.map((row) => {
