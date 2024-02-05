@@ -88,6 +88,10 @@ console.log(getFeedbackData);
         accessor: "createdAt",
       },
       {
+        Header: "Admin Comments",
+        accessor: "adminComments",
+      },
+      {
         Header: "Updated At",
         accessor: "updatedAt",
       },
