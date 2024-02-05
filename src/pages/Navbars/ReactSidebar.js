@@ -40,7 +40,7 @@ const ReactSidebar = ({ sidebarItems, onClick }) => {
               className='fs-15 text-bolder'
               active={isActive}
               rootStyles={{
-                backgroundColor: isActive ? 'white' : '#313947',
+                backgroundColor: isActive ? '#f5f4f2' : '#313947',
                 color: isActive ? 'black' : 'white',
                 ':hover': {
                   color: 'black',

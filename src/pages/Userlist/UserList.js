@@ -15,7 +15,7 @@ const UserList = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: getTrainData, isLoading } = useGetUserListQuery(currentPage);
-  const handleNavigateAddForm = () => navigate("/admin/Add-User");
+  const handleNavigateAddForm = () => navigate("/admin/adduser-list");
   useEffect(() => {
     if (getTrainData && getTrainData.data) {
       setData(getTrainData.data);
@@ -59,7 +59,7 @@ const UserList = () => {
                 <Header
                   ONCLICK={handleNavigateAddForm}
                   HEADING="User List"
-                  // BUTTON_NAME="Add UserList"
+                  BUTTON_NAME="Add UserList"
                   headingClassName="text-center text-md-start m-md-4 m-xl-2"
                 />
               </Col>

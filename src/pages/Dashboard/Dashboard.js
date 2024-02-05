@@ -5,6 +5,7 @@ import feedback from "../../assets/images/feedback.png";
 import withdrawrequest from "../../assets/images/withdraw request.png";
 import { useGetDashboardQuery } from "../../redux/features/api/DashboardApi";
 import Loader from "../Loader/Loader";
+import BasicTable from "../../components/BasicTable";
 
 const Dashboard = () => {
   const { data, error, isLoading } = useGetDashboardQuery();
@@ -29,6 +30,35 @@ const Dashboard = () => {
     withdrawRequests = [],
   } = data;
 
+  const COLUMNS = [
+    {
+      Header: "ID",
+      accessor: (d, i) => i + 1,
+  
+      minWidth: 10,
+    },
+    {
+      Header: "Email",
+      accessor: "email",
+      // width: "auto",
+      // minWidth: 100
+    },
+    
+    {
+      Header: "Password",
+      accessor: "password",
+    },
+
+    {
+      Header: "Referral Id",
+      accessor: "referralId",
+      // width: "auto",
+      // minWidth: 100
+    },
+    
+   
+ 
+  ];
   return (
     <div>
     {!isLoading ? (
@@ -87,30 +117,23 @@ const Dashboard = () => {
         </Col>
       </Row>
 
-      <Row className="d-flex flex-row justify-content-center align-items-stretch  mb-3">
-        <Col sm={12} md={6} lg={6} className="d-flex flex-column justify-content-center align-items-center">
-          <div className="d-flex flex-column p-5 m-1 h-100">
-            <Row className=" mx-2 fs-4 fw-bolder">Newly User:</Row>
-            {users.length > 0 ? (
-              users.map((user, index) => (
-                <Row key={index} className="my-2">
-                  <div className="shadow rounded my-5 p-3">
-                    <Row className="mt-3 mx-4 fs-8 fw-bolder">{index + 1}. Facebook ID: {user.facebookId}</Row>
-                    <Row className="mt-3 mx-4 fs-8 fw-bolder">Name: {user.name}</Row>
-                    <Row className="mt-3 mx-4 fs-8 fw-bolder">Referral ID: {user.referralId}</Row>
-                    <Row className="mt-3 mx-4 fs-8 fw-bolder">Email: {user.email}</Row>
-                    <Row className="mt-3 mx-4 fs-8 fw-bolder">Password : {user.password}</Row>
-                    <Row className="mt-3 mx-4 fs-8 fw-bolder">Provider: {user.provider}</Row>
-                  </div>
-                </Row>
-              ))
-            ) : (
-              <Row>No newly users available</Row>
-            )}
-          </div>
-        </Col>
+      <Row className="d-flex flex-row justify-content-center align-items-stretch mb-3">
+  <Col xs={12} md={6} lg={6}  className="d-flex flex-column justify-content-center align-items-center">
+    <div className="d-flex flex-column p-3 p-md-5 m-1 h-100">
+      <h4 className="mx-2 fs-4 fw-bolder">Newly User:</h4>
+      {users.length > 0 ? (
+        <BasicTable
+          COLUMNS={COLUMNS}
+          MOCK_DATA={users}
+        />
+      ) : (
+        <Row className="mx-2">No newly users available</Row>
+      )}
+    </div>
+  </Col>
 
-        <Col sm={12} md={6} lg={6} className="mt-4">
+
+         <Col sm={12} md={6} lg={6} className="mt-4">
           <div className="d-flex flex-column p-3 m-1 h-100">
             <Row className="mt-1 mx-2 fs-4 fw-bolder">Withdraw Request:</Row>
             {withdrawRequests.map((request, index) => (
@@ -127,7 +150,7 @@ const Dashboard = () => {
               </Row>
             ))}
           </div>
-        </Col>
+        </Col> 
       </Row>
     </Container>
     </>

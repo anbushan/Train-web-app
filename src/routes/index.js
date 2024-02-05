@@ -137,6 +137,45 @@ export default function Router() {
                 </AuthGuard>
               ),
             },
+
+            {
+              path: "/admin/add-notification",
+              element: (
+                <AuthGuard>
+                  <AddNotification/>
+                </AuthGuard>
+              ),
+            },
+
+            {
+              path: "/admin/add-station",
+              element: (
+                <AuthGuard>
+                  <AddStation/>
+                </AuthGuard>
+              ),
+            },
+            
+            
+            {
+              path: "/admin/edit-station",
+              element: (
+                <AuthGuard>
+                  <EditStation/>
+                </AuthGuard>
+              ),
+            },
+
+            {
+              path: "/admin/adduser-list",
+              element: (
+                <AuthGuard>
+                  <AddUserList/>
+                </AuthGuard>
+              ),
+            },
+
+            
           ]
         },
       
@@ -183,6 +222,17 @@ const EditTrain = Loadable(lazy(()=>import("../pages/Train/EditTrain")));
 const WithdrawHistory = Loadable(lazy(()=>import("../pages/WithdrawHistory/WithdrawHistory")));
 
 const WithdrawRequest = Loadable(lazy(()=>import("../pages/WithdrawRequest/WithdrawRequest")));
+
+
+const AddNotification = Loadable(lazy(()=>import("../pages/Notification/AddNotification")));
+
+const AddStation = Loadable(lazy(()=>import("../pages/Station/AddStation")));
+
+const EditStation = Loadable(lazy(()=>import("../pages/Station/EditStation")));
+
+const AddUserList = Loadable(lazy(()=>import("../pages/Userlist/AddUserList")));
+
+
 
 
 const NotFound = Loadable(lazy(() => import("../pages/404/Page404")));

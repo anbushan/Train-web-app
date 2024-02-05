@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import BasicTable from "../../components/BasicTable";
 import Header from "../../components/Header";
 import Loader from "../../pages/loginForms/loader/Loader";
 import {
-    useGetNotificationQuery,
+    useGetNotificationQuery,useDeleteNotificationMutation
 } from "../../redux/features/api/NotificationApi";
 import { toast } from "react-toastify";
+import DeleteModel from "../../components/DeleteModel";
 
 const Notification = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
-//   const [idToDelete, setIdToDelete] = useState("");
+  const [idToDelete, setIdToDelete] = useState("");
+  const [deleteShow, setDeleteShow] = useState(false);
+ const [deleteNotification ] = useDeleteNotificationMutation();
   const [currentPage, setCurrentPage] = useState(1);
   const { data: NotificationData, isLoading } = useGetNotificationQuery(currentPage);
-  const handleNavigateAddForm = () => navigate("/admin/add-info");
+  const handleNavigateAddForm = () => navigate("/admin/add-notification");
   useEffect(() => {
     if (NotificationData && NotificationData.data) {
       setData(NotificationData.data);
@@ -28,30 +30,31 @@ const Notification = () => {
   }, [NotificationData, currentPage]);
 
   console.log(NotificationData);
-//   const deleteHandleClose = () => {
-//     setDeleteShow(false);
-//   };
+
+  const deleteHandleClose = () => {
+    setDeleteShow(false);
+  };
 
  
-//   const deleteHandleShow = (id) => {
-//     setIdToDelete(id);
-//     setDeleteShow(true);
-//   };
+  const deleteHandleShow = (id) => {
+    setIdToDelete(id);
+    setDeleteShow(true);
+  };
 
-//   const delTimeSheetData = async () => {
-//     try {
-//       const response = await deleteSchemeMutation(idToDelete);
-//       setDeleteShow(false);
-//       setIdToDelete("");
-//       if (response.error.originalStatus === 200) {
-//         toast.success(response.error.data, { autoClose: 1000 });
-//       } else {
-//         toast.error(response.error.data, { autoClose: 1000 });
-//       }
-//     } catch (error) {
-//       toast.error("Internal Server Error");
-//     }
-//   };
+  const delNotificationData = async () => {
+    try {
+      const response = await deleteNotification(idToDelete);
+      setDeleteShow(false);
+      setIdToDelete("");
+      if (response.error.originalStatus === 200) {
+        toast.success(response.error.data, { autoClose: 1000 });
+      } else {
+        toast.error(response.error.data, { autoClose: 1000 });
+      }
+    } catch (error) {
+      toast.error("Internal Server Error");
+    }
+  };
 
   const COLUMNS = [
     {
@@ -65,7 +68,7 @@ const Notification = () => {
       minWidth: 100,
     },
     {
-      Header: "Comments",
+      Header: "Sub Tittle",
       accessor: "body",
       width: "auto",
       minWidth: 100,
@@ -83,12 +86,13 @@ const Notification = () => {
 
         return (
           <div className="d-flex align-items-center justify-content-center flex-row">
-            <Link to={`/admin/edit-Notification/`}>
+            {/* <Link to={`/admin/edit-notification/`}>
             <Button variant="warning">
               <FaEdit />
             </Button>
-          </Link>
-          <Button variant="danger" className="m-1" >
+          </Link> */}
+          <Button variant="danger" className="m-1" onClick={() => deleteHandleShow(rowIdx)}>
+        
             <MdDelete />
           </Button>
           </div>
@@ -133,13 +137,13 @@ const Notification = () => {
               </Col>
             </Row>
           </Container>
-          {/* <DeleteModel
+          <DeleteModel
             DELETESTATE={deleteShow}
             ONCLICK={deleteHandleClose}
-            YES={delTimeSheetData}
-            DESCRIPTION="Confirm to Delete this Scheme"
-            DELETETITLE="Schemes"
-          /> */}
+            YES={delNotificationData}
+            DESCRIPTION="Confirm to Delete this notification"
+            DELETETITLE="notification"
+          />
            
       </>
       ):(

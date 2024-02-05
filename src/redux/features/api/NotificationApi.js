@@ -16,64 +16,33 @@ export const NotificationApi = createApi({
       }),
       providesTags: ["NOTIFICATION"],
     }),
-    // getNotificationById: build.query({
-    //   query: (id) => ({
-    //     url: `/Notification/${id}`,
-    //     method: "GET",
-    //     headers: {
-    //       "Content-Type": "application/json; charset=UTF-8",
-    //     },
-    //   }),
-    //   providesTags: ["Notification"],
-    // }),
-    // getNotificationBySearchData: build.query({
-    //   query: (search) => ({
-    //     url: `/Notification/${search}`,
-    //     method: "GET",
-    //     headers: {
-    //       "Content-Type": "application/json; charset=UTF-8",
-    //     },
-    //   }),
-    //   providesTags: ["Notification"],
-    // }),
+  
 
-//     addNotification: build.mutation({
-//         query: (data) => ({
-//           url: `/admin/addNotification`,
-//           method: "POST",
-//           body: data,
-//           headers: {
-//             "Content-Type": "application/json; charset=UTF-8",
-//           },
-//         }),
-//         invalidatesTags: ["NOTIFICATION"],
-//       }),
+    addNotification: build.mutation({
+        query: (data) => ({
+          url: `/sendNotification`,
+          method: "POST",
+          body: data,
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+          },
+        }),
+        invalidatesTags: ["NOTIFICATION"],
+      }),
      
 
-//     editNotification: build.mutation({
-//       query: ({ id, data }) => ({
-//         url: `/admin/updateNotification/65b61b26e068a4e7d727ad84${id}`,
-//         method: "PATCH",
-//         body: data,
-//         headers: {
-//           "Content-Type": "application/json; charset=UTF-8",
-//         },
-//       }),
-//       invalidatesTags: ["NOTIFICATION"],
-//     }),
-//     deleteNotification: build.mutation({
-//       query: (id) => ({
-//         url: `/admin/deleteNotification/65b61b26e068a4e7d727ad84${id}`,
-//         method: "DELETE",
-//         headers: {
-//           "Content-Type": "application/json; charset=UTF-8",
-//         },
-//       }),
-//       invalidatesTags: ["NOTIFICATION"],
-//     }),
+    deleteNotification: build.mutation({
+      query: (id) => ({
+        url: `/deleteNotification/65ae48a6bf7efcc87b182037${id}`,
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }),
+      invalidatesTags: ["NOTIFICATION"],
+    }),
   }),
 });
 
 export const { useGetNotificationQuery, useGetNotificationByIdQuery,useDeleteNotificationMutation,
-    useAddNotificationMutation,useGetNotificationBySearchDataQuery,useEditNotificationMutation
-} = NotificationApi;
+    useAddNotificationMutation} = NotificationApi;

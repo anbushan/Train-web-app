@@ -22,7 +22,7 @@ const Station = () => {
   const { data: getStationData, isLoading } = useGetStationQuery(currentPage);
   
   const navigate = useNavigate();
-  const handleNavigateAddForm = () => navigate(`/StationAddForm`);
+  const handleNavigateAddForm = () => navigate(`/admin/add-station`);
    useEffect(() => {
     if (getStationData && getStationData) {
       setData(getStationData.data.StationList);
@@ -88,7 +88,7 @@ console.log(getStationData);
         return (
         
         <div className="d-flex align-items-center justify-content-center flex-row">
-          <Link to={`/StationEditForm/${rowIdx}`}>
+          <Link to="/admin/edit-station">
             <Button variant="warning">
               <FaEdit />
             </Button>
