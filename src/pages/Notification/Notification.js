@@ -62,7 +62,7 @@ const Notification = () => {
       accessor: (d, i) => i + 1,
     },
     {
-      Header: "Title",
+      Header: "Tittle",
       accessor: "title",
       width: "auto",
       minWidth: 100,

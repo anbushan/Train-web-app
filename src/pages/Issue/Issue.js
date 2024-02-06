@@ -4,36 +4,34 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import BasicTable from "../../components/BasicTable";
-import BasicHeader from "../../components/BasicHeader";
+import BasicHeader from "../../components/BasicHeader"
 import DeleteModel from "../../components/DeleteModel";
-import { useGetWithdrawrequestQuery,useDeleteWithdrawrequestMutation } from "../../redux/features/api/WithdrawRequestApi";
+import { useGetIssueQuery,useDeleteIssueMutation } from "../../redux/features/api/IssueApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
  import { useEffect } from "react";
 // import Filter from "../../components/FilterComponent";
-const Withdrawrequest = () => {
+const Issue = () => {
 
    const [deleteShow, setDeleteShow] = useState(false);
    const [idToDelete, setIdToDelete] = useState("");
-  const [deleteWithdrawrequestApi ] = useDeleteWithdrawrequestMutation();
+  const [deleteIssueApi ] = useDeleteIssueMutation();
   const [data , setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: getWithdrawrequestData, isLoading } = useGetWithdrawrequestQuery(currentPage);
+  const { data: getIssueData, isLoading } = useGetIssueQuery(currentPage);
   
   const navigate = useNavigate();
-  const handleNavigateAddForm = () => navigate(`/WithdrawrequestAddForm`);
+  // const handleNavigateAddForm = () => navigate(`/IssueAddForm`);
    useEffect(() => {
-    if (getWithdrawrequestData && getWithdrawrequestData) {
-      setData(getWithdrawrequestData.data);
-      setTotalPages(getWithdrawrequestData.pagination.totalPages);
-      setCurrentPage(getWithdrawrequestData.pagination.currentPage);
+    if (getIssueData && getIssueData.data) {
+      setData(getIssueData.data);
+      setTotalPages(getIssueData.pagination.totalPages);
+      setCurrentPage(getIssueData.currentPage);
     }
-  }, [getWithdrawrequestData, currentPage]);
+  }, [getIssueData, currentPage]);
  
-console.log(getWithdrawrequestData);
-
-
+console.log(getIssueData);
   const deleteHandleClose = () => {
      setDeleteShow(false);
   };
@@ -44,9 +42,9 @@ console.log(getWithdrawrequestData);
     setDeleteShow(true);
   };
 
-  const deleteWithdrawrequest = async () => {
+  const deleteIssue = async () => {
     try {
-      const response = await deleteWithdrawrequestApi(idToDelete);
+      const response = await deleteIssueApi(idToDelete);
       console.log(response);
       setDeleteShow(false);
       setIdToDelete("");
@@ -61,45 +59,44 @@ console.log(getWithdrawrequestData);
     }
   }
   const COLUMNS = [
-   {
+    {
       Header: "ID",
-      accessor: (d, i) => i + 1,
-  
-      minWidth: 10,
+      accessor:  (d, i) => i + 1,
+    },
+    {
+      Header: "Name",
+      accessor: "name",
     },
     {
       Header: "Email",
       accessor: "email",
-      // width: "auto",
-      // minWidth: 100
-    },
-    
-    {
-      Header: "Upi ID",
-      accessor: "upiId",
     },
     {
-      Header: "Withdraw Amount",
-      accessor: "withdrawAmount",
-      // width: "auto",
-      // minWidth: 100
-    },
-    
-    {
-      Header: "Status",
-      accessor: "status",
-    },
-    {
-      Header: "Created At",
-      accessor: "createdAt",
-      // width: "auto",
-      // minWidth: 100
-    },
-    
-    {
-      Header: "Updated At",
-      accessor: "updatedAt",
-    },
+        Header: "Image",
+        accessor: "image",
+      },
+      {
+        Header: "Comments",
+        accessor: "comments",
+      },
+      {
+        Header: "Status",
+        accessor: "status",
+      },
+      {
+        Header: "Admin Comments",
+        accessor: "adminComments",
+      },
+      {
+        Header: "Created At",
+        accessor: "createdAt",
+      },
+      
+      {
+        Header: "Updated At",
+        accessor: "updatedAt",
+      },
+   
     {
       Header: "ACTIONS",
       accessor: "action",
@@ -109,7 +106,7 @@ console.log(getWithdrawrequestData);
         return (
         
         <div className="d-flex align-items-center justify-content-center flex-row">
-          <Link to={"/admin/edit-withdrawrequest"}>
+          <Link to={"/admin/edit-issue"}>
             <Button variant="warning">
               <FaEdit />
             </Button>
@@ -130,12 +127,13 @@ console.log(getWithdrawrequestData);
     <Container fluid className="mt-3">
         <Row>
           <BasicHeader
-            ONCLICK={handleNavigateAddForm}
-            HEADING="Withdraw Request"
-      
+            // ONCLICK={handleNavigateAddForm}
+            HEADING="Issues"
+    
             
           />
-                 <hr className="mt-3"/>
+          
+          <hr className="mt-3"/>
          </Row>
          <Row>
           {/* <Filter datePicker={true} textInput={true} textSelect={true}/> */}
@@ -145,20 +143,20 @@ console.log(getWithdrawrequestData);
           />
         </Row>
       </Container>
-      <DeleteModel YES={deleteWithdrawrequest}
+      <DeleteModel YES={deleteIssue}
         DELETESTATE={deleteShow}
         ONCLICK={deleteHandleClose}
-        DESCRIPTION=" Are you sure want to delete this Withdrawrequest?"
-        DELETETITLE="Withdrawrequest"
+        DESCRIPTION="Issue"
+        DELETETITLE="Issue"
       />
         
       </>
       ):(
         <Loader/>
         
-      )}
+      )} 
     </div>
   );
 };
 
-export default Withdrawrequest;
+export default Issue;

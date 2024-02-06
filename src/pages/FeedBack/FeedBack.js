@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Button, Container, Row } from "react-bootstrap";
-import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
 import BasicTable from "../../components/BasicTable";
-import Header from "../../components/Header";
+import BasicHeader from "../../components/BasicHeader"
 import DeleteModel from "../../components/DeleteModel";
 import { useGetFeedbackQuery,useDeleteFeedbackMutation } from "../../redux/features/api/FeedBackApi";
 import { toast } from "react-toastify";
@@ -21,13 +19,12 @@ const Feedback = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data: getFeedbackData, isLoading } = useGetFeedbackQuery(currentPage);
   
-  const navigate = useNavigate();
   // const handleNavigateAddForm = () => navigate(`/FeedbackAddForm`);
    useEffect(() => {
     if (getFeedbackData && getFeedbackData.data) {
       setData(getFeedbackData.data);
       setTotalPages(getFeedbackData.pagination.totalPages);
-      setCurrentPage(getFeedbackData.currentPage);
+      setCurrentPage(getFeedbackData.pagination.currentPage);
     }
   }, [getFeedbackData, currentPage  ]);
  
@@ -63,38 +60,24 @@ console.log(getFeedbackData);
       Header: "ID",
       accessor:  (d, i) => i + 1,
     },
-    {
-      Header: "Name",
-      accessor: "name",
-    },
+   
     {
       Header: "Email",
       accessor: "email",
     },
     {
-        Header: "Image",
-        accessor: "image",
-      },
-      {
-        Header: "Comments",
-        accessor: "comments",
-      },
-      {
-        Header: "Status",
-        accessor: "status",
+        Header: "Feedback",
+        accessor: "feedback",
       },
       {
         Header: "Created At",
         accessor: "createdAt",
       },
       {
-        Header: "Admin Comments",
-        accessor: "adminComments",
-      },
-      {
         Header: "Updated At",
         accessor: "updatedAt",
       },
+    
    
     {
       Header: "ACTIONS",
@@ -105,11 +88,7 @@ console.log(getFeedbackData);
         return (
         
         <div className="d-flex align-items-center justify-content-center flex-row">
-          <Link to={`/FeedbackEditForm/${rowIdx}`}>
-            <Button variant="warning">
-              <FaEdit />
-            </Button>
-          </Link>
+          
           <Button variant="danger" className="m-1" onClick={() => deleteHandleShow(rowIdx)}>
             <MdDelete />
           </Button>
@@ -125,10 +104,10 @@ console.log(getFeedbackData);
       <>
     <Container fluid className="mt-3">
         <Row>
-          <Header
+          <BasicHeader
             // ONCLICK={handleNavigateAddForm}
             HEADING="Feedback"
-            // BUTTON_NAME="Add Feedback"
+    
             
           />
           

@@ -59,7 +59,7 @@ const UserList = () => {
                 <Header
                   ONCLICK={handleNavigateAddForm}
                   HEADING="User List"
-                  BUTTON_NAME="Add UserList"
+                  BUTTON_NAME="Add User"
                   headingClassName="text-center text-md-start m-md-4 m-xl-2"
                 />
               </Col>

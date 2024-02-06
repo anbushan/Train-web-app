@@ -174,8 +174,31 @@ export default function Router() {
                 </AuthGuard>
               ),
             },
+            {
+              path: "/admin/issue",
+              element: (
+                <AuthGuard>
+                  <Issue/>
+                </AuthGuard>
+              ),
+            },
 
-            
+            {
+              path: "/admin/edit-issue",
+              element: (
+                <AuthGuard>
+                  <EditIssue/>
+                </AuthGuard>
+              ),
+            },
+            {
+              path: "/admin/edit-withdrawrequest",
+              element: (
+                <AuthGuard>
+                  <EditWithdrawrequest/>
+                </AuthGuard>
+              ),
+            },
           ]
         },
       
@@ -231,6 +254,11 @@ const AddStation = Loadable(lazy(()=>import("../pages/Station/AddStation")));
 const EditStation = Loadable(lazy(()=>import("../pages/Station/EditStation")));
 
 const AddUserList = Loadable(lazy(()=>import("../pages/Userlist/AddUserList")));
+
+const Issue = Loadable(lazy(()=>import("../pages/Issue/Issue")));
+
+const EditIssue = Loadable(lazy(()=>import("../pages/Issue/EditIssue")));
+const EditWithdrawrequest = Loadable(lazy(()=>import("../pages/WithdrawRequest/EditWithdrawrequest")));
 
 
 

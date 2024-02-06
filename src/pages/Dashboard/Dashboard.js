@@ -5,7 +5,7 @@ import feedback from "../../assets/images/feedback.png";
 import withdrawrequest from "../../assets/images/withdraw request.png";
 import { useGetDashboardQuery } from "../../redux/features/api/DashboardApi";
 import Loader from "../Loader/Loader";
-import BasicTable from "../../components/BasicTable";
+import TableComponents from "../../components/TableComponent";
 
 const Dashboard = () => {
   const { data, error, isLoading } = useGetDashboardQuery();
@@ -34,35 +34,47 @@ const Dashboard = () => {
     {
       Header: "ID",
       accessor: (d, i) => i + 1,
-  
       minWidth: 10,
     },
     {
       Header: "Email",
       accessor: "email",
-      // width: "auto",
-      // minWidth: 100
     },
-    
-    {
-      Header: "Password",
-      accessor: "password",
-    },
-
     {
       Header: "Referral Id",
       accessor: "referralId",
-      // width: "auto",
-      // minWidth: 100
     },
-    
-   
- 
   ];
+
+  const COLUMNSS = [
+    {
+      Header: "ID",
+      accessor: (d, i) => i + 1,
+      minWidth: 10,
+    },
+    {
+      Header: "Email",
+      accessor: "email",
+    },
+    {
+      Header: "Upi Id ",
+      accessor: "upiId",
+    },
+    {
+      Header: "Withdraw Amount",
+      accessor: "withdrawAmount",
+    },
+    {
+      Header: "Status ",
+      accessor: "status",
+    },
+    {
+      Header: "Created At",
+      accessor: "createdAt",
+    },
+  ];
+
   return (
-    <div>
-    {!isLoading ? (
-      <>
     <Container fluid>
       <Row className="mt-4 mx-2">
         <Col className="d-flex align-items-start shadow rounded p-3">
@@ -117,48 +129,36 @@ const Dashboard = () => {
         </Col>
       </Row>
 
-      <Row className="d-flex flex-row justify-content-center align-items-stretch mb-3">
-  <Col xs={12} md={6} lg={6}  className="d-flex flex-column justify-content-center align-items-center">
-    <div className="d-flex flex-column p-3 p-md-5 m-1 h-100">
-      <h4 className="mx-2 fs-4 fw-bolder">Newly User:</h4>
-      {users.length > 0 ? (
-        <BasicTable
-          COLUMNS={COLUMNS}
-          MOCK_DATA={users}
-        />
-      ) : (
-        <Row className="mx-2">No newly users available</Row>
-      )}
-    </div>
-  </Col>
-
-
-         <Col sm={12} md={6} lg={6} className="mt-4">
-          <div className="d-flex flex-column p-3 m-1 h-100">
-            <Row className="mt-1 mx-2 fs-4 fw-bolder">Withdraw Request:</Row>
-            {withdrawRequests.map((request, index) => (
-              <Row key={index}className="my-2">
-                <div className="shadow rounded my-5 p-3">
-                  <Row className="mt-3 mx-4 fs-8 fw-bolder"> {index + 1}. Email: {request.email}</Row>
-                  <Row className="mt-3 mx-4 fs-8 fw-bolder">Upi Id: {request.upiId} </Row>
-                  <Row className="mt-3 mx-4 fs-8 fw-bolder">Withdraw Amount: {request.withdrawAmount}</Row>
-                  <Row className="mt-3 mx-4 fs-8 fw-bolder"> Status: {request.status} </Row>
-                  <Row className="mt-3 mx-4 fs-8 fw-bolder">ApprovedDate: {request.approvedDate} </Row>
-                  <Row className="mt-3 mx-4 fs-8 fw-bolder">Created At: {request.createdAt}</Row>
-                  <Row className="mt-3 mx-4 fs-8 fw-bolder">Updated At: {request.updatedAt} </Row>
-                </div>
-              </Row>
-            ))}
+      <Row className="mt-3 d-flex flex-row justify-content-start align-items-start">
+        <Col xs={12} md={6} lg={6} className="mb-3 justify-content-start align-items-start">
+          <div className="d-flex flex-column p-3 p-md-5 m-1">
+            <h4 className=" fs-4 mb-4 fw-bolder text-start">NewUser Join:</h4>
+            {users.length > 0 ? (
+              <TableComponents
+                COLUMNS={COLUMNS}
+                MOCK_DATA={users}
+              />
+            ) : (
+              <Row className="mx-2">No newly users available</Row>
+            )}
           </div>
-        </Col> 
+        </Col>
+
+        <Col xs={12} md={6} className="mb-3">
+          <div className="d-flex flex-column p-3 p-md-5 m-1">
+            <h4 className=" fs-4 mb-4 fw-bolder text-start">New Withdraw Request:</h4>
+            {withdrawRequests.length > 0 ? (
+              <TableComponents
+                COLUMNS={COLUMNSS}
+                MOCK_DATA={withdrawRequests}
+              />
+            ) : (
+              <Row className="mx-2">No Withdraw Request available</Row>
+            )}
+          </div>
+        </Col>
       </Row>
     </Container>
-    </>
-      ):(
-        <Loader/>
-        
-      )}
-      </div>
   );
 };
 

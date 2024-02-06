@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import {  useNavigate } from "react-router-dom";
 import BasicTable from "../../components/BasicTable";
-import Header from "../../components/Header";
+import BasicHeader from "../../components/BasicHeader";
 import Loader from "../loginForms/loader/Loader";
 import {
   useGetWithdrawhistoryQuery,
@@ -77,10 +77,9 @@ const Withdrawhistory = () => {
           <Container fluid className="my-4" style={{overflow:"hidden"}}>
             <Row>
               <Col className="">
-                <Header
+                <BasicHeader
                   ONCLICK={handleNavigateAddForm}
                   HEADING="Withdraw History"
-                  // BUTTON_NAME="Add Withdrawhistory"
                   headingClassName="text-center text-md-start m-md-4 m-xl-2"
                 />
               </Col>

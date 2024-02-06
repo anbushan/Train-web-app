@@ -8,6 +8,7 @@ import { MdFeedback } from "react-icons/md";
 import { GiRailway } from "react-icons/gi";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { IoSettingsOutline } from "react-icons/io5";
+import { AiOutlineIssuesClose } from "react-icons/ai";
 export const sidebarItems = [
   {
     "id": 1,
@@ -74,10 +75,19 @@ export const sidebarItems = [
   },
   {
     "id": 8,
+    "label": "Issues",
+    "parent_id": null,
+    "icon":<AiOutlineIssuesClose   size={20}/>,
+    "order_index": 8,
+    "url": "/admin/issue",
+  },
+  {
+    "id": 8,
     "label": "Settings",
     "parent_id": null,
     "icon":<IoSettingsOutline   size={20}/>,
     "order_index": 8,
     "url": "/admin/settings",
   },
+ 
 ];
