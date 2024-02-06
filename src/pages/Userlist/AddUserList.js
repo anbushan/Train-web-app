@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { UserSchema } from "../../pages/Userlist/UserValidation";
+import UserListSchema from '../../pages/Userlist/UserValidation';
 import BasicButton from "../../components/BasicButton";
 import TextInput from "../../components/TextInput";
 
@@ -73,7 +73,7 @@ const AddUser = () => {
       <Container fluid>
         <Formik
           initialValues={initialValues}
-          validationSchema={UserSchema}
+          validationSchema={UserListSchema}
           onSubmit={handleAddData}
         >
           {({

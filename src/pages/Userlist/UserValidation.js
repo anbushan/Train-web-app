@@ -1,11 +1,10 @@
-import * as Yup from "yup";
+import * as Yup from 'yup';
 
-export const UserSchema = Yup.object().shape({
-    email:Yup.email().required(" Email No Must be Required..!"),
-    password:Yup.password().required(" Password Name must be Required..!"),
-    confirmPassword:Yup.password().required(" Confirm Password Name must be Required..!"),
-
-  
-  
-    
+const UserListSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  age: Yup.number().integer().min(18, 'Must be at least 18 years old').required('Age is required'),
+  // Define other fields and their validation rules here
 });
+
+export default UserListSchema;
