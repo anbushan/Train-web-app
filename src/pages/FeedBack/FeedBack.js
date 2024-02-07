@@ -124,7 +124,7 @@ console.log(getFeedbackData);
       <DeleteModel YES={deleteFeedback}
         DELETESTATE={deleteShow}
         ONCLICK={deleteHandleClose}
-        DESCRIPTION="Feedback"
+        DESCRIPTION="Are you sure want to delete this Feedback..?"
         DELETETITLE="Feedback"
       />
         

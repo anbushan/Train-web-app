@@ -1,43 +1,38 @@
-import React, { useState } from "react";
-import { Button, Container, Row } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Button, Container, Row, Modal, Form } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
 import BasicTable from "../../components/BasicTable";
 import BasicHeader from "../../components/BasicHeader";
 import DeleteModel from "../../components/DeleteModel";
-import { useGetWithdrawrequestQuery,useDeleteWithdrawrequestMutation } from "../../redux/features/api/WithdrawRequestApi";
+import { useGetWithdrawrequestQuery, useDeleteWithdrawrequestMutation, useEditWithdrawrequestMutation } from "../../redux/features/api/WithdrawRequestApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
- import { useEffect } from "react";
-// import Filter from "../../components/FilterComponent";
-const Withdrawrequest = () => {
 
-   const [deleteShow, setDeleteShow] = useState(false);
-   const [idToDelete, setIdToDelete] = useState("");
-  const [deleteWithdrawrequestApi ] = useDeleteWithdrawrequestMutation();
-  const [data , setData] = useState([]);
+const Withdrawrequest = () => {
+  const [editShow, setEditShow] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [editId, setEditId] = useState(null);
+  const [deleteShow, setDeleteShow] = useState(false);
+  const [idToDelete, setIdToDelete] = useState("");
+  const [deleteWithdrawrequestApi] = useDeleteWithdrawrequestMutation();
+  const [updateWithdrawrequestApi] = useEditWithdrawrequestMutation();
+  const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: getWithdrawrequestData, isLoading } = useGetWithdrawrequestQuery(currentPage);
-  
-  const navigate = useNavigate();
-  const handleNavigateAddForm = () => navigate(`/WithdrawrequestAddForm`);
-   useEffect(() => {
+
+  useEffect(() => {
     if (getWithdrawrequestData && getWithdrawrequestData) {
       setData(getWithdrawrequestData.data);
       setTotalPages(getWithdrawrequestData.pagination.totalPages);
       setCurrentPage(getWithdrawrequestData.pagination.currentPage);
     }
   }, [getWithdrawrequestData, currentPage]);
- 
-console.log(getWithdrawrequestData);
-
 
   const deleteHandleClose = () => {
-     setDeleteShow(false);
+    setDeleteShow(false);
   };
-
 
   const deleteHandleShow = (id) => {
     setIdToDelete(id);
@@ -59,21 +54,45 @@ console.log(getWithdrawrequestData);
       console.error(error);
       toast.error("Internal Server Error");
     }
-  }
+  };
+
+  const handleEditShow = (id) => {
+    setEditId(id);
+    setEditShow(true);
+  };
+
+  const handleEditClose = () => {
+    setEditShow(false);
+    setEditId(null);
+  };
+
+  const handleDropdownChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
+  const handleEditSave = async () => {
+    try {
+      const response = await updateWithdrawrequestApi(editId, { status: selectedOption });
+      console.log(response);
+      setEditShow(false);
+      setEditId(null);
+      toast.success("Withdraw Request Updated Successfully");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to Update Withdraw Request");
+    }
+  };
+
   const COLUMNS = [
-   {
+    {
       Header: "ID",
       accessor: (d, i) => i + 1,
-  
       minWidth: 10,
     },
     {
       Header: "Email",
       accessor: "email",
-      // width: "auto",
-      // minWidth: 100
     },
-    
     {
       Header: "Upi ID",
       accessor: "upiId",
@@ -81,10 +100,7 @@ console.log(getWithdrawrequestData);
     {
       Header: "Withdraw Amount",
       accessor: "withdrawAmount",
-      // width: "auto",
-      // minWidth: 100
     },
-    
     {
       Header: "Status",
       accessor: "status",
@@ -92,10 +108,7 @@ console.log(getWithdrawrequestData);
     {
       Header: "Created At",
       accessor: "createdAt",
-      // width: "auto",
-      // minWidth: 100
     },
-    
     {
       Header: "Updated At",
       accessor: "updatedAt",
@@ -103,59 +116,77 @@ console.log(getWithdrawrequestData);
     {
       Header: "ACTIONS",
       accessor: "action",
-      Cell: (props) =>{
+      Cell: (props) => {
         const rowIdx = props.row.original._id;
-        console.log(props.row);
         return (
-        
-        <div className="d-flex align-items-center justify-content-center flex-row">
-          <Link to={"/admin/edit-withdrawrequest"}>
-            <Button variant="warning">
+          <div className="d-flex align-items-center justify-content-center flex-row">
+            <Button variant="warning" onClick={() => handleEditShow(rowIdx)}>
               <FaEdit />
             </Button>
-          </Link>
-          <Button variant="danger" className="m-1" onClick={() => deleteHandleShow(rowIdx)}>
-            <MdDelete />
-          </Button>
-        </div>
-      )
-    }
-  }
+            <Button variant="danger" className="m-1" onClick={() => deleteHandleShow(rowIdx)}>
+              <MdDelete />
+            </Button>
+          </div>
+        );
+      },
+    },
   ];
 
   return (
     <div>
-    {!isLoading ? (
-      <>
-    <Container fluid className="mt-3">
-        <Row>
-          <BasicHeader
-            ONCLICK={handleNavigateAddForm}
-            HEADING="Withdraw Request"
-      
-            
+      {!isLoading ? (
+        <>
+          <Container fluid className="mt-3">
+            <Row>
+              <BasicHeader HEADING="Withdraw Request" />
+              <hr className="mt-3" />
+            </Row>
+            <Row className="">
+              <BasicTable
+                COLUMNS={COLUMNS}
+                MOCK_DATA={data}
+                currentPage={currentPage}
+                totalPages={totalPages}
+                setCurrentPage={setCurrentPage}
+              />
+            </Row>
+          </Container>
+
+          <DeleteModel
+            YES={deleteWithdrawrequest}
+            DELETESTATE={deleteShow}
+            ONCLICK={deleteHandleClose}
+            DESCRIPTION="Are you sure want to delete this Withdrawrequest?"
+            DELETETITLE="Withdrawrequest"
           />
-                 <hr className="mt-3"/>
-         </Row>
-         <Row>
-          {/* <Filter datePicker={true} textInput={true} textSelect={true}/> */}
-         </Row>
-        <Row className="">
-          <BasicTable COLUMNS={COLUMNS} MOCK_DATA={data} currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage}
-          />
-        </Row>
-      </Container>
-      <DeleteModel YES={deleteWithdrawrequest}
-        DELETESTATE={deleteShow}
-        ONCLICK={deleteHandleClose}
-        DESCRIPTION=" Are you sure want to delete this Withdrawrequest?"
-        DELETETITLE="Withdrawrequest"
-      />
-        
-      </>
-      ):(
-        <Loader/>
-        
+
+          <Modal show={editShow} onHide={handleEditClose} centered>
+            <Modal.Header closeButton>
+              <Modal.Title>Edit Withdraw Request</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form>
+                <Form.Group controlId="exampleForm.ControlSelect1">
+                  <Form.Label>Status:</Form.Label>
+                  <Form.Control as="select" value={selectedOption} onChange={handleDropdownChange}>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                  </Form.Control>
+                </Form.Group>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button style={{backgroundColor:"#db6300",border:"none"}} onClick={handleEditClose}>
+                Cancel
+              </Button>
+              <Button style={{backgroundColor:"#db6300",border:"none"}} onClick={handleEditSave}>
+                Update
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
+      ) : (
+        <Loader />
       )}
     </div>
   );

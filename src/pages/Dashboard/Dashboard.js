@@ -75,6 +75,10 @@ const Dashboard = () => {
   ];
 
   return (
+     
+    <div>
+    {!isLoading ? (
+      <>
     <Container fluid>
       <Row className="mt-4 mx-2">
         <Col className="d-flex align-items-start shadow rounded p-3">
@@ -132,7 +136,7 @@ const Dashboard = () => {
       <Row className="mt-3 d-flex flex-row justify-content-start align-items-start">
         <Col xs={12} md={6} lg={6} className="mb-3 justify-content-start align-items-start">
           <div className="d-flex flex-column p-3 p-md-5 m-1">
-            <h4 className=" fs-4 mb-4 fw-bolder text-start">NewUser Join:</h4>
+            <h4 className=" fs-4 mb-4 fw-bolder text-center">New User Join:</h4>
             {users.length > 0 ? (
               <TableComponents
                 COLUMNS={COLUMNS}
@@ -146,7 +150,7 @@ const Dashboard = () => {
 
         <Col xs={12} md={6} className="mb-3">
           <div className="d-flex flex-column p-3 p-md-5 m-1">
-            <h4 className=" fs-4 mb-4 fw-bolder text-start">New Withdraw Request:</h4>
+            <h4 className=" fs-4 mb-4 fw-bolder text-center">New Withdraw Request:</h4>
             {withdrawRequests.length > 0 ? (
               <TableComponents
                 COLUMNS={COLUMNSS}
@@ -159,6 +163,12 @@ const Dashboard = () => {
         </Col>
       </Row>
     </Container>
+    </>
+      ):(
+        <Loader/>
+        
+      )} 
+    </div>
   );
 };
 

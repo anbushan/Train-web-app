@@ -112,9 +112,9 @@ const AddNotification = () => {
                   <Col className="m-1 p-4 d-flex flex-wrap flex-column shadow rounded">
                     <Col className="m-2" lg="6" xxl="6" xl="12" md="12" sm="12">
                       <TextInput
-                        label="Tittle"
+                        label="Title"
                         type=""
-                        name="tittle"
+                        name="title"
                         className={`form-control ${
                           touched.tittle && errors.tittle ? "is-invalid" : ""
                         }`}
@@ -135,9 +135,9 @@ const AddNotification = () => {
 
                     <Col className="m-2" lg="6" xxl="6" xl="12" md="12" sm="12">
                       <TextInput
-                        label="Subtittle"
+                        label="Subtitle"
                         type=""
-                        name="subtittle"
+                        name="subtitle"
                         className={`form-control ${
                           touched.subtittle && errors.subtittle
                             ? "is-invalid"

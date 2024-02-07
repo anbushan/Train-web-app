@@ -62,13 +62,13 @@ const Notification = () => {
       accessor: (d, i) => i + 1,
     },
     {
-      Header: "Tittle",
+      Header: "Title",
       accessor: "title",
       width: "auto",
       minWidth: 100,
     },
     {
-      Header: "Sub Tittle",
+      Header: "Sub Title",
       accessor: "body",
       width: "auto",
       minWidth: 100,
@@ -141,7 +141,7 @@ const Notification = () => {
             DELETESTATE={deleteShow}
             ONCLICK={deleteHandleClose}
             YES={delNotificationData}
-            DESCRIPTION="Confirm to Delete this notification"
+            DESCRIPTION="Confirm to Delete this notification..?"
             DELETETITLE="notification"
           />
            

@@ -127,7 +127,7 @@ console.log(getStationData);
       <DeleteModel YES={deleteStation}
         DELETESTATE={deleteShow}
         ONCLICK={deleteHandleClose}
-        DESCRIPTION="Station"
+        DESCRIPTION="Are you sure want to delete this Station..?"
         DELETETITLE="Station"
       />
         

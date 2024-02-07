@@ -106,11 +106,7 @@ console.log(getIssueData);
         return (
         
         <div className="d-flex align-items-center justify-content-center flex-row">
-          <Link to={"/admin/edit-issue"}>
-            <Button variant="warning">
-              <FaEdit />
-            </Button>
-          </Link>
+         
           <Button variant="danger" className="m-1" onClick={() => deleteHandleShow(rowIdx)}>
             <MdDelete />
           </Button>
@@ -146,7 +142,7 @@ console.log(getIssueData);
       <DeleteModel YES={deleteIssue}
         DELETESTATE={deleteShow}
         ONCLICK={deleteHandleClose}
-        DESCRIPTION="Issue"
+        DESCRIPTION="Are you sure want to delete this Issue..?"
         DELETETITLE="Issue"
       />
         
