@@ -8,7 +8,7 @@ export const IssueApi = createApi({
   endpoints: (build) => ({
     getIssue: build.query({
       query: (page) => ({
-        url: `/admin/viewIssues?page=1${page}`,
+        url: `/admin/viewIssues?page=${page}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -48,7 +48,7 @@ export const IssueApi = createApi({
           "Content-Type": "application/json; charset=UTF-8",
         },
       }),
-      invalidatesTags: ["Issue"],
+      invalidatesTags: ["ISSUE"],
     }),
     deleteIssue: build.mutation({
       query: (id) => ({
@@ -58,7 +58,7 @@ export const IssueApi = createApi({
           "Content-Type": "application/json; charset=UTF-8",
         },
       }),
-      invalidatesTags: ["Issue"],
+      invalidatesTags: ["ISSUE"],
     }),
   }),
 });

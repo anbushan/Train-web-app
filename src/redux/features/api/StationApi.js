@@ -8,7 +8,7 @@ export const StationApi = createApi({
   endpoints: (build) => ({
     getStation: build.query({
       query: (page) => ({
-        url: `/info/getStation?searchString=tirunelveli${page}`,
+        url: `/info/getStation?page=${page}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

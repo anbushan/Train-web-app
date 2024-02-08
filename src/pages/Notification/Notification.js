@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { MdDelete } from "react-icons/md";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import BasicTable from "../../components/BasicTable";
 import Header from "../../components/Header";
 import Loader from "../../pages/loginForms/loader/Loader";
-import {
-    useGetNotificationQuery,useDeleteNotificationMutation
-} from "../../redux/features/api/NotificationApi";
+import { useGetNotificationQuery, useDeleteNotificationMutation } from "../../redux/features/api/NotificationApi";
 import { toast } from "react-toastify";
 import DeleteModel from "../../components/DeleteModel";
 
@@ -17,10 +15,10 @@ const Notification = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [idToDelete, setIdToDelete] = useState("");
   const [deleteShow, setDeleteShow] = useState(false);
- const [deleteNotification ] = useDeleteNotificationMutation();
   const [currentPage, setCurrentPage] = useState(1);
   const { data: NotificationData, isLoading } = useGetNotificationQuery(currentPage);
-  const handleNavigateAddForm = () => navigate("/admin/add-notification");
+  const [deleteNotification] = useDeleteNotificationMutation();
+
   useEffect(() => {
     if (NotificationData && NotificationData.data) {
       setData(NotificationData.data);
@@ -30,12 +28,10 @@ const Notification = () => {
   }, [NotificationData, currentPage]);
 
   console.log(NotificationData);
+  const handleNavigateAddForm = () => navigate("/admin/add-notification");
 
-  const deleteHandleClose = () => {
-    setDeleteShow(false);
-  };
+  const deleteHandleClose = () => setDeleteShow(false);
 
- 
   const deleteHandleShow = (id) => {
     setIdToDelete(id);
     setDeleteShow(true);
@@ -83,32 +79,24 @@ const Notification = () => {
       fixed: "right",
       Cell: (props) => {
         const rowIdx = props.row.original._id;
-
         return (
           <div className="d-flex align-items-center justify-content-center flex-row">
-            {/* <Link to={`/admin/edit-notification/`}>
-            <Button variant="warning">
-              <FaEdit />
+            <Button variant="danger" className="m-1" onClick={() => deleteHandleShow(rowIdx)}>
+              <MdDelete />
             </Button>
-          </Link> */}
-          <Button variant="danger" className="m-1" onClick={() => deleteHandleShow(rowIdx)}>
-        
-            <MdDelete />
-          </Button>
           </div>
         );
-   },
+      },
     },
   ];
 
   return (
-   
-     <div>
-    {!isLoading ? (
-      <>
+    <div>
+      {!isLoading ? (
+        <>
           <Container fluid className="my-4">
             <Row>
-              <Col className="">
+              <Col>
                 <Header
                   ONCLICK={handleNavigateAddForm}
                   HEADING=" Notification"
@@ -118,15 +106,8 @@ const Notification = () => {
               </Col>
             </Row>
             <hr className="bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2 " />
-            <Row className="d-flex flex-column align-items-center justift-content-center">
-              <Col
-                xs={12}
-                lg={12}
-                xl={12}
-                xxl={12}
-                md={12}
-                className="table-responsive"
-              >
+            <Row className="justify-content-center">
+              <Col xs={12} lg={12} xl={12} xxl={12} md={12} className="table-responsive">
                 <BasicTable
                   COLUMNS={COLUMNS}
                   MOCK_DATA={NotificationData}
@@ -141,15 +122,13 @@ const Notification = () => {
             DELETESTATE={deleteShow}
             ONCLICK={deleteHandleClose}
             YES={delNotificationData}
-            DESCRIPTION="Confirm to Delete this notification..?"
+            DESCRIPTION="Confirm to Delete this notification"
             DELETETITLE="notification"
           />
-           
-      </>
-      ):(
-        <Loader/>
-        
-      )} 
+        </>
+      ) : (
+        <Loader />
+      )}
     </div>
   );
 };

@@ -8,7 +8,7 @@ export const WithdrawhistoryApi = createApi({
   endpoints: (builder) => ({
     getWithdrawhistory: builder.query({
       query: (page) => ({
-        url: `/admin/witdrawHistory?${page}`,
+        url: `/admin/witdrawHistory?page=${page}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

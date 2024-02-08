@@ -23,10 +23,10 @@ const Withdrawrequest = () => {
   const { data: getWithdrawrequestData, isLoading } = useGetWithdrawrequestQuery(currentPage);
 
   useEffect(() => {
-    if (getWithdrawrequestData && getWithdrawrequestData) {
+    if (getWithdrawrequestData && getWithdrawrequestData.data) {
       setData(getWithdrawrequestData.data);
       setTotalPages(getWithdrawrequestData.pagination.totalPages);
-      setCurrentPage(getWithdrawrequestData.pagination.currentPage);
+      setCurrentPage(currentPage);
     }
   }, [getWithdrawrequestData, currentPage]);
 
@@ -41,20 +41,16 @@ const Withdrawrequest = () => {
 
   const deleteWithdrawrequest = async () => {
     try {
-      const response = await deleteWithdrawrequestApi(idToDelete);
-      console.log(response);
+      await deleteWithdrawrequestApi(idToDelete);
       setDeleteShow(false);
       setIdToDelete("");
-      if (response.error.originalStatus === 200) {
-        toast(response.error.data);
-      } else {
-        toast.error(response.error.data);
-      }
+      toast.success("Withdraw Request deleted successfully");
     } catch (error) {
       console.error(error);
-      toast.error("Internal Server Error");
+      toast.error("Failed to delete Withdraw Request");
     }
   };
+  
 
   const handleEditShow = (id) => {
     setEditId(id);
@@ -121,10 +117,10 @@ const Withdrawrequest = () => {
         return (
           <div className="d-flex align-items-center justify-content-center flex-row">
             <Button variant="warning" onClick={() => handleEditShow(rowIdx)}>
-              <FaEdit />
+              <FaEdit /> 
             </Button>
-            <Button variant="danger" className="m-1" onClick={() => deleteHandleShow(rowIdx)}>
-              <MdDelete />
+            <Button variant="danger" className="ms-2" onClick={() => deleteHandleShow(rowIdx)}>
+              <MdDelete /> 
             </Button>
           </div>
         );
@@ -139,9 +135,8 @@ const Withdrawrequest = () => {
           <Container fluid className="mt-3">
             <Row>
               <BasicHeader HEADING="Withdraw Request" />
-              <hr className="mt-3" />
             </Row>
-            <Row className="">
+            <Row>
               <BasicTable
                 COLUMNS={COLUMNS}
                 MOCK_DATA={data}
@@ -156,7 +151,7 @@ const Withdrawrequest = () => {
             YES={deleteWithdrawrequest}
             DELETESTATE={deleteShow}
             ONCLICK={deleteHandleClose}
-            DESCRIPTION="Are you sure want to delete this Withdrawrequest?"
+            DESCRIPTION="Are you sure want to delete this Withdrawrequest"
             DELETETITLE="Withdrawrequest"
           />
 
@@ -176,10 +171,10 @@ const Withdrawrequest = () => {
               </Form>
             </Modal.Body>
             <Modal.Footer>
-              <Button style={{backgroundColor:"#db6300",border:"none"}} onClick={handleEditClose}>
+              <Button variant="secondary" onClick={handleEditClose}>
                 Cancel
               </Button>
-              <Button style={{backgroundColor:"#db6300",border:"none"}} onClick={handleEditSave}>
+              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleEditSave}>
                 Update
               </Button>
             </Modal.Footer>

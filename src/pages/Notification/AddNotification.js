@@ -46,9 +46,9 @@ const AddNotification = () => {
         setTimeout(() => navigate("/admin/Notification"), 3000);
         console.log(response.error.data);
       } else {
-        toast.error(response?.error?.data.error, { autoClose: 1000 });
+        toast.error(response?.error?.error, { autoClose: 1000 });
         console.log("else part");
-        console.log(response.error.data);
+        console.log(response.error);
       }
     } catch (error) {
       console.error(error);

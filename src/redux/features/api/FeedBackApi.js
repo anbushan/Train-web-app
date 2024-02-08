@@ -7,8 +7,8 @@ export const FeedbackApi = createApi({
   tagTypes: ["FEEDBACK"],
   endpoints: (build) => ({
     getFeedback: build.query({
-      query: () => ({
-        url: `/admin/viewFeedback`,
+      query: (page) => ({
+        url: `/admin/viewFeedback?page=${page}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
