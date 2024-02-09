@@ -16,27 +16,16 @@ export const TrainApi = createApi({
       }),
       providesTags: ["TRAIN"],
     }),
-    // getTrainById: build.query({
-    //   query: (id) => ({
-    //     url: `/Train/${id}`,
-    //     method: "GET",
-    //     headers: {
-    //       "Content-Type": "application/json; charset=UTF-8",
-    //     },
-    //   }),
-    //   providesTags: ["TRAIN"],
-    // }),
-    // getTrainBySearchData: build.query({
-    //   query: (search) => ({
-    //     url: `/Train/${search}`,
-    //     method: "GET",
-    //     headers: {
-    //       "Content-Type": "application/json; charset=UTF-8",
-    //     },
-    //   }),
-    //   providesTags: ["TRAIN"],
-    // }),
-
+    getTrainById: build.query({
+      query: (id) => ({
+        url: `/admin/trainNames/${id}`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }),
+      providesTags: ["TRAIN"],
+    }),
     addTrain: build.mutation({
         query: (data) => ({
           url: `/admin/addTrain`,
@@ -52,7 +41,7 @@ export const TrainApi = createApi({
 
     editTrain: build.mutation({
       query: ({ id, data }) => ({
-        url: `/admin/updateTrain/65b62f7a91a9e059e0b6f909/${id}`,
+        url: `/admin/updateTrain/${id}`,
         method: "PATCH",
         body: data,
         headers: {
@@ -63,7 +52,7 @@ export const TrainApi = createApi({
     }),
     deleteTrain: build.mutation({
       query: (id) => ({
-        url: `/admin/deleteTrain/65b62f7a91a9e059e0b6f909${id}`,
+        url: `/admin/deleteTrain/${id}`,
         method: "DELETE",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

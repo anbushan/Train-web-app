@@ -115,7 +115,7 @@ const Feedback = () => {
         YES={deleteFeedback}
         DELETESTATE={deleteShow}
         ONCLICK={deleteHandleClose}
-        DESCRIPTION="Are you sure you want to delete this Feedback?"
+        DESCRIPTION="Are you sure you want to delete this Feedback"
         DELETETITLE="Feedback"
       />
     </div>

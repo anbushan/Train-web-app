@@ -114,7 +114,7 @@ export default function Router() {
             },
 
             {
-              path: "/admin/edit-train",
+              path: "/admin/edit-train/:id",
               element: (
                 <AuthGuard>
                   <EditTrain/>

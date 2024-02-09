@@ -44,14 +44,17 @@ const Train = () => {
       const response = await deleteTrainApi(idToDelete);
       setDeleteShow(false);
       setIdToDelete("");
-      if (response.error.originalStatus === 200) {
-        toast(response.error.data);
+      if (response?.data) {
+        toast.success(response?.data?.message, { autoClose: 1000 });
+        console.log(response);
+      
       } else {
-        toast.error(response.error.data);
-      }
+        toast.error(response?.error?.data.error, { autoClose: 1000 });
+        console.log("else part");
+        console.log(response.error);
+       }
     } catch (error) {
       console.error(error);
-      toast.error("Internal Server Error");
     }
   };
 
@@ -75,7 +78,7 @@ const Train = () => {
         const rowIdx = props.row.original._id;
         return (
           <div className="d-flex align-items-center justify-content-center flex-row">
-            <Link to="/admin/edit-train">
+          <Link to={`/admin/edit-train/${rowIdx}`}>
               <Button variant="warning">
                 <FaEdit />
               </Button>
@@ -118,7 +121,7 @@ const Train = () => {
         YES={deleteTrain}
         DELETESTATE={deleteShow}
         ONCLICK={deleteHandleClose}
-        DESCRIPTION="Are you sure you want to delete this Train?"
+        DESCRIPTION="Are you sure you want to delete this Train"
         DELETETITLE="Train"
       />
     </div>
