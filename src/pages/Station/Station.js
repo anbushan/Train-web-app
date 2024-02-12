@@ -29,7 +29,9 @@ const Station = () => {
       setCurrentPage(currentPage);
     }
   }, [getStationData, currentPage]);
+  
 console.log(getStationData);
+
   const deleteHandleClose = () => {
     setDeleteShow(false);
   };
@@ -44,14 +46,17 @@ console.log(getStationData);
       const response = await deleteStationApi(idToDelete);
       setDeleteShow(false);
       setIdToDelete("");
-      if (response.error.originalStatus === 200) {
-        toast(response.error.data);
+      if (response?.data) {
+        toast.success(response?.data?.message, { autoClose: 1000 });
+        console.log(response);
+      
       } else {
-        toast.error(response.error.data);
-      }
+        toast.error(response?.error?.data.error, { autoClose: 1000 });
+        console.log("else part");
+        console.log(response.error);
+       }
     } catch (error) {
       console.error(error);
-      toast.error("Internal Server Error");
     }
   };
 
@@ -83,7 +88,7 @@ console.log(getStationData);
         const rowIdx = props.row.original._id;
         return (
           <div className="d-flex align-items-center justify-content-center flex-row">
-            <Link to="/admin/edit-station">
+             <Link to={`/admin/edit-station/${rowIdx}`}>
               <Button variant="warning">
                 <FaEdit />
               </Button>

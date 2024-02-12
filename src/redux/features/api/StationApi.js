@@ -16,16 +16,16 @@ export const StationApi = createApi({
       }),
       providesTags: ["STATION"],
     }),
-    // getStationById: build.query({
-    //   query: (id) => ({
-    //     url: `/Station/${id}`,
-    //     method: "GET",
-    //     headers: {
-    //       "Content-Type": "application/json; charset=UTF-8",
-    //     },
-    //   }),
-    //   providesTags: ["Station"],
-    // }),
+    getStationById: build.query({
+      query: (id) => ({
+        url: `admin/stationNames/${id}`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }),
+      providesTags: ["STATION"],
+    }),
     // getStationBySearchData: build.query({
     //   query: (search) => ({
     //     url: `/Station/${search}`,
@@ -52,7 +52,7 @@ export const StationApi = createApi({
 
     editStation: build.mutation({
       query: ({ id, data }) => ({
-        url: `/admin/updateStation/65b61b26e068a4e7d727ad84${id}`,
+        url: `/admin/updateStation/${id}`,
         method: "PATCH",
         body: data,
         headers: {
@@ -63,7 +63,7 @@ export const StationApi = createApi({
     }),
     deleteStation: build.mutation({
       query: (id) => ({
-        url: `/admin/deleteStation/65b61b26e068a4e7d727ad84${id}`,
+        url: `/admin/deleteStation/${id}`,
         method: "DELETE",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

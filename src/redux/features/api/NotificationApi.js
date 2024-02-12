@@ -33,7 +33,7 @@ export const NotificationApi = createApi({
 
     deleteNotification: build.mutation({
       query: (id) => ({
-        url: `/deleteNotification${id}`,
+        url: `/deleteNotification/${id}`,
         method: "DELETE",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

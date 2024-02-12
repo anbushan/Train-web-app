@@ -1,14 +1,13 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import CustomFetchBase from "./CustomFetchBase";
-
 export const WithdrawrequestApi = createApi({
   reducerPath: "WithdrawrequestApi",
   baseQuery: CustomFetchBase,
   tagTypes: ["WITHDRAWREQUEST"],
   endpoints: (build) => ({
     getWithdrawrequest: build.query({
-      query: (page) => ({
-        url: `/admin/viewWithdrawRequests?page=${page}`,
+      query: ({ page, id }) => ({
+        url: `/admin/viewWithdrawRequests?page=${page}&id=${id}`, // Fix the URL construction
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -16,11 +15,23 @@ export const WithdrawrequestApi = createApi({
       }),
       providesTags: ["WITHDRAWREQUEST"],
     }),
+
+
+    // getWithdrawrequestById: build.query({
+    //   query: (id) => ({
+    //     url: `/admin/withdrawRequest/${id}`,
+    //     method: "GET",
+    //     headers: {
+    //       "Content-Type": "application/json; charset=UTF-8",
+    //     },
+    //   }),
+    //   providesTags: ["WITHDRAWREQUEST"],
+    // }),
      
 
     editWithdrawrequest: build.mutation({
       query: ({ id, data }) => ({
-        url: `/admin/updateWithdrawRequests/65bf5868acac9bd014e8ed7/${id}`,
+        url: `/admin/updateWithdrawRequests/${id}`,
         method: "PATCH",
         body: data,
         headers: {
@@ -31,7 +42,7 @@ export const WithdrawrequestApi = createApi({
     }),
     deleteWithdrawrequest: build.mutation({
       query: (id) => ({
-        url: `//admin/categories/result${id}`,
+        url: `/admin/deleteWithdrawRequest/${id}`,
         method: "DELETE",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

@@ -78,10 +78,10 @@ export default function Router() {
             },
     
             {
-              path: "/admin/notification",
+              path: "/admin/general",
               element: (
                 <AuthGuard>
-                  <Notification/>
+                  <General/>
                 </AuthGuard>
               ),
             },
@@ -139,10 +139,10 @@ export default function Router() {
             },
 
             {
-              path: "/admin/add-notification",
+              path: "/admin/add-general",
               element: (
                 <AuthGuard>
-                  <AddNotification/>
+                  <AddGeneral/>
                 </AuthGuard>
               ),
             },
@@ -158,7 +158,7 @@ export default function Router() {
             
             
             {
-              path: "/admin/edit-station",
+              path: "/admin/edit-station/:id",
               element: (
                 <AuthGuard>
                   <EditStation/>
@@ -192,13 +192,22 @@ export default function Router() {
               ),
             },
             {
-              path: "/admin/edit-withdrawrequest",
+              path: "/admin/group",
               element: (
                 <AuthGuard>
-                  <EditWithdrawrequest/>
+                  <Group/>
                 </AuthGuard>
               ),
             },
+            {
+              path: "/admin/individual",
+              element: (
+                <AuthGuard>
+                  <Individual/>
+                </AuthGuard>
+              ),
+            },
+           
           ]
         },
       
@@ -228,7 +237,7 @@ const Train = Loadable(lazy(()=>import("../pages/Train/Train")));
 
 const Station = Loadable(lazy(()=>import("../pages/Station/Station")));
 
-const Notification = Loadable(lazy(()=>import("../pages/Notification/Notification")));
+const General = Loadable(lazy(()=>import("../pages/Notification/General/General")));
 
 
 const Dashboard = Loadable(lazy(()=>import("../pages/Dashboard/Dashboard")));
@@ -247,7 +256,7 @@ const WithdrawHistory = Loadable(lazy(()=>import("../pages/WithdrawHistory/Withd
 const WithdrawRequest = Loadable(lazy(()=>import("../pages/WithdrawRequest/WithdrawRequest")));
 
 
-const AddNotification = Loadable(lazy(()=>import("../pages/Notification/AddNotification")));
+const AddGeneral = Loadable(lazy(()=>import("../pages/Notification/General/AddGeneralNotification")));
 
 const AddStation = Loadable(lazy(()=>import("../pages/Station/AddStation")));
 
@@ -258,7 +267,13 @@ const AddUserList = Loadable(lazy(()=>import("../pages/Userlist/AddUserList")));
 const Issue = Loadable(lazy(()=>import("../pages/Issue/Issue")));
 
 const EditIssue = Loadable(lazy(()=>import("../pages/Issue/EditIssue")));
-const EditWithdrawrequest = Loadable(lazy(()=>import("../pages/WithdrawRequest/EditWithdrawrequest")));
+
+const Group = Loadable(lazy(()=>import("../pages/Notification/Group/Group")));
+
+
+const Individual = Loadable(lazy(()=>import("../pages/Notification/Individual/Individual")));
+
+
 
 
 

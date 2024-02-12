@@ -8,6 +8,7 @@ import DeleteModel from "../../components/DeleteModel";
 import { useGetWithdrawrequestQuery, useDeleteWithdrawrequestMutation, useEditWithdrawrequestMutation } from "../../redux/features/api/WithdrawRequestApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Withdrawrequest = () => {
   const [editShow, setEditShow] = useState(false);
@@ -20,15 +21,23 @@ const Withdrawrequest = () => {
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: getWithdrawrequestData, isLoading } = useGetWithdrawrequestQuery(currentPage);
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (id) {
+      setCurrentPage(1);
+    }
+  }, [id]);
+
+  const { data: getWithdrawrequestData, isLoading } = useGetWithdrawrequestQuery(currentPage, id);
 
   useEffect(() => {
     if (getWithdrawrequestData && getWithdrawrequestData.data) {
       setData(getWithdrawrequestData.data);
       setTotalPages(getWithdrawrequestData.pagination.totalPages);
-      setCurrentPage(currentPage);
     }
-  }, [getWithdrawrequestData, currentPage]);
+  }, [getWithdrawrequestData]);
 
   const deleteHandleClose = () => {
     setDeleteShow(false);
@@ -41,16 +50,18 @@ const Withdrawrequest = () => {
 
   const deleteWithdrawrequest = async () => {
     try {
-      await deleteWithdrawrequestApi(idToDelete);
+      const response = await deleteWithdrawrequestApi(idToDelete);
       setDeleteShow(false);
       setIdToDelete("");
-      toast.success("Withdraw Request deleted successfully");
+      if (response?.data) {
+        toast.success(response?.data?.message, { autoClose: 1000 });
+      } else {
+        toast.error(response?.error?.data.error, { autoClose: 1000 });
+      }
     } catch (error) {
       console.error(error);
-      toast.error("Failed to delete Withdraw Request");
     }
   };
-  
 
   const handleEditShow = (id) => {
     setEditId(id);
@@ -66,16 +77,23 @@ const Withdrawrequest = () => {
     setSelectedOption(e.target.value);
   };
 
-  const handleEditSave = async () => {
+  const handleEditData = async () => {
     try {
-      const response = await updateWithdrawrequestApi(editId, { status: selectedOption });
-      console.log(response);
-      setEditShow(false);
-      setEditId(null);
-      toast.success("Withdraw Request Updated Successfully");
+      const response = await updateWithdrawrequestApi({
+        id: editId,
+        data: {
+          status: selectedOption,
+        },
+      });
+
+      if (response?.data) {
+        toast.success(response?.data?.message, { autoClose: 1000 });
+        navigate("/admin/withdraw-request");
+      } else {
+        toast.error(response?.error?.data.error, { autoClose: 1000 });
+      }
     } catch (error) {
       console.error(error);
-      toast.error("Failed to Update Withdraw Request");
     }
   };
 
@@ -117,10 +135,10 @@ const Withdrawrequest = () => {
         return (
           <div className="d-flex align-items-center justify-content-center flex-row">
             <Button variant="warning" onClick={() => handleEditShow(rowIdx)}>
-              <FaEdit /> 
+              <FaEdit />
             </Button>
             <Button variant="danger" className="ms-2" onClick={() => deleteHandleShow(rowIdx)}>
-              <MdDelete /> 
+              <MdDelete />
             </Button>
           </div>
         );
@@ -174,7 +192,7 @@ const Withdrawrequest = () => {
               <Button variant="secondary" onClick={handleEditClose}>
                 Cancel
               </Button>
-              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleEditSave}>
+              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleEditData}>
                 Update
               </Button>
             </Modal.Footer>

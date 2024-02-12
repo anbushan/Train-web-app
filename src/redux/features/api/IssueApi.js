@@ -41,7 +41,7 @@ export const IssueApi = createApi({
 
     editIssue: build.mutation({
       query: ({ id, data }) => ({
-        url: `/admin/updateIssues/65c1dfcc4e0865974f89ab2d${id}`,
+        url: `/admin/updateIssues/${id}`,
         method: "PATCH",
         body: data,
         headers: {
@@ -52,7 +52,7 @@ export const IssueApi = createApi({
     }),
     deleteIssue: build.mutation({
       query: (id) => ({
-        url: `/admin/deleteIssues/65c1dfab4e0865974f89ab2b${id}`,
+        url: `/admin/deleteIssues/${id}`,
         method: "DELETE",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

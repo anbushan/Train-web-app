@@ -20,7 +20,7 @@ export const FeedbackApi = createApi({
 
       deleteFeedback: build.mutation({
       query: (id) => ({
-        url: `/admin/deleteFeedback/65c1eae02bf65fad86208a68${id}`,
+        url: `/admin/deleteFeedback/${id}`,
         method: "DELETE",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

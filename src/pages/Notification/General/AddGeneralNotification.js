@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { NotificationSchema } from "../../pages/Notification/NotificationValidation";
-import BasicButton from "../../components/BasicButton";
-import TextInput from "../../components/TextInput";
+import { NotificationSchema } from ".././../../pages/Notification/General/GeneralValidation";
+import BasicButton from ".././../../components/BasicButton";
+import TextInput from ".././../../components/TextInput";
 
-import { useAddNotificationMutation } from "../../redux/features/api/NotificationApi";
+import { useAddNotificationMutation } from ".././../../redux/features/api/NotificationApi";
 import { toast } from "react-toastify";
 
-const AddNotification = () => {
+const AddGeneralNotification = () => {
   const [tittle, settittle] = useState("");
   const [subtittle, setsubtittle] = useState("");
   const [image, setimage] = useState("");
@@ -18,7 +18,7 @@ const AddNotification = () => {
 
   const navigate = useNavigate();
   const handleCancel = () => {
-    navigate("/admin/notification");
+    navigate("/admin/general");
   };
 
   const initialValues = {
@@ -41,9 +41,9 @@ const AddNotification = () => {
         setsubtittle("");
         setimage("");
 
-        navigate("/admin/Notification");
+        navigate("/admin/general");
         toast.success(response?.data?.message, { autoClose: 1000 });
-        setTimeout(() => navigate("/admin/Notification"), 3000);
+        setTimeout(() => navigate("/admin/general"), 3000);
         console.log(response.error.data);
       } else {
         toast.error(response?.error?.error, { autoClose: 1000 });
@@ -79,7 +79,7 @@ const AddNotification = () => {
                     <h4 onClick={handleCancel}>
                       <AiOutlineArrowLeft />
                     </h4>
-                    <h4>Add Notification</h4>
+                    <h4>Add General</h4>
                   </Col>
                   <Col className="d-sm-none d-none d-md-none d-lg-flex d-xxl-flex d-xl-flex flex-row justify-content-end align-items-center">
                     <BasicButton
@@ -219,4 +219,4 @@ const AddNotification = () => {
     </div>
   );
 };
-export default AddNotification;
+export default AddGeneralNotification;

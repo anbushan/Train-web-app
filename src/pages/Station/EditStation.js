@@ -6,31 +6,37 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import BasicButton from "../../components/BasicButton";
 import TextInput from "../../components/TextInput";
-import { useEditStationMutation } from "../../redux/features/api/StationApi";
+import { useEditStationMutation,useGetStationByIdQuery } from "../../redux/features/api/StationApi";
 import { toast } from "react-toastify";
 
 const EditStation = () => {
-  const { id } = useParams();
-  const Id = id && id.startsWith(":") ? id.slice(1) : id;
-  const [{ data: editStation }, { isLoading }] = useEditStationMutation();
-
-  const navigate = useNavigate();
-  const handleCancel = () => {
-    navigate("/admin/station");
-  };
+ 
   const [stationCode, setStationCode] = useState("");
   const [stationName, setStationName] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
+  const { id } = useParams();
+  const Id = id.startsWith(":") ? id.slice(1) : id;
+ const [EditStationData, { isLoading }] = useEditStationMutation();
+  const { data: editStation } = useGetStationByIdQuery(Id);
+
+console.log(id);
+  const navigate = useNavigate();
+  const handleCancel = () => {
+    navigate("/admin/station");
+  };
 
   useEffect(() => {
-    if (editStation) {
-      setStationCode(editStation.stationCode);
-      setStationName(editStation.stationName);
-      setCity(editStation.city);
-      setState(editStation.state);
+    if (editStation && editStation.data) {
+      setStationCode(editStation.data.stationCode);
+      setStationName(editStation.data.stationName);
+      setCity(editStation.data.city);
+      setState(editStation.data.state);
     }
   }, [editStation]);
+
+console.log(editStation);
+
 
   const initialValues = {
     stationCode: "",
@@ -39,34 +45,32 @@ const EditStation = () => {
     state: "",
   };
 
-  const handleAddData = async () => {
+  const handleEditData = async () => {
     try {
-      const response = await editStation({
+      const response = await EditStationData({
         id: Id,
         data: {
-          stationCode,
-          stationName,
-          city,
-          state,
+          stationCode: stationCode,
+          stationName: stationName,
+          city:city,
+          state:state,
+         
         },
       });
-
-      if (response.error.originalStatus === 200) {
-        setStationCode("");
-        setStationName("");
-        setCity("");
-        setState("");
-
+      
+      console.log(response);
+    
+      if (response?.data) {
+        toast.success(response?.data?.message, { autoClose: 1000 });
+        console.log(response);
         navigate("/admin/station");
-        toast.success(response.error.data, { autoClose: 2000 });
-        setTimeout(() => navigate("/admin/station"), 3000);
       } else {
-        toast.error(response.error.data, { autoClose: 2000 });
-        console.error(response.error.data);
-      }
+        toast.error(response?.error?.data.error, { autoClose: 1000 });
+        console.log("else part");
+        console.log(response.error);
+       }
     } catch (error) {
       console.error(error);
-      toast.error("Internal Server Error", { autoClose: 2000 });
     }
   };
 
@@ -76,7 +80,7 @@ const EditStation = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={StationSchema}
-          onSubmit={handleAddData}
+          onSubmit={handleEditData}
         >
           {({
             values,
@@ -131,6 +135,7 @@ const EditStation = () => {
                         label="Station Code"
                         type=""
                         name="stationCode"
+                        value={stationCode}
                         className={`form-control ${
                           touched.stationCode && errors.stationCode
                             ? "is-invalid"
@@ -156,6 +161,7 @@ const EditStation = () => {
                         label="Station Name"
                         type=""
                         name="stationName"
+                        value={stationName}
                         className={`form-control ${
                           touched.stationName && errors.stationName
                             ? "is-invalid"
@@ -181,6 +187,7 @@ const EditStation = () => {
                         label="City "
                         type=""
                         name="city"
+                        value={city}
                         className={`form-control ${
                           touched.city && errors.city ? "is-invalid" : ""
                         }`}
@@ -204,6 +211,7 @@ const EditStation = () => {
                         label="State"
                         type=""
                         name="state"
+                        value={state}
                         className={`form-control ${
                           touched.state && errors.state ? "is-invalid" : ""
                         }`}

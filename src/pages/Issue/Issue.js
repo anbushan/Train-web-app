@@ -40,14 +40,17 @@ const Issue = () => {
       const response = await deleteIssueApi(idToDelete);
       setDeleteShow(false);
       setIdToDelete("");
-      if (response.error.originalStatus === 200) {
-        toast(response.error.data);
+      if (response?.data) {
+        toast.success(response?.data?.message, { autoClose: 1000 });
+        console.log(response);
+      
       } else {
-        toast.error(response.error.data);
-      }
+        toast.error(response?.error?.data.error, { autoClose: 1000 });
+        console.log("else part");
+        console.log(response.error);
+       }
     } catch (error) {
       console.error(error);
-      toast.error("Internal Server Error");
     }
   };
 
