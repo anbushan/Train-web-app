@@ -15,9 +15,9 @@ const ReactSidebar = ({ sidebarItems, onClick }) => {
             active={isActive}
             rootStyles={{
               backgroundColor: isActive ? 'white' : '#313947',
-              color: isActive ? 'white' : 'black',
-              ':hover': {
-                color: 'black',
+              color:"white",
+              ':hover':{
+                  color:"black",
               },
             }}
             key={item.id}
