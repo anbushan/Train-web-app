@@ -9,6 +9,7 @@ import DeleteModel from "../../components/DeleteModel";
 import { useGetStationQuery, useDeleteStationMutation } from "../../redux/features/api/StationApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
+import { useTranslation } from "react-i18next";
 
 const Station = () => {
   const [deleteShow, setDeleteShow] = useState(false);
@@ -18,6 +19,7 @@ const Station = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: getStationData, isLoading } = useGetStationQuery(currentPage);
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleNavigateAddForm = () => navigate(`/admin/add-station`);
@@ -109,8 +111,8 @@ console.log(getStationData);
           <Row>
             <Header
               ONCLICK={handleNavigateAddForm}
-              HEADING="Station"
-              BUTTON_NAME="Add Station"
+              HEADING={t("Station")}
+              BUTTON_NAME={t("Add Station")}
             />
             <hr className="mt-3" />
           </Row>
@@ -143,8 +145,8 @@ console.log(getStationData);
         YES={deleteStation}
         DELETESTATE={deleteShow}
         ONCLICK={deleteHandleClose}
-        DESCRIPTION="Are you sure you want to delete this Station?"
-        DELETETITLE="Station"
+        DESCRIPTION={t("Are you sure you want to delete this Station?")}
+        DELETETITLE={t("Station")}
       />
     </div>
   );

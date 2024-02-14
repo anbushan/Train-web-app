@@ -18,6 +18,7 @@ const Train = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: getTrainData, isLoading } = useGetTrainQuery(currentPage);
+  
   const navigate = useNavigate();
 
   const handleNavigateAddForm = () => navigate(`/admin/add-train`);
@@ -99,8 +100,9 @@ const Train = () => {
           <Row className="">
             <Header
               ONCLICK={handleNavigateAddForm}
-              HEADING="Train"
-              BUTTON_NAME="Add Train"
+              HEADING= "Train"
+              BUTTON_NAME= "Add Train"
+            
             />
             <hr className="mt-3" />
           </Row>
@@ -121,7 +123,7 @@ const Train = () => {
         YES={deleteTrain}
         DELETESTATE={deleteShow}
         ONCLICK={deleteHandleClose}
-        DESCRIPTION="Are you sure you want to delete this Train"
+        DESCRIPTION= "Are you sure you want to delete this Train"
         DELETETITLE="Train"
       />
     </div>

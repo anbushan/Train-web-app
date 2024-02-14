@@ -10,6 +10,7 @@ import { WithdrawrequestApi } from "./api/WithdrawRequestApi";
 import { WithdrawhistoryApi } from "./api/WithdrawHistoryApi";
 import { IssueApi } from "./api/IssueApi";
 import { FeedbackApi } from "./api/FeedBackApi";
+import { IndividualNotificationApi } from "./api/IndividualNotificationApi";
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
     [WithdrawrequestApi.reducerPath]: WithdrawrequestApi.reducer,
     [WithdrawhistoryApi.reducerPath]: WithdrawhistoryApi.reducer,
     [IssueApi.reducerPath]:IssueApi.reducer,
+    [IndividualNotificationApi.reducerPath]:IndividualNotificationApi.reducer,
   },
   devTools: process.env.NODE_ENV === "development",
   middleware: (getDefaultMiddleware) =>
@@ -38,5 +40,6 @@ export const store = configureStore({
       WithdrawrequestApi.middleware,
       WithdrawhistoryApi.middleware,
       IssueApi.middleware,
+      IndividualNotificationApi.middleware,
     ]),
 });

@@ -8,6 +8,7 @@ import BasicButton from "../../components/BasicButton";
 import TextInput from "../../components/TextInput";
 import { useEditStationMutation,useGetStationByIdQuery } from "../../redux/features/api/StationApi";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const EditStation = () => {
  
@@ -19,6 +20,7 @@ const EditStation = () => {
   const Id = id.startsWith(":") ? id.slice(1) : id;
  const [EditStationData, { isLoading }] = useEditStationMutation();
   const { data: editStation } = useGetStationByIdQuery(Id);
+  const { t } = useTranslation();
 
 console.log(id);
   const navigate = useNavigate();
@@ -98,18 +100,18 @@ console.log(editStation);
                     <h4 onClick={handleCancel}>
                       <AiOutlineArrowLeft />
                     </h4>
-                    <h4>Edit Station</h4>
+                    <h4>{t("Edit Station")}</h4>
                   </Col>
                   <Col className="d-sm-none d-none d-md-none d-lg-flex d-xxl-flex d-xl-flex flex-row justify-content-end align-items-center">
                     <BasicButton
                       className="m-1"
                       variant="secondary"
                       onClick={handleCancel}
-                      label="Cancel"
+                      label={t("Cancel")}
                     />
                     <BasicButton
                       className="m-1"
-                      label="Update"
+                      label={t("Update")}
                       type="button"
                       isLoading={isLoading}
                       loaderVariant="info"
@@ -132,7 +134,7 @@ console.log(editStation);
                   <Col className="m-1 p-4 d-flex flex-wrap flex-column shadow rounded">
                     <Col className="m-2" lg="6" xxl="6" xl="12" md="12" sm="12">
                       <TextInput
-                        label="Station Code"
+                        label={t("Station Code")}
                         type=""
                         name="stationCode"
                         value={stationCode}
@@ -158,7 +160,7 @@ console.log(editStation);
 
                     <Col className="m-2" lg="6" xxl="6" xl="12" md="12" sm="12">
                       <TextInput
-                        label="Station Name"
+                        label={t("Station Name")}
                         type=""
                         name="stationName"
                         value={stationName}
@@ -184,7 +186,7 @@ console.log(editStation);
 
                     <Col className="m-2" lg="6" xxl="6" xl="12" md="12" sm="12">
                       <TextInput
-                        label="City "
+                        label={t("City ")}
                         type=""
                         name="city"
                         value={city}
@@ -208,7 +210,7 @@ console.log(editStation);
 
                     <Col className="m-2" lg="6" xxl="6" xl="12" md="12" sm="12">
                       <TextInput
-                        label="State"
+                        label={t("State")}
                         type=""
                         name="state"
                         value={state}

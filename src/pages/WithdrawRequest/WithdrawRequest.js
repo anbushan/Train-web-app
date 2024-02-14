@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Button, Container, Row, Modal, Form } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { IoIosSend } from "react-icons/io";
 import BasicTable from "../../components/BasicTable";
 import BasicHeader from "../../components/BasicHeader";
 import DeleteModel from "../../components/DeleteModel";
 import { useGetWithdrawrequestQuery, useDeleteWithdrawrequestMutation, useEditWithdrawrequestMutation } from "../../redux/features/api/WithdrawRequestApi";
+import { useAddIndividualNotificationMutation } from "../../redux/features/api/IndividualNotificationApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
 import { useParams, useNavigate } from "react-router-dom";
@@ -18,9 +20,14 @@ const Withdrawrequest = () => {
   const [idToDelete, setIdToDelete] = useState("");
   const [deleteWithdrawrequestApi] = useDeleteWithdrawrequestMutation();
   const [updateWithdrawrequestApi] = useEditWithdrawrequestMutation();
+  const [addIndividualNotification] = useAddIndividualNotificationMutation();
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sendRequestShow, setSendRequestShow] = useState(false);
+  const [email, setEmail] = useState("");
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -97,6 +104,34 @@ const Withdrawrequest = () => {
     }
   };
 
+  const handleSendRequestClose = () => {
+    setSendRequestShow(false);
+  };
+
+  const handleSendRequestShow = () => {
+    setSendRequestShow(true);
+  };
+
+  const handleSendRequest = async () => {
+    try {
+      const response = await addIndividualNotification(email, {
+        title,
+        body,
+      });
+      if (response?.data) {
+        toast.success("Notification sent successfully", { autoClose: 1000 });
+        setSendRequestShow(false);
+        setEmail("");
+        setTitle("");
+        setBody("");
+      } else {
+        toast.error(response?.error?.data.error, { autoClose: 1000 });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const COLUMNS = [
     {
       Header: "ID",
@@ -140,6 +175,9 @@ const Withdrawrequest = () => {
             <Button variant="danger" className="ms-2" onClick={() => deleteHandleShow(rowIdx)}>
               <MdDelete />
             </Button>
+            <Button variant="primary" className="ms-2" onClick={handleSendRequestShow}>
+              <IoIosSend />
+            </Button>
           </div>
         );
       },
@@ -172,28 +210,57 @@ const Withdrawrequest = () => {
             DESCRIPTION="Are you sure want to delete this Withdrawrequest"
             DELETETITLE="Withdrawrequest"
           />
+<Modal show={editShow} onHide={handleEditClose} centered>
+  <Modal.Header closeButton>
+    <Modal.Title>Edit Withdraw Request</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <Form>
+      <Form.Group controlId="exampleForm.ControlSelect1">
+        <Form.Label>Status:</Form.Label>
+        <Form.Control as="select" value={selectedOption} onChange={handleDropdownChange}>
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+        </Form.Control>
+      </Form.Group>
+    </Form>
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={handleEditClose}>
+      Cancel
+    </Button>
+    <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleEditData}>
+      Update
+    </Button>
+  </Modal.Footer>
+</Modal>
 
-          <Modal show={editShow} onHide={handleEditClose} centered>
+          <Modal show={sendRequestShow} onHide={handleSendRequestClose} centered>
             <Modal.Header closeButton>
-              <Modal.Title>Edit Withdraw Request</Modal.Title>
+              <Modal.Title>Send Request</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form>
-                <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>Status:</Form.Label>
-                  <Form.Control as="select" value={selectedOption} onChange={handleDropdownChange}>
-                    <option value="Pending">Pending</option>
-                    <option value="Approved">Approved</option>
-                  </Form.Control>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                </Form.Group>
+                <Form.Group controlId="formBasicUPI">
+                  <Form.Label>UPI ID</Form.Label>
+                  <Form.Control type="text" placeholder="Enter UPI ID" value={title} onChange={(e) => setTitle(e.target.value)} />
+                </Form.Group>
+                <Form.Group controlId="formBasicWithdrawAmount">
+                  <Form.Label>Withdraw Amount</Form.Label>
+                  <Form.Control type="text" placeholder="Enter withdraw amount" value={body} onChange={(e) => setBody(e.target.value)} />
                 </Form.Group>
               </Form>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleEditClose}>
+              <Button variant="secondary" onClick={handleSendRequestClose}>
                 Cancel
               </Button>
-              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleEditData}>
-                Update
+              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSendRequest}>
+                Send
               </Button>
             </Modal.Footer>
           </Modal>
@@ -206,3 +273,4 @@ const Withdrawrequest = () => {
 };
 
 export default Withdrawrequest;
+

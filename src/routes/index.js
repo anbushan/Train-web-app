@@ -207,7 +207,14 @@ export default function Router() {
                 </AuthGuard>
               ),
             },
-           
+            {
+              path: "/admin/news",
+              element: (
+                <AuthGuard>
+                  <News/>
+                </AuthGuard>
+              ),
+            },
           ]
         },
       
@@ -272,6 +279,8 @@ const Group = Loadable(lazy(()=>import("../pages/Notification/Group/Group")));
 
 
 const Individual = Loadable(lazy(()=>import("../pages/Notification/Individual/Individual")));
+
+const News = Loadable(lazy(()=>import("../pages/News/News")));
 
 
 

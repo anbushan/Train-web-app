@@ -13,9 +13,11 @@ import ReactPaginate from "react-paginate";
 import { IconContext } from "react-icons/lib";
 import "./FilterComponent.css";
 
+
 const BasicTable = (props) => {
   const columns = useMemo(() => props.COLUMNS, [props.COLUMNS]);
   const data = useMemo(() => props.MOCK_DATA || [], [props.MOCK_DATA]);
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -63,7 +65,7 @@ const BasicTable = (props) => {
                 backgroundColor:"#db6300",
               }}
             >
-              Search
+             Search
             </Button>
           </Col>
         </Row>

@@ -12,6 +12,11 @@ import { AiOutlineIssuesClose } from "react-icons/ai";
 import { HiMiniUserGroup } from "react-icons/hi2";
 import { MdPerson } from "react-icons/md";
 import { IoPersonCircleSharp } from "react-icons/io5";
+import { FaRegNewspaper } from "react-icons/fa";
+
+
+
+
 
 export const sidebarItems = [
   {
@@ -113,6 +118,15 @@ export const sidebarItems = [
     "order_index": 8,
     "url": "/admin/issue",
   },
+  {
+    "id": 13,
+    "label": "News",
+    "parent_id": null,
+    "icon":<FaRegNewspaper   size={20}/>,
+    "order_index": 8,
+    "url": "/admin/news",
+  },
+ 
   {
     "id": 13,
     "label": "Settings",
