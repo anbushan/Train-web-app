@@ -33,6 +33,7 @@ const GeneralGroupNotification = () => {
       setCurrentPage(currentPage);
     }
   }, [GroupNotificationData, currentPage]);
+  console.log(GroupNotificationData);
 
   const handleNavigateAddForm = () => navigate("/admin/group-notification");
 
