@@ -69,6 +69,18 @@ const AddStation = () => {
         stationName: stationName,
         city: city,
         state: state,
+        tamilStationName: tamilStationName,
+        tamilCity: tamilCity,
+        tamilState: tamilState,
+        teluguStationName: teluguStationName,
+        teluguCity: teluguCity,
+        teluguState: teluguState,
+        kannadaStationName: kannadaStationName,
+        kannadaCity: kannadaCity,
+        kannadaState: kannadaState,
+        hindiStationName: hindiStationName,
+        hindiCity: hindiCity,
+        hindiState: hindiState,
       
         
       });

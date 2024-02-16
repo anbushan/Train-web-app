@@ -7,8 +7,8 @@ export const IndividualNotificationApi = createApi({
   tagTypes: ["INDIVIDUALNOTIFICATION"],
   endpoints: (build) => ({
     addIndividualNotification: build.mutation({
-      query: (email, data) => ({
-        url: `http://54.235.51.47:8080/sendNotification/${email}`,
+      query: (data) => ({
+        url: `/sendNotification`,
         method: "POST",
         body: data,
         headers: {

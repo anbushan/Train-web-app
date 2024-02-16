@@ -11,6 +11,9 @@ import { WithdrawhistoryApi } from "./api/WithdrawHistoryApi";
 import { IssueApi } from "./api/IssueApi";
 import { FeedbackApi } from "./api/FeedBackApi";
 import { IndividualNotificationApi } from "./api/IndividualNotificationApi";
+import { GroupNotificationApi } from "./api/GroupNotificationApi";
+import { GroupApi } from "./api/GroupApi";
+import { NewsApi } from "./api/NewsApi";
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +29,9 @@ export const store = configureStore({
     [WithdrawhistoryApi.reducerPath]: WithdrawhistoryApi.reducer,
     [IssueApi.reducerPath]:IssueApi.reducer,
     [IndividualNotificationApi.reducerPath]:IndividualNotificationApi.reducer,
+    [GroupNotificationApi.reducerPath]:GroupNotificationApi.reducer,
+    [GroupApi.reducerPath]:GroupApi.reducer,
+    [NewsApi.reducerPath]:NewsApi.reducer,
   },
   devTools: process.env.NODE_ENV === "development",
   middleware: (getDefaultMiddleware) =>
@@ -41,5 +47,8 @@ export const store = configureStore({
       WithdrawhistoryApi.middleware,
       IssueApi.middleware,
       IndividualNotificationApi.middleware,
+      GroupNotificationApi.middleware,
+      GroupApi.middleware,
+      NewsApi.middleware,
     ]),
 });

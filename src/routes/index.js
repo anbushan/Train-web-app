@@ -215,6 +215,14 @@ export default function Router() {
                 </AuthGuard>
               ),
             },
+            {
+              path: "/admin/group-notification",
+              element: (
+                <AuthGuard>
+                  <GroupNotification/>
+                </AuthGuard>
+              ),
+            },
           ]
         },
       
@@ -276,6 +284,8 @@ const Issue = Loadable(lazy(()=>import("../pages/Issue/Issue")));
 const EditIssue = Loadable(lazy(()=>import("../pages/Issue/EditIssue")));
 
 const Group = Loadable(lazy(()=>import("../pages/Notification/Group/Group")));
+
+const GroupNotification = Loadable(lazy(()=>import("../pages/Notification/Group/GroupNotification")));
 
 
 const Individual = Loadable(lazy(()=>import("../pages/Notification/Individual/Individual")));
