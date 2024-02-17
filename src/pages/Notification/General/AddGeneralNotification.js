@@ -11,9 +11,9 @@ import { useAddNotificationMutation } from ".././../../redux/features/api/Notifi
 import { toast } from "react-toastify";
 
 const AddGeneralNotification = () => {
-  const [tittle, settittle] = useState("");
-  const [subtittle, setsubtittle] = useState("");
-  const [image, setimage] = useState("");
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [image, setImage] = useState("");
   const [NotificationAddData, { isLoading }] = useAddNotificationMutation();
 
   const navigate = useNavigate();
@@ -22,36 +22,43 @@ const AddGeneralNotification = () => {
   };
 
   const initialValues = {
-    tittle: "",
-    subtittle: "",
+    title: "",
+    body: "",
     image: "",
   };
 
   const handleAddData = async () => {
     try {
-      const formData = new FormData();
-      formData.append("tittle", tittle);
-      formData.append("subtittle", subtittle);
-      formData.append("image", image);
-
-      const response = await NotificationAddData(formData);
-
+      const response = await NotificationAddData ({
+        title: title,
+        body: body,
+        image:image,
+     
+      
+        
+      });
+    
+   
       if (response?.data) {
-        settittle("");
-        setsubtittle("");
-        setimage("");
-
-        navigate("/admin/general");
+        setTitle("");
+        setBody("");
+        setImage("");
+       
+      
+      
+        // navigate("/admin/train");
         toast.success(response?.data?.message, { autoClose: 1000 });
-        setTimeout(() => navigate("/admin/general"), 3000);
+        
         console.log(response.error.data);
+       
       } else {
-        toast.error(response?.error?.error, { autoClose: 1000 });
+        toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");
         console.log(response.error);
       }
     } catch (error) {
       console.error(error);
+   
     }
   };
 
@@ -96,11 +103,11 @@ const AddGeneralNotification = () => {
                       loaderVariant="info"
                       disabled={isSubmitting}
                       onClick={
-                        tittle === "" ||
-                        subtittle === "" ||
+                        title === "" ||
+                        body === "" ||
                         image === "" ||
-                        (touched.tittle && errors.tittle) ||
-                        (touched.subtittle && errors.subtittle) ||
+                        (touched.title && errors.title) ||
+                        (touched.body && errors.body) ||
                         (touched.image && errors.image)
                           ? handleSubmit
                           : handleAddData
@@ -116,16 +123,16 @@ const AddGeneralNotification = () => {
                         type=""
                         name="title"
                         className={`form-control ${
-                          touched.tittle && errors.tittle ? "is-invalid" : ""
+                          touched.title && errors.title ? "is-invalid" : ""
                         }`}
                         onChange={(e) => {
-                          settittle(e.target.value);
+                          setTitle(e.target.value);
                           handleChange(e);
                         }}
                         onBlur={handleBlur}
                         validation={
-                          touched.tittle && errors.tittle ? (
-                            <p className="text-danger">{errors.tittle}</p>
+                          touched.title && errors.title ? (
+                            <p className="text-danger">{errors.title}</p>
                           ) : (
                             ""
                           )
@@ -135,22 +142,22 @@ const AddGeneralNotification = () => {
 
                     <Col className="m-2" lg="6" xxl="6" xl="12" md="12" sm="12">
                       <TextInput
-                        label="Subtitle"
+                        label="body"
                         type=""
-                        name="subtitle"
+                        name="body"
                         className={`form-control ${
-                          touched.subtittle && errors.subtittle
+                          touched.body && errors.body
                             ? "is-invalid"
                             : ""
                         }`}
                         onChange={(e) => {
-                          setsubtittle(e.target.value);
+                          setBody(e.target.value);
                           handleChange(e);
                         }}
                         onBlur={handleBlur}
                         validation={
-                          touched.subtittle && errors.subtittle ? (
-                            <p className="text-danger">{errors.subtittle}</p>
+                          touched.body && errors.body ? (
+                            <p className="text-danger">{errors.body}</p>
                           ) : (
                             ""
                           )
@@ -166,7 +173,7 @@ const AddGeneralNotification = () => {
                           touched.image && errors.image ? "is-invalid" : ""
                         }`}
                         onChange={(e) => {
-                          setimage(e.target.files[0]); // Use e.target.files to get the selected file
+                          setImage(e.target.files[0]); // Use e.target.files to get the selected file
                           handleChange(e);
                         }}
                         onBlur={handleBlur}
@@ -199,11 +206,11 @@ const AddGeneralNotification = () => {
                       loaderVariant="info"
                       disabled={isSubmitting}
                       onClick={
-                        tittle === "" ||
-                        subtittle === "" ||
+                        title === "" ||
+                        body === "" ||
                         image === "" ||
-                        (touched.tittle && errors.tittle) ||
-                        (touched.subtittle && errors.subtittle) ||
+                        (touched.title && errors.title) ||
+                        (touched.body && errors.body) ||
                         (touched.image && errors.image)
                           ? handleSubmit
                           : handleAddData

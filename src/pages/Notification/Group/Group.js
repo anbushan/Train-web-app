@@ -13,7 +13,7 @@ import { MdStreetview } from "react-icons/md";
 const GeneralGroupNotification = () => {
   const navigate = useNavigate();
   const [groupname, setGroupname] = useState("");
-  const [emails, setEmails] = useState("");
+  const [emails, setEmails] = useState([]);
   const [data, setData] = useState([]);
  
   const [totalPages, setTotalPages] = useState(1);
@@ -59,12 +59,10 @@ const GeneralGroupNotification = () => {
     }
   };
 
-  const handleLogin = async () => {
+ 
+  const CreateGroup = async () => {
     try {
-      const response = await addGroupNotificationApi({
-        groupname: groupname,
-        emails: emails,
-      });
+      const response = await addGroupNotificationApi(groupname, data);
 
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
@@ -85,9 +83,6 @@ const GeneralGroupNotification = () => {
 
  
 
-  // const handleGroupView = () => {
-  //   navigate(`/admin/group-notification`); // Navigate to the group page with the specified groupId
-  // };
 
   const COLUMNS = [
     {
@@ -130,7 +125,7 @@ const GeneralGroupNotification = () => {
               <MdDelete />
             </Button>
             <Button variant="primary" className="m-1" onClick={() => handleNavigateAddForm(rowIdx)}>
-              <MdStreetview/>  Group
+              <MdStreetview/>View
             </Button>
           </div>
         );
@@ -178,7 +173,7 @@ const GeneralGroupNotification = () => {
               <Modal.Title>Add Group </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form.Group controlId="groupName">
+              <Form.Group controlId="groupname">
                 <Form.Label>Group Name</Form.Label>
                 <Form.Control type="text" placeholder="Enter group name"  value={groupname} onChange={(e) => setGroupname(e.target.value)} />
               </Form.Group>
@@ -196,7 +191,7 @@ const GeneralGroupNotification = () => {
               <Button variant="secondary" onClick={handleClose}>
                 Cancel
               </Button>
-              <Button style={{ backgroundColor: "#db6300", border: "none" }} variant="primary" onClick={handleLogin}>
+              <Button style={{ backgroundColor: "#db6300", border: "none" }} variant="primary" onClick={CreateGroup}>
                 Add Group
               </Button>
             </Modal.Footer>

@@ -463,7 +463,7 @@ const AddStation = () => {
 
                 <Row className="d-flex flex-wrap flex-lg-row flex-xxl-row flex-xl-row flex-column flex-md-column flex-sm-column  mt-4">
                   <Col className="m-1 p-4 d-flex flex-wrap flex-column shadow rounded">
-                  <h4 className="mb-4">Hindhi:</h4>
+                  <h4 className="mb-4">Hindi:</h4>
                    
                     
                   

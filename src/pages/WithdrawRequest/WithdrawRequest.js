@@ -31,11 +31,11 @@ const Withdrawrequest = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (id) {
-      setCurrentPage(1);
-    }
-  }, [id]);
+  // useEffect(() => {
+  //   if (id) {
+  //     setCurrentPage(1);
+  //   }
+  // }, [id]);
 
   const { data: getWithdrawrequestData, isLoading } = useGetWithdrawrequestQuery(currentPage, id);
 
@@ -125,7 +125,7 @@ const Withdrawrequest = () => {
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
         console.log(response);
-      
+        navigate("/admin/withdraw-request");
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");
@@ -246,7 +246,7 @@ const Withdrawrequest = () => {
               <Form>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <Form.Control type="email" placeholder="Enter email" value={email.data} onChange={(e) => setEmail(e.target.value)} />
                 </Form.Group>
                 <Form.Group controlId="formBasicUPI">
                   <Form.Label>UPI ID</Form.Label>

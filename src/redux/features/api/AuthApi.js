@@ -28,8 +28,8 @@ export const AuthApi = createApi({
 
 export const {
   useLoginUserMutation,
-  useRegisterUserMutation,
-  useForgetUserMutation,
-  useOtpVerifyMutation,
-  useResetPasswordMutation,
+  // useRegisterUserMutation,
+  // useForgetUserMutation,
+  // useOtpVerifyMutation,
+  // useResetPasswordMutation,
 } = AuthApi;

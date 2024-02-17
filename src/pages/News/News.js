@@ -208,15 +208,15 @@ const News = () => {
           <option value="" disabled>
             Select Categories
           </option>
-          <option value="General">General</option>
-          <option value="World">World</option>
-          <option value="Nation">Nation</option>
-          <option value="Business">Business</option>
-          <option value="Technology">Technology</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Sports">Sports</option>
-          <option value="Science">Science</option>
-          <option value="Health">Health</option>
+          <option value="general">General</option>
+          <option value="world">World</option>
+          <option value="nation">Nation</option>
+          <option value="business">Business</option>
+          <option value="technology">Technology</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="sports">Sports</option>
+          <option value="science">Science</option>
+          <option value="health">Health</option>
           {/* {categoryOptions &&
             categoryOptions.map((option, index) => (
               <option key={index} value={option}>
