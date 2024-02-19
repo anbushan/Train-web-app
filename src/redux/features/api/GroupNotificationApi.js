@@ -19,10 +19,10 @@ export const GroupNotificationApi = createApi({
   
 
     addGroupNotification: build.mutation({
-        query: ({groupname,data}) => ({
+        query: ({groupname,emails}) => ({
           url: `/admin/addGroup/${groupname}`,
           method: "POST",
-          body: data,
+          body: { groupname: groupname, emails: emails },
           headers: {
             "Content-Type": "application/json; charset=UTF-8",
           },

@@ -33,7 +33,7 @@ export const GroupApi = createApi({
 
     deleteGroup: build.mutation({
       query: (id) => ({
-        url: `/admin/deleteGroup/Group456/${id}`,
+        url: `/admin/deleteGroup/${id}`,
         method: "DELETE",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

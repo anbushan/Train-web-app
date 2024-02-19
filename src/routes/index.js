@@ -223,6 +223,22 @@ export default function Router() {
                 </AuthGuard>
               ),
             },
+            {
+              path: "/admin/Local-train",
+              element: (
+                <AuthGuard>
+                  <LocalTrain/>
+                </AuthGuard>
+              ),
+            },
+            {
+              path: "/admin/metro-train",
+              element: (
+                <AuthGuard>
+                  <MetroTrain/>
+                </AuthGuard>
+              ),
+            },
           ]
         },
       
@@ -291,6 +307,10 @@ const GroupNotification = Loadable(lazy(()=>import("../pages/Notification/Group/
 const Individual = Loadable(lazy(()=>import("../pages/Notification/Individual/Individual")));
 
 const News = Loadable(lazy(()=>import("../pages/News/News")));
+
+const LocalTrain = Loadable(lazy(()=>import("../pages/LocalTrain/LocalTrain")));
+
+const MetroTrain = Loadable(lazy(()=>import("../pages/MetroTrain/MetroTrain")));
 
 
 

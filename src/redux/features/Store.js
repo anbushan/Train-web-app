@@ -14,6 +14,8 @@ import { IndividualNotificationApi } from "./api/IndividualNotificationApi";
 import { GroupNotificationApi } from "./api/GroupNotificationApi";
 import { GroupApi } from "./api/GroupApi";
 import { NewsApi } from "./api/NewsApi";
+import { LocalTrainApi } from "./api/LocalTrainApi";
+import { MetroTrainApi } from "./api/MetroTrainApi";
 
 export const store = configureStore({
   reducer: {
@@ -32,6 +34,8 @@ export const store = configureStore({
     [GroupNotificationApi.reducerPath]:GroupNotificationApi.reducer,
     [GroupApi.reducerPath]:GroupApi.reducer,
     [NewsApi.reducerPath]:NewsApi.reducer,
+    [LocalTrainApi.reducerPath]:LocalTrainApi.reducer,
+    [MetroTrainApi.reducerPath]:MetroTrainApi.reducer,
   },
   devTools: process.env.NODE_ENV === "development",
   middleware: (getDefaultMiddleware) =>
@@ -50,5 +54,7 @@ export const store = configureStore({
       GroupNotificationApi.middleware,
       GroupApi.middleware,
       NewsApi.middleware,
+      LocalTrainApi.middleware,
+      MetroTrainApi.middleware,
     ]),
 });

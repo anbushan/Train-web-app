@@ -51,18 +51,27 @@ const GeneralGroupNotification = () => {
       setIdToDelete("");
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
+        console.log(response);
+      
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
-      }
+        console.log("else part");
+        console.log(response.error);
+       }
     } catch (error) {
       console.error(error);
     }
   };
 
+
  
   const CreateGroup = async () => {
     try {
-      const response = await addGroupNotificationApi(groupname, data);
+      const response = await addGroupNotificationApi({
+        groupname:groupname,
+      emails: ["tamilselvan0677@gmail.com","ranjith8072@gmail.com"]
+        
+      });
 
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });

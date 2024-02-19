@@ -13,8 +13,8 @@ import { HiMiniUserGroup } from "react-icons/hi2";
 import { MdPerson } from "react-icons/md";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { FaRegNewspaper } from "react-icons/fa";
-
-
+import { PiTrainRegionalFill } from "react-icons/pi";
+import { FaTrainTram } from "react-icons/fa6";
 
 
 
@@ -41,6 +41,22 @@ export const sidebarItems = [
     "icon":<FaTrainSubway size={20}/>,
     "order_index": 3,
     "url": "/admin/train",
+  },
+  {
+    "id": 13,
+    "label": "Local Train",
+    "parent_id": null,
+    "icon":<FaTrainTram   size={20}/>,
+    "order_index": 8,
+    "url": "/admin/local-train",
+  },
+  {
+    "id": 13,
+    "label": "Metro Train",
+    "parent_id": null,
+    "icon":<PiTrainRegionalFill   size={20}/>,
+    "order_index": 8,
+    "url": "/admin/metro-train",
   },
   {
     "id": 4,
