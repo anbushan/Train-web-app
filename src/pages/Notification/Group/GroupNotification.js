@@ -47,7 +47,6 @@ console.log(groupData);
     setIdToDelete(id);
     setDeleteShow(true);
   };
-
   const deletegroup = async () => {
     try {
       const response = await deletegroupApi(idToDelete);
@@ -55,15 +54,17 @@ console.log(groupData);
       setIdToDelete("");
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
+        console.log(response);
+      
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
-      }
+        console.log("else part");
+        console.log(response.error);
+       }
     } catch (error) {
       console.error(error);
     }
   };
-
-  
   const handleSendRequest = async () => {
     try {
       const response = await addGroupNotification({
@@ -77,6 +78,7 @@ console.log(groupData);
         toast.success(response?.data?.message, { autoClose: 1000 });
         console.log(response);
         navigate("/admin/group-notification");
+        setShowModal(false); 
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");

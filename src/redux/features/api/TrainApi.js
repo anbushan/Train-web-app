@@ -7,8 +7,8 @@ export const TrainApi = createApi({
   tagTypes: ["TRAIN"],
   endpoints: (build) => ({
     getTrain: build.query({
-      query: (page) => ({
-        url: `/info/trainNames?page=${page}`,
+      query: ({ page, search }) => ({
+        url: `/info/trainNames?page=${page}&search=${search}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

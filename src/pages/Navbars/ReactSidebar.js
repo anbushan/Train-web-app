@@ -58,7 +58,7 @@ const ReactSidebar = ({ sidebarItems, onClick }) => {
   };
 
   return (
-    <div style={{ height: '100vh', overflow: 'hidden',backgroundColor:"313947" }}>
+    <div style={{ height: '100vh', overflow: 'hidden', backgroundColor: '#313947' }}>
       <Sidebar
         backgroundColor='#313947'
         rootStyles={{
@@ -70,7 +70,9 @@ const ReactSidebar = ({ sidebarItems, onClick }) => {
           borderColor: '#313947',
         }}
       >
-        <Menu iconShape='circle'>{renderMenuItems(sidebarItems)}</Menu>
+        <div style={{ overflowY: 'auto', height: '100%' }}>
+          <Menu iconShape='circle'>{renderMenuItems(sidebarItems)}</Menu>
+        </div>
       </Sidebar>
     </div>
   );

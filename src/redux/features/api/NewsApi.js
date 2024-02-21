@@ -7,8 +7,8 @@ export const NewsApi = createApi({
   tagTypes: ["NEWS"],
   endpoints: (build) => ({
     getNews: build.query({
-      query: (data) => ({
-        url: `/news/addNewsInDB?category=${data.cate}&lang=${data.lang}`,
+      query: ({cate,lang}) => ({
+        url: `/news/addNewsInDB?category=${cate}&lang=${lang}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

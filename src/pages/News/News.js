@@ -22,12 +22,11 @@ const News = () => {
   const [idToDelete, setIdToDelete] = useState("");
   const [deleteShow, setDeleteShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  // const [languageOptions, setLanguageOptions] = useState([]);
-  // const [categoryOptions, setCategoryOptions] = useState([]);
   const { data: newsTableData, isLoading: tableLoading } =
     useGetNewsTableQuery(currentPage);
-  const {  newsOptionsData, refetch: refetchNewsOptions } =
-    useGetNewsQuery();
+  const { data: newsOptionsData, refetch: refetchNewsOptions } =
+    useGetNewsQuery({ cate: category, lang: lang }); // Use the useGetNewsQuery hook
+
   const [deleteNewsApi] = useDeleteNewsMutation();
 
   // useEffect(() => {
@@ -192,6 +191,7 @@ const News = () => {
                 {option}
               </option>
             ))} */}
+            
         </Form.Select>
       </Form.Group>
     </Col>

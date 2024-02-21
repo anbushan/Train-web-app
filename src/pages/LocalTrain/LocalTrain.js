@@ -16,10 +16,8 @@ const Train = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteShow, setDeleteShow] = useState(false);
   const [idToDelete, setIdToDelete] = useState("");
-  const [selectedCity, setSelectedCity] = useState("Chennai"); // Default city is Chennai
-  console.log(selectedCity);
-  const { data: getLocalTrainData, isLoading } = useGetChennaiLocalQuery({ page: currentPage, city: selectedCity });
-
+  const [selectedCity, setSelectedCity] = useState("chennai"); 
+  const { data: getLocalTrainData, isLoading } = useGetChennaiLocalQuery({ page: currentPage, city: selectedCity ,id:idToDelete});
   const navigate = useNavigate();
   const [deleteLocalTrain] = useDeleteLocalTrainMutation();
 
@@ -33,11 +31,10 @@ const Train = () => {
     }
   }, [getLocalTrainData, currentPage]);
 
-  console.log(getLocalTrainData);
-
   const handleCityChange = (e) => {
     setSelectedCity(e.target.value);
   };
+
   const deleteHandleClose = () => {
     setDeleteShow(false);
   };
@@ -140,7 +137,7 @@ const Train = () => {
         const rowIdx = props.row.original._id;
         return (
           <div className="d-flex align-items-center justify-content-center flex-row">
-          <Link to={`/admin/edit-local/${rowIdx}`}>
+          <Link to={`/admin/edit-localtrain`}>
               <Button variant="warning">
                 <FaEdit />
               </Button>
@@ -173,12 +170,12 @@ const Train = () => {
       <Form.Group controlId="city">
                 <Form.Label className="fs-4">Select City:</Form.Label>
                 <Form.Control as="select" value={selectedCity} onChange={handleCityChange}>
-                  <option value="Chennai">Chennai</option>
-                  <option value="Delhi">Delhi</option>
-                  <option value="Pune">Pune</option>
-                  <option value="Kolkata">Kolkata</option>
-                  <option value="Mumbai">Mumbai</option>
-                  <option value="Hyderabad">Hyderabad</option>
+                  <option value="chennai">Chennai</option>
+                  <option value="delhi">Delhi</option>
+                  <option value="pune">Pune</option>
+                  <option value="kolkata">Kolkata</option>
+                  <option value="mumbai">Mumbai</option>
+                  <option value="hyderabad">Hyderabad</option>
                 </Form.Control>
               </Form.Group>
       </Col>

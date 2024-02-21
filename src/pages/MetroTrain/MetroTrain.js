@@ -5,21 +5,25 @@ import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import BasicTable from "../../components/TablePaginationComponent";
 import Header from "../../components/Header";
-import { useGetChennaiMetroQuery } from "../../redux/features/api/MetroTrainApi";
+import { useDeleteMetroTrainMutation, useGetChennaiMetroQuery } from "../../redux/features/api/MetroTrainApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
+import DeleteModel from "../../components/DeleteModel";
 
 const Train = () => {
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCity, setSelectedCity] = useState("Chennai"); // Default city is Chennai
+  const [deleteShow, setDeleteShow] = useState(false);
+  const [idToDelete, setIdToDelete] = useState("");
+  const [selectedCity, setSelectedCity] = useState("Chennai"); 
   console.log(selectedCity);
   const { data: getMetroTrainData, isLoading } = useGetChennaiMetroQuery({ page: currentPage, city: selectedCity });
+  const [deleteMetroTrain] = useDeleteMetroTrainMutation();
 
   const navigate = useNavigate();
 
-  const handleNavigateAddForm = () => navigate(`/admin/add-Metrotrain`);
+  const handleNavigateAddForm = () => navigate(`/admin/add-metrotrain`);
 
   useEffect(() => {
     if (getMetroTrainData && getMetroTrainData.data) {
@@ -34,33 +38,32 @@ const Train = () => {
   const handleCityChange = (e) => {
     setSelectedCity(e.target.value);
   };
-//   const deleteHandleClose = () => {
-//     setDeleteShow(false);
-//   };
+  const deleteHandleClose = () => {
+    setDeleteShow(false);
+  };
 
-//   const deleteHandleShow = (id) => {
-//     setIdToDelete(id);
-//     setDeleteShow(true);
-//   };
+  const deleteHandleShow = (id) => {
+    setIdToDelete(id);
+    setDeleteShow(true);
+  };
 
-//   const deleteTrain = async () => {
-//     try {
-//       const response = await deleteTrainApi(idToDelete);
-//       setDeleteShow(false);
-//       setIdToDelete("");
-//       if (response?.data) {
-//         toast.success(response?.data?.message, { autoClose: 1000 });
-//         console.log(response);
-      
-//       } else {
-//         toast.error(response?.error?.data.error, { autoClose: 1000 });
-//         console.log("else part");
-//         console.log(response.error);
-//        }
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
+  const deleteMetro = async () => {
+    try {
+      const response = await deleteMetroTrain(selectedCity, idToDelete);
+      setDeleteShow(false);
+      setIdToDelete("");
+      if (response?.data) {
+        toast.success(response?.data?.message, { autoClose: 1000 });
+        console.log(response);
+      } else {
+        toast.error(response?.error?.data.error, { autoClose: 1000 });
+        console.log("else part");
+        console.log(response.error);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const COLUMNS = [
     {
       Header: "ID",
@@ -130,12 +133,12 @@ const Train = () => {
         const rowIdx = props.row.original._id;
         return (
           <div className="d-flex align-items-center justify-content-center flex-row">
-          <Link to={`/admin/edit-metro/${rowIdx}`}>
+          <Link to={`/admin/edit-metrotrain`}>
               <Button variant="warning">
                 <FaEdit />
               </Button>
             </Link>
-            <Button variant="danger" className="m-1" >
+            <Button variant="danger" className="m-1" onClick={() => deleteHandleShow(rowIdx)}>
               <MdDelete />
             </Button>
           </div>
@@ -199,13 +202,13 @@ const Train = () => {
       ) : (
         <Loader />
       )}
-      {/* <DeleteModel
-        YES={deleteTrain}
+      <DeleteModel
+        YES={deleteMetro}
         DELETESTATE={deleteShow}
         ONCLICK={deleteHandleClose}
         DESCRIPTION= "Are you sure you want to delete this Train"
         DELETETITLE="Train"
-      /> */}
+      />
     </div>
   );
 };

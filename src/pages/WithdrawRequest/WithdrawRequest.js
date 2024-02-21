@@ -95,7 +95,7 @@ const Withdrawrequest = () => {
 
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
-        navigate("/admin/withdraw-request");
+        handleEditClose(); 
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
       }
@@ -107,34 +107,34 @@ const Withdrawrequest = () => {
   const handleSendRequestClose = () => {
     setSendRequestShow(false);
   };
-
+  
   const handleSendRequestShow = () => {
     setSendRequestShow(true);
   };
-
- 
+  
   const handleSendRequest = async () => {
     try {
       const response = await addIndividualNotification({
-      
         email: email,
         title: title,
         body: body,
       });
-
+  
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
         console.log(response);
         navigate("/admin/withdraw-request");
+        setSendRequestShow(false); // Close the modal after successful send
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");
         console.log(response.error);
-       }
+      }
     } catch (error) {
       console.error(error);
     }
   };
+  
   const COLUMNS = [
     {
       Header: "ID",

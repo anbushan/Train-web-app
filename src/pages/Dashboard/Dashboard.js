@@ -5,6 +5,7 @@ import feedback from "../../assets/images/feedback.png";
 import withdrawrequest from "../../assets/images/withdraw request.png";
 import train from "../../assets/images/train.png";
 import station from "../../assets/images/station.png";
+import metrotrain from "../../assets/images/metrotrain.png";
 import { useGetDashboardQuery } from "../../redux/features/api/DashboardApi";
 import Loader from "../Loader/Loader";
 import TableComponents from "../../components/TableComponent";
@@ -31,6 +32,7 @@ const Dashboard = () => {
     totalWithdrawRequests,
     totalTrains,
     totalStations,
+    totallyMetroTrains,
     users = [],
     withdrawRequests = [],
   } = data;
@@ -148,6 +150,19 @@ const Dashboard = () => {
                 <div className="fs-5 fw-bolder">Total Stations</div>
                 <h3 className="fs-8 fw-bolder">{totalStations}</h3>
                 <div className="fs-14">Total Number of Stations</div>
+              </div>
+            </div>
+          </Card>
+        </Col>
+           
+        <Col xs={12} md={6} lg={4} className="mb-3">
+          <Card className="p-3 rounded shadow">
+            <div className="d-flex align-items-center">
+              <img src={metrotrain} width={60} className="rounded-circle" alt="Withdraw Request" />
+              <div className="ms-3">
+                <div className="fs-5 fw-bolder">Total Metro Trains</div>
+                <h3 className="fs-8 fw-bolder">{totallyMetroTrains}</h3>
+                <div className="fs-14">Total Number of Trains</div>
               </div>
             </div>
           </Card>

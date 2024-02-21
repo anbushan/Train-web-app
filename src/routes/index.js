@@ -224,7 +224,7 @@ export default function Router() {
               ),
             },
             {
-              path: "/admin/Local-train",
+              path: "/admin/local-train",
               element: (
                 <AuthGuard>
                   <LocalTrain/>
@@ -236,6 +236,38 @@ export default function Router() {
               element: (
                 <AuthGuard>
                   <MetroTrain/>
+                </AuthGuard>
+              ),
+            },
+            {
+              path: "/admin/add-localtrain",
+              element: (
+                <AuthGuard>
+                  <AddLocalTrain/>
+                </AuthGuard>
+              ),
+            },
+            {
+              path: "/admin/add-metrotrain",
+              element: (
+                <AuthGuard>
+                  <AddMetroTrain/>
+                </AuthGuard>
+              ),
+            },
+            {
+              path: "/admin/edit-localtrain",
+              element: (
+                <AuthGuard>
+                  <EditLocalTrain/>
+                </AuthGuard>
+              ),
+            },
+            {
+              path: "/admin/edit-metrotrain",
+              element: (
+                <AuthGuard>
+                  <EditMetroTrain/>
                 </AuthGuard>
               ),
             },
@@ -309,8 +341,17 @@ const Individual = Loadable(lazy(()=>import("../pages/Notification/Individual/In
 const News = Loadable(lazy(()=>import("../pages/News/News")));
 
 const LocalTrain = Loadable(lazy(()=>import("../pages/LocalTrain/LocalTrain")));
+const AddLocalTrain = Loadable(lazy(()=>import("../pages/LocalTrain/AddLocalTrain")));
+const EditLocalTrain = Loadable(lazy(()=>import("../pages/LocalTrain/EditLocalTrain")));
+
 
 const MetroTrain = Loadable(lazy(()=>import("../pages/MetroTrain/MetroTrain")));
+
+const AddMetroTrain = Loadable(lazy(()=>import("../pages/MetroTrain/AddMetroTrain")));
+const EditMetroTrain = Loadable(lazy(()=>import("../pages/MetroTrain/EditMetroTrain")));
+
+
+
 
 
 

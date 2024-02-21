@@ -102,7 +102,7 @@ const GeneralNotification = () => {
               <Col>
                 <Header
                   ONCLICK={handleNavigateAddForm}
-                  HEADING=" General"
+                  HEADING=" General Notification"
                   BUTTON_NAME="Add General"
                   headingClassName="text-center text-md-start m-md-4 m-xl-2"
                 />
@@ -126,7 +126,7 @@ const GeneralNotification = () => {
             ONCLICK={deleteHandleClose}
             YES={deleteNotification}
             DESCRIPTION="Confirm to Delete this notification"
-            DELETETITLE="notification"
+            DELETETITLE="Notification"
           />
         </>
       ) : (

@@ -109,7 +109,7 @@ console.log(TrainData);
                     <h4 onClick={handleCancel}>
                       <AiOutlineArrowLeft />
                     </h4>
-                    <h4>"Edit Train"</h4>
+                    <h4>Edit Train</h4>
                   </Col>
                   <Col className="d-sm-none d-none d-md-none d-lg-flex d-xxl-flex d-xl-flex flex-row justify-content-end align-items-center">
                  <BasicButton

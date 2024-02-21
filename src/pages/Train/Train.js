@@ -3,7 +3,7 @@ import { Button, Container, Row } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-import BasicTable from "../../components/BasicTable";
+import BasicTable from "../../components/TablePaginationComponent";
 import Header from "../../components/Header";
 import DeleteModel from "../../components/DeleteModel";
 import { useGetTrainQuery, useDeleteTrainMutation } from "../../redux/features/api/TrainApi";
@@ -13,11 +13,12 @@ import Loader from "../../pages/loginForms/loader/Loader";
 const Train = () => {
   const [deleteShow, setDeleteShow] = useState(false);
   const [idToDelete, setIdToDelete] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [deleteTrainApi] = useDeleteTrainMutation();
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: getTrainData, isLoading } = useGetTrainQuery(currentPage);
+  const { data: getTrainData, isLoading } = useGetTrainQuery({ page: currentPage, search: searchTerm });
   
   const navigate = useNavigate();
 
@@ -30,10 +31,8 @@ const Train = () => {
       setCurrentPage(currentPage);
     }
   }, [getTrainData, currentPage]);
-
-  const deleteHandleClose = () => {
-    setDeleteShow(false);
-  };
+  
+  const deleteHandleClose = () => setDeleteShow(false);
 
   const deleteHandleShow = (id) => {
     setIdToDelete(id);
@@ -106,7 +105,15 @@ const Train = () => {
             />
             <hr className="mt-3" />
           </Row>
-          <Row className="">
+          <Row className="justify-content-center col-md-6 col-lg-3 mx-2 mt-4 mb-5">
+            <input 
+              type="text"
+              placeholder="Filter Train..."
+              className="form-control"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            /></Row>
+             <Row>
             <BasicTable
               COLUMNS={COLUMNS}
               MOCK_DATA={data}
