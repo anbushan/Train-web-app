@@ -129,8 +129,8 @@ const GeneralGroupNotification = () => {
             <Button variant="danger" className="m-1" onClick={() => deleteHandleShow(rowIdx)}>
               <MdDelete />
             </Button>
-            <Button variant="primary" className="m-1" onClick={() => handleNavigateAddForm(rowIdx)}>
-              <MdStreetview/>View
+            <Button variant="warning" className="m-1" onClick={() => handleNavigateAddForm(rowIdx)}>
+              <MdStreetview/>
             </Button>
           </div>
         );
