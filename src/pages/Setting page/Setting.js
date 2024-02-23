@@ -1,39 +1,250 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BasicHeader from '../../components/BasicHeader';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row, Button, Card } from 'react-bootstrap';
 
 const Setting = () => {
+  const [showBannerCards, setShowBannerCards] = useState(true);
+  const [showSecondSet, setShowSecondSet] = useState(false);
+  const [showDefaultImages, setShowDefaultImages] = useState(false); // Added state variable
+
+  const handleBannerButtonClick = () => {
+    setShowBannerCards(!showBannerCards);
+    setShowSecondSet(false);
+    setShowDefaultImages(false); // Reset other state variables
+  };
+
+  const handleSecondButtonClick = () => {
+    setShowSecondSet(!showSecondSet);
+    setShowBannerCards(false);
+    setShowDefaultImages(false); // Reset other state variables
+  };
+
+  const handleDefaultButtonClick = () => {
+    setShowDefaultImages(!showDefaultImages);
+    setShowSecondSet(false);
+    setShowBannerCards(false); // Reset other state variables
+  };
+
   return (
     <>
-      <BasicHeader 
+      <BasicHeader
+        className="mt-5"
         HEADING="Settings"
         headingClassName="text-center text-md-start m-md-4 m-xl-2 mt-3"
       />
       <Container>
-        <Row>
-          <Col xs={12} md={6} lg={6} className="mb-3">
-            <div className="d-flex flex-column p-3 p-md-5 m-1">
-              <h4 className="fs-4 mb-1 fw-bolder text-start">Referral:</h4>
-            </div>
-            <img
-              style={{ height: "auto", width: "100%" }}
-              className="d-block mx-auto mb-3"
-              src="https://images.pexels.com/photos/573130/pexels-photo-573130.jpeg?cs=srgb&dl=pexels-zulian-yuliansyah-573130.jpg&fm=jpg"
-              alt="Referral"
-            />
+        <Row className='d-flex flex-row justify-content-center align-items-center mt-5 mx-5'>
+          <Col>
+            <Button
+              style={{ backgroundColor: "#db6300", border: "none" }}
+              onClick={handleBannerButtonClick}
+            >
+              BANNER IMAGE
+            </Button>
           </Col>
-          <Col xs={12} md={6} lg={6} className="mb-3">
-            <div className="d-flex flex-column p-3 p-md-5 m-1">
-              <h4 className="fs-4 mb-1 fw-bolder text-start">Rating Banner:</h4>
-            </div>
-            <img
-              style={{ height: "auto", width: "100%" }}
-              className="d-block mx-auto mb-3"
-              src="https://images.pexels.com/photos/573130/pexels-photo-573130.jpeg?cs=srgb&dl=pexels-zulian-yuliansyah-573130.jpg&fm=jpg"
-              alt="Rating Banner"
-            />
+          <Col>
+            <Button
+              style={{ backgroundColor: "#db6300", border: "none" }}
+              onClick={handleSecondButtonClick}
+            >
+              CAROUSEL IMAGE
+            </Button>
+          </Col>
+          <Col>
+            <Button
+              style={{ backgroundColor: "#db6300", border: "none" }}
+              onClick={handleDefaultButtonClick}
+            >
+              DEFAULT IMAGE
+            </Button>
           </Col>
         </Row>
+        {showBannerCards && (
+          <Row className='d-flex flex-row justify-content-center align-items-center mt-5 mx-5'>
+            <Col>
+              <Card className="mt-3">
+                <Card.Img
+                  variant="top"
+                  src="https://via.placeholder.com/150"
+                />
+              </Card>
+            </Col>
+            <Col>
+              <Button className='mt-3' variant="primary">Edit Image</Button>
+            </Col>
+            <Col>
+              <Card className="mt-3">
+                <Card.Img
+                  variant="top"
+                  src="https://via.placeholder.com/150"
+                />
+              </Card>
+            </Col>
+            <Col>
+              <Button className='mt-3' variant="primary">Edit Image</Button>
+            </Col>
+          </Row>
+        )}
+        {showSecondSet && (
+          <>
+            <Row className='d-flex flex-row justify-content-center align-items-center mt-5 mx-5'>
+              <Col>
+                <Card className="mt-3">
+                  <Card.Img
+                    variant="top"
+                    src="https://via.placeholder.com/150"
+                  />
+                </Card>
+            
+              </Col>
+              <Col>
+                <Button className='mt-3' variant="primary">Edit Image</Button>
+              </Col>
+              <Col>
+                <Card className="mt-3">
+                  <Card.Img
+                    variant="top"
+                    src="https://via.placeholder.com/150"
+                  />
+                </Card>
+              </Col>
+              <Col>
+                <Button className='mt-3' variant="primary">Edit Image</Button>
+              </Col>
+              <Col>
+                <Card className="mt-3">
+                  <Card.Img
+                    variant="top"
+                    src="https://via.placeholder.com/150"
+                  />
+                </Card>
+              </Col>
+              <Col>
+                <Button className='mt-3' variant="primary">Edit Image</Button>
+              </Col>
+            </Row>
+            <Row className='d-flex flex-row justify-content-center align-items-center mt-5 mx-5'>
+           
+              <Col>
+                <Card className="mt-3">
+                  <Card.Img
+                    variant="top"
+                    src="https://via.placeholder.com/150"
+                  />
+                </Card>
+              </Col>
+             
+              <Col>
+                <Button className='mt-3' variant="primary">Edit Image</Button>
+              </Col>
+              <Col>
+                <Card className="mt-3">
+                  <Card.Img
+                    variant="top"
+                    src="https://via.placeholder.com/150"
+                  />
+                </Card>
+              </Col>
+             
+
+              <Col>
+                <Button className='mt-3' variant="primary">Edit Image</Button>
+              </Col>
+              <Col>
+                <Card className="mt-3">
+                  <Card.Img
+                    variant="top"
+                    src="https://via.placeholder.com/150"
+                  />
+                </Card>
+              </Col>
+              <Col>
+                <Button className='mt-3' variant="primary">Edit Image</Button>
+              </Col>
+            </Row>
+          </>
+        )}
+        { showDefaultImages && (
+
+
+<>
+<Row className='d-flex flex-row justify-content-center align-items-center mt-5 mx-5'>
+  <Col>
+    <Card className="mt-3">
+      <Card.Img
+        variant="top"
+        src="https://via.placeholder.com/150"
+      />
+    </Card>
+
+  </Col>
+  <Col>
+    <Button className='mt-3' variant="primary">Edit Image</Button>
+  </Col>
+  <Col>
+    <Card className="mt-3">
+      <Card.Img
+        variant="top"
+        src="https://via.placeholder.com/150"
+      />
+    </Card>
+  </Col>
+  <Col>
+    <Button className='mt-3' variant="primary">Edit Image</Button>
+  </Col>
+  <Col>
+    <Card className="mt-3">
+      <Card.Img
+        variant="top"
+        src="https://via.placeholder.com/150"
+      />
+    </Card>
+  </Col>
+  <Col>
+    <Button className='mt-3' variant="primary">Edit Image</Button>
+  </Col>
+</Row>
+<Row className='d-flex flex-row justify-content-center align-items-center mt-5 mx-5'>
+
+  <Col>
+    <Card className="mt-3">
+      <Card.Img
+        variant="top"
+        src="https://via.placeholder.com/150"
+      />
+    </Card>
+  </Col>
+ 
+  <Col>
+    <Button className='mt-3' variant="primary">Edit Image</Button>
+  </Col>
+  <Col>
+    <Card className="mt-3">
+      <Card.Img
+        variant="top"
+        src="https://via.placeholder.com/150"
+      />
+    </Card>
+  </Col>
+ 
+
+  <Col>
+    <Button className='mt-3' variant="primary">Edit Image</Button>
+  </Col>
+  <Col>
+    <Card className="mt-3">
+      <Card.Img
+        variant="top"
+        src="https://via.placeholder.com/150"
+      />
+    </Card>
+  </Col>
+  <Col>
+    <Button className='mt-3' variant="primary">Edit Image</Button>
+  </Col>
+</Row>
+</>
+        )}
       </Container>
     </>
   );

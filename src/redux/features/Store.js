@@ -16,6 +16,8 @@ import { GroupApi } from "./api/GroupApi";
 import { NewsApi } from "./api/NewsApi";
 import { LocalTrainApi } from "./api/LocalTrainApi";
 import { MetroTrainApi } from "./api/MetroTrainApi";
+import { SettingImageApi } from "./api/SettingPageApi";
+
 
 export const store = configureStore({
   reducer: {
@@ -36,6 +38,7 @@ export const store = configureStore({
     [NewsApi.reducerPath]:NewsApi.reducer,
     [LocalTrainApi.reducerPath]:LocalTrainApi.reducer,
     [MetroTrainApi.reducerPath]:MetroTrainApi.reducer,
+    [SettingImageApi.reducerPath]:SettingImageApi.reducer,
   },
   devTools: process.env.NODE_ENV === "development",
   middleware: (getDefaultMiddleware) =>
@@ -56,5 +59,6 @@ export const store = configureStore({
       NewsApi.middleware,
       LocalTrainApi.middleware,
       MetroTrainApi.middleware,
+      SettingImageApi.middleware,
     ]),
 });
