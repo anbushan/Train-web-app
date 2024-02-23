@@ -108,7 +108,7 @@ const Train = () => {
           <Row className="justify-content-center col-md-6 col-lg-3 mx-2 mt-4 mb-5">
             <input 
               type="text"
-              placeholder="Filter Train..."
+              placeholder="Search Train..."
               className="form-control"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}

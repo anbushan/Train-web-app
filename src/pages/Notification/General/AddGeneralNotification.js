@@ -50,7 +50,7 @@ const AddGeneralNotification = () => {
         toast.success(response?.data?.message, { autoClose: 1000 });
         
         console.log(response.error.data);
-       
+        navigate("/admin/general");
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");

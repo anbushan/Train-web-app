@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Button, Container, Row, Modal, Form } from "react-bootstrap";
+import { Button, Container, Row, Modal, Form, Col } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { IoIosSend } from "react-icons/io";
 import BasicTable from "../../components/BasicTable";
-import BasicHeader from "../../components/BasicHeader";
 import DeleteModel from "../../components/DeleteModel";
 import { useGetWithdrawrequestQuery, useDeleteWithdrawrequestMutation, useEditWithdrawrequestMutation } from "../../redux/features/api/WithdrawRequestApi";
 import { useAddIndividualNotificationMutation } from "../../redux/features/api/IndividualNotificationApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
 import { useParams, useNavigate } from "react-router-dom";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const Withdrawrequest = () => {
   const [editShow, setEditShow] = useState(false);
@@ -31,11 +31,7 @@ const Withdrawrequest = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (id) {
-  //     setCurrentPage(1);
-  //   }
-  // }, [id]);
+ 
 
   const { data: getWithdrawrequestData, isLoading } = useGetWithdrawrequestQuery(currentPage, id);
 
@@ -45,6 +41,11 @@ const Withdrawrequest = () => {
       setTotalPages(getWithdrawrequestData.pagination.totalPages);
     }
   }, [getWithdrawrequestData]);
+
+ 
+  const handleCancel = () => {
+    navigate("/admin/withdraw-request");
+  };
 
   const deleteHandleClose = () => {
     setDeleteShow(false);
@@ -108,9 +109,9 @@ const Withdrawrequest = () => {
     setSendRequestShow(false);
   };
   
-  const handleSendRequestShow = () => {
-    setSendRequestShow(true);
-  };
+  // const handleSendRequestShow = () => {
+  //   setSendRequestShow(true);
+  // };
   
   const handleSendRequest = async () => {
     try {
@@ -178,9 +179,7 @@ const Withdrawrequest = () => {
             <Button variant="danger" className="ms-2" onClick={() => deleteHandleShow(rowIdx)}>
               <MdDelete />
             </Button>
-            <Button variant="primary" className="ms-2" onClick={handleSendRequestShow}>
-              <IoIosSend />
-            </Button>
+           
           </div>
         );
       },
@@ -192,8 +191,18 @@ const Withdrawrequest = () => {
       {!isLoading ? (
         <>
           <Container fluid className="mt-3">
-            <Row>
-              <BasicHeader HEADING="Withdraw Request" />
+          <Row>
+              <Col className="d-flex flex-row justify-content-between mt-1">
+             
+                <h4  className="fw-bold "onClick={handleCancel}> <AiOutlineArrowLeft /> Withdraw Request </h4>
+                <Button
+                  style={{ backgroundColor: "#db6300", border: "none" }}
+                  className="p-2"
+                  onClick={() => setSendRequestShow(true)}
+                >
+                  <IoIosSend size={20} /> Individual Notification
+                </Button>
+              </Col>
             </Row>
             <Row>
               <BasicTable

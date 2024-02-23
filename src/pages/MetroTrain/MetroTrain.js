@@ -181,7 +181,7 @@ const Train = () => {
                   <option value="Ahmedabad">Ahmedabad</option>
                   <option value="Jaipur">Jaipur</option>
                   <option value="Nagpur">Nagpur</option>
-                  <option value="Nodia">Nodia</option>
+                  <option value="Noida">Noida</option>
                   <option value="Bangalore">Bangalore</option>
                 </Form.Control>
               </Form.Group>
