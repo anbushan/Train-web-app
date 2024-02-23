@@ -256,7 +256,7 @@ export default function Router() {
               ),
             },
             {
-              path: "/admin/edit-localtrain",
+              path: "/admin/edit-localtrain/:id",
               element: (
                 <AuthGuard>
                   <EditLocalTrain/>
@@ -264,7 +264,7 @@ export default function Router() {
               ),
             },
             {
-              path: "/admin/edit-metrotrain",
+              path: "/admin/edit-metrotrain/:id",
               element: (
                 <AuthGuard>
                   <EditMetroTrain/>

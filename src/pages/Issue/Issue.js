@@ -22,7 +22,7 @@ const Issue = () => {
     if (getIssueData && getIssueData.data) {
       setData(getIssueData.data);
       setTotalPages(getIssueData.pagination.totalPages);
-      setCurrentPage(getIssueData.pagination.currentPage);
+      setCurrentPage(currentPage);
     }
   }, [getIssueData, currentPage]);
 

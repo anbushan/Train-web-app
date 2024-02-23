@@ -8,7 +8,7 @@ export const MetroTrainApi = createApi({
   endpoints: (build) => ({
     getChennaiMetro: build.query({
       query: ({ page, city }) => ({
-        url: `/metro/view${city}Metro?page=${page}`,
+        url: `/metro/viewAdmin${city}Metro?page=${page}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -17,26 +17,24 @@ export const MetroTrainApi = createApi({
       providesTags: ["METROTRAIN"],
     }),
 
+    getMetroTrainById: build.query({
+      query: ({ id, city }) => ({
+        url: `/metro/viewAdmin${city}Metro/${id}`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }),
+      providesTags: ["LOCALTRAIN"],
+    }),
+
+
     
     addMetroTrain: build.mutation({
       query: ({data,city}) => ({
-        url: `/metro/addMumbaiMetro`,
+        url: `/metro/add${city}Metro`,
         method: "POST",
-        body: {
-          "route": "test :left_right_arrow: test",
-          "day": "weekend",
-          "source": "CHENNAI CENTRAL",
-          "destination": "GUindy",
-          "via": "EGMORE, CMBT, ALANDUR",
-          "first_train": "05:02am",
-          "last_train": "11:17pm",
-          "timing1": "05:00am - 08:00am, 11:00am - 05:00pm, 08:00pm - 10:00pm",
-          "timing1_train_frequency": "Every 14 minutes",
-          "timing2": "10:00pm - 11:00pm",
-          "timing2_train_frequency": "Every 30 minutes",
-          "timing3": "08:00am - 11:00am, 05:00pm - 08:00pm",
-          "timing3_train_frequency": "Every 12 minutes"
-      },
+        body: data,
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
         },
@@ -45,7 +43,7 @@ export const MetroTrainApi = createApi({
     }),
 
     editMetroTrain: build.mutation({
-      query: ( {id, city,data }) => ({
+      query: ({id, city,data }) => ({
         url: `/metro/update${city}Metro/${id}`,
         method: "PATCH",
         body: data,
@@ -57,7 +55,7 @@ export const MetroTrainApi = createApi({
     }),
 
     deleteMetroTrain: build.mutation({
-      query: (city,id) => ({
+      query: ({city,id}) => ({
         url: `/metro/delete${city}Metro/${id}`,
         method: "DELETE",
         headers: {
@@ -76,6 +74,6 @@ export const {
     useDeleteMetroTrainMutation,
     useAddMetroTrainMutation,
     useEditMetroTrainMutation,
-  useGetPuneLocalQuery,
+    useGetMetroTrainByIdQuery,
   useGetHyderabadLocalQuery,
 } = MetroTrainApi;

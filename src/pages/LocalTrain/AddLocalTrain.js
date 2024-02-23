@@ -73,26 +73,26 @@ const AddLocalTrain = () => {
         sClasses: sClasses,
         sRunsOn: sRunsOn,
         trainID: trainID,
-      
       };
   
       // Log the data to check the payload
       console.log('Request Payload:', data);
   
-      const response = await AddLocalTrainData(data, city);
-  
+      const response = await AddLocalTrainData({ data, city });
       if (response?.data) {
-        toast.success(response.data.message, { autoClose: 1000 });
+        toast.success(response?.data?.message, { autoClose: 1000 });
         console.log(response);
+       
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
-        console.log('Error response:', response?.error);
-      }
+        console.log("else part");
+        console.log(response.error);
+       }
     } catch (error) {
-      console.error('Error occurred:', error);
+      console.error(error);
     }
   };
-  
+
 
   return (
     <div>

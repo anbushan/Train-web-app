@@ -17,6 +17,18 @@ export const LocalTrainApi = createApi({
       providesTags: ["LOCALTRAIN"],
     }),
 
+    getLocalTrainById: build.query({
+      query: ({ id, city }) => ({
+        url: `/local/admin${city}LocalTrains/${id}`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }),
+      providesTags: ["LOCALTRAIN"],
+    }),
+
+
     addLocalTrain: build.mutation({
       query: ({data,city}) => ({
         url: `/local/addLocalTrains/${city}`,
@@ -30,7 +42,7 @@ export const LocalTrainApi = createApi({
     }),
 
     editLocalTrain: build.mutation({
-      query: ( id, city,data ) => ({
+      query: ({id,city,data} ) => ({
         url: `/local/updateLocalTrains/${city}/${id}`,
         method: "PATCH",
         body: data,
@@ -42,7 +54,7 @@ export const LocalTrainApi = createApi({
     }),
 
     deleteLocalTrain: build.mutation({
-      query: (city,id) => ({
+      query: ({city,id}) => ({
         url: `/local/deleteLocalTrains/${city}/${id}`,
         method: "DELETE",
         headers: {
@@ -61,7 +73,7 @@ export const {
     useDeleteLocalTrainMutation,
     useAddLocalTrainMutation,
     useEditLocalTrainMutation,
-  useGetMumbaiLocalQuery,
+    useGetLocalTrainByIdQuery,
   useGetPuneLocalQuery,
   useGetHyderabadLocalQuery,
 } = LocalTrainApi;

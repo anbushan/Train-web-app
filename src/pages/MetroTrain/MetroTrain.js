@@ -28,7 +28,7 @@ const Train = () => {
   useEffect(() => {
     if (getMetroTrainData && getMetroTrainData.data) {
       setData(getMetroTrainData.data);
-      setTotalPages(getMetroTrainData.totalPages);
+      setTotalPages(getMetroTrainData.pagination.totalPages);
       setCurrentPage(currentPage);
     }
   }, [getMetroTrainData, currentPage]);
@@ -49,16 +49,22 @@ const Train = () => {
 
   const deleteMetro = async () => {
     try {
-      const response = await deleteMetroTrain(selectedCity, idToDelete);
-      setDeleteShow(false);
-      setIdToDelete("");
-      if (response?.data) {
+      const response = await deleteMetroTrain({city:selectedCity, id:idToDelete});
+      console.log(idToDelete);
+      if (response?.data){
+       
         toast.success(response?.data?.message, { autoClose: 1000 });
         console.log(response);
+        setDeleteShow(false);
+        setIdToDelete("");
+       
       } else {
+       
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");
         console.log(response.error);
+        setDeleteShow(false);
+        setIdToDelete("");
       }
     } catch (error) {
       console.error(error);
@@ -131,9 +137,10 @@ const Train = () => {
       accessor: "action",
       Cell: (props) => {
         const rowIdx = props.row.original._id;
+       
         return (
           <div className="d-flex align-items-center justify-content-center flex-row">
-          <Link to={`/admin/edit-metrotrain`}>
+          <Link to={`/admin/edit-metrotrain/:${rowIdx}`}>
               <Button variant="warning">
                 <FaEdit />
               </Button>

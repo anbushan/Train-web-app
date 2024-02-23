@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { Form, Row, Col, Container } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { LoaclTrainSchema } from "../../pages/LocalTrain/LocalTrainValidation";
-import { useEditLocalTrainMutation } from "../../redux/features/api/LocalTrainApi";
+import { useEditLocalTrainMutation ,useGetLocalTrainByIdQuery} from "../../redux/features/api/LocalTrainApi";
 import { toast } from "react-toastify";
 import TextInput from "../../components/TextInput";
 import BasicButton from "../../components/BasicButton";
@@ -30,9 +30,41 @@ const EditTrain = () => {
   const [city, setCity] = useState("chennai");
   const { id } = useParams();
   const Id = id && id.startsWith(":") ? id.slice(1) : id;
+  const [EditLocalTrainData, { isLoading }] = useEditLocalTrainMutation();
+  const { data: LocalTrainData } = useGetLocalTrainByIdQuery({id:Id,city:city});
 
-  const [EditLocalTrainData, { isLoading }] = useEditLocalTrainMutation(Id);
-  const [trainData, setTrainData] = useState({
+  console.log(id);
+  console.log(city);
+  console.log(LocalTrainData);
+
+  useEffect(() => {
+    if (LocalTrainData && LocalTrainData.data)
+     {
+      setTrainNo(LocalTrainData.data.trainNo);
+      setTrainName(LocalTrainData.data.trainName);
+      setType(LocalTrainData.data.type);
+      setZone(LocalTrainData.data.zone);
+      setUpdatedOn(LocalTrainData.data.updatedOn);
+      setFrom(LocalTrainData.data.from);
+      setDeparture(LocalTrainData.data.departure);
+      setTo(LocalTrainData.data.to);
+      setArrival(LocalTrainData.data.arrival);
+      setDuration(LocalTrainData.data.duration);
+      setDistance(LocalTrainData.data.distance);
+      setSpeed(LocalTrainData.data.speed);
+      setHalts(LocalTrainData.data.halts);
+      setSClasses(LocalTrainData.data.sClasses);
+      setSRunsOn(LocalTrainData.data.sRunsOn);
+      setTrainID(LocalTrainData.data.trainID);
+    }
+  }, [LocalTrainData]);
+ 
+
+  const handleCancel = () => {
+    navigate("/admin/local-train");
+  };
+
+  const initialValues = {
     trainNo: "",
     trainName: "",
     type: "",
@@ -46,50 +78,67 @@ const EditTrain = () => {
     distance: "",
     speed: "",
     halts: "",
-    sClasses: "", // Renamed for clarity
-    sRunsOn: "" ,
-    trainID:"",// Renamed for clarity
-  });
-
-  console.log(id);
-  console.log(city);
-  console.log(trainData);
-
-  useEffect(() => {
-    if (EditLocalTrainData && EditLocalTrainData.data) {
-      setTrainData(EditLocalTrainData.data);
-    }
-  }, [EditLocalTrainData]);
-
-  console.log(EditLocalTrainData);
-
-  const handleCancel = () => {
-    navigate("/admin/local-train");
+    sClasses: "",
+    sRunsOn: "",
+    trainID: "",
   };
 
   const handleEditData = async () => {
     try {
       const response = await EditLocalTrainData({
-        id,
-        data: trainData
+         id: Id, city:city,
+        data: {
+          trainNo:trainNo,
+          trainName:trainName,
+          type:type,
+          zone:zone,
+          updatedOn:updatedOn,
+          from:from,
+          departure:departure,
+          to:to,
+          arrival:arrival,
+          duration:duration,
+          distance:distance,
+          speed:speed,
+          halts:halts,
+          sClasses:sClasses,
+          sRunsOn:sRunsOn,
+          trainID:trainID,
+        },
       });
-
       if (response?.data) {
-        toast.success(response.data.message, { autoClose: 1000 });
+        setTrainNo("");
+        setTrainName("");
+        setType("");
+        setZone("");
+        setUpdatedOn("");
+        setFrom("");
+        setDeparture("");
+        setTo("");
+        setArrival("");
+        setDuration("");
+        setDistance("");
+        setSpeed("");
+        setHalts("");
+        setSClasses("");
+        setSRunsOn("");
+        setTrainID("");
+
+        toast.success(response?.data?.message, { autoClose: 1000 });
+    navigate("/admin/local-train")
       } else {
-        toast.error(response?.error?.data?.error, { autoClose: 1000 });
+        toast.error(response?.error?.data.error, { autoClose: 1000 });
       }
     } catch (error) {
       console.error(error);
-      toast.error("An error occurred while editing train data.", { autoClose: 1000 });
+      toast.error("Internal Server Error", { autoClose: 2000 });
     }
   };
-
   return (
     <div>
       <Container fluid>
         <Formik
-          initialValues={trainData}
+          initialValues={initialValues}
           validationSchema={LoaclTrainSchema}
           onSubmit={handleEditData}
         >

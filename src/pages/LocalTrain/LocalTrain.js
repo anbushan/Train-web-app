@@ -40,22 +40,27 @@ const Train = () => {
   };
 
   const deleteHandleShow = (id) => {
+    console.log(id);
     setIdToDelete(id);
     setDeleteShow(true);
   };
 
   const deleteTrain = async () => {
     try {
-      const response = await deleteLocalTrain(selectedCity, idToDelete);
-      setDeleteShow(false);
-      setIdToDelete("");
+      const response = await deleteLocalTrain({city:selectedCity, id:idToDelete});
+      console.log(idToDelete);
       if (response?.data) {
+
         toast.success(response?.data?.message, { autoClose: 1000 });
         console.log(response);
+        setDeleteShow(false);
+      setIdToDelete("");
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");
         console.log(response.error);
+        setDeleteShow(false);
+      setIdToDelete("");
       }
     } catch (error) {
       console.error(error);
@@ -135,9 +140,10 @@ const Train = () => {
       accessor: "action",
       Cell: (props) => {
         const rowIdx = props.row.original._id;
+       
         return (
           <div className="d-flex align-items-center justify-content-center flex-row">
-          <Link to={`/admin/edit-localtrain`}>
+          <Link to={`/admin/edit-localtrain/:${rowIdx}`}>
               <Button variant="warning">
                 <FaEdit />
               </Button>

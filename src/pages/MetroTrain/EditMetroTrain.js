@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import BasicButton from "../../components/BasicButton";
 import TextInput from "../../components/TextInput";
-import { useEditMetroTrainMutation } from "../../redux/features/api/MetroTrainApi";
+import { useEditMetroTrainMutation ,useGetMetroTrainByIdQuery} from "../../redux/features/api/MetroTrainApi";
 import { MetroTrainSchema } from "../../pages/MetroTrain/MetroTrainValidation";
 import { toast } from "react-toastify";
 
@@ -24,45 +24,44 @@ const EditTrain = () => {
   const [timing2frequency, setTiming2frequency] = useState("");
   const [timing3, setTiming3] = useState("");
   const [timing3frequency, setTiming3frequency] = useState("");
-  const [city, setCity] = useState("chennai");
-//   const [city, setCity] = useState("chennai"); // State to manage selected city
-const { id } = useParams();
+  const [city, setCity] = useState("chennai");  
+  const { id } = useParams();
+  const Id = id && id.startsWith(":") ? id.slice(1) : id;
+  const [EditMetroTrainData, { isLoading }] = useEditMetroTrainMutation();
+  const { data: MetroTrainData } = useGetMetroTrainByIdQuery({id:Id,city:city});
+
+  console.log(id);
+  console.log(city);
+  console.log(MetroTrainData);
 
 
-  const [EditMetroTrainData, { isLoading }] = useEditMetroTrainMutation(id);
-  
-  
 
-  
-// console.log(id);
-console.log(EditMetroTrainData);
   const handleCancel = () => {
     navigate("/admin/metro-train");
   };
   useEffect(() => {
-    if (EditMetroTrainData && EditMetroTrainData.data) {
-        setRoute(EditMetroTrainData.data.route);
-        setDay(EditMetroTrainData.data.day);
-        setSource(EditMetroTrainData.data.source);
-        setDestination(EditMetroTrainData.data.destination);
-        setVia(EditMetroTrainData.data.via);
-        setFirsttrain(EditMetroTrainData.data.firsttrain);
-        setLasttrain(EditMetroTrainData.data.lasttrain);
-        setTiming1(EditMetroTrainData.data.timing1);
-        setTiming1frequency(EditMetroTrainData.data.timing1frequency);
-        setTiming2(EditMetroTrainData.data.timing2);
-        setTiming2frequency(EditMetroTrainData.data.timing2frequency);
-        setTiming3(EditMetroTrainData.data.timing3);
-        setTiming3frequency(EditMetroTrainData.data.timing3frequency);
-     
-     
+    if (MetroTrainData && MetroTrainData.data) {
+      setRoute(MetroTrainData.data.route);
+      setDay(MetroTrainData.data.day);
+      setSource(MetroTrainData.data.source);
+      setDestination(MetroTrainData.data.destination);
+      setVia(MetroTrainData.data.via);
+      setFirsttrain(MetroTrainData.data.first_train);
+      setLasttrain(MetroTrainData.data.last_train);
+      setTiming1(MetroTrainData.data.timing1);
+      setTiming1frequency(MetroTrainData.data.timing1_train_frequency);
+      setTiming2(MetroTrainData.data.timing2);
+      setTiming2frequency(MetroTrainData.data.timing2_train_frequency);
+      setTiming3(MetroTrainData.data.timing3);
+      setTiming3frequency(MetroTrainData.data.timing3_train_frequency);
     }
-  }, [EditMetroTrainData]);
-
-  console.log(EditMetroTrainData);
+  }, [MetroTrainData]);
+  
+console.log(route);
+console.log(day);
 
   const initialValues = {
-      route: "",
+    route: "",
     day: "",
     source: "",
     destination: "",
@@ -80,8 +79,7 @@ console.log(EditMetroTrainData);
   const handleEditData = async () => {
     try {
       const response = await EditMetroTrainData({
-        id: id,
-        city:city,
+        id: Id, city:city,
         data: {
             route:route ,
             day: day,
@@ -104,9 +102,23 @@ console.log(EditMetroTrainData);
       console.log(response);
     
       if (response?.data) {
+        setRoute("");
+        setDay("");
+        setSource("");
+        setDestination("");
+        setVia("");
+        setFirsttrain("");
+        setLasttrain("");
+        setTiming1("");
+        setTiming1frequency("");
+        setTiming2("");
+        setTiming2frequency("");
+        setTiming3("");
+        setTiming3frequency("");
+       
         toast.success(response?.data?.message, { autoClose: 1000 });
         console.log(response);
-        navigate("/admin/train");
+        navigate("/admin/metro-train");
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");
