@@ -330,7 +330,7 @@ const AddLocalTrain = () => {
                       sm="12"
                     >
                       <TextInput
-                        label="updatedOn"
+                        label="UpdatedOn"
                         type=""
                         name="updatedOn"
                         className={`form-control ${
@@ -421,7 +421,7 @@ const AddLocalTrain = () => {
                       sm="12"
                     >
                       <TextInput
-                        label="to"
+                        label="To"
                         type=""
                         name="to"
                         className={`form-control ${
@@ -574,7 +574,7 @@ const AddLocalTrain = () => {
                       sm="12"
                     >
                       <TextInput
-                        label="halts"
+                        label="Halts"
                         type=""
                         name="halts"
                         className={`form-control ${
@@ -603,7 +603,7 @@ const AddLocalTrain = () => {
                       sm="12"
                     >
                       <TextInput
-                        label="sClasses"
+                        label="SClasses"
                         type=""
                         name="sClasses"
                         className={`form-control ${
@@ -634,7 +634,7 @@ const AddLocalTrain = () => {
                       sm="12"
                     >
                       <TextInput
-                        label="sRunsOn"
+                        label="SRunsOn"
                         type=""
                         name="sRunsOn"
                         className={`form-control ${

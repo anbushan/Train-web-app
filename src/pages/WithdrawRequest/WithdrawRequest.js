@@ -10,7 +10,6 @@ import { useAddIndividualNotificationMutation } from "../../redux/features/api/I
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
 import { useParams, useNavigate } from "react-router-dom";
-import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const Withdrawrequest = () => {
   const [editShow, setEditShow] = useState(false);
@@ -194,7 +193,7 @@ const Withdrawrequest = () => {
           <Row>
               <Col className="d-flex flex-row justify-content-between mt-1">
              
-                <h4  className="fw-bold "onClick={handleCancel}> <AiOutlineArrowLeft /> Withdraw Request </h4>
+                <h4  className="fw-bold "onClick={handleCancel}>  Withdraw Request </h4>
                 <Button
                   style={{ backgroundColor: "#db6300", border: "none" }}
                   className="p-2"

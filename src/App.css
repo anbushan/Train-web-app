@@ -38,3 +38,28 @@
   }
 }
 
+.image-container {
+  position: relative;
+  margin: 15px;
+  height: 200px;
+  width: 350px;
+  max-width: 100%;
+}
+
+.edit-icon {
+  position: absolute;
+  top: 25px; /* Adjust the distance from the top */
+  right: 2px; /* Adjust the distance from the right */
+  transform: translate(50%, -50%); /* Center the icon perfectly in the corner */
+  font-size: 48px; /* Increase the size of the icon */
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 15px; /* Increase the padding */
+  visibility: hidden;
+  transition: visibility 0.3s ease-in-out;
+}
+
+.image-container:hover .edit-icon {
+  visibility: visible;
+}

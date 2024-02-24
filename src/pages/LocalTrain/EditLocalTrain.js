@@ -375,7 +375,7 @@ const EditTrain = () => {
                       sm="12"
                     >
                       <TextInput
-                        label="updatedOn"
+                        label="UpdatedOn"
                         type=""
                         name="updatedOn"
                         value={updatedOn}
@@ -469,7 +469,7 @@ const EditTrain = () => {
                       sm="12"
                     >
                       <TextInput
-                        label="to"
+                        label="To"
                         type=""
                         name="to"
                         value={to}
@@ -627,7 +627,7 @@ const EditTrain = () => {
                       sm="12"
                     >
                       <TextInput
-                        label="halts"
+                        label="Halts"
                         type=""
                         name="halts"
                         value={halts}
@@ -657,7 +657,7 @@ const EditTrain = () => {
                       sm="12"
                     >
                       <TextInput
-                        label="sClasses"
+                        label="SClasses"
                         type=""
                         name="sClasses"
                         value={sClasses}
@@ -689,7 +689,7 @@ const EditTrain = () => {
                       sm="12"
                     >
                       <TextInput
-                        label="sRunsOn"
+                        label="SRunsOn"
                         type=""
                         name="sRunsOn"
                         value={sRunsOn}

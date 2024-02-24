@@ -17,9 +17,19 @@ export const SettingImageApi = createApi({
       providesTags: ["SETTINGIMAGE"],
     }),
 
-   
+    editSettingImage: build.mutation({
+      query: ({  data }) => ({
+        url: `/admin/updateBanner/65bca70d45f5ff99f43a2a57`,
+        method: "PATCH",
+        body: data,
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }),
+      invalidatesTags: ["SETTINGIMAGE"],
+    }),
    
   }),
 });
 
-export const { useGetSettingImageQuery} = SettingImageApi;
+export const { useGetSettingImageQuery,useEditSettingImageMutation} = SettingImageApi;
