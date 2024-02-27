@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-// import BasicTable from "../../components/TableComponent";
+import axios from "axios";
 import Header from "../../components/BasicHeader";
 import Loader from "../../pages/loginForms/loader/Loader";
 import {
-  useGetNewsQuery,
   useGetNewsTableQuery,
   useDeleteNewsMutation,
 } from "../../redux/features/api/NewsApi";
 import { toast } from "react-toastify";
 import DeleteModel from "../../components/DeleteModel";
-import Tablepagination from"../../components/TablePaginationComponent"
+import Tablepagination from "../../components/TablePaginationComponent";
+
 const News = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -24,18 +24,8 @@ const News = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data: newsTableData, isLoading: tableLoading } =
     useGetNewsTableQuery(currentPage);
-  const { data: newsOptionsData, refetch: refetchNewsOptions } =
-    useGetNewsQuery({ cate: category, lang: lang }); // Use the useGetNewsQuery hook
 
   const [deleteNewsApi] = useDeleteNewsMutation();
-
-  // useEffect(() => {
-  //   if (newsOptionsData && newsOptionsData.data) {
-  //     setLanguageOptions(newsOptionsData.lang);
-  //     setCategoryOptions(newsOptionsData.category);
-  //   }
-  // }, [newsOptionsData]);
-  // console.log(newsOptionsData);
 
   useEffect(() => {
     if (newsTableData && newsTableData.data) {
@@ -43,7 +33,6 @@ const News = () => {
       setTotalPages(newsTableData.pagination.totalPages);
     }
   }, [newsTableData]);
-  // console.log(newsTableData);
 
   const handleNavigateAddForm = () => navigate("/admin/");
 
@@ -69,34 +58,25 @@ const News = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    if (!lang || !category) {
-      console.error("Language or category is not selected");
-      return;
-    }
-  
-    if (category !== undefined && lang !== undefined) {
-      const data = { cate: category, lang: lang };
-  
-      try {
-        const response = await refetchNewsOptions(data);
-        if (response?.data) {
-          console.log("success" + (response.data.message ?? "sent successfully"));
-        } else {
-          console.log("error" + (response.error.message ?? "news not added"));
-        }
-        console.log("Language:", lang);
-        console.log("Category:", category);
+  const handleSubmit = async () => {
+    console.log(category);
+    console.log(lang);
+    try {
+      const response = await axios.get(`https://train-info.onrender.com/news/addNewsInDB?category=${category}&lang=${lang}`);
+      console.log(response);
+      if (response?.data) {
+        console.log("Success: " + (response.data.message ?? "sent successfully"));
         setLang("");
         setCategory("");
-      } catch (error) {
-        console.error(error);
+        console.log(category);
+        console.log(lang);
+      } else {
+        console.error("Error: " + (response?.error?.message ?? "news not added"));
+        setLang("");
+        setCategory("");
       }
-    } else {
-      console.error("Category or lang is undefined");
-      // Handle the case where category or lang is undefined
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
   };
   
@@ -166,77 +146,63 @@ const News = () => {
             </Row>
             <Row className="mb-3">
               <Col>
-              <Form onSubmit={handleSubmit}>
-  <Row className="mb-4 mt-4">
-    <Col xs={12} md={4} lg={3}>
-      <Form.Group controlId="language">
-        <Form.Label className="text-dark" style={{ fontWeight: "bolder" }}>
-          Languages:
-        </Form.Label>
-        <Form.Select
-          value={lang}
-          onChange={(e) => setLang(e.target.value)}
-          className="mb-2"
-        >
-          <option value="" disabled>
-            Select Languages
-          </option>
-          <option value="ta">Tamil</option>
-          <option value="en">English</option>
-          <option value="te">Telugu</option>
-          <option value="hi">Hindi</option>
-          {/* {languageOptions &&
-            languageOptions.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))} */}
-            
-        </Form.Select>
-      </Form.Group>
-    </Col>
-    <Col xs={12} md={4} lg={3}>
-      <Form.Group controlId="category">
-        <Form.Label className="text-dark" style={{ fontWeight: "bolder" }}>
-          Categories:
-        </Form.Label>
-        <Form.Select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="mb-2"
-        >
-          <option value="" disabled>
-            Select Categories
-          </option>
-          <option value="general">General</option>
-          <option value="world">World</option>
-          <option value="nation">Nation</option>
-          <option value="business">Business</option>
-          <option value="technology">Technology</option>
-          <option value="entertainment">Entertainment</option>
-          <option value="sports">Sports</option>
-          <option value="science">Science</option>
-          <option value="health">Health</option>
-          {/* {categoryOptions &&
-            categoryOptions.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))} */}
-        </Form.Select>
-      </Form.Group>
-    </Col>
-    <Col xs={12} md={4} lg={3} className=" d-flex flex-column ">
-      <Button
-        style={{ backgroundColor: "#db6300", border: "none" ,marginTop:"30px"}}
-        type="submit"
-      >
-        Send
-      </Button>
-    </Col>
-  </Row>
-</Form>
-
+                <Form>
+                  <Row className="mb-4 mt-4">
+                    <Col xs={12} md={4} lg={3}>
+                      <Form.Group controlId="language">
+                        <Form.Label className="text-dark" style={{ fontWeight: "bolder" }}>
+                          Languages:
+                        </Form.Label>
+                        <Form.Select
+                          value={lang}
+                          onChange={(e) => setLang(e.target.value)}
+                          className="mb-2"
+                        >
+                          <option value="" disabled>
+                            Select Languages
+                          </option>
+                          <option value="ta">Tamil</option>
+                          <option value="en">English</option>
+                          <option value="te">Telugu</option>
+                          <option value="hi">Hindi</option>
+                        </Form.Select>
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={4} lg={3}>
+                      <Form.Group controlId="category">
+                        <Form.Label className="text-dark" style={{ fontWeight: "bolder" }}>
+                          Categories:
+                        </Form.Label>
+                        <Form.Select
+                          value={category}
+                          onChange={(e) => setCategory(e.target.value)}
+                          className="mb-2"
+                        >
+                          <option value="" disabled>
+                            Select Categories
+                          </option>
+                          <option value="general">General</option>
+                          <option value="world">World</option>
+                          <option value="nation">Nation</option>
+                          <option value="business">Business</option>
+                          <option value="technology">Technology</option>
+                          <option value="entertainment">Entertainment</option>
+                          <option value="sports">Sports</option>
+                          <option value="science">Science</option>
+                          <option value="health">Health</option>
+                        </Form.Select>
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={4} lg={3} className=" d-flex flex-column ">
+                      <Button
+                        style={{ backgroundColor: "#db6300", border: "none", marginTop: "30px" }}
+                        type="button" onClick={handleSubmit}
+                      >
+                        Send
+                      </Button>
+                    </Col>
+                  </Row>
+                </Form>
               </Col>
             </Row>
             <hr className="bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2" />
@@ -257,7 +223,6 @@ const News = () => {
                   setCurrentPage={setCurrentPage}
                 />
               </Col>
-             
             </Row>
           </Container>
           <DeleteModel

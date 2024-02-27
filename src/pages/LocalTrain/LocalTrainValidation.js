@@ -1,7 +1,9 @@
 import * as Yup from "yup";
 
 export const LoaclTrainSchema = Yup.object().shape({
-    trainNo:Yup.mixed().required(" TrainNo must be Required..!"),
+    trainNo:Yup.string()
+    .required("Train number is required.")
+    .matches(/^\d{5}$/, "Train number must contain exactly five digits."),
     trainName:Yup.mixed().required(" TrainName must be Required..!"),
     type:Yup.mixed().required("Type enter end date"),
     zone: Yup.mixed().required("Zone In Time must be Required..!"),

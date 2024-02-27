@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Row, Modal, Form } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import BasicTable from ".././../../components/BasicTable";
 import Header from ".././../../components/Header";
 import Loader from ".././../../pages/loginForms/loader/Loader";
-import { useGetGroupNotificationQuery, useDeleteGroupNotificationMutation, useAddGroupNotificationMutation } from ".././../../redux/features/api/GroupNotificationApi";
+import { useGetGroupNotificationQuery, useDeleteGroupNotificationMutation } from ".././../../redux/features/api/GroupNotificationApi";
 import { toast } from "react-toastify";
 import DeleteModel from ".././../../components/DeleteModel";
-import { MdStreetview } from "react-icons/md";
+
+
 
 const GeneralGroupNotification = () => {
   const navigate = useNavigate();
-  const [groupname, setGroupname] = useState("");
-  const [emails, setEmails] = useState([]);
-  const [data, setData] = useState([]);
  
+  const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [idToDelete, setIdToDelete] = useState("");
   const [deleteShow, setDeleteShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: GroupNotificationData, isLoading } = useGetGroupNotificationQuery(currentPage);
   const [deleteGroupNotificationApi] = useDeleteGroupNotificationMutation();
-  const [addGroupNotificationApi] = useAddGroupNotificationMutation();
-  const [show, setShow] = useState(false);
-  
+
+ 
 
   useEffect(() => {
     if (GroupNotificationData && GroupNotificationData.data) {
@@ -33,7 +31,6 @@ const GeneralGroupNotification = () => {
       setCurrentPage(currentPage);
     }
   }, [GroupNotificationData, currentPage]);
-  console.log(GroupNotificationData);
 
   const handleNavigateAddForm = () => navigate("/admin/group-notification");
 
@@ -43,6 +40,7 @@ const GeneralGroupNotification = () => {
     setIdToDelete(id);
     setDeleteShow(true);
   };
+
   const deleteGroupNotification = async () => {
     try {
       const response = await deleteGroupNotificationApi(idToDelete);
@@ -50,45 +48,15 @@ const GeneralGroupNotification = () => {
       setIdToDelete("");
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
-        console.log(response);
-      
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
-        console.log("else part");
-        console.log(response.error);
-       }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-
-  const CreateGroup = async () => {
-    try {
-      const response = await addGroupNotificationApi({
-        groupname: groupname,
-        emails: ["tamilselvan0677@gmail.com", "ranjith8072@gmail.com"]
-      });
-  
-      if (response?.data) {
-        toast.success(response?.data?.message, { autoClose: 1000 });
-        handleClose(); 
-        console.log(response);
-      } else {
-        toast.error(response?.error?.data.error, { autoClose: 1000 });
-        console.log("else part");
-        console.log(response.error);
       }
     } catch (error) {
       console.error(error);
     }
   };
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
  
-
-
   const COLUMNS = [
     {
       Header: "ID",
@@ -129,9 +97,7 @@ const GeneralGroupNotification = () => {
             <Button variant="danger" className="m-1" onClick={() => deleteHandleShow(rowIdx)}>
               <MdDelete />
             </Button>
-            <Button variant="warning" className="m-1" onClick={() => handleNavigateAddForm(rowIdx)}>
-              <MdStreetview/>
-            </Button>
+           
           </div>
         );
       },
@@ -146,9 +112,10 @@ const GeneralGroupNotification = () => {
             <Row>
               <Col>
                 <Header
-                  ONCLICK={handleShow}
+                 
+                  ONCLICK={handleNavigateAddForm}
                   HEADING=" Group Notification"
-                  BUTTON_NAME="Add Group "
+                  BUTTON_NAME="View Group "
                   headingClassName="text-center text-md-start m-md-4 m-xl-2"
                 />
               </Col>
@@ -170,37 +137,10 @@ const GeneralGroupNotification = () => {
             DELETESTATE={deleteShow}
             ONCLICK={deleteHandleClose}
             YES={deleteGroupNotification}
-            DESCRIPTION="Confirm to Delete this Grop Notification"
+            DESCRIPTION="Confirm to Delete this Group Notification"
             DELETETITLE="GroupNotification"
           />
-          <Modal show={show} onHide={handleClose} centered>
-            <Modal.Header closeButton>
-              <Modal.Title>Add Group </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form.Group controlId="groupname">
-                <Form.Label>Group Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter group name"  value={groupname} onChange={(e) => setGroupname(e.target.value)} />
-              </Form.Group>
-              <Form.Group controlId="emails"  value={emails} onChange={(e) => setEmails(e.target.value)}>
-                <Form.Label>Emails</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  placeholder="Enter your emails "
-                
-                />
-              </Form.Group>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Cancel
-              </Button>
-              <Button style={{ backgroundColor: "#db6300", border: "none" }} variant="primary" onClick={CreateGroup}>
-                Add Group
-              </Button>
-            </Modal.Footer>
-          </Modal>
+       
         </>
       ) : (
         <Loader />

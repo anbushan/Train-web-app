@@ -3,7 +3,7 @@ import * as Yup from "yup";
 export const TrainSchema = Yup.object().shape({
     TrainNo: Yup.string()
         .required("Train number is required.")
-        .matches(/^\d+$/, "Train number must contain only digits."),
+        .matches(/^\d{5}$/, "Train number must contain exactly five digits."),
 
     TrainName: Yup.string().required("Train name is required."),
 
@@ -15,3 +15,4 @@ export const TrainSchema = Yup.object().shape({
 
     hindiTrainName: Yup.string().required("ट्रेन का नाम आवश्यक है."),
 });
+

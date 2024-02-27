@@ -4,7 +4,7 @@ import customFetchBase from "./CustomFetchBase";
 export const SettingImageApi = createApi({
   reducerPath: "SettingImageApi",
   baseQuery: customFetchBase,
-  tagTypes: [" SETTINGIMAGE"],
+  tagTypes: ["SETTINGIMAGE"],
   endpoints: (build) => ({
     getSettingImage: build.query({
       query: () => ({
@@ -17,19 +17,18 @@ export const SettingImageApi = createApi({
       providesTags: ["SETTINGIMAGE"],
     }),
 
-    editSettingImage: build.mutation({
-      query: ({  data }) => ({
-        url: `/admin/updateBanner/65bca70d45f5ff99f43a2a57`,
-        method: "PATCH",
-        body: data,
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-        },
-      }),
-      invalidatesTags: ["SETTINGIMAGE"],
-    }),
-   
+    editSettingImage:build.mutation({
+  query: ({key, imageFile}) => ({
+    url: `/admin/updateBanner/65bca70d45f5ff99f43a2a57`,
+    method: "PUT",
+    body: key,imageFile,
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+    },
   }),
+  invalidatesTags: ["SETTINGIMAGE"]
+    })
+  })
 });
 
-export const { useGetSettingImageQuery,useEditSettingImageMutation} = SettingImageApi;
+export const { useGetSettingImageQuery, useEditSettingImageMutation } = SettingImageApi;

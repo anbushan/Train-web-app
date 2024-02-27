@@ -17,6 +17,16 @@ export const GroupApi = createApi({
       providesTags: ["GROUP"],
     }),
   
+    getEmail: build.query({
+      query: () => ({
+        url: `/admin/usersEmail`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }),
+      providesTags: ["GROUP"],
+    }),
 
     addGroup: build.mutation({
         query: ({ groupName, title, body }) => ({
@@ -29,7 +39,17 @@ export const GroupApi = createApi({
         }),
         invalidatesTags: ["GROUP"],
       }),
-     
+      addGroupNotification: build.mutation({
+        query: ({groupname,emails}) => ({
+          url: `/admin/addGroup/${groupname}`,
+          method: "POST",
+          body: { groupname: groupname, emails: emails },
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+          },
+        }),
+        invalidatesTags: ["GROUP"],
+      }),
 
     deleteGroup: build.mutation({
       query: (id) => ({
@@ -44,5 +64,5 @@ export const GroupApi = createApi({
   }),
 });
 
-export const { useGetGroupQuery, useGetGroupByIdQuery,useDeleteGroupMutation,
+export const { useGetGroupQuery, useGetEmailQuery,useDeleteGroupMutation,useAddGroupNotificationMutation,
     useAddGroupMutation} = GroupApi;

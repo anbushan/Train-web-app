@@ -16,6 +16,17 @@ export const WithdrawrequestApi = createApi({
       providesTags: ["WITHDRAWREQUEST"],
     }),
 
+    getEmail: build.query({
+      query: () => ({
+        url: `/admin/usersEmail`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }),
+      providesTags: ["WITHDRAWREQUEST"],
+    }),
+
 
     // getWithdrawrequestById: build.query({
     //   query: (id) => ({
@@ -53,6 +64,6 @@ export const WithdrawrequestApi = createApi({
   }),
 });
 
-export const { useGetWithdrawrequestQuery, useGetWithdrawrequestByIdQuery,useDeleteWithdrawrequestMutation,
+export const { useGetWithdrawrequestQuery, useGetEmailQuery,useDeleteWithdrawrequestMutation,
     useAddWithdrawrequestMutation,useGetWithdrawrequestBySearchDataQuery,useEditWithdrawrequestMutation
 } = WithdrawrequestApi;

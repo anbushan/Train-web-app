@@ -16,6 +16,7 @@ export const NewsApi = createApi({
       }),
       providesTags: ["NEWS"],
     }),
+    
     getNewsTable: build.query({
       query: (page) => ({
         url: `/news/allNewsInDB?page=${page}`,

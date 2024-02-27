@@ -16,19 +16,8 @@ export const GroupNotificationApi = createApi({
       }),
       providesTags: ["GROUPNOTIFICATION"],
     }),
-  
 
-    addGroupNotification: build.mutation({
-        query: ({groupname,emails}) => ({
-          url: `/admin/addGroup/${groupname}`,
-          method: "POST",
-          body: { groupname: groupname, emails: emails },
-          headers: {
-            "Content-Type": "application/json; charset=UTF-8",
-          },
-        }),
-        invalidatesTags: ["GROUPNOTIFICATION"],
-      }),
+   
      
 
     deleteGroupNotification: build.mutation({
@@ -44,5 +33,5 @@ export const GroupNotificationApi = createApi({
   }),
 });
 
-export const { useGetGroupNotificationQuery, useGetGroupNotificationByIdQuery,useDeleteGroupNotificationMutation,
-    useAddGroupNotificationMutation} = GroupNotificationApi;
+export const { useGetGroupNotificationQuery,useDeleteGroupNotificationMutation,
+    } = GroupNotificationApi;

@@ -4,16 +4,20 @@ import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import BasicTable from ".././../../components/BasicTable";
 import Loader from ".././../../pages/loginForms/loader/Loader";
-import { useGetGroupQuery, useDeleteGroupMutation,useAddGroupMutation } from ".././../../redux/features/api/GroupApi";
+import { useGetGroupQuery, useDeleteGroupMutation,useAddGroupMutation,useGetEmailQuery, useAddGroupNotificationMutation } from "../../../redux/features/api/GroupApi";
 import { toast } from "react-toastify";
 import DeleteModel from ".././../../components/DeleteModel";
 import { IoIosSend } from "react-icons/io";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { FaPlus } from "react-icons/fa6";
+import Select from 'react-select';
 
 
 const Generalgroup = () => {
 
   const [data, setData] = useState([]);
+  const [groupname, setGroupname] = useState("");
+  const [selectedEmails, setSelectedEmails] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [idToDelete, setIdToDelete] = useState("");
   const [deleteShow, setDeleteShow] = useState(false);
@@ -25,6 +29,9 @@ const Generalgroup = () => {
  const [addGroupNotification] = useAddGroupMutation();
   const { data: groupData, isLoading } = useGetGroupQuery(currentPage);
   const [deletegroupApi] = useDeleteGroupMutation();
+  const [show, setShow] = useState(false);
+  const { data: emailData, isLoading: emailLoading } = useGetEmailQuery();
+  const [addGroupNotificationApi] = useAddGroupNotificationMutation();
 
  
   useEffect(() => {
@@ -89,6 +96,37 @@ console.log(groupData);
     }
   };
 
+
+
+  const CreateGroup = async () => {
+    try {
+      const selectedEmailValues = selectedEmails.map(email => email.value);
+      const response = await addGroupNotificationApi({
+        groupname: groupname,
+        emails: selectedEmailValues,
+      });
+  
+      if (response?.data) {
+        toast.success(response?.data?.message, { autoClose: 1000 });
+        handleClose(); 
+      } else {
+        toast.error(response?.error?.data.error, { autoClose: 1000 });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const emailOptions = emailData ? emailData.data.map(email => ({ value: email, label: email })) : [];
+
+  const handleEmailChange = (selectedOptions) => {
+    setSelectedEmails(selectedOptions);
+  };
+
+
   const COLUMNS = [
     {
       Header: "ID",
@@ -134,20 +172,31 @@ console.log(groupData);
 
   return (
     <div>
-      {!isLoading ? (
+       {!isLoading && !emailLoading ? (
         <>
           <Container fluid className="my-4">
             <Row>
+            
               <Col className="d-flex flex-row justify-content-between mt-1">
              
                 <h4  className="fw-bold "onClick={handleCancel}> <AiOutlineArrowLeft /> Group </h4>
+                
+                <div>
                 <Button
                   style={{ backgroundColor: "#db6300", border: "none" }}
-                  className="p-2"
+                  className="p-2 m-1"
                   onClick={() => setShowModal(true)}
                 >
                   <IoIosSend size={20} /> Send Notification
                 </Button>
+                <Button
+                  style={{ backgroundColor: "#db6300", border: "none" }}
+                  className="p-2 m-1"
+                  onClick={handleShow}
+                >
+                  <FaPlus size={20} /> Add Group
+                </Button>
+                </div>
               </Col>
             </Row>
             <hr className="bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2 " />
@@ -212,6 +261,44 @@ console.log(groupData);
               </Button>
               <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSendRequest}>
                 Send
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          <Modal show={show} onHide={handleClose} centered>
+            <Modal.Header closeButton>
+              <Modal.Title>Add Group </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form.Group controlId="groupname">
+                <Form.Label>Group Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter group name"
+                  value={groupname}
+                  onChange={(e) => setGroupname(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="emails">
+                <Form.Label>Emails</Form.Label>
+                <Select
+                  isMulti
+                  options={emailOptions}
+                  value={selectedEmails}
+                  onChange={handleEmailChange}
+                />
+              </Form.Group>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Cancel
+              </Button>
+              <Button
+                style={{ backgroundColor: "#db6300", border: "none" }}
+                variant="primary"
+                onClick={CreateGroup}
+              >
+                Add Group
               </Button>
             </Modal.Footer>
           </Modal>
