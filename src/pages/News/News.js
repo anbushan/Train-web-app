@@ -34,7 +34,7 @@ const News = () => {
     }
   }, [newsTableData]);
 
-  const handleNavigateAddForm = () => navigate("/admin/");
+ 
 
   const deleteHandleClose = () => setDeleteShow(false);
 
@@ -65,18 +65,18 @@ const News = () => {
       const response = await axios.get(`https://train-info.onrender.com/news/addNewsInDB?category=${category}&lang=${lang}`);
       console.log(response);
       if (response?.data) {
-        console.log("Success: " + (response.data.message ?? "sent successfully"));
+        toast.success(response?.data?.message, { autoClose: 1000 });
         setLang("");
         setCategory("");
         console.log(category);
         console.log(lang);
       } else {
-        console.error("Error: " + (response?.error?.message ?? "news not added"));
+        toast.error(response?.error?.data.error, { autoClose: 1000 });
         setLang("");
         setCategory("");
       }
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error(error);
     }
   };
   
@@ -138,7 +138,7 @@ const News = () => {
             <Row>
               <Col>
                 <Header
-                  ONCLICK={handleNavigateAddForm}
+                 
                   HEADING=" News"
                   headingClassName="text-center text-md-start m-md-4 m-xl-2"
                 />

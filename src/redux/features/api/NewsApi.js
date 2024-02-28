@@ -6,16 +6,16 @@ export const NewsApi = createApi({
   baseQuery: CustomFetchBase,
   tagTypes: ["NEWS"],
   endpoints: (build) => ({
-    getNews: build.query({
-      query: ({cate,lang}) => ({
-        url: `/news/addNewsInDB?category=${cate}&lang=${lang}`,
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-        },
-      }),
-      providesTags: ["NEWS"],
-    }),
+    // getNews: build.query({
+    //   query: ({cate,lang}) => ({
+    //     url: `/news/addNewsInDB?category=${cate}&lang=${lang}`,
+    //     method: "GET",
+    //     headers: {
+    //       "Content-Type": "application/json; charset=UTF-8",
+    //     },
+    //   }),
+    //   providesTags: ["NEWS"],
+    // }),
     
     getNewsTable: build.query({
       query: (page) => ({

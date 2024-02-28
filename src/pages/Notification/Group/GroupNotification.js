@@ -85,7 +85,11 @@ console.log(groupData);
         toast.success(response?.data?.message, { autoClose: 1000 });
         console.log(response);
         navigate("/admin/group-notification");
+        setGroupName("");
+        setTitle("");
+        setBody("");
         setShowModal(false); 
+        
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");
@@ -108,7 +112,10 @@ console.log(groupData);
   
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
-        handleClose(); 
+        setGroupname(""); 
+        setSelectedEmails([]); 
+        handleClose();
+      
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
       }
@@ -204,7 +211,7 @@ console.log(groupData);
               <Col xs={12} lg={12} xl={12} xxl={12} md={12} className="table-responsive">
                 <BasicTable
                   COLUMNS={COLUMNS}
-                  MOCK_DATA={data} // Use the backend data directly here
+                  MOCK_DATA={data} 
                   currentPage={currentPage}
                   totalPages={totalPages}
                   setCurrentPage={setCurrentPage}

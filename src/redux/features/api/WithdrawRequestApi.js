@@ -7,7 +7,7 @@ export const WithdrawrequestApi = createApi({
   endpoints: (build) => ({
     getWithdrawrequest: build.query({
       query: ({ page,  }) => ({
-        url: `/admin/viewWithdrawRequests?page=${page}`, // Fix the URL construction
+        url: `/admin/viewWithdrawRequests?page=${page}`, 
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -25,20 +25,7 @@ export const WithdrawrequestApi = createApi({
         },
       }),
       providesTags: ["WITHDRAWREQUEST"],
-    }),
-
-
-    // getWithdrawrequestById: build.query({
-    //   query: (id) => ({
-    //     url: `/admin/withdrawRequest/${id}`,
-    //     method: "GET",
-    //     headers: {
-    //       "Content-Type": "application/json; charset=UTF-8",
-    //     },
-    //   }),
-    //   providesTags: ["WITHDRAWREQUEST"],
-    // }),
-     
+    }),     
 
     editWithdrawrequest: build.mutation({
       query: ({ id, data }) => ({
@@ -64,6 +51,5 @@ export const WithdrawrequestApi = createApi({
   }),
 });
 
-export const { useGetWithdrawrequestQuery, useGetEmailQuery,useDeleteWithdrawrequestMutation,
-    useAddWithdrawrequestMutation,useGetWithdrawrequestBySearchDataQuery,useEditWithdrawrequestMutation
+export const { useGetWithdrawrequestQuery, useGetEmailQuery,useDeleteWithdrawrequestMutation,useEditWithdrawrequestMutation
 } = WithdrawrequestApi;
