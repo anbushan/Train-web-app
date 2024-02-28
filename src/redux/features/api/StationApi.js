@@ -16,6 +16,16 @@ export const StationApi = createApi({
       }),
       providesTags: ["STATION"],
     }),
+    getStationSearch: build.query({
+      query: (search) => ({
+        url: `/info/getStation?search=${search}`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }),
+      providesTags: ["STATION"],
+    }),
     getStationById: build.query({
       query: (id) => ({
         url: `admin/stationNames/${id}`,
@@ -75,5 +85,5 @@ export const StationApi = createApi({
 });
 
 export const { useGetStationQuery, useGetStationByIdQuery,useDeleteStationMutation,
-    useAddStationMutation,useGetStationBySearchDataQuery,useEditStationMutation
+    useAddStationMutation,useGetStationSearchQuery,useEditStationMutation
 } = StationApi;

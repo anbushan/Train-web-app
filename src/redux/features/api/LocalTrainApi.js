@@ -17,6 +17,17 @@ export const LocalTrainApi = createApi({
       providesTags: ["LOCALTRAIN"],
     }),
 
+    getChennaiLocalSearch: build.query({
+      query: ({ search, city }) => ({
+        url: `/local/admin${city}LocalTrains?search=${search}`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }),
+      providesTags: ["LOCALTRAIN"],
+    }),
+
     getLocalTrainById: build.query({
       query: ({ id, city }) => ({
         url: `/local/admin${city}LocalTrains/${id}`,
@@ -74,6 +85,6 @@ export const {
     useAddLocalTrainMutation,
     useEditLocalTrainMutation,
     useGetLocalTrainByIdQuery,
-  useGetPuneLocalQuery,
-  useGetHyderabadLocalQuery,
+
+  useGetChennaiLocalSearchQuery,
 } = LocalTrainApi;

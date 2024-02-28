@@ -5,7 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import BasicTable from "../../components/TablePaginationComponent";
 import Header from "../../components/Header";
-import { useGetChennaiLocalQuery, useDeleteLocalTrainMutation } from "../../redux/features/api/LocalTrainApi";
+import { useGetChennaiLocalSearchQuery, useDeleteLocalTrainMutation } from "../../redux/features/api/LocalTrainApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
 import DeleteModel from "../../components/DeleteModel";
@@ -16,8 +16,9 @@ const Train = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteShow, setDeleteShow] = useState(false);
   const [idToDelete, setIdToDelete] = useState("");
-  const [selectedCity, setSelectedCity] = useState("chennai"); 
-  const { data: getLocalTrainData, isLoading } = useGetChennaiLocalQuery({ page: currentPage, city: selectedCity ,id:idToDelete});
+  const [selectedCity, setSelectedCity] = useState("chennai");
+  const [search, setSearch] = useState(""); // State variable for search query
+  const { data: getLocalTrainData, isLoading } = useGetChennaiLocalSearchQuery({ page: currentPage, city: selectedCity, search: search, id: idToDelete });
   const navigate = useNavigate();
   const [deleteLocalTrain] = useDeleteLocalTrainMutation();
 
@@ -35,6 +36,10 @@ const Train = () => {
     setSelectedCity(e.target.value);
   };
 
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
   const deleteHandleClose = () => {
     setDeleteShow(false);
   };
@@ -47,25 +52,25 @@ const Train = () => {
 
   const deleteTrain = async () => {
     try {
-      const response = await deleteLocalTrain({city:selectedCity, id:idToDelete});
+      const response = await deleteLocalTrain({ city: selectedCity, id: idToDelete });
       console.log(idToDelete);
       if (response?.data) {
-
         toast.success(response?.data?.message, { autoClose: 1000 });
         console.log(response);
         setDeleteShow(false);
-      setIdToDelete("");
+        setIdToDelete("");
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");
         console.log(response.error);
         setDeleteShow(false);
-      setIdToDelete("");
+        setIdToDelete("");
       }
     } catch (error) {
       console.error(error);
     }
   };
+
   const COLUMNS = [
     {
       Header: "ID",
@@ -164,16 +169,15 @@ const Train = () => {
           <Row className="">
             <Header
               ONCLICK={handleNavigateAddForm}
-              HEADING= "Local Train"
-              BUTTON_NAME= "Add Local Train"
-            
+              HEADING="Local Train"
+              BUTTON_NAME="Add Local Train"
             />
             <hr className="mt-3" />
           </Row>
           <Row className="mb-3">
-    <Form onSubmit={""} className="d-flex flex-column flex-md-row align-items-md-center justify-content-start">
-      <Col xs={12} md={4} lg={3} className="m-2">
-      <Form.Group controlId="city">
+            <Form onSubmit={""} className="d-flex flex-column flex-md-row align-items-md-center justify-content-start">
+              <Col xs={12} md={4} lg={3} className="m-2">
+              <Form.Group controlId="city">
                 <Form.Label className="fs-4">Select City:</Form.Label>
                 <Form.Control as="select" value={selectedCity} onChange={handleCityChange}>
                   <option value="chennai">Chennai</option>
@@ -184,17 +188,15 @@ const Train = () => {
                   <option value="hyderabad">Hyderabad</option>
                 </Form.Control>
               </Form.Group>
-      </Col>
-    </Form>
-  </Row>
-
-
-
-
-
-
-
-
+              </Col>
+              <Col xs={12} md={4} lg={3} className="m-2">
+                <Form.Group controlId="search">
+                  <Form.Label className="fs-4">Search:</Form.Label>
+                  <Form.Control type="text" value={search} onChange={handleSearchChange} placeholder=" search LocalTrain" />
+                </Form.Group>
+              </Col>
+            </Form>
+          </Row>
           <Row className="">
             <BasicTable
               COLUMNS={COLUMNS}
@@ -212,7 +214,7 @@ const Train = () => {
         YES={deleteTrain}
         DELETESTATE={deleteShow}
         ONCLICK={deleteHandleClose}
-        DESCRIPTION= "Are you sure you want to delete this Train"
+        DESCRIPTION="Are you sure you want to delete this Train"
         DELETETITLE="Local Train"
       />
     </div>

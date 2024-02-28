@@ -53,8 +53,8 @@ const UserList = () => {
               />
             </Col>
           </Row>
-          <hr className="bg-primary" />
-          <Row className="justify-content-center">
+          <hr className="bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2 " />
+          <Row className="d-flex flex-column align-items-center justift-content-center">
             <Col xs={12} lg={12} xl={12} xxl={12} md={12} className="table-responsive">
               <BasicTable
                 COLUMNS={COLUMNS}

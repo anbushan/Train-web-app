@@ -33,20 +33,12 @@ const AddGeneralNotification = () => {
         title: title,
         body: body,
         image:image,
-     
-      
-        
+         
       });
-    
-   
       if (response?.data) {
         setTitle("");
         setBody("");
         setImage("");
-       
-      
-      
-        // navigate("/admin/train");
         toast.success(response?.data?.message, { autoClose: 1000 });
         
         console.log(response.error.data);

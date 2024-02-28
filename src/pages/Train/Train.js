@@ -103,9 +103,9 @@ const Train = () => {
               BUTTON_NAME= "Add Train"
             
             />
-            <hr className="mt-3" />
+            <hr className="mt-3 bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2 "/>
           </Row>
-          <Row className="justify-content-center col-md-6 col-lg-3 mx-2 mt-4 mb-5">
+          <Row className="justify-content-center col-md-6 col-lg-3 mx-2 mt-4 mb-4">
             <input 
               type="text"
               placeholder="Search Train..."
@@ -113,7 +113,7 @@ const Train = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             /></Row>
-             <Row>
+             <Row className="d-flex flex-column align-items-center justift-content-center">
             <BasicTable
               COLUMNS={COLUMNS}
               MOCK_DATA={data}
