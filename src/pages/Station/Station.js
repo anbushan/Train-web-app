@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import BasicTable from "../../components/TablePaginationComponent";
 import Header from "../../components/Header";
 import DeleteModel from "../../components/DeleteModel";
-import { useGetStationQuery, useGetStationSearchQuery, useDeleteStationMutation } from "../../redux/features/api/StationApi";
+import { useGetStationQuery, useDeleteStationMutation } from "../../redux/features/api/StationApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
 
@@ -14,24 +14,24 @@ const Station = () => {
   const [deleteShow, setDeleteShow] = useState(false);
   const [idToDelete, setIdToDelete] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [deleteStationApi] = useDeleteStationMutation();
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const getStationQuery = searchTerm ? useGetStationSearchQuery : useGetStationQuery;
-  const { data: getStationData, isLoading } = getStationQuery(searchTerm || { page: currentPage });
+  const { data: getStationData, isLoading } = useGetStationQuery({ page: currentPage, search: searchTerm });
+  console.log(getStationData);
+  const deleteStationApi = useDeleteStationMutation();
   const navigate = useNavigate();
 
   const handleNavigateAddForm = () => navigate(`/admin/add-station`);
 
   useEffect(() => {
     if (getStationData && getStationData.data) {
-      setData(getStationData.data.StationList);
+      setData(getStationData.data);
       setTotalPages(getStationData.pagination.totalPages);
-      setCurrentPage(currentPage);
+      setCurrentPage(getStationData.pagination.currentPage);
     }
-  }, [getStationData, currentPage]);
-  
+  }, [getStationData]);
+
   const deleteHandleClose = () => setDeleteShow(false);
 
   const deleteHandleShow = (id) => {
@@ -46,6 +46,7 @@ const Station = () => {
       setIdToDelete("");
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
+        // After successful deletion, you might want to refetch the data or update the UI accordingly
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
       }
@@ -115,8 +116,7 @@ const Station = () => {
               className="form-control"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </Row>
+            /></Row>
           <Row className="d-flex flex-column align-items-center justift-content-center">
               <Col
                 xs={12}

@@ -5,10 +5,11 @@ import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import BasicTable from "../../components/TablePaginationComponent";
 import Header from "../../components/Header";
-import { useDeleteMetroTrainMutation, useGetChennaiMetroQuery } from "../../redux/features/api/MetroTrainApi";
+import { useDeleteMetroTrainMutation, useGetChennaiMetroSearchQuery } from "../../redux/features/api/MetroTrainApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
 import DeleteModel from "../../components/DeleteModel";
+
 
 const Train = () => {
   const [data, setData] = useState([]);
@@ -17,8 +18,8 @@ const Train = () => {
   const [deleteShow, setDeleteShow] = useState(false);
   const [idToDelete, setIdToDelete] = useState("");
   const [selectedCity, setSelectedCity] = useState("Chennai"); 
-  console.log(selectedCity);
-  const { data: getMetroTrainData, isLoading } = useGetChennaiMetroQuery({ page: currentPage, city: selectedCity });
+  const [search, setSearch] = useState(""); // State variable for search query
+  const { data: getMetroTrainData, isLoading } = useGetChennaiMetroSearchQuery({ page: currentPage, city: selectedCity, search: search, id: idToDelete });
   const [deleteMetroTrain] = useDeleteMetroTrainMutation();
 
   const navigate = useNavigate();
@@ -46,6 +47,11 @@ const Train = () => {
     setIdToDelete(id);
     setDeleteShow(true);
   };
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
 
   const deleteMetro = async () => {
     try {
@@ -186,6 +192,12 @@ const Train = () => {
                 </Form.Control>
               </Form.Group>
       </Col>
+      <Col xs={12} md={4} lg={3} className="m-2">
+                <Form.Group controlId="search">
+                  <Form.Label className="fs-4">Search:</Form.Label>
+                  <Form.Control type="text" value={search} onChange={handleSearchChange} placeholder=" search MetroTrain" />
+                </Form.Group>
+              </Col>
     </Form>
   </Row>
 

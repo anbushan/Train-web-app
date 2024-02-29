@@ -19,7 +19,7 @@ const Train = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: getTrainData, isLoading } = useGetTrainQuery({ page: currentPage, search: searchTerm });
-  
+  console.log(getTrainData);
   const navigate = useNavigate();
 
   const handleNavigateAddForm = () => navigate(`/admin/add-train`);

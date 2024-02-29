@@ -6,20 +6,20 @@ export const LocalTrainApi = createApi({
   baseQuery: CustomFetchBase,
   tagTypes: ["LOCALTRAIN"],
   endpoints: (build) => ({
-    getChennaiLocal: build.query({
-      query: ({ page, city }) => ({
-        url: `/local/admin${city}LocalTrains?page=${page}`,
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-        },
-      }),
-      providesTags: ["LOCALTRAIN"],
-    }),
+    // getChennaiLocal: build.query({
+    //   query: ({ page, city }) => ({
+    //     url: `/local/admin${city}LocalTrains?page=${page}`,
+    //     method: "GET",
+    //     headers: {
+    //       "Content-Type": "application/json; charset=UTF-8",
+    //     },
+    //   }),
+    //   providesTags: ["LOCALTRAIN"],
+    // }),
 
     getChennaiLocalSearch: build.query({
-      query: ({ search, city }) => ({
-        url: `/local/admin${city}LocalTrains?search=${search}`,
+      query: ({ search, city,page }) => ({
+        url: `/local/admin${city}LocalTrains?search=${search}&page=${page}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

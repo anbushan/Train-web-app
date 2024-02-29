@@ -6,9 +6,21 @@ export const MetroTrainApi = createApi({
   baseQuery: CustomFetchBase,
   tagTypes: ["METROTRAIN"],
   endpoints: (build) => ({
-    getChennaiMetro: build.query({
-      query: ({ page, city }) => ({
-        url: `/metro/viewAdmin${city}Metro?page=${page}`,
+    // getChennaiMetro: build.query({
+    //   query: ({ page, city}) => ({
+    //     url: `/metro/viewAdmin${city}Metro?page=${page}`,
+    //     method: "GET",
+    //     headers: {
+    //       "Content-Type": "application/json; charset=UTF-8",
+    //     },
+    //   }),
+    //   providesTags: ["METROTRAIN"],
+    // }),
+
+    
+    getChennaiMetroSearch: build.query({
+      query: ({ search, city,page}) => ({
+        url: `/metro/viewAdmin${city}Metro?search=${search}&page=${page}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -75,5 +87,5 @@ export const {
     useAddMetroTrainMutation,
     useEditMetroTrainMutation,
     useGetMetroTrainByIdQuery,
-  useGetHyderabadLocalQuery,
+    useGetChennaiMetroSearchQuery,
 } = MetroTrainApi;
