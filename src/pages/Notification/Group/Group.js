@@ -79,8 +79,19 @@ const GeneralGroupNotification = () => {
       minWidth: 100,
     },
     {
-      Header: "Emails",
-      accessor: "emails",
+      Header: "Phone Numbers",
+      accessor: "phoneNumbers",
+      width: "auto",
+      minWidth: 100,
+      Cell: ({ row }) => {
+        return (
+          <ul>
+            {row.original.phoneNumbers.map((phoneNumber, index) => (
+              <li key={index}>{phoneNumber}</li>
+            ))}
+          </ul>
+        );
+      },
     },
     {
       Header: "Created At",

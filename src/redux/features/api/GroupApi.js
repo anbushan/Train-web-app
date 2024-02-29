@@ -17,9 +17,9 @@ export const GroupApi = createApi({
       providesTags: ["GROUP"],
     }),
   
-    getEmail: build.query({
+    getNumber: build.query({
       query: () => ({
-        url: `/admin/usersEmail`,
+        url: `/admin/usersPhoneNumber`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -64,5 +64,5 @@ export const GroupApi = createApi({
   }),
 });
 
-export const { useGetGroupQuery, useGetEmailQuery,useDeleteGroupMutation,useAddGroupNotificationMutation,
+export const { useGetGroupQuery, useGetNumberQuery,useDeleteGroupMutation,useAddGroupNotificationMutation,
     useAddGroupMutation} = GroupApi;

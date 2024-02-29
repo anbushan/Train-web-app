@@ -30,8 +30,8 @@ const UserList = () => {
       minWidth: 10,
     },
     {
-      Header: "Email",
-      accessor: "email",
+      Header: "Phone Number",
+      accessor: "phoneNumber",
     },
     {
       Header: "Referral ID",

@@ -61,8 +61,8 @@ const Feedback = () => {
       accessor: (d, i) => i + 1,
     },
     {
-      Header: "Email",
-      accessor: "email",
+      Header: "Phone Number",
+      accessor: "phoneNumber",
     },
     {
       Header: "Feedback",

@@ -59,13 +59,10 @@ const Issue = () => {
       Header: "ID",
       accessor: (d, i) => i + 1,
     },
+    
     {
-      Header: "Name",
-      accessor: "name",
-    },
-    {
-      Header: "Email",
-      accessor: "email",
+      Header: "Phone Number",
+      accessor: "phoneNumber",
     },
     {
       Header: "Image",

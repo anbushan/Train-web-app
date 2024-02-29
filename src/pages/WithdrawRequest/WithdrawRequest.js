@@ -9,7 +9,7 @@ import {
   useGetWithdrawrequestQuery,
   useDeleteWithdrawrequestMutation,
   useEditWithdrawrequestMutation,
-  useGetEmailQuery,
+  useGetNumberQuery,
 } from "../../redux/features/api/WithdrawRequestApi";
 import { useAddIndividualNotificationMutation } from "../../redux/features/api/IndividualNotificationApi";
 import { toast } from "react-toastify";
@@ -29,16 +29,14 @@ const Withdrawrequest = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [sendRequestShow, setSendRequestShow] = useState(false);
-  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [emailOptions, setEmailOptions] = useState([]); // Define emailOptions state
+  const [numberOptions, setNumberOptions] = useState([]); // Define emailOptions state
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const { data: getWithdrawrequestData, isLoading } =
-    useGetWithdrawrequestQuery(currentPage, id);
-  const { data: emailData } = useGetEmailQuery();
+  const { data: getWithdrawrequestData, isLoading } =  useGetWithdrawrequestQuery(currentPage, id);
+  const { data: NumberData } = useGetNumberQuery();
 
   useEffect(() => {
     if (getWithdrawrequestData && getWithdrawrequestData.data) {
@@ -48,10 +46,10 @@ const Withdrawrequest = () => {
   }, [getWithdrawrequestData]);
 
   useEffect(() => {
-    if (emailData && emailData.data) {
-      setEmailOptions(emailData.data);
+    if (NumberData && NumberData.data) {
+      setNumberOptions(NumberData.data);
     }
-  }, [emailData]);
+  }, [NumberData]);
 
   const handleCancel = () => {
     navigate("/admin/withdraw-request");
@@ -122,7 +120,7 @@ const Withdrawrequest = () => {
   const handleSendRequest = async () => {
     try {
       const response = await addIndividualNotification({
-        email: email,
+        phoneNumber:number,
         title: title,
         body: body,
       });
@@ -148,8 +146,8 @@ const Withdrawrequest = () => {
       minWidth: 10,
     },
     {
-      Header: "Email",
-      accessor: "email",
+      Header: "Phone Number",
+      accessor: "phoneNumber",
     },
     {
       Header: "Upi ID",
@@ -275,14 +273,14 @@ const Withdrawrequest = () => {
             <Modal.Body>
               <Form>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email </Form.Label>
+                  <Form.Label>Phone Number </Form.Label>
                   <Form.Control
                     as="select"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={number}
+                    onChange={(e) => setNumber(e.target.value)}
                   >
-                    <option value="">Select an email</option>
-                    {emailOptions.map((option, index) => (
+                    <option value="">Select an Number</option>
+                    {numberOptions.map((option, index) => (
                       <option key={index} value={option}>
                         {option}
                       </option>

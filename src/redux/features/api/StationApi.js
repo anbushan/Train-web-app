@@ -7,8 +7,8 @@ export const StationApi = createApi({
   tagTypes: ["STATION"],
   endpoints: (build) => ({
     getStation: build.query({
-      query: (page) => ({
-        url: `/info/getStation?page=${page}`,
+      query: ({page,search}) => ({
+        url: `/admin/stationNames?page=${page}&search=${search}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -16,16 +16,16 @@ export const StationApi = createApi({
       }),
       providesTags: ["STATION"],
     }),
-    getStationSearch: build.query({
-      query: (search) => ({
-        url: `/info/getStation?search=${search}`,
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-        },
-      }),
-      providesTags: ["STATION"],
-    }),
+    // getStationSearch: build.query({
+    //   query: (search) => ({
+    //     url: `/admin/stationNames?search=${search}`,
+    //     method: "GET",
+    //     headers: {
+    //       "Content-Type": "application/json; charset=UTF-8",
+    //     },
+    //   }),
+    //   providesTags: ["STATION"],
+    // }),
     getStationById: build.query({
       query: (id) => ({
         url: `admin/stationNames/${id}`,

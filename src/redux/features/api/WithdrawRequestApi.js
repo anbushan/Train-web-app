@@ -16,9 +16,9 @@ export const WithdrawrequestApi = createApi({
       providesTags: ["WITHDRAWREQUEST"],
     }),
 
-    getEmail: build.query({
+    getNumber: build.query({
       query: () => ({
-        url: `/admin/usersEmail`,
+        url: `/admin/usersPhoneNumber`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -51,5 +51,5 @@ export const WithdrawrequestApi = createApi({
   }),
 });
 
-export const { useGetWithdrawrequestQuery, useGetEmailQuery,useDeleteWithdrawrequestMutation,useEditWithdrawrequestMutation
+export const { useGetWithdrawrequestQuery, useGetNumberQuery,useDeleteWithdrawrequestMutation,useEditWithdrawrequestMutation
 } = WithdrawrequestApi;
