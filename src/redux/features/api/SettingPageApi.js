@@ -17,11 +17,11 @@ export const SettingImageApi = createApi({
       providesTags: ["SETTINGIMAGE"],
     }),
 
-    editSettingImage:build.mutation({
-  query: ({key, imageFile}) => ({
-    url: `/admin/updateBanner/65bca70d45f5ff99f43a2a57`,
-    method: "PUT",
-    body: key,imageFile,
+    addCarosuelImage:build.mutation({
+  query: (data) => ({
+    url: `/admin/addCarousel/65bca70d45f5ff99f43a2a57`,
+    method: "PATCH",
+    body: data ,
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
     },
@@ -31,4 +31,4 @@ export const SettingImageApi = createApi({
   })
 });
 
-export const { useGetSettingImageQuery, useEditSettingImageMutation } = SettingImageApi;
+export const { useGetSettingImageQuery, useAddCarosuelImageMutation } = SettingImageApi;
