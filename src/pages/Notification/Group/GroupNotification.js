@@ -31,6 +31,8 @@ const Generalgroup = () => {
   const { data: phoneData, isLoading: numberLoading } = useGetNumberQuery();
   const [addGroupNotificationApi] = useAddGroupNotificationMutation();
 
+console.log(selectedphoneNumbers);
+
   useEffect(() => {
     if (groupData && groupData.data) {
       setData(groupData.data);
@@ -97,6 +99,8 @@ const Generalgroup = () => {
         groupname: groupname,
         phoneNumbers: selectedPhoneNumbers,
       });
+     
+console.log(selectedPhoneNumbers);
 
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
@@ -115,6 +119,7 @@ const Generalgroup = () => {
   const handleShow = () => setShow(true);
 
   const NumberOptions = phoneData ? phoneData.data.map(phoneNumber => ({ value: phoneNumber, label: phoneNumber })) : [];
+  console.log(NumberOptions);
 
   const handleEmailChange = (selectedOptions) => {
     setSelectedphoneNumbers(selectedOptions);

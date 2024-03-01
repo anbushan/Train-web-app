@@ -17,18 +17,17 @@ export const SettingImageApi = createApi({
       providesTags: ["SETTINGIMAGE"],
     }),
 
-    addCarosuelImage:build.mutation({
-  query: (data) => ({
-    url: `/admin/addCarousel/65bca70d45f5ff99f43a2a57`,
-    method: "PATCH",
-    body: data ,
-    headers: {
-      "Content-Type": "application/json; charset=UTF-8",
-    },
-  }),
-  invalidatesTags: ["SETTINGIMAGE"]
-    })
+    deleteCarosuel: build.mutation({
+      query: (index) => ({
+        url: `/admin/deleteCarousel/65bca70d45f5ff99f43a2a57/${index}`,
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }),
+      invalidatesTags: ["SETTINGIMAGE"],
+    }),
   })
 });
 
-export const { useGetSettingImageQuery, useAddCarosuelImageMutation } = SettingImageApi;
+export const { useGetSettingImageQuery, useDeleteCarosuelMutation } = SettingImageApi;

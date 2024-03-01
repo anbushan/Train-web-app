@@ -7,8 +7,8 @@ export const UserListApi = createApi({
   tagTypes: [" USERLIST"],
   endpoints: (build) => ({
     getUserList: build.query({
-      query: (page) => ({
-        url: `/admin/users?page=${page}`,
+      query: ({page,search}) => ({
+        url: `/admin/users?page=${page}&search=${search}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

@@ -19,7 +19,7 @@ const Station = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data: getStationData, isLoading } = useGetStationQuery({ page: currentPage, search: searchTerm });
   console.log(getStationData);
-  const deleteStationApi = useDeleteStationMutation();
+  const[deleteStationApi] = useDeleteStationMutation();
   const navigate = useNavigate();
 
   const handleNavigateAddForm = () => navigate(`/admin/add-station`);
@@ -46,7 +46,7 @@ const Station = () => {
       setIdToDelete("");
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
-        // After successful deletion, you might want to refetch the data or update the UI accordingly
+
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
       }

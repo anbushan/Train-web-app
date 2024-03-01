@@ -31,7 +31,7 @@ export const NewsApi = createApi({
 
     deleteNews: build.mutation({
       query: (id) => ({
-        url: `/admin/deleteNews/${id}`,
+        url: `/news/deleteNewsInDB/${id}`,
         method: "DELETE",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { MdDelete } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { MdDelete, MdRefresh } from "react-icons/md";
 import axios from "axios";
 import Header from "../../components/BasicHeader";
 import Loader from "../../pages/loginForms/loader/Loader";
@@ -14,7 +13,6 @@ import DeleteModel from "../../components/DeleteModel";
 import Tablepagination from "../../components/TablePaginationComponent";
 
 const News = () => {
-  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [lang, setLang] = useState("");
   const [category, setCategory] = useState("");
@@ -22,10 +20,13 @@ const News = () => {
   const [idToDelete, setIdToDelete] = useState("");
   const [deleteShow, setDeleteShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: newsTableData, isLoading: tableLoading } =
-    useGetNewsTableQuery(currentPage);
-
+  const {
+    data: newsTableData,
+    isLoading: tableLoading,
+    refetch,
+  } = useGetNewsTableQuery(currentPage);
   const [deleteNewsApi] = useDeleteNewsMutation();
+  const [refreshLoading, setRefreshLoading] = useState(false);
 
   useEffect(() => {
     if (newsTableData && newsTableData.data) {
@@ -33,8 +34,6 @@ const News = () => {
       setTotalPages(newsTableData.pagination.totalPages);
     }
   }, [newsTableData]);
-
- 
 
   const deleteHandleClose = () => setDeleteShow(false);
 
@@ -59,17 +58,37 @@ const News = () => {
   };
 
   const handleSubmit = async () => {
-    console.log(category);
-    console.log(lang);
+    if (!lang && !category) {
+      toast.error("Please select both language and category .", {
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    if (!lang) {
+      toast.error("Please select a language .", { autoClose: 2000 });
+      return;
+    }
+
+    if (!category) {
+      toast.error("Please select a category .", { autoClose: 2000 });
+      return;
+    }
+
+    setRefreshLoading(true);
+    await refetch();
+    setRefreshLoading(false);
     try {
-      const response = await axios.get(`https://train-info.onrender.com/news/addNewsInDB?category=${category}&lang=${lang}`);
-      console.log(response);
+      const response = await axios.get(
+        `https://train-info.onrender.com/news/addNewsInDB?category=${category}&lang=${lang}`
+      );
       if (response?.data) {
+        console.log(lang);
+        console.log(category);
+        console.log(response);
         toast.success(response?.data?.message, { autoClose: 1000 });
         setLang("");
         setCategory("");
-        console.log(category);
-        console.log(lang);
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         setLang("");
@@ -79,7 +98,7 @@ const News = () => {
       console.error(error);
     }
   };
-  
+
   const COLUMNS = [
     {
       Header: "ID",
@@ -138,19 +157,22 @@ const News = () => {
             <Row>
               <Col>
                 <Header
-                 
                   HEADING=" News"
                   headingClassName="text-center text-md-start m-md-4 m-xl-2"
                 />
               </Col>
             </Row>
+            <hr className="bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2" />
             <Row className="mb-3">
               <Col>
                 <Form>
                   <Row className="mb-4 mt-4">
                     <Col xs={12} md={4} lg={3}>
                       <Form.Group controlId="language">
-                        <Form.Label className="text-dark" style={{ fontWeight: "bolder" }}>
+                        <Form.Label
+                          className="text-dark"
+                          style={{ fontWeight: "bolder" }}
+                        >
                           Languages:
                         </Form.Label>
                         <Form.Select
@@ -170,7 +192,10 @@ const News = () => {
                     </Col>
                     <Col xs={12} md={4} lg={3}>
                       <Form.Group controlId="category">
-                        <Form.Label className="text-dark" style={{ fontWeight: "bolder" }}>
+                        <Form.Label
+                          className="text-dark"
+                          style={{ fontWeight: "bolder" }}
+                        >
                           Categories:
                         </Form.Label>
                         <Form.Select
@@ -195,17 +220,33 @@ const News = () => {
                     </Col>
                     <Col xs={12} md={4} lg={3} className=" d-flex flex-column ">
                       <Button
-                        style={{ backgroundColor: "#db6300", border: "none", marginTop: "30px" }}
-                        type="button" onClick={handleSubmit}
+                        style={{
+                          backgroundColor: "#db6300",
+                          border: "none",
+                          marginTop: "30px",
+                          position: "relative",
+                        }}
+                        type="button"
+                        onClick={handleSubmit}
+                        disabled={refreshLoading}
                       >
-                        Send
+                        <MdRefresh
+                          size={25}
+                          style={{
+                            marginRight: "0px",
+                            animation: refreshLoading
+                              ? "spin 1s linear infinite"
+                              : "none",
+                          }}
+                          className="justify-content-center align-items-center "
+                        />
                       </Button>
                     </Col>
                   </Row>
                 </Form>
               </Col>
             </Row>
-            <hr className="bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2" />
+          
             <Row className="justify-content-center">
               <Col
                 xs={12}

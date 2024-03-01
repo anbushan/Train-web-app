@@ -48,18 +48,43 @@
 
 .edit-icon {
   position: absolute;
-  top: 25px; /* Adjust the distance from the top */
-  right: 2px; /* Adjust the distance from the right */
-  transform: translate(50%, -50%); /* Center the icon perfectly in the corner */
-  font-size: 48px; /* Increase the size of the icon */
+  top: 25px; 
+  right: 2px; 
+  transform: translate(50%, -50%); 
+  font-size: 48px; 
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
-  padding: 15px; /* Increase the padding */
+  padding: 15px;
   visibility: hidden;
   transition: visibility 0.3s ease-in-out;
 }
 
 .image-container:hover .edit-icon {
   visibility: visible;
+}
+.delete-icon {
+  position: absolute;
+  top: 25px; 
+  left:-20px;
+  transform: translate(50%, -50%); 
+  font-size: 48px; 
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 15px; 
+  visibility: hidden;
+  transition: visibility 0.3s ease-in-out;
+}
+.image-container:hover .delete-icon {
+  visibility: visible;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
