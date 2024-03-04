@@ -347,7 +347,7 @@ const Setting = () => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Upload Carousel Image</Modal.Title>
+          <Modal.Title>Add Carousel Image</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <input

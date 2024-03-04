@@ -16,14 +16,16 @@ const GeneralNotification = () => {
   const [idToDelete, setIdToDelete] = useState("");
   const [deleteShow, setDeleteShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState();
   const { data: NotificationData, isLoading } = useGetNotificationQuery(currentPage);
   const [deleteNotificationApi] = useDeleteNotificationMutation();
 
   useEffect(() => {
     if (NotificationData && NotificationData.data) {
       setData(NotificationData.data);
-      setTotalPages(NotificationData.totalPages);
+      setTotalPages(NotificationData.pagination.totalPages);
       setCurrentPage(currentPage);
+      setItemsPerPage(NotificationData.pagination.itemsPerPage);
     }
   }, [NotificationData, currentPage]);
 
@@ -58,7 +60,7 @@ const GeneralNotification = () => {
   const COLUMNS = [
     {
       Header: "ID",
-      accessor: (d, i) => i + 1,
+      accessor: "s_no",
     },
     {
       Header: "Title",
@@ -75,6 +77,16 @@ const GeneralNotification = () => {
     {
       Header: "Image",
       accessor: "image",
+      Cell: (props) => {
+        const imageUrl = props.value; 
+        return <img src={imageUrl} alt="img" style={{ maxWidth: '50px', maxHeight: '50px' }} />;
+      },
+    },
+    {
+      Header: "Created At",
+      accessor: "createdAt",
+      width: "auto",
+      minWidth: 100,
     },
     {
       Header: "ACTIONS",
@@ -92,7 +104,7 @@ const GeneralNotification = () => {
       },
     },
   ];
-
+  
   return (
     <div>
       {!isLoading ? (
@@ -113,10 +125,11 @@ const GeneralNotification = () => {
               <Col xs={12} lg={12} xl={12} xxl={12} md={12} className="table-responsive">
                 <BasicTable
                   COLUMNS={COLUMNS}
-                  MOCK_DATA={NotificationData}
+                  MOCK_DATA={data}
                   currentPage={currentPage}
                   totalPages={totalPages}
                   setCurrentPage={setCurrentPage}
+                  itemsPerPage={itemsPerPage}
                 />
               </Col>
             </Row>

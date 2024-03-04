@@ -16,6 +16,7 @@ const Issue = () => {
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState();
   const { data: getIssueData, isLoading } = useGetIssueQuery(currentPage);
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const Issue = () => {
       setData(getIssueData.data);
       setTotalPages(getIssueData.pagination.totalPages);
       setCurrentPage(currentPage);
+      setItemsPerPage(getIssueData.pagination.itemsPerPage);
     }
   }, [getIssueData, currentPage]);
 
@@ -57,7 +59,7 @@ const Issue = () => {
   const COLUMNS = [
     {
       Header: "ID",
-      accessor: (d, i) => i + 1,
+      accessor:"s_no",
     },
     
     {
@@ -119,6 +121,7 @@ const Issue = () => {
               currentPage={currentPage}
               totalPages={totalPages}
               setCurrentPage={setCurrentPage}
+              itemsPerPage={itemsPerPage}
             />
           </Row>
         </Container>

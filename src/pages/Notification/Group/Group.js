@@ -19,6 +19,7 @@ const GeneralGroupNotification = () => {
   const [idToDelete, setIdToDelete] = useState("");
   const [deleteShow, setDeleteShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState();
   const { data: GroupNotificationData, isLoading } = useGetGroupNotificationQuery(currentPage);
   const [deleteGroupNotificationApi] = useDeleteGroupNotificationMutation();
 
@@ -29,6 +30,7 @@ const GeneralGroupNotification = () => {
       setData(GroupNotificationData.data);
       setTotalPages(GroupNotificationData.pagination.totalPages);
       setCurrentPage(currentPage);
+      setItemsPerPage(GroupNotificationData.pagination.itemsPerPage);
     }
   }, [GroupNotificationData, currentPage]);
 
@@ -60,7 +62,7 @@ const GeneralGroupNotification = () => {
   const COLUMNS = [
     {
       Header: "ID",
-      accessor: (d, i) => i + 1,
+      accessor:"s_no",
     },
     {
       Header: "Group Name",
@@ -140,6 +142,7 @@ const GeneralGroupNotification = () => {
                   currentPage={currentPage}
                   totalPages={totalPages}
                   setCurrentPage={setCurrentPage}
+                  itemsPerPage={itemsPerPage}
                 />
               </Col>
             </Row>

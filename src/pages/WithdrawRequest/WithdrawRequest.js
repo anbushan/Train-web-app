@@ -1,9 +1,11 @@
+// Withdrawrequest.js
+
 import React, { useState, useEffect } from "react";
 import { Button, Container, Row, Modal, Form, Col } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { IoIosSend } from "react-icons/io";
-import BasicTable from "../../components/BasicTable";
+import BasicTable from "../../components/TablePaginationComponent";
 import DeleteModel from "../../components/DeleteModel";
 import {
   useGetWithdrawrequestQuery,
@@ -19,6 +21,7 @@ import { useParams, useNavigate } from "react-router-dom";
 const Withdrawrequest = () => {
   const [editShow, setEditShow] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [editId, setEditId] = useState(null);
   const [deleteShow, setDeleteShow] = useState(false);
   const [idToDelete, setIdToDelete] = useState("");
@@ -32,16 +35,18 @@ const Withdrawrequest = () => {
   const [number, setNumber] = useState("");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [numberOptions, setNumberOptions] = useState([]); // Define emailOptions state
+  const [numberOptions, setNumberOptions] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data: getWithdrawrequestData, isLoading } =  useGetWithdrawrequestQuery(currentPage, id);
+  const [itemsPerPage, setItemsPerPage] = useState();
+  const { data: getWithdrawrequestData, isLoading } = useGetWithdrawrequestQuery({ page: currentPage, search: searchTerm,id:id });
   const { data: NumberData } = useGetNumberQuery();
 
   useEffect(() => {
     if (getWithdrawrequestData && getWithdrawrequestData.data) {
       setData(getWithdrawrequestData.data);
       setTotalPages(getWithdrawrequestData.pagination.totalPages);
+      setItemsPerPage(getWithdrawrequestData.pagination.itemsPerPage);
     }
   }, [getWithdrawrequestData]);
 
@@ -142,7 +147,7 @@ const Withdrawrequest = () => {
   const COLUMNS = [
     {
       Header: "ID",
-      accessor: (d, i) => i + 1,
+      accessor:"s_no",
       minWidth: 10,
     },
     {
@@ -211,6 +216,16 @@ const Withdrawrequest = () => {
                 </Button>
               </Col>
             </Row>
+            <hr className="mt-3 bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2 "/>
+            <Row className="justify-content-center col-md-6 col-lg-3 mx-2 mt-4 mb-4">
+              <input 
+                type="text"
+                placeholder="Search"
+                className="form-control"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </Row>
             <Row>
               <BasicTable
                 COLUMNS={COLUMNS}
@@ -218,6 +233,7 @@ const Withdrawrequest = () => {
                 currentPage={currentPage}
                 totalPages={totalPages}
                 setCurrentPage={setCurrentPage}
+                itemsPerPage={itemsPerPage}
               />
             </Row>
           </Container>

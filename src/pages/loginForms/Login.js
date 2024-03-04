@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
-// import MainLogo from "../../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
- import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Formik } from "formik";
 import { LogAndRegSchema } from "./LoginValidation";
 import TextInput from "../../components/TextInput";
 import { useLoginUserMutation } from "../../redux/features/api/AuthApi";
 import { toast } from "react-toastify";
 import BasicButton from "../../components/BasicButton";
- import login from "../../assets/images/login.png";
+import login from "../../assets/images/login.png";
 
 const Login = () => {
   const [passwordIcon, setPasswordIcon] = useState(false);
@@ -49,10 +48,15 @@ const Login = () => {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");
         console.log(response.error);
-       }
+      }
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    handleLogin();
   };
 
   return (
@@ -73,7 +77,7 @@ const Login = () => {
             className="img-fluid d-none d-md-none d-sm-none d-lg-flex d-xl-flex d-xxl-flex d-lg-block ml-10 mt-md-4 justify-content-center align-items-center"
             src={login}
             alt="Img"
-            style={{height:"600px",width:"900px"}}
+            style={{ height: "600px", width: "900px" }}
           />
         </Col>
 
@@ -84,7 +88,6 @@ const Login = () => {
           xl={6}
           className="d-flex flex-column justify-content-center align-items-center "
         >
-          {/* <img src={''} width={150} className="mb-3" alt="..." /> */}
           <Row className="shadow p-4  bg-body rounded d-flex flex-column justify-content-center align-items-center">
             <Col className="d-flex flex-column justify-content-center align-items-center">
               <h5>Login</h5>
@@ -107,101 +110,99 @@ const Login = () => {
                   handleSubmit,
                   isSubmitting,
                 }) => (
-                  <Form className="d-flex flex-column justify-content-center">
-                  <Col className="align-items-start">
-      <TextInput
-        htmlFor="email"
-        label={"Email"}
-        name="email"
-        type="email"
-        size="md"
-        id="email"
-        className={`form-control ${
-          touched.email && errors.email ? "is-invalid" : ""
-        }`}
-        onChange={(e) => {
-          setEmail(e.target.value.trim());
-          handleChange(e);
-        }}
-        onBlur={handleBlur}
-        validation={
-          touched.email && errors.email ? (
-            <p className="text-danger">{errors.email}</p>
-          ) : (
-            ""
-          )
-        }
-      />
-    </Col>
-                  <Row className="d-flex mt-2 flex-row justify align-items-center">
-                    <Col className="d-flex flex-row justify-end align-items-center">
-                      <Form.Label
-                        htmlFor="password*"
-                        className="d-flex flex-row justify-start"
-                      >
-                        Password<span className="text-danger">*</span>
-                      </Form.Label>
-                    </Col>
-                  </Row>
-                  <Row className="d-flex flex-row justify-between align-items-center">
-                    <Col className="d-flex flex-row justify-content-end align-items-center">
-                      <Form.Control
-                        name="loginPassword"
-                        type="password"
+                  <Form
+                    className="d-flex flex-column justify-content-center"
+                    onSubmit={handleFormSubmit}
+                  >
+                    <Col className="align-items-start">
+                      <TextInput
+                        htmlFor="email"
+                        label={"Email"}
+                        name="email"
+                        type="email"
                         size="md"
-                        id="password"
-                        className={`position-relative form-control ${
-                          touched.loginPassword && errors.loginPassword
-                            ? "border-danger"
-                            : ""
+                        id="email"
+                        placeholder="Enter your email"
+                        className={`form-control ${
+                          touched.email && errors.email ? "is-invalid" : ""
                         }`}
                         onChange={(e) => {
-                          setPassword(e.target.value.trim());
+                          setEmail(e.target.value.trim());
                           handleChange(e);
                         }}
                         onBlur={handleBlur}
+                        validation={
+                          touched.email && errors.email ? (
+                            <p className="text-danger">{errors.email}</p>
+                          ) : (
+                            ""
+                          )
+                        }
                       />
-                      <div
-                        className="position-absolute m-2 pointer"
-                        onClick={showPassword}
-                      >
-                        {password ? (
-                          <>
-                            {!passwordIcon ? (
-                              <AiOutlineEyeInvisible />
-                            ) : (
-                              <AiOutlineEye />
-                            )}
-                          </>
-                        ) : (
-                          ""
-                        )}
-                      </div>
                     </Col>
-                  </Row>
-                  {touched.loginPassword && errors.loginPassword ? (
-                    <p className="text-danger">{errors.loginPassword}</p>
-                  ) : (
-                    ""
-                  )}
+                    <Row className="d-flex mt-2 flex-row justify align-items-center">
+                      <Col className="d-flex flex-row justify-end align-items-center">
+                        <Form.Label
+                          htmlFor="password*"
+                          className="d-flex flex-row justify-start"
+                        >
+                          Password<span className="text-danger">*</span>
+                        </Form.Label>
+                      </Col>
+                    </Row>
+                    <Row className="d-flex flex-row justify-between align-items-center">
+                      <Col className="d-flex flex-row justify-content-end align-items-center">
+                        <Form.Control
+                          name="loginPassword"
+                          type="password"
+                          size="md"
+                          id="password"
+                          placeholder="Enter your password"
+                          className={`position-relative form-control ${
+                            touched.loginPassword && errors.loginPassword
+                              ? "border-danger"
+                              : ""
+                          }`}
+                          onChange={(e) => {
+                            setPassword(e.target.value.trim());
+                            handleChange(e);
+                          }}
+                          onBlur={handleBlur}
+                        />
+                        <div
+                          className="position-absolute m-2 pointer"
+                          onClick={showPassword}
+                        >
+                          {password ? (
+                            <>
+                              {!passwordIcon ? (
+                                <AiOutlineEyeInvisible />
+                              ) : (
+                                <AiOutlineEye />
+                              )}
+                            </>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </Col>
+                    </Row>
+                    {touched.loginPassword && errors.loginPassword ? (
+                      <p className="text-danger">{errors.loginPassword}</p>
+                    ) : (
+                      ""
+                    )}
 
-                  <BasicButton
-                    className="mt-3"
-                    variant={"warning"}
-                    type="button"
-                    disabled={isSubmitting}
-                    onClick={
-                      email === "" ||
-                      password === "" ||
-                      (touched.email && errors.email) ||
-                      (touched.loginPassword && errors.loginPassword)
-                        ? handleSubmit
-                        : handleLogin
-                    }
-                    isLoading={isLoading}
-                    label={"Login"}
-                  />
-                </Form>
+                    <BasicButton
+                      className="mt-3"
+                      variant={"warning"}
+                      type="submit"
+                      disabled={isSubmitting}
+                      onClick={handleLogin}
+                      isLoading={isLoading}
+                      label={"Login"}
+                    />
+                  </Form>
                 )}
               </Formik>
             </Col>

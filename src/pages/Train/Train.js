@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import DeleteModel from "../../components/DeleteModel";
 import { useGetTrainQuery, useDeleteTrainMutation } from "../../redux/features/api/TrainApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
+import { BsSearch, BsX } from "react-icons/bs";
 
 const Train = () => {
   const [deleteShow, setDeleteShow] = useState(false);
@@ -18,7 +19,9 @@ const Train = () => {
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: getTrainData, isLoading } = useGetTrainQuery({ page: currentPage, search: searchTerm });
+  const [itemsPerPage, setItemsPerPage] = useState();
+  const [searchInput, setSearchInput] = useState(""); 
+  const { data: getTrainData, isLoading ,refetch } = useGetTrainQuery({ page: currentPage, search: searchTerm });
   console.log(getTrainData);
   const navigate = useNavigate();
 
@@ -29,6 +32,7 @@ const Train = () => {
       setData(getTrainData.data);
       setTotalPages(getTrainData.pagination.totalPages);
       setCurrentPage(currentPage);
+      setItemsPerPage(getTrainData.pagination.itemsPerPage);
     }
   }, [getTrainData, currentPage]);
   
@@ -37,6 +41,16 @@ const Train = () => {
   const deleteHandleShow = (id) => {
     setIdToDelete(id);
     setDeleteShow(true);
+  };
+
+  const handleSearch = () => {
+    setSearchTerm(searchInput);
+    refetch({ page: currentPage, search: searchInput });
+  };
+
+  const handleClear = () => {
+    setSearchInput("");
+    setSearchTerm("");
   };
 
   const deleteTrain = async () => {
@@ -61,7 +75,7 @@ const Train = () => {
   const COLUMNS = [
     {
       Header: "ID",
-      accessor: (d, i) => i + 1,
+      accessor:"s_no",
     },
     {
       Header: "Train No",
@@ -105,14 +119,36 @@ const Train = () => {
             />
             <hr className="mt-3 bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2 "/>
           </Row>
-          <Row className="justify-content-center col-md-6 col-lg-3 mx-2 mt-4 mb-4">
-            <input 
-              type="text"
-              placeholder="Search Train..."
-              className="form-control"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            /></Row>
+          <Row className="d-flex  flex-lg-row flex-column flex-xxl-row flex-xl-row flex-sm-column flex-md-row">
+            <Col className="my-4 " xxl={3} xl={3} lg={3} sm={6} md={6}>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <BsSearch />
+                </span>
+                <input
+                  type="text"
+                  placeholder="Search UserList..."
+                  className="form-control"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+                {searchInput && (
+                  <span className="input-group-text" onClick={handleClear} >
+                    <BsX/>
+                  </span>
+                )}
+              </div>
+            </Col>
+            <Col  className="d-flex flex-column text-center my-4"
+            xxl={2}
+            xl={2}
+            lg={2}
+            sm={3}
+            md={3}>
+              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSearch} className="">Search</Button>
+            </Col>
+          </Row>
+
              <Row className="d-flex flex-column align-items-center justift-content-center">
             <BasicTable
               COLUMNS={COLUMNS}
@@ -120,6 +156,7 @@ const Train = () => {
               currentPage={currentPage}
               totalPages={totalPages}
               setCurrentPage={setCurrentPage}
+              itemsPerPage={itemsPerPage}
             />
           </Row>
         </Container>

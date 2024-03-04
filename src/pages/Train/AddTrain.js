@@ -290,7 +290,7 @@ const AddTrain = () => {
                       <TextInput
                         label="ट्रेन का नाम"
                         type=""
-                        name="hindhiTrainName"
+                        name="hindiTrainName"
                         className={`form-control ${
                           touched.hindiTrainName && errors.hindiTrainName ? "is-invalid" : ""
                         }`}

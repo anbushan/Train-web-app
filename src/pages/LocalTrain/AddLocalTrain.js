@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -26,7 +26,7 @@ const AddLocalTrain = () => {
   const [sClasses, setSClasses] = useState("");
   const [sRunsOn, setSRunsOn] = useState("");
   const [trainID, setTrainID] = useState("");
-  const [city, setCity] = useState("chennai"); // State to manage selected city
+  const [city, setCity] = useState("chennai"); 
   const [AddLocalTrainData, { isLoading }] = useAddLocalTrainMutation();
   const navigate = useNavigate();
 
@@ -34,6 +34,15 @@ const AddLocalTrain = () => {
     navigate("/admin/local-train");
   };
   console.log(city);
+
+  useEffect(() => {
+    setCurrentDate(); 
+  }, []); 
+
+  const setCurrentDate = () => {
+    const currentDate = new Date().toLocaleDateString('en-GB'); 
+    setUpdatedOn(currentDate); 
+  };
 
   const initialValues = {
     trainNo: "",
@@ -322,36 +331,35 @@ const AddLocalTrain = () => {
                       />
                     </Col>
                     <Col
-                      className="m-2"
-                      lg="12"
-                      xxl="12"
-                      xl="12"
-                      md="12"
-                      sm="12"
-                    >
-                      <TextInput
-                        label="UpdatedOn"
-                        type=""
-                        name="updatedOn"
-                        className={`form-control ${
-                          touched.updatedOn && errors.updatedOn
-                            ? "is-invalid"
-                            : ""
-                        }`}
-                        onChange={(e) => {
-                          setUpdatedOn(e.target.value);
-                          handleChange(e);
-                        }}
-                        onBlur={handleBlur}
-                        validation={
-                          touched.updatedOn && errors.updatedOn ? (
-                            <p className="text-danger">{errors.updatedOn}</p>
-                          ) : (
-                            ""
-                          )
-                        }
-                      />
-                    </Col>
+      className="m-2"
+      lg="12"
+      xxl="12"
+      xl="12"
+      md="12"
+      sm="12"
+    >
+      <TextInput
+        label="UpdatedOn"
+        type=""
+        name="updatedOn"
+        value={updatedOn}
+        className={`form-control ${
+          touched.updatedOn && errors.updatedOn ? "is-invalid" : ""
+        }`}
+        onChange={(e) => {
+          setUpdatedOn(e.target.value);
+          handleChange(e);
+        }}
+        onBlur={handleBlur}
+        validation={
+          touched.updatedOn && errors.updatedOn ? (
+            <p className="text-danger">{errors.updatedOn}</p>
+          ) : (
+            ""
+          )
+        }
+      />
+    </Col>
                     <Col
                       className="m-2"
                       lg="12"

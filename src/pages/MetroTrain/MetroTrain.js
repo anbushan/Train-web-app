@@ -5,11 +5,14 @@ import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import BasicTable from "../../components/TablePaginationComponent";
 import Header from "../../components/Header";
-import { useDeleteMetroTrainMutation, useGetChennaiMetroSearchQuery } from "../../redux/features/api/MetroTrainApi";
+import {
+  useDeleteMetroTrainMutation,
+  useGetChennaiMetroSearchQuery,
+} from "../../redux/features/api/MetroTrainApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
 import DeleteModel from "../../components/DeleteModel";
-
+import Select from "react-select";
 
 const Train = () => {
   const [data, setData] = useState([]);
@@ -17,9 +20,18 @@ const Train = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteShow, setDeleteShow] = useState(false);
   const [idToDelete, setIdToDelete] = useState("");
-  const [selectedCity, setSelectedCity] = useState("Chennai"); 
-  const [search, setSearch] = useState(""); // State variable for search query
-  const { data: getMetroTrainData, isLoading } = useGetChennaiMetroSearchQuery({ page: currentPage, city: selectedCity, search: search, id: idToDelete });
+  const [selectedCity, setSelectedCity] = useState({
+    value: "Chennai",
+    label: "Chennai",
+  });
+  const [search, setSearch] = useState("");
+  const [itemsPerPage, setItemsPerPage] = useState();
+  const { data: getMetroTrainData, isLoading } = useGetChennaiMetroSearchQuery({
+    page: currentPage,
+    city: selectedCity.value,
+    search: search,
+    id: idToDelete,
+  });
   const [deleteMetroTrain] = useDeleteMetroTrainMutation();
 
   const navigate = useNavigate();
@@ -31,14 +43,21 @@ const Train = () => {
       setData(getMetroTrainData.data);
       setTotalPages(getMetroTrainData.pagination.totalPages);
       setCurrentPage(currentPage);
+      setItemsPerPage(getMetroTrainData.pagination.itemsPerPage);
     }
   }, [getMetroTrainData, currentPage]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+    setSearch("");
+  }, [selectedCity]);
+
   console.log(getMetroTrainData);
 
-  const handleCityChange = (e) => {
-    setSelectedCity(e.target.value);
+  const handleCityChange = (selectedOption) => {
+    setSelectedCity(selectedOption);
   };
+
   const deleteHandleClose = () => {
     setDeleteShow(false);
   };
@@ -52,20 +71,19 @@ const Train = () => {
     setSearch(e.target.value);
   };
 
-
   const deleteMetro = async () => {
     try {
-      const response = await deleteMetroTrain({city:selectedCity, id:idToDelete});
+      const response = await deleteMetroTrain({
+        city: selectedCity,
+        id: idToDelete,
+      });
       console.log(idToDelete);
-      if (response?.data){
-       
+      if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
         console.log(response);
         setDeleteShow(false);
         setIdToDelete("");
-       
       } else {
-       
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");
         console.log(response.error);
@@ -79,7 +97,7 @@ const Train = () => {
   const COLUMNS = [
     {
       Header: "ID",
-      accessor: (d, i) => i + 1,
+      accessor: "s_no",
     },
     {
       Header: "Route",
@@ -90,68 +108,72 @@ const Train = () => {
       accessor: "day",
     },
     {
-        Header: "Source",
-        accessor: "source",
-      },
-      {
-        Header: "Destination",
-        accessor: "destination",
-      },
-      {
-        Header: "Via",
-        accessor: "via",
-      },
-      {
-        Header: "First Train",
-        accessor: "first_train",
-      },
-      {
-        Header: "Last Train",
-        accessor: "last_train",
-      },
-      {
-        Header: "Timing 1",
-        accessor: "timing1",
-      },
-      {
-        Header: "Timing1 Train Frequency",
-        accessor: "timing1_train_frequency",
-      },
-      {
-        Header: "Timing 2",
-        accessor: "timing2",
-      },
-      {
-        Header: "Timing2 Train Frequency",
-        accessor: "timing2_train_frequency",
-      },
-      {
-        Header: "Timing 3",
-        accessor: "timing3",
-      },
-      {
-        Header: "Timing3 Train Frequency",
-        accessor: "timing3_train_frequency",
-      },
-      {
-        Header: "Additional Data",
-        accessor: "additional_data",
-      },
-     
+      Header: "Source",
+      accessor: "source",
+    },
+    {
+      Header: "Destination",
+      accessor: "destination",
+    },
+    {
+      Header: "Via",
+      accessor: "via",
+    },
+    {
+      Header: "First Train",
+      accessor: "first_train",
+    },
+    {
+      Header: "Last Train",
+      accessor: "last_train",
+    },
+    {
+      Header: "Timing 1",
+      accessor: "timing1",
+    },
+    {
+      Header: "Timing1 Train Frequency",
+      accessor: "timing1_train_frequency",
+    },
+    {
+      Header: "Timing 2",
+      accessor: "timing2",
+    },
+    {
+      Header: "Timing2 Train Frequency",
+      accessor: "timing2_train_frequency",
+    },
+    {
+      Header: "Timing 3",
+      accessor: "timing3",
+    },
+    {
+      Header: "Timing3 Train Frequency",
+      accessor: "timing3_train_frequency",
+    },
+    {
+      Header: "Additional Data",
+      accessor: "additional_data",
+    },
+
     {
       Header: "ACTIONS",
       accessor: "action",
       Cell: (props) => {
         const rowIdx = props.row.original._id;
-       
+
         return (
           <div className="d-flex align-items-center justify-content-center flex-row">
-          <Link to={`/admin/edit-metrotrain/:${rowIdx}`}>
+            <Link to={`/admin/edit-metrotrain/:${rowIdx}`}>
               <Button variant="warning">
                 <FaEdit />
               </Button>
             </Link>
-            <Button variant="danger" className="m-1" onClick={() => deleteHandleShow(rowIdx)}>
+            <Button
+              variant="danger"
+              className="m-1"
+              onClick={() => deleteHandleShow(rowIdx)}
+            >
               <MdDelete />
             </Button>
           </div>
@@ -167,46 +189,50 @@ const Train = () => {
           <Row className="">
             <Header
               ONCLICK={handleNavigateAddForm}
-              HEADING= "Metro Train"
-              BUTTON_NAME= "Add Metro Train"
-            
+              HEADING="Metro Train"
+              BUTTON_NAME="Add Metro Train"
             />
             <hr className="mt-3" />
           </Row>
           <Row className="mb-3">
-    <Form onSubmit={""} className="d-flex flex-column flex-md-row align-items-md-center justify-content-start">
-      <Col xs={12} md={4} lg={3} className="m-2">
-      <Form.Group controlId="city">
-                <Form.Label className="fs-4">Select City:</Form.Label>
-                <Form.Control as="select" value={selectedCity} onChange={handleCityChange}>
-                  <option value="Chennai">Chennai</option>
-                  <option value="Mumbai">Mumbai</option>
-                  <option value="Kolkata">Kolkata</option>
-                  <option value="Pune">Pune</option>
-                  <option value="Delhi">Delhi</option>
-                  <option value="Ahmedabad">Ahmedabad</option>
-                  <option value="Jaipur">Jaipur</option>
-                  <option value="Nagpur">Nagpur</option>
-                  <option value="Noida">Noida</option>
-                  <option value="Bangalore">Bangalore</option>
-                </Form.Control>
-              </Form.Group>
-      </Col>
-      <Col xs={12} md={4} lg={3} className="m-2">
-                <Form.Group controlId="search">
-                  <Form.Label className="fs-4">Search:</Form.Label>
-                  <Form.Control type="text" value={search} onChange={handleSearchChange} placeholder=" search MetroTrain" />
+            <Form
+              onSubmit={(e) => e.preventDefault()}
+              className="d-flex flex-column flex-md-row align-items-md-center justify-content-start"
+            >
+              <Col xs={12} md={4} lg={3} className="m-2">
+                <Form.Group controlId="city">
+                  <Form.Label className="fs-4">Select City:</Form.Label>
+                  <Select
+                    value={selectedCity}
+                    onChange={handleCityChange}
+                    options={[
+                      { value: "Chennai", label: "Chennai" },
+                      { value: "Mumbai", label: "Mumbai" },
+                      { value: "Kolkata", label: "Kolkata" },
+                      { value: "Pune", label: "Pune" },
+                      { value: "Delhi", label: "Delhi" },
+                      { value: "Ahmedabad", label: "Ahmedabad" },
+                      { value: "Jaipur", label: "Jaipur" },
+                      { value: "Nagpur", label: "Nagpur" },
+                      { value: "Noida", label: "Noida" },
+                      { value: "Bangalore", label: "Bangalore" },
+                    ]}
+                  />
                 </Form.Group>
               </Col>
-    </Form>
-  </Row>
-
-
-
-
-
-
-
+              <Col xs={12} md={4} lg={3} className="m-2">
+                <Form.Group controlId="search">
+                  <Form.Label className="fs-4">Search:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={search}
+                    onChange={handleSearchChange}
+                    placeholder=" search MetroTrain"
+                  />
+                </Form.Group>
+              </Col>
+            </Form>
+          </Row>
 
           <Row className="">
             <BasicTable
@@ -215,6 +241,7 @@ const Train = () => {
               currentPage={currentPage}
               totalPages={totalPages}
               setCurrentPage={setCurrentPage}
+              itemsPerPage={itemsPerPage}
             />
           </Row>
         </Container>
@@ -225,7 +252,7 @@ const Train = () => {
         YES={deleteMetro}
         DELETESTATE={deleteShow}
         ONCLICK={deleteHandleClose}
-        DESCRIPTION= "Are you sure you want to delete this Train"
+        DESCRIPTION="Are you sure you want to delete this Train"
         DELETETITLE="Train"
       />
     </div>

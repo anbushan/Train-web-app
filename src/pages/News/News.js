@@ -20,6 +20,7 @@ const News = () => {
   const [idToDelete, setIdToDelete] = useState("");
   const [deleteShow, setDeleteShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState();
   const {
     data: newsTableData,
     isLoading: tableLoading,
@@ -32,6 +33,7 @@ const News = () => {
     if (newsTableData && newsTableData.data) {
       setData(newsTableData.data);
       setTotalPages(newsTableData.pagination.totalPages);
+      setItemsPerPage(newsTableData.pagination.itemsPerPage);
     }
   }, [newsTableData]);
 
@@ -102,7 +104,7 @@ const News = () => {
   const COLUMNS = [
     {
       Header: "ID",
-      accessor: (d, i) => i + 1,
+      accessor:"s_no",
     },
     {
       Header: "Category",
@@ -262,6 +264,8 @@ const News = () => {
                   currentPage={currentPage}
                   totalPages={totalPages}
                   setCurrentPage={setCurrentPage}
+                  itemsPerPage={itemsPerPage}
+                  
                 />
               </Col>
             </Row>

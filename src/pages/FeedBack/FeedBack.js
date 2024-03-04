@@ -15,6 +15,7 @@ const Feedback = () => {
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState();
   const { data: getFeedbackData, isLoading } = useGetFeedbackQuery(currentPage);
 
   useEffect(() => {
@@ -22,6 +23,7 @@ const Feedback = () => {
       setData(getFeedbackData.data);
       setTotalPages(getFeedbackData.pagination.totalPages);
       setCurrentPage(currentPage);
+      setItemsPerPage(getFeedbackData.pagination.itemsPerPage);
     }
   }, [getFeedbackData, currentPage]);
 
@@ -58,7 +60,7 @@ const Feedback = () => {
   const COLUMNS = [
     {
       Header: "ID",
-      accessor: (d, i) => i + 1,
+      accessor:"s_no",
     },
     {
       Header: "Phone Number",
@@ -110,6 +112,7 @@ const Feedback = () => {
               currentPage={currentPage}
               totalPages={totalPages}
               setCurrentPage={setCurrentPage}
+              itemsPerPage={itemsPerPage}
             />
           </Row>
         </Container>

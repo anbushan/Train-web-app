@@ -36,7 +36,7 @@ export const sidebarItems = [
   },
   {
     "id": 3,
-    "label": "Train",
+    "label": "Trains",
     "parent_id": null,
     "icon":<FaTrainSubway size={20}/>,
     "order_index": 3,

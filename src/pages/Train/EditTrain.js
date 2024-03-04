@@ -118,28 +118,31 @@ console.log(TrainData);
                       onClick={handleCancel}
                       label="Cancel"
                     />              
-                      <BasicButton
-                      className="m-1"
-                      label="Update"
+                     <BasicButton
+                      className="m-2 d-flex justify-content-start align-items-center text-light"
+                      variant={"warning"}
                       type="button"
-                      isLoading={isLoading}
-                      loaderVariant="info"
-                      disabled={
-                        isSubmitting ||
-                        !TrainNo ||
-                        !TrainName ||  
-                        !tamilTrainName ||
-                        !teluguTrainName ||  
-                        !kannadaTrainName ||
-                        !hindiTrainName ||                     
+                      disabled={isSubmitting}
+                      onClick={
+                        TrainNo === "" ||
+                        TrainName === "" ||
+                        tamilTrainName === "" ||
+                        teluguTrainName === "" ||
+                        kannadaTrainName === "" ||
+                        hindiTrainName === "" ||
+                       
                         (touched.TrainNo && errors.TrainNo) ||
                         (touched.TrainName && errors.TrainName) ||
                         (touched.tamilTrainName && errors.tamilTrainName) ||
                         (touched.teluguTrainName && errors.teluguTrainName) ||
                         (touched.kannadaTrainName && errors.kannadaTrainName) ||
-                        (touched.hindiTrainName && errors.hindiTrainName)                   
+                        (touched.hindiTrainName && errors.hindiTrainName) 
+                       
+                          ? handleSubmit
+                          : handleEditData
                       }
-                      onClick={handleSubmit}
+                      isLoading={isLoading}
+                      label={"Update"}
                     />
                             
                           </Col>  
@@ -430,29 +433,32 @@ console.log(TrainData);
                   </Col>
                   
                  <Col className="d-flex justify-content-end align-items-center">            
-                   <BasicButton
-                     className="m-1"
-                     label="Update"
-                     type="button"
-                     isLoading={isLoading}
-                     loaderVariant="info"
-                     disabled={
-                      isSubmitting ||
-                      !TrainNo ||
-                      !TrainName ||  
-                      !tamilTrainName ||
-                      !teluguTrainName ||  
-                      !kannadaTrainName ||
-                      !hindiTrainName ||                     
-                      (touched.TrainNo && errors.TrainNo) ||
-                      (touched.TrainName && errors.TrainName) ||
-                      (touched.tamilTrainName && errors.tamilTrainName) ||
-                      (touched.teluguTrainName && errors.teluguTrainName) ||
-                      (touched.kannadaTrainName && errors.kannadaTrainName) ||
-                      (touched.hindiTrainName && errors.hindiTrainName)                              
-                     }
-                     onClick={handleSubmit}
-                   />
+                 <BasicButton
+                      className="m-2 d-flex justify-content-start align-items-center text-light"
+                      variant={"warning"}
+                      type="button"
+                      disabled={isSubmitting}
+                      onClick={
+                        TrainNo === "" ||
+                        TrainName === "" ||
+                        tamilTrainName === "" ||
+                        teluguTrainName === "" ||
+                        kannadaTrainName === "" ||
+                        hindiTrainName === "" ||
+                       
+                        (touched.TrainNo && errors.TrainNo) ||
+                        (touched.TrainName && errors.TrainName) ||
+                        (touched.tamilTrainName && errors.tamilTrainName) ||
+                        (touched.teluguTrainName && errors.teluguTrainName) ||
+                        (touched.kannadaTrainName && errors.kannadaTrainName) ||
+                        (touched.hindiTrainName && errors.hindiTrainName) 
+                       
+                          ? handleSubmit
+                          : handleEditData
+                      }
+                      isLoading={isLoading}
+                      label={"Update"}
+                    />
                   </Col>
                 </Row>
               </Form>

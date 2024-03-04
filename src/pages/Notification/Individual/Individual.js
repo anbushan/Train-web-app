@@ -11,6 +11,7 @@ const IndividualNotification = () => {
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState();
   const { data: getIndividualNotificationData, isLoading } = useGetIndividualNotificationQuery(currentPage);
 
   useEffect(() => {
@@ -18,6 +19,7 @@ const IndividualNotification = () => {
       setData(getIndividualNotificationData.data);
       setTotalPages(getIndividualNotificationData.pagination.totalPages);
       setCurrentPage(currentPage);
+      setItemsPerPage(getIndividualNotificationData.pagination.itemsPerPage);
     }
   }, [getIndividualNotificationData, currentPage]);
 
@@ -26,7 +28,7 @@ const IndividualNotification = () => {
   const COLUMNS = [
     {
       Header: "ID",
-      accessor: (d, i) => i + 1,
+      accessor:"s_no",
       minWidth: 10,
     },
     {
@@ -65,6 +67,7 @@ const IndividualNotification = () => {
                 currentPage={currentPage}
                 totalPages={totalPages}
                 setCurrentPage={setCurrentPage}
+                itemsPerPage={itemsPerPage}
               />
             </Col>
           </Row>

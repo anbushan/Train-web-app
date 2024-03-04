@@ -1,25 +1,22 @@
 import React, { useState } from "react";
- import MainLogo from "../../assets/images/MainLogo.png";
+import MainLogo from "../../assets/images/MainLogo.png";
 import "./MainNav.css";
 import { Col, Container, Dropdown, Offcanvas, Row } from "react-bootstrap";
-
 import { AiOutlineMenu } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
-
 import { useNavigate } from "react-router-dom";
-
 import { sidebarItems } from "./SideMenu_Data";
 import ReactSidebar from "./ReactSidebar";
 import DeleteModel from "../../components/DeleteModel";
 
 const MainNav = () => {
   const [show, setShow] = useState(false);
-  const [logoutShow, setlogoutShow] = useState(false);
+  const [logoutShow, setLogoutShow] = useState(false);
   const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
   const handleNavigateAddForm = () => setShow(true);
-  const handleModelClose = () => setlogoutShow(false);
+  const handleModelClose = () => setLogoutShow(false);
   const handleLogin = () => {
     localStorage.clear();
     navigate("/");
@@ -86,7 +83,7 @@ const MainNav = () => {
 
               <Dropdown.Menu>
                 <Dropdown.Item></Dropdown.Item>{" "}
-                <Dropdown.Item onClick={() => setlogoutShow(true)}>
+                <Dropdown.Item onClick={() => setLogoutShow(true)}>
                   Logout
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -114,7 +111,7 @@ const MainNav = () => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => setlogoutShow(true)}>
+                  <Dropdown.Item onClick={() => setLogoutShow(true)}>
                     Logout
                   </Dropdown.Item>
                 </Dropdown.Menu>
@@ -124,9 +121,10 @@ const MainNav = () => {
         </Row>
       </Container>
 
-      <Row className="d-sm-flex d-lg-none d-xl-none d-xxl-none">
-        <Offcanvas scroll={true} show={show} onHide={handleClose}>
-          <Offcanvas.Header className="bg-mainColor" closeButton>
+      {/* Conditionally render Offcanvas for large screens */}
+      <Row className="d-none d-lg-flex d-xl-flex d-xxl-flex">
+        <Offcanvas scroll={false} show={show} onHide={handleClose}>
+          <Offcanvas.Header style={{ backgroundColor: "#db6300" }} closeButton>
             <Offcanvas.Title
               className="custom-title"
               style={{
@@ -138,16 +136,16 @@ const MainNav = () => {
                 width={50}
                 className="rounded-circle p-2"
                 alt="..."
-              ></img>
-              Train Info
+              />
+              Trains On Time
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body style={{ backgroundColor: "#313947" }}>
-            <ReactSidebar onClick={handleClose} sidebarItems={sidebarItems} /> 
-            
+            <ReactSidebar onClick={handleClose} sidebarItems={sidebarItems} />
           </Offcanvas.Body>
         </Offcanvas>
       </Row>
+
       <DeleteModel
         DELETESTATE={logoutShow}
         ONCLICK={handleModelClose}

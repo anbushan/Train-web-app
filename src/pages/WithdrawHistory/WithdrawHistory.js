@@ -11,6 +11,7 @@ const Withdrawhistory = () => {
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState();
   const { data: getWithdrawhistoryData, isLoading } = useGetWithdrawhistoryQuery(
     currentPage
   );
@@ -20,6 +21,7 @@ const Withdrawhistory = () => {
       setData(getWithdrawhistoryData.data);
       setTotalPages(getWithdrawhistoryData.pagination.totalPages);
       setCurrentPage(currentPage);
+      setItemsPerPage(getWithdrawhistoryData.pagination.itemsPerPage);
     }
   }, [getWithdrawhistoryData, currentPage]);
 
@@ -79,6 +81,7 @@ const Withdrawhistory = () => {
                 currentPage={currentPage}
                 totalPages={totalPages}
                 setCurrentPage={setCurrentPage}
+                itemsPerPage={itemsPerPage}
               />
             </Col>
           </Row>

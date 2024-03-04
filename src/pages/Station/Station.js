@@ -17,6 +17,7 @@ const Station = () => {
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState();
   const { data: getStationData, isLoading } = useGetStationQuery({ page: currentPage, search: searchTerm });
   console.log(getStationData);
   const[deleteStationApi] = useDeleteStationMutation();
@@ -29,6 +30,7 @@ const Station = () => {
       setData(getStationData.data);
       setTotalPages(getStationData.pagination.totalPages);
       setCurrentPage(getStationData.pagination.currentPage);
+      setItemsPerPage(getStationData.pagination.itemsPerPage);
     }
   }, [getStationData]);
 
@@ -58,7 +60,7 @@ const Station = () => {
   const COLUMNS = [
     {
       Header: "ID",
-      accessor: (d, i) => i + 1,
+      accessor:"s_no",
     },
     {
       Header: "Station Code",
@@ -132,6 +134,7 @@ const Station = () => {
                   currentPage={currentPage}
                   totalPages={totalPages}
                   setCurrentPage={setCurrentPage}
+                  itemsPerPage={itemsPerPage}
                 />
               </Col>
             </Row>

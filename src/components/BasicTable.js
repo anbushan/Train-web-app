@@ -13,7 +13,6 @@ import ReactPaginate from "react-paginate";
 import { IconContext } from "react-icons/lib";
 import "./FilterComponent.css";
 
-
 const BasicTable = (props) => {
   const columns = useMemo(() => props.COLUMNS, [props.COLUMNS]);
   const data = useMemo(() => props.MOCK_DATA || [], [props.MOCK_DATA]);
@@ -34,7 +33,7 @@ const BasicTable = (props) => {
     },
     useGlobalFilter,
     useSortBy,
-    usePagination,
+    usePagination
   );
 
   return (
@@ -62,15 +61,16 @@ const BasicTable = (props) => {
               style={{
                 outline: "none",
                 border: "none",
-                backgroundColor:"#db6300",
+                backgroundColor: "#db6300",
               }}
             >
-             Search
+              Search
             </Button>
           </Col>
         </Row>
         <Row>
-          <Table className="justify-content-center align-items-center"
+          <Table
+            className="justify-content-center align-items-center"
             striped
             bordered
             hover
@@ -79,33 +79,33 @@ const BasicTable = (props) => {
             style={{ width: "100%" }}
           >
             <thead>
-  {headerGroups.map((headerGroup) => (
-    <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-      {headerGroup.headers.map((column) => (
-        <th
-          {...column.getHeaderProps(column.getSortByToggleProps())}
-          key={column.id}
-          className="text-center text-dark" 
-          style={{
-            width: `${column.width}px`,
-            whiteSpace: "nowrap",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {column.render("Header") === "ACTIONS" ? (
-            <>{column.render("Header")}</>
-          ) : (
-            <>
-              {column.render("Header")}
-              <FaSort className="mx-2" />
-            </>
-          )}
-        </th>
-      ))}
-    </tr>
-  ))}
-</thead>
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
+                  {headerGroup.headers.map((column) => (
+                    <th
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                      key={column.id}
+                      className="text-center text-dark"
+                      style={{
+                        width: `${column.width}px`,
+                        whiteSpace: "nowrap",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      {column.render("Header") === "ACTIONS" ? (
+                        <>{column.render("Header")}</>
+                      ) : (
+                        <>
+                          {column.render("Header")}
+                          <FaSort className="mx-2" />
+                        </>
+                      )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
             <tbody {...getTableBodyProps()}>
               {page.length > 0 ? (
                 page.map((row) => {
@@ -147,12 +147,20 @@ const BasicTable = (props) => {
               page.length > 0 ? "d-flex" : "d-none"
             } flex-row justify-content-center align-items-center`}
           >
-            <span className="m-1 d-flex justify-content-start flex-noWrap align-items-center">
-              Page
-              <strong className="m-2">
-                {props.currentPage} of {props.totalPages}
-              </strong>{" "}
-            </span>
+            <Col className="d-flex justify-content-start align-items-center flex-wrap">
+              <span className="m-1">
+                Page{" "}
+                <strong className="m-2">
+                  {props.currentPage} of {props.totalPages}
+                </strong>
+              </span>
+              <Row>
+                <span className="m-1">
+                  Items per page{" "}
+                  <strong className="m-2">{props.itemsPerPage}</strong>
+                </span>
+              </Row>
+            </Col>
             <Col className="d-none d-sm-none d-md-none d-xxl-flex d-xl-flex d-lg-flex justify-content-end align-items-center">
               <ReactPaginate
                 breakLabel="..."
@@ -189,7 +197,7 @@ const BasicTable = (props) => {
             <Col className="d-flex d-sm-flex d-md-flex d-xxl-none d-xl-none d-lg-none justify-content-end align-items-center">
               <Button
                 // variant="warning"/
-                style={{backgroundColor:"#db6300",border:"none"}}
+                style={{ backgroundColor: "#db6300", border: "none" }}
                 onClick={() => props.setCurrentPage(props.currentPage - 1)}
                 disabled={props.currentPage === 1}
                 className="m-2"
@@ -198,7 +206,7 @@ const BasicTable = (props) => {
               </Button>
               <Button
                 // variant="warning"
-                style={{backgroundColor:"#db6300",border:"none"}}
+                style={{ backgroundColor: "#db6300", border: "none" }}
                 onClick={() => {
                   props.setCurrentPage(props.currentPage + 1);
                 }}

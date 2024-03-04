@@ -66,11 +66,11 @@ const ReactSidebar = ({ sidebarItems, onClick }) => {
           color: 'white',
           fontWeight: 'bolder',
           width: '100%',
-          height: '100%',
+          maxHeight: 'calc(100vh - 4rem)', // Adjusted maximum height
           borderColor: '#313947',
         }}
       >
-        <div style={{ overflowY: 'auto', height: '100%' }}>
+        <div style={{ height: '100%' }}>
           <Menu iconShape='circle'>{renderMenuItems(sidebarItems)}</Menu>
         </div>
       </Sidebar>

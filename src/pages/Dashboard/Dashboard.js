@@ -9,6 +9,7 @@ import metrotrain from "../../assets/images/metrotrain.png";
 import { useGetDashboardQuery } from "../../redux/features/api/DashboardApi";
 import Loader from "../Loader/Loader";
 import TableComponents from "../../components/TableComponent";
+import { Link } from "react-router-dom";
 
 
 const Dashboard = () => {
@@ -51,6 +52,10 @@ const Dashboard = () => {
       Header: "Referral Id",
       accessor: "referralId",
     },
+    {
+      Header: "Created At",
+      accessor: "createdAt",
+    },
   ];
 
   const COLUMNSS = [
@@ -91,6 +96,7 @@ const Dashboard = () => {
 
       <Row className="mt-5">
         <Col xs={12} md={6} lg={4} className="mb-3">
+        <Link to="/admin/user-list" className="link-unstyled">
           <Card className="p-3 rounded shadow">
             <div className="d-flex align-items-center">
               <img src={user} width={60} className="rounded-circle" alt="User" />
@@ -101,9 +107,11 @@ const Dashboard = () => {
               </div>
             </div>
           </Card>
+          </Link>
         </Col>
 
         <Col xs={12} md={6} lg={4} className="mb-3">
+        <Link to="/admin/feedback" className="link-unstyled">
           <Card className="p-3 rounded shadow">
             <div className="d-flex align-items-center">
               <img src={feedback} width={60} className="rounded-circle" alt="Feedback" />
@@ -114,9 +122,11 @@ const Dashboard = () => {
               </div>
             </div>
           </Card>
+          </Link>
         </Col>
 
         <Col xs={12} md={6} lg={4} className="mb-3">
+        <Link to="/admin/withdraw-request" className="link-unstyled">
           <Card className="p-3 rounded shadow">
             <div className="d-flex align-items-center">
               <img src={withdrawrequest} width={60} className="rounded-circle" alt="Withdraw Request" />
@@ -127,9 +137,11 @@ const Dashboard = () => {
               </div>
             </div>
           </Card>
+          </Link>
         </Col>
 
         <Col xs={12} md={6} lg={4} className="mb-3">
+        <Link to="/admin/train" className="link-unstyled">
           <Card className="p-3 rounded shadow">
             <div className="d-flex align-items-center">
               <img src={train} width={60} className="rounded-circle" alt="Withdraw Request" />
@@ -140,9 +152,11 @@ const Dashboard = () => {
               </div>
             </div>
           </Card>
+          </Link>
         </Col>
         
         <Col xs={12} md={6} lg={4} className="mb-3">
+        <Link to="/admin/station" className="link-unstyled">
           <Card className="p-3 rounded shadow">
             <div className="d-flex align-items-center">
               <img src={station} width={60} className="rounded-circle" alt="Withdraw Request" />
@@ -153,9 +167,11 @@ const Dashboard = () => {
               </div>
             </div>
           </Card>
+          </Link>
         </Col>
            
         <Col xs={12} md={6} lg={4} className="mb-3">
+        <Link to="/admin/metro-train" className="link-unstyled">
           <Card className="p-3 rounded shadow">
             <div className="d-flex align-items-center">
               <img src={metrotrain} width={60} className="rounded-circle" alt="Withdraw Request" />
@@ -166,13 +182,15 @@ const Dashboard = () => {
               </div>
             </div>
           </Card>
+          </Link>
         </Col>
+        
       </Row>
 
       <Row className="mt-3">
         <Col xs={12} md={6} lg={12} className="mb-3">
           <Card className="p-3 rounded shadow">
-            <h4 className="fs-4 mb-4 fw-bolder text-center">New User Join:</h4>
+            <h4 className="fs-4 mb-4 fw-bolder text-start">New User Join</h4>
             {users.length > 0 ? (
               <TableComponents COLUMNS={COLUMNS} MOCK_DATA={users} />
             ) : (
@@ -183,7 +201,7 @@ const Dashboard = () => {
 
         <Col xs={12} md={6} lg={12} className="mb-3">
           <Card className="p-3 rounded shadow">
-            <h4 className="fs-4 mb-4 fw-bolder text-center">New Withdraw Request:</h4>
+            <h4 className="fs-4 mb-4 fw-bolder text-start">New Withdraw Request</h4>
             {withdrawRequests.length > 0 ? (
               <TableComponents COLUMNS={COLUMNSS} MOCK_DATA={withdrawRequests} />
             ) : (
