@@ -112,11 +112,11 @@ export const sidebarItems = [
   },
   {
     "id": 10,
-    "label": "Withdraw history",
+    "label": "Transaction history",
     "parent_id": null,
     "icon":<MdOutlineWorkHistory  size={20}/>,
     "order_index": 7,
-    "url": "/admin/withdraw-history",
+    "url": "/admin/transaction-history",
   },
   {
     "id": 11,

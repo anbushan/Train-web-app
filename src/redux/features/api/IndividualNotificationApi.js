@@ -7,17 +7,23 @@ export const IndividualNotificationApi = createApi({
   tagTypes: ["INDIVIDUALNOTIFICATION"],
   endpoints: (build) => ({
     addIndividualNotification: build.mutation({
-      query:  ({ phoneNumber, title, body })=> ({
-        url: `/sendNotification/${phoneNumber}`,
-        method: "POST",
-        body: { title, body },
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-        },
-      }),
+      query: ({phoneNumber, title, body, image }) => {
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('body', body);
+        formData.append('image', image);
+    
+        return {
+          url: `/sendNotification/${phoneNumber}`,
+          method: "POST",
+          body: formData,
+          headers: {
+           
+          },
+        };
+      },
       invalidatesTags: ["INDIVIDUALNOTIFICATION"],
     }),
- 
 
     getIndividualNotification: build.query({
         query: (page) => ({

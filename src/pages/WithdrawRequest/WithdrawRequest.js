@@ -1,5 +1,3 @@
-// Withdrawrequest.js
-
 import React, { useState, useEffect } from "react";
 import { Button, Container, Row, Modal, Form, Col } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
@@ -35,11 +33,12 @@ const Withdrawrequest = () => {
   const [number, setNumber] = useState("");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [file, setFile] = useState(null); // State to store the selected file
   const [numberOptions, setNumberOptions] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
   const [itemsPerPage, setItemsPerPage] = useState();
-  const { data: getWithdrawrequestData, isLoading } = useGetWithdrawrequestQuery({ page: currentPage, search: searchTerm,id:id });
+  const { data: getWithdrawrequestData, isLoading } = useGetWithdrawrequestQuery({ page: currentPage, search: searchTerm,id:id});
   const { data: NumberData } = useGetNumberQuery();
 
   useEffect(() => {
@@ -128,20 +127,34 @@ const Withdrawrequest = () => {
         phoneNumber:number,
         title: title,
         body: body,
+        image:file,
       });
 
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
         navigate("/admin/withdraw-request");
         setSendRequestShow(false);
+        setNumber("")
+        setTitle("")
+        setBody("")
+        setFile("")
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");
         console.log(response.error);
+        setNumber("")
+        setTitle("")
+        setBody("")
+        setFile("")
       }
     } catch (error) {
       console.error(error);
     }
+  };
+
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]); 
   };
 
   const COLUMNS = [
@@ -319,6 +332,13 @@ const Withdrawrequest = () => {
                     placeholder="Enter Body"
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formBasicFile" className="mt-2">
+                  <Form.Label>Upload Image</Form.Label>
+                  <Form.Control
+                    type="file"
+                    onChange={handleFileChange}
                   />
                 </Form.Group>
               </Form>

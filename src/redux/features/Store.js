@@ -7,7 +7,7 @@ import { NotificationApi } from "./api/NotificationApi";
 import { DashboardApi } from "./api/DashboardApi";
 import { UserListApi } from "./api/UserListApi";
 import { WithdrawrequestApi } from "./api/WithdrawRequestApi";
-import { WithdrawhistoryApi } from "./api/WithdrawHistoryApi";
+import { TransactionhistoryApi} from "./api/TransactionHistoryApi";
 import { IssueApi } from "./api/IssueApi";
 import { FeedbackApi } from "./api/FeedBackApi";
 import { IndividualNotificationApi } from "./api/IndividualNotificationApi";
@@ -30,7 +30,7 @@ export const store = configureStore({
     [FeedbackApi.reducerPath]: FeedbackApi.reducer,
     [DashboardApi.reducerPath]: DashboardApi.reducer,
     [WithdrawrequestApi.reducerPath]: WithdrawrequestApi.reducer,
-    [WithdrawhistoryApi.reducerPath]: WithdrawhistoryApi.reducer,
+    [TransactionhistoryApi.reducerPath]: TransactionhistoryApi.reducer,
     [IssueApi.reducerPath]:IssueApi.reducer,
     [IndividualNotificationApi.reducerPath]:IndividualNotificationApi.reducer,
     [GroupNotificationApi.reducerPath]:GroupNotificationApi.reducer,
@@ -51,7 +51,7 @@ export const store = configureStore({
       FeedbackApi.middleware,
       DashboardApi.middleware,
       WithdrawrequestApi.middleware,
-      WithdrawhistoryApi.middleware,
+      TransactionhistoryApi.middleware,
       IssueApi.middleware,
       IndividualNotificationApi.middleware,
       GroupNotificationApi.middleware,

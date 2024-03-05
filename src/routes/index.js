@@ -122,10 +122,10 @@ export default function Router() {
               ),
             },
             {
-              path: "/admin/withdraw-history",
+              path: "/admin/transaction-history",
               element: (
                 <AuthGuard>
-                  <WithdrawHistory/>
+                  <TransactionHistory/>
                 </AuthGuard>
               ),
             },
@@ -271,6 +271,14 @@ export default function Router() {
                 </AuthGuard>
               ),
             },
+            {
+              path: "/admin/add-transaction",
+              element: (
+                <AuthGuard>
+                  <AddTransactionHistory/>
+                </AuthGuard>
+              ),
+            },
           ]
         },
       
@@ -314,7 +322,8 @@ const AddTrain = Loadable(lazy(()=>import("../pages/Train/AddTrain")));
 
 const EditTrain = Loadable(lazy(()=>import("../pages/Train/EditTrain")));
 
-const WithdrawHistory = Loadable(lazy(()=>import("../pages/WithdrawHistory/WithdrawHistory")));
+const TransactionHistory = Loadable(lazy(()=>import("../pages/TransactionHistory/TransactionHistory")));
+const AddTransactionHistory = Loadable(lazy(()=>import("../pages/TransactionHistory/AddTransactionHistory")));
 
 const WithdrawRequest = Loadable(lazy(()=>import("../pages/WithdrawRequest/WithdrawRequest")));
 

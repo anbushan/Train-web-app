@@ -94,7 +94,7 @@ const Dashboard = () => {
         </Col>
       </Row>
 
-      <Row className="mt-5">
+      <Row className="mt-5 flex-warp">
         <Col xs={12} md={6} lg={4} className="mb-3">
         <Link to="/admin/user-list" className="link-unstyled">
           <Card className="p-3 rounded shadow">

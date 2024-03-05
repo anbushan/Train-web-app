@@ -13,7 +13,7 @@ export const LoaclTrainSchema = Yup.object().shape({
     to:Yup.mixed().required("To Time must be Required..!"),
     arrival:Yup.mixed().required(" Arrival must be Required..!"),
     duration:Yup.mixed().required(" Duration must be Required..!"),
-    distance:Yup.mixed().required("Distance enter end date"),
+    distance:Yup.mixed().required("Distance must be Required..!"),
     speed: Yup.mixed().required("Speed In Time must be Required..!"),
     halts:Yup.mixed().required("Halts Time must be Required..!"),
     sClasses:Yup.mixed().required("SClasses Time must be Required..!"),

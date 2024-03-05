@@ -43,6 +43,14 @@ const IndividualNotification = () => {
       Header: "Body",
       accessor: "body",
     },
+    {
+      Header: "Image",
+      accessor: "image",
+      Cell: (props) => {
+        const imageUrl = props.value; 
+        return <img src={imageUrl} alt="img" style={{ maxWidth: '50px', maxHeight: '50px' }} />;
+      },
+    },
   ];
   
   return (

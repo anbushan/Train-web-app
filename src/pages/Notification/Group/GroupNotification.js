@@ -27,16 +27,18 @@ const Generalgroup = () => {
   const [addGroupNotification] = useAddGroupMutation();
   const { data: groupData, isLoading: groupLoading } = useGetGroupQuery(currentPage);
   const [deleteGroupApi] = useDeleteGroupMutation();
+  const [itemsPerPage, setItemsPerPage] = useState();
   const [show, setShow] = useState(false);
   const { data: phoneData, isLoading: numberLoading } = useGetNumberQuery();
   const [addGroupNotificationApi] = useAddGroupNotificationMutation();
 
-console.log(selectedphoneNumbers);
+  console.log(selectedphoneNumbers);
 
   useEffect(() => {
     if (groupData && groupData.data) {
       setData(groupData.data);
       setTotalPages(groupData.pagination.totalPages);
+      setItemsPerPage(groupData.pagination.itemsPerPage);
     }
   }, [groupData, currentPage]);
 
@@ -100,7 +102,7 @@ console.log(selectedphoneNumbers);
         phoneNumbers: selectedPhoneNumbers,
       });
      
-console.log(selectedPhoneNumbers);
+      console.log(selectedPhoneNumbers);
 
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
@@ -128,7 +130,7 @@ console.log(selectedPhoneNumbers);
   const COLUMNS = [
     {
       Header: "ID",
-      accessor: (d, i) => i + 1,
+      accessor:"s_no",
     },
     {
       Header: "Group Name",
@@ -182,14 +184,14 @@ console.log(selectedPhoneNumbers);
                     className="p-2 m-1"
                     onClick={() => setShowModal(true)}
                   >
-                    <IoIosSend size={20} /> Send Notification
+                    <IoIosSend size={20} /><span className="d-none d-md-inline"> Send Notification</span>
                   </Button>
                   <Button
                     style={{ backgroundColor: "#db6300", border: "none" }}
                     className="p-2 m-1"
                     onClick={handleShow}
                   >
-                    <FaPlus size={20} /> Add Group
+                    <FaPlus size={20} /><span className="d-none d-md-inline"> Add Group</span>
                   </Button>
                 </div>
               </Col>
@@ -203,6 +205,7 @@ console.log(selectedPhoneNumbers);
                   currentPage={currentPage}
                   totalPages={totalPages}
                   setCurrentPage={setCurrentPage}
+                  itemsPerPage={itemsPerPage}
                 />
               </Col>
             </Row>

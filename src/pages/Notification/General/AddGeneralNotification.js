@@ -36,11 +36,11 @@ const AddGeneralNotification = () => {
          
       });
       if (response?.data) {
+       
+        toast.success(response?.data?.message, { autoClose: 1000 });
         setTitle("");
         setBody("");
         setImage("");
-        toast.success(response?.data?.message, { autoClose: 1000 });
-        
         console.log(response.error.data);
         navigate("/admin/general");
       } else {
