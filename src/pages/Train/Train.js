@@ -85,6 +85,7 @@ const Train = () => {
       Header: "Train Name",
       accessor: "TrainName",
     },
+   
     {
       Header: "ACTIONS",
       accessor: "action",
@@ -120,14 +121,14 @@ const Train = () => {
             <hr className="mt-3 bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2 "/>
           </Row>
           <Row className="d-flex  flex-lg-row flex-column flex-xxl-row flex-xl-row flex-sm-column flex-md-row">
-            <Col className="my-4 " xxl={3} xl={3} lg={3} sm={6} md={6}>
+            <Col className="my-4 mx-2" xxl={3} xl={3} lg={3} sm={6} md={6}>
               <div className="input-group">
                 <span className="input-group-text">
                   <BsSearch />
                 </span>
                 <input
                   type="text"
-                  placeholder="Search UserList..."
+                  placeholder="Search Train..."
                   className="form-control"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}

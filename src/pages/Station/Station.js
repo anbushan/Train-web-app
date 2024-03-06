@@ -9,16 +9,18 @@ import DeleteModel from "../../components/DeleteModel";
 import { useGetStationQuery, useDeleteStationMutation } from "../../redux/features/api/StationApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
+import { BsSearch, BsX } from "react-icons/bs";
 
 const Station = () => {
   const [deleteShow, setDeleteShow] = useState(false);
   const [idToDelete, setIdToDelete] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchInput, setSearchInput] = useState(""); 
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState();
-  const { data: getStationData, isLoading } = useGetStationQuery({ page: currentPage, search: searchTerm });
+  const { data: getStationData, isLoading, refetch } = useGetStationQuery({ page: currentPage, search: searchTerm });
   console.log(getStationData);
   const[deleteStationApi] = useDeleteStationMutation();
   const navigate = useNavigate();
@@ -39,6 +41,16 @@ const Station = () => {
   const deleteHandleShow = (id) => {
     setIdToDelete(id);
     setDeleteShow(true);
+  };
+
+  const handleClear = () => {
+    setSearchInput("");
+    setSearchTerm("");
+  };
+
+  const handleSearch = () => {
+    setSearchTerm(searchInput);
+    refetch({ page: currentPage, search: searchInput });
   };
 
   const deleteStation = async () => {
@@ -111,14 +123,35 @@ const Station = () => {
             />
             <hr className="mt-3" />
           </Row>
-          <Row className="justify-content-center col-md-6 col-lg-3 mx-2 mt-4 mb-4">
-            <input 
-              type="text"
-              placeholder="Search Train..."
-              className="form-control"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            /></Row>
+          <Row className="d-flex  flex-lg-row flex-column flex-xxl-row flex-xl-row flex-sm-column flex-md-row">
+            <Col className="my-4 mx-2" xxl={3} xl={3} lg={3} sm={6} md={6}>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <BsSearch />
+                </span>
+                <input
+                  type="text"
+                  placeholder="Search Station..."
+                  className="form-control"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+                {searchInput && (
+                  <span className="input-group-text" onClick={handleClear}>
+                    <BsX />
+                  </span>
+                )}
+              </div>
+            </Col>
+            <Col  className="d-flex flex-column text-center my-4"
+            xxl={2}
+            xl={2}
+            lg={2}
+            sm={3}
+            md={3}>
+              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSearch} className="">Search</Button>
+            </Col>
+          </Row>
           <Row className="d-flex flex-column align-items-center justift-content-center">
               <Col
                 xs={12}

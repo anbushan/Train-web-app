@@ -1,14 +1,14 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import CustomFetchBase from "./CustomFetchBase";
 
-export const NotificationApi = createApi({
+export const GeneralNotificationApi = createApi({
   reducerPath: "NotificationApi",
   baseQuery: CustomFetchBase,
   tagTypes: ["NOTIFICATION"],
   endpoints: (build) => ({
     getNotification: build.query({
-      query: (page) => ({
-        url: `/admin/viewGeneralNotification?page=${page}`,
+      query: ({page,search}) => ({
+        url: `/admin/viewGeneralNotification?page=${page}&search=${search}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -51,4 +51,4 @@ export const NotificationApi = createApi({
 });
 
 export const { useGetNotificationQuery, useGetNotificationByIdQuery,useDeleteNotificationMutation,
-    useAddNotificationMutation} = NotificationApi;
+    useAddNotificationMutation} = GeneralNotificationApi;

@@ -7,7 +7,7 @@ import { NotificationSchema } from ".././../../pages/Notification/General/Genera
 import BasicButton from ".././../../components/BasicButton";
 import TextInput from ".././../../components/TextInput";
 
-import { useAddNotificationMutation } from ".././../../redux/features/api/NotificationApi";
+import { useAddNotificationMutation } from "../../../redux/features/api/GeneralNotificationApi";
 import { toast } from "react-toastify";
 
 const AddGeneralNotification = () => {
@@ -159,13 +159,13 @@ const AddGeneralNotification = () => {
                     <Col className="m-2" lg="6" xxl="6" xl="12" md="12" sm="12">
                       <TextInput
                         label="Image"
-                        type="file" // Change the type to file
+                        type="file" 
                         name="image"
                         className={`form-control ${
                           touched.image && errors.image ? "is-invalid" : ""
                         }`}
                         onChange={(e) => {
-                          setImage(e.target.files[0]); // Use e.target.files to get the selected file
+                          setImage(e.target.files[0]); 
                           handleChange(e);
                         }}
                         onBlur={handleBlur}
@@ -180,7 +180,7 @@ const AddGeneralNotification = () => {
                     </Col>
                   </Col>
                 </Row>
-                <Row className="d-sm-flex d-flex d-md-flex d-lg-none d-xxl-none d-xl-none flex-row justify-content-between align-items-center">
+                <Row className="d-sm-flex d-flex d-md-flex d-lg-none d-xxl-none d-xl-none flex-row justify-content-between align-items-center mt-3">
                   <Col className="d-flex justify-content-start align-items-center">
                     <BasicButton
                       className="m-1"

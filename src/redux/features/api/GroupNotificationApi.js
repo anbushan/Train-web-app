@@ -7,8 +7,8 @@ export const GroupNotificationApi = createApi({
   tagTypes: ["GROUPNOTIFICATION"],
   endpoints: (build) => ({
     getGroupNotification: build.query({
-      query: (page) => ({
-        url: `/admin/viewGroupNotifications?page=${page}`,
+      query: ({page,search}) => ({
+        url: `/admin/viewGroupNotifications?page=${page}&search=${search}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

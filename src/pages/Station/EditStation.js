@@ -802,7 +802,7 @@ console.log(editStation);
                     
                 </Row>
                 
-                     <Row className=" mt-3  d-sm-flex d-flex d-md-flex d-lg-none d-xxl-none d-xl-none flex-row justify-content-between align-items-center">  
+                     <Row className=" mt-3  d-sm-flex d-flex d-md-flex d-lg-none d-xxl-none d-xl-none flex-row justify-content-between align-items-center mt-3">  
                     <Col className="d-flex justify-content-start align-items-center">                 
                     <BasicButton
                       className="m-1"

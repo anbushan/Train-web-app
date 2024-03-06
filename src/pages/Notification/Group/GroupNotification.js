@@ -1,52 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Row, Modal, Form } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import BasicTable from "../../../components/BasicTable";
-import Loader from "../../../pages/loginForms/loader/Loader";
-import { useGetGroupQuery, useDeleteGroupMutation, useAddGroupMutation, useGetNumberQuery, useAddGroupNotificationMutation } from "../../../redux/features/api/GroupApi";
+import BasicTable from "../../../components/TablePaginationComponent";
+import Loader from "../../loginForms/loader/Loader";
+import { useGetGroupNotificationQuery, useDeleteGroupNotificationMutation } from "../../../redux/features/api/GroupNotificationApi";
 import { toast } from "react-toastify";
 import DeleteModel from "../../../components/DeleteModel";
-import { IoIosSend } from "react-icons/io";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import { FaPlus } from "react-icons/fa";
-import Select from 'react-select';
+import { MdOutlineStreetview } from "react-icons/md";
+import { BsSearch, BsX } from "react-icons/bs";
 
-const Generalgroup = () => {
+
+
+const GroupNotification = () => {
+  const navigate = useNavigate();
+ 
   const [data, setData] = useState([]);
-  const [groupname, setGroupname] = useState("");
-  const [selectedphoneNumbers, setSelectedphoneNumbers] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [idToDelete, setIdToDelete] = useState("");
   const [deleteShow, setDeleteShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [showModal, setShowModal] = useState(false);
-  const [groupName, setGroupName] = useState("");
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [addGroupNotification] = useAddGroupMutation();
-  const { data: groupData, isLoading: groupLoading } = useGetGroupQuery(currentPage);
-  const [deleteGroupApi] = useDeleteGroupMutation();
   const [itemsPerPage, setItemsPerPage] = useState();
-  const [show, setShow] = useState(false);
-  const { data: phoneData, isLoading: numberLoading } = useGetNumberQuery();
-  const [addGroupNotificationApi] = useAddGroupNotificationMutation();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchInput, setSearchInput] = useState(""); 
+  const { data: GroupNotificationData, isLoading ,refetch} = useGetGroupNotificationQuery({ page: currentPage, search: searchTerm });
+  const [deleteGroupNotificationApi] = useDeleteGroupNotificationMutation();
 
-  console.log(selectedphoneNumbers);
+ 
 
   useEffect(() => {
-    if (groupData && groupData.data) {
-      setData(groupData.data);
-      setTotalPages(groupData.pagination.totalPages);
-      setItemsPerPage(groupData.pagination.itemsPerPage);
+    if (GroupNotificationData && GroupNotificationData.data) {
+      setData(GroupNotificationData.data);
+      setTotalPages(GroupNotificationData.pagination.totalPages);
+      setCurrentPage(currentPage);
+      setItemsPerPage(GroupNotificationData.pagination.itemsPerPage);
     }
-  }, [groupData, currentPage]);
+  }, [GroupNotificationData, currentPage]);
 
-  const navigate = useNavigate();
-
-  const handleCancel = () => {
-    navigate("/admin/group");
-  };
+  const handleNavigateAddForm = () => navigate("/admin/group");
 
   const deleteHandleClose = () => setDeleteShow(false);
 
@@ -55,9 +46,20 @@ const Generalgroup = () => {
     setDeleteShow(true);
   };
 
-  const deleteGroup = async () => {
+  const handleClear = () => {
+    setSearchInput("");
+    setSearchTerm("");
+  };
+
+  const handleSearch = () => {
+    setSearchTerm(searchInput);
+    refetch({ page: currentPage, search: searchInput });
+  };
+
+
+  const deleteGroupNotification = async () => {
     try {
-      const response = await deleteGroupApi(idToDelete);
+      const response = await deleteGroupNotificationApi(idToDelete);
       setDeleteShow(false);
       setIdToDelete("");
       if (response?.data) {
@@ -70,63 +72,7 @@ const Generalgroup = () => {
     }
   };
 
-  const handleSendRequest = async () => {
-    try {
-      const response = await addGroupNotification({
-        groupName: groupName,
-        title: title,
-        body: body,
-      });
-
-      if (response?.data) {
-        toast.success(response?.data?.message, { autoClose: 1000 });
-        navigate("/admin/group-notification");
-        setGroupName("");
-        setTitle("");
-        setBody("");
-        setShowModal(false);
-      } else {
-        toast.error(response?.error?.data.error, { autoClose: 1000 });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const CreateGroup = async () => {
-    try {
-      const selectedPhoneNumbers = selectedphoneNumbers.map(phone => phone.value);
-      
-      const response = await addGroupNotificationApi({
-        groupname: groupname,
-        phoneNumbers: selectedPhoneNumbers,
-      });
-     
-      console.log(selectedPhoneNumbers);
-
-      if (response?.data) {
-        toast.success(response?.data?.message, { autoClose: 1000 });
-        setGroupname("");
-        setSelectedphoneNumbers([]);
-        handleClose();
-      } else {
-        toast.error(response?.error?.data.error, { autoClose: 1000 });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const NumberOptions = phoneData ? phoneData.data.map(phoneNumber => ({ value: phoneNumber, label: phoneNumber })) : [];
-  console.log(NumberOptions);
-
-  const handleEmailChange = (selectedOptions) => {
-    setSelectedphoneNumbers(selectedOptions);
-  };
-
+ 
   const COLUMNS = [
     {
       Header: "ID",
@@ -135,6 +81,16 @@ const Generalgroup = () => {
     {
       Header: "Group Name",
       accessor: "groupName",
+    },
+    {
+      Header: "Title",
+      accessor: "title",
+      width: "auto",
+      minWidth: 100,
+    },
+    {
+      Header: "Sub Title",
+      accessor: "body",
       width: "auto",
       minWidth: 100,
     },
@@ -146,12 +102,16 @@ const Generalgroup = () => {
       Cell: ({ row }) => {
         return (
           <ul>
-            {row.original.phoneNumbers.map((phoneNumber) => (
-              <li key={phoneNumber._id}>{phoneNumber.phoneNumber}</li>
+            {row.original.phoneNumbers.map((phoneNumber, index) => (
+              <li key={index}>{phoneNumber}</li>
             ))}
           </ul>
         );
       },
+    },
+    {
+      Header: "Created At",
+      accessor: "createdAt",
     },
     {
       Header: "ACTIONS",
@@ -164,39 +124,63 @@ const Generalgroup = () => {
             <Button variant="danger" className="m-1" onClick={() => deleteHandleShow(rowIdx)}>
               <MdDelete />
             </Button>
+           
           </div>
         );
       },
     },
   ];
-
+  
   return (
     <div>
-      {!groupLoading && !numberLoading ? (
+      {!isLoading ? (
         <>
           <Container fluid className="my-4">
             <Row>
-              <Col className="d-flex flex-row justify-content-between mt-1">
-                <h4 className="fw-bold " onClick={handleCancel}><AiOutlineArrowLeft /> Group</h4>
+            <Col className="d-flex flex-row justify-content-between mt-1">
+                <h4 className="fw-bold "> Group Notification</h4>
                 <div>
                   <Button
                     style={{ backgroundColor: "#db6300", border: "none" }}
                     className="p-2 m-1"
-                    onClick={() => setShowModal(true)}
+                    onClick={handleNavigateAddForm}
                   >
-                    <IoIosSend size={20} /><span className="d-none d-md-inline"> Send Notification</span>
-                  </Button>
-                  <Button
-                    style={{ backgroundColor: "#db6300", border: "none" }}
-                    className="p-2 m-1"
-                    onClick={handleShow}
-                  >
-                    <FaPlus size={20} /><span className="d-none d-md-inline"> Add Group</span>
+                    <MdOutlineStreetview size={20} /><span className="d-none d-md-inline"> View Group</span>
                   </Button>
                 </div>
               </Col>
             </Row>
             <hr className="bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2 " />
+
+            <Row className="d-flex  flex-lg-row flex-column flex-xxl-row flex-xl-row flex-sm-column flex-md-row">
+            <Col className="my-4 mx-2" xxl={3} xl={3} lg={3} sm={6} md={6}>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <BsSearch />
+                </span>
+                <input
+                  type="text"
+                  placeholder="Search notification..."
+                  className="form-control"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+                {searchInput && (
+                  <span className="input-group-text" onClick={handleClear}>
+                    <BsX />
+                  </span>
+                )}
+              </div>
+            </Col>
+            <Col  className="d-flex flex-column text-center my-4"
+            xxl={2}
+            xl={2}
+            lg={2}
+            sm={3}
+            md={3}>
+              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSearch} className="">Search</Button>
+            </Col>
+          </Row>
             <Row className="justify-content-center">
               <Col xs={12} lg={12} xl={12} xxl={12} md={12} className="table-responsive">
                 <BasicTable
@@ -213,92 +197,11 @@ const Generalgroup = () => {
           <DeleteModel
             DELETESTATE={deleteShow}
             ONCLICK={deleteHandleClose}
-            YES={deleteGroup}
-            DESCRIPTION="Confirm to Delete this group"
-            DELETETITLE="group"
+            YES={deleteGroupNotification}
+            DESCRIPTION="Confirm to Delete this Group Notification"
+            DELETETITLE="GroupNotification"
           />
-          <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-            <Modal.Header closeButton>
-              <Modal.Title>Send Notification</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form>
-                <Form.Group controlId="groupName">
-                  <Form.Label>Group Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter group name"
-                    value={groupName}
-                    onChange={(e) => setGroupName(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group controlId="title">
-                  <Form.Label>Title</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group controlId="body">
-                  <Form.Label>Body</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter body"
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
-                  />
-                </Form.Group>
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShowModal(false)}>
-                Cancel
-              </Button>
-              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSendRequest}>
-                Send
-              </Button>
-            </Modal.Footer>
-          </Modal>
-
-          <Modal show={show} onHide={handleClose} centered>
-            <Modal.Header closeButton>
-              <Modal.Title>Add Group</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form.Group controlId="groupname">
-                <Form.Label>Group Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter group name"
-                  value={groupname}
-                  onChange={(e) => setGroupname(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="emails">
-                <Form.Label className="mt-2">Phone Numbers</Form.Label>
-                <Select
-                  isMulti
-                  options={NumberOptions}
-                  value={selectedphoneNumbers}
-                  onChange={handleEmailChange}
-                />
-              </Form.Group>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Cancel
-              </Button>
-              <Button
-                style={{ backgroundColor: "#db6300", border: "none" }}
-                variant="primary"
-                onClick={CreateGroup}
-              >
-                Add Group
-              </Button>
-            </Modal.Footer>
-          </Modal>
+       
         </>
       ) : (
         <Loader />
@@ -307,4 +210,4 @@ const Generalgroup = () => {
   );
 };
 
-export default Generalgroup;
+export default GroupNotification;

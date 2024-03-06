@@ -39,7 +39,7 @@ const BasicTable = (props) => {
     <div>
       <Container fluid className="ml-xxl-n4 ml-xl-n4 ml-lg-n4">
         <Row>
-          <Table
+        <Table
             className="justify-content-center align-items-center"
             striped
             bordered
@@ -53,7 +53,7 @@ const BasicTable = (props) => {
                 <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
                   {headerGroup.headers.map((column) => (
                     <th
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                      {...column.getHeaderProps()}
                       key={column.id}
                       className="text-center text-dark"
                       style={{
@@ -66,10 +66,16 @@ const BasicTable = (props) => {
                       {column.render("Header") === "ACTIONS" ? (
                         <>{column.render("Header")}</>
                       ) : (
-                        <>
+                        <div
+                          onClick={(e) => {
+                            if (!e.target.classList.contains('fa-sort')) {
+                              column.toggleSortBy();
+                            }
+                          }}
+                        >
                           {column.render("Header")}
                           <FaSort className="mx-2" />
-                        </>
+                        </div>
                       )}
                     </th>
                   ))}

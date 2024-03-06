@@ -3,7 +3,6 @@ import UserReducer from "../features/userSlice";
 import { AuthApi } from "./api/AuthApi";
 import { TrainApi } from "./api/TrainApi";
 import { StationApi } from "./api/StationApi";
-import { NotificationApi } from "./api/NotificationApi";
 import { DashboardApi } from "./api/DashboardApi";
 import { UserListApi } from "./api/UserListApi";
 import { WithdrawrequestApi } from "./api/WithdrawRequestApi";
@@ -17,6 +16,7 @@ import { NewsApi } from "./api/NewsApi";
 import { LocalTrainApi } from "./api/LocalTrainApi";
 import { MetroTrainApi } from "./api/MetroTrainApi";
 import { SettingImageApi } from "./api/SettingPageApi";
+import { GeneralNotificationApi } from "./api/GeneralNotificationApi";
 
 
 export const store = configureStore({
@@ -26,7 +26,7 @@ export const store = configureStore({
     [UserListApi.reducerPath]: UserListApi.reducer,
     [TrainApi.reducerPath]: TrainApi.reducer,
     [StationApi.reducerPath]: StationApi.reducer,
-    [NotificationApi.reducerPath]: NotificationApi.reducer,
+    [GeneralNotificationApi.reducerPath]: GeneralNotificationApi.reducer,
     [FeedbackApi.reducerPath]: FeedbackApi.reducer,
     [DashboardApi.reducerPath]: DashboardApi.reducer,
     [WithdrawrequestApi.reducerPath]: WithdrawrequestApi.reducer,
@@ -47,7 +47,7 @@ export const store = configureStore({
       UserListApi.middleware,
       TrainApi.middleware,
       StationApi.middleware,
-      NotificationApi.middleware,
+      GeneralNotificationApi.middleware,
       FeedbackApi.middleware,
       DashboardApi.middleware,
       WithdrawrequestApi.middleware,

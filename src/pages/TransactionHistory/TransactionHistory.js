@@ -82,7 +82,7 @@ const Transactionhistory = () => {
     },
     {
       Header: " Amount",
-      accessor: "withdrawAmount",
+      accessor: "amount",
     },
     {
       Header: "Transaction Id",

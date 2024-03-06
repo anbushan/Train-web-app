@@ -24,7 +24,7 @@ const AddLocalTrain = () => {
   const [timing3, setTiming3] = useState("");
   const [timing3frequency, setTiming3frequency] = useState("");
   
-  const [city, setCity] = useState("chennai"); // State to manage selected city
+  const [city, setCity] = useState("chennai"); 
   const [AddMetroTrainData, { isLoading }] = useAddMetroTrainMutation();
   const navigate = useNavigate();
 
@@ -69,7 +69,7 @@ const AddLocalTrain = () => {
         timing3_train_frequency: timing3frequency,
       };
   
-      // Log the data to check the payload
+      
       console.log('Request Payload:', data);
   
       const response = await AddMetroTrainData({ data, city });
@@ -588,7 +588,7 @@ const AddLocalTrain = () => {
                    
                   </Col>
                 </Row>
-                <Row className="d-sm-flex d-flex d-md-flex d-lg-none d-xxl-none d-xl-none flex-row justify-content-between align-items-center">
+                <Row className="d-sm-flex d-flex d-md-flex d-lg-none d-xxl-none d-xl-none flex-row justify-content-between align-items-center mt-3">
                   <Col className="d-flex justify-content-start align-items-center">
                     <BasicButton
                       className="m-1"

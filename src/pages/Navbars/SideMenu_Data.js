@@ -98,7 +98,7 @@ export const sidebarItems = [
         "parent_id": null,
         "icon":<HiMiniUserGroup size={20}/>,
         "order_index": 3,
-        "url": "/admin/group"
+        "url": "/admin/group-notification"
       }
     ]
   },  

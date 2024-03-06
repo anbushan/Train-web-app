@@ -26,8 +26,8 @@ export const IndividualNotificationApi = createApi({
     }),
 
     getIndividualNotification: build.query({
-        query: (page) => ({
-          url: `/admin/viewIndiNotifications?page=${page}`,
+        query: ({page,search}) => ({
+          url: `/admin/viewIndiNotifications/${search}?page=${page}`,
           method: "GET",
           headers: {
             "Content-Type": "application/json; charset=UTF-8",

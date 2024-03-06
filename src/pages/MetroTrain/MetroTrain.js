@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
 import DeleteModel from "../../components/DeleteModel";
 import Select from "react-select";
+import { BsSearch, BsX } from "react-icons/bs";
 
 const Train = () => {
   const [data, setData] = useState([]);
@@ -74,7 +75,7 @@ const Train = () => {
   const deleteMetro = async () => {
     try {
       const response = await deleteMetroTrain({
-        city: selectedCity,
+        city: selectedCity.value,
         id: idToDelete,
       });
       console.log(idToDelete);
@@ -221,14 +222,27 @@ const Train = () => {
                 </Form.Group>
               </Col>
               <Col xs={12} md={4} lg={3} className="m-2">
-                <Form.Group controlId="search">
+              <Form.Group controlId="search" className="position-relative">
                   <Form.Label className="fs-4">Search:</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={search}
-                    onChange={handleSearchChange}
-                    placeholder=" search MetroTrain"
-                  />
+                  <div className="input-group">
+                    <span className="input-group-text">
+                      <BsSearch />
+                    </span>
+                    <Form.Control
+                      type="text"
+                      value={search}
+                      onChange={handleSearchChange}
+                      placeholder="Search MetroTrain"
+                    />
+                    {search && (
+                      <span
+                        className="input-group-text"
+                        onClick={() => setSearch("")}
+                      >
+                        <BsX style={{ cursor: "pointer" }} />
+                      </span>
+                    )}
+                  </div>
                 </Form.Group>
               </Col>
             </Form>

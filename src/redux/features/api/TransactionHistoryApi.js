@@ -17,6 +17,29 @@ export const TransactionhistoryApi = createApi({
       providesTags: ["TRANSACTIONHISTORY"],
     }),
 
+    addTransactionhistory: builder.mutation({
+      query: ({ phoneNumber, upiId, modeOfPayment, amount,transactionId,image }) => {
+        const formData = new FormData();
+        formData.append('phoneNumber', phoneNumber);
+        formData.append('upiId', upiId);
+        formData.append('modeOfPayment', modeOfPayment);
+        formData.append('amount', amount);
+        formData.append('transactionId', transactionId);
+        formData.append('image', image);
+    
+        return {
+          url: `/admin/addTransaction`,
+          method: "POST",
+          body: formData,
+          headers: {
+           
+          },
+        };
+      },
+      invalidatesTags: ["TRANSACTIONHISTORY"],
+    }),
+    
+
     deleteTransactionhistory: builder.mutation({
       query: (id) => ({
         url: `/admin/deleteTransaction/${id}`,
@@ -28,8 +51,10 @@ export const TransactionhistoryApi = createApi({
       invalidatesTags: ["TRANSACTIONHISTORY"],
     }),
 
+
+
   
   }),
 });
 
-export const { useGetTransactionhistoryQuery,useDeleteTransactionhistoryMutation} = TransactionhistoryApi;
+export const { useGetTransactionhistoryQuery,useDeleteTransactionhistoryMutation,useAddTransactionhistoryMutation} = TransactionhistoryApi;

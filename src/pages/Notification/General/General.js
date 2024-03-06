@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import BasicTable from ".././../../components/BasicTable";
+import BasicTable from ".././../../components/TablePaginationComponent";
 import Header from ".././../../components/Header";
 import Loader from ".././../../pages/loginForms/loader/Loader";
-import { useGetNotificationQuery, useDeleteNotificationMutation } from ".././../../redux/features/api/NotificationApi";
+import { useGetNotificationQuery, useDeleteNotificationMutation } from "../../../redux/features/api/GeneralNotificationApi";
 import { toast } from "react-toastify";
 import DeleteModel from ".././../../components/DeleteModel";
+import { BsSearch, BsX } from "react-icons/bs";
 
 const GeneralNotification = () => {
   const navigate = useNavigate();
@@ -17,7 +18,9 @@ const GeneralNotification = () => {
   const [deleteShow, setDeleteShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState();
-  const { data: NotificationData, isLoading } = useGetNotificationQuery(currentPage);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchInput, setSearchInput] = useState(""); 
+  const { data: NotificationData, isLoading ,refetch} = useGetNotificationQuery({ page: currentPage, search: searchTerm });
   const [deleteNotificationApi] = useDeleteNotificationMutation();
 
   useEffect(() => {
@@ -39,6 +42,17 @@ const GeneralNotification = () => {
     setIdToDelete(id);
     setDeleteShow(true);
   };
+
+  const handleClear = () => {
+    setSearchInput("");
+    setSearchTerm("");
+  };
+
+  const handleSearch = () => {
+    setSearchTerm(searchInput);
+    refetch({ page: currentPage, search: searchInput });
+  };
+
   const deleteNotification = async () => {
     try {
       const response = await deleteNotificationApi(idToDelete);
@@ -121,6 +135,35 @@ const GeneralNotification = () => {
               </Col>
             </Row>
             <hr className="bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2 " />
+          <Row className="d-flex  flex-lg-row flex-column flex-xxl-row flex-xl-row flex-sm-column flex-md-row">
+            <Col className="my-4 mx-2" xxl={3} xl={3} lg={3} sm={6} md={6}>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <BsSearch />
+                </span>
+                <input
+                  type="text"
+                  placeholder="Search notification..."
+                  className="form-control"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+                {searchInput && (
+                  <span className="input-group-text" onClick={handleClear}>
+                    <BsX />
+                  </span>
+                )}
+              </div>
+            </Col>
+            <Col  className="d-flex flex-column text-center my-4"
+            xxl={2}
+            xl={2}
+            lg={2}
+            sm={3}
+            md={3}>
+              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSearch} className="">Search</Button>
+            </Col>
+          </Row>
             <Row className="justify-content-center">
               <Col xs={12} lg={12} xl={12} xxl={12} md={12} className="table-responsive">
                 <BasicTable
