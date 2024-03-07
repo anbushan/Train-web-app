@@ -41,8 +41,9 @@ const AddGeneralNotification = () => {
         setTitle("");
         setBody("");
         setImage("");
-        console.log(response.error.data);
         navigate("/admin/general");
+        console.log(response.error.data);
+        
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");

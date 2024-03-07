@@ -43,7 +43,7 @@ const Login = () => {
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
         console.log(response);
-        history("/admin/Dashboard");
+        history("/admin/dashboard");
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");

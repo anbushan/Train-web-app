@@ -10,7 +10,9 @@ import axios from "axios";
 import Header from "../../components/Header";
 import DeleteModel from "../../components/DeleteModel";
 
+
 const Setting = () => {
+
   const [deleteShow, setDeleteShow] = useState(false);
   const [indexToDelete, setindexToDelete] = useState("");
   const { data: imageData, isLoading, isError } = useGetSettingImageQuery();
@@ -148,6 +150,8 @@ const Setting = () => {
         toast.success(response?.data?.message, { autoClose: 1000 });
         setCarouselImageFile(null);
         setCarouselModalOpen(false);
+        window.location.reload(); 
+       
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         setCarouselImageFile(null);

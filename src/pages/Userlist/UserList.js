@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
-import { BsSearch, BsX } from "react-icons/bs"; // Import icons
+import { BsSearch, BsX } from "react-icons/bs"; 
 import BasicTable from "../../components/TablePaginationComponent";
 import Header from "../../components/BasicHeader";
 import Loader from "../loginForms/loader/Loader";
