@@ -7,8 +7,8 @@ export const TransactionhistoryApi = createApi({
   tagTypes: ["TRANSACTIONHISTORY"],
   endpoints: (builder) => ({
     getTransactionhistory: builder.query({
-      query: (page) => ({
-        url: `/admin/viewTransactions?page=${page}`,
+      query: ({page,search}) => ({
+        url: `/admin/viewTransactions/${search}?page=${page}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

@@ -7,8 +7,8 @@ export const IssueApi = createApi({
   tagTypes: ["ISSUE"],
   endpoints: (build) => ({
     getIssue: build.query({
-      query: (page) => ({
-        url: `/admin/viewIssues?page=${page}`,
+      query: ({page,search}) => ({
+        url: `/admin/viewIssues/${search}?page=${page}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

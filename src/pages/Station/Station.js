@@ -91,6 +91,14 @@ const Station = () => {
       accessor: "state",
     },
     {
+      Header: "Created At",
+      accessor: "createdAt",
+    },
+    {
+      Header: "Updated At",
+      accessor: "updatedAt",
+    },
+    {
       Header: "ACTIONS",
       accessor: "action",
       Cell: (props) => {

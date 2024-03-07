@@ -6,8 +6,8 @@ export const WithdrawrequestApi = createApi({
   tagTypes: ["WITHDRAWREQUEST"],
   endpoints: (build) => ({
     getWithdrawrequest: build.query({
-      query: ({ page, search}) => ({
-        url: `/admin/viewWithdrawRequests?page=${page}&search=${search}`, 
+      query: ({ page,search}) => ({
+        url: `/admin/viewWithdrawRequests/${search}?page=${page}`, 
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

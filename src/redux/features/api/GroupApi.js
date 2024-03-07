@@ -7,8 +7,8 @@ export const GroupApi = createApi({
   tagTypes: ["GROUP"],
   endpoints: (build) => ({
     getGroup: build.query({
-      query: (page) => ({
-        url: `/admin/viewGroup?page=${page}`,
+      query: ({page,search}) => ({
+        url: `/admin/viewGroup?page=${page}&search=${search}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

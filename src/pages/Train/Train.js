@@ -85,6 +85,14 @@ const Train = () => {
       Header: "Train Name",
       accessor: "TrainName",
     },
+    {
+      Header: "Created At",
+      accessor: "createdAt",
+    },
+    {
+      Header: "Updated At",
+      accessor: "updatedAt",
+    },
    
     {
       Header: "ACTIONS",

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Button, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { MdDelete } from "react-icons/md";
-import BasicTable from "../../components/BasicTable";
+import BasicTable from "../../components/TablePaginationComponent";
 import BasicHeader from "../../components/BasicHeader";
 import DeleteModel from "../../components/DeleteModel";
 import { useGetFeedbackQuery, useDeleteFeedbackMutation } from "../../redux/features/api/FeedBackApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
+import { BsSearch, BsX } from "react-icons/bs";
 
 const Feedback = () => {
   const [deleteShow, setDeleteShow] = useState(false);
@@ -16,7 +17,9 @@ const Feedback = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState();
-  const { data: getFeedbackData, isLoading } = useGetFeedbackQuery(currentPage);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchInput, setSearchInput] = useState(""); 
+  const { data: getFeedbackData, isLoading ,refetch } = useGetFeedbackQuery({ page: currentPage, search: searchTerm });
 
   useEffect(() => {
     if (getFeedbackData && getFeedbackData.data) {
@@ -34,6 +37,16 @@ const Feedback = () => {
   const deleteHandleShow = (id) => {
     setIdToDelete(id);
     setDeleteShow(true);
+  };
+
+  const handleClear = () => {
+    setSearchInput("");
+    setSearchTerm("");
+  };
+
+  const handleSearch = () => {
+    setSearchTerm(searchInput);
+    refetch({ page: currentPage, search: searchInput });
   };
 
   const deleteFeedback = async () => {
@@ -102,8 +115,34 @@ const Feedback = () => {
             <BasicHeader HEADING="Feedback" />
             <hr className="mt-3" />
           </Row>
-          <Row>
-            {/* Add filter component here */}
+          <Row className="d-flex  flex-lg-row flex-column flex-xxl-row flex-xl-row flex-sm-column flex-md-row">
+            <Col className="my-4 mx-2" xxl={3} xl={3} lg={3} sm={6} md={6}>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <BsSearch />
+                </span>
+                <input
+                  type="text"
+                  placeholder="Search Feedback..."
+                  className="form-control"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+                {searchInput && (
+                  <span className="input-group-text" onClick={handleClear}>
+                    <BsX />
+                  </span>
+                )}
+              </div>
+            </Col>
+            <Col  className="d-flex flex-column text-center my-4"
+            xxl={2}
+            xl={2}
+            lg={2}
+            sm={3}
+            md={3}>
+              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSearch} className="">Search</Button>
+            </Col>
           </Row>
           <Row>
             <BasicTable

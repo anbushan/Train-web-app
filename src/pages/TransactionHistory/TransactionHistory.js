@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import BasicTable from "../../components/BasicTable";
+import BasicTable from "../../components/TablePaginationComponent";
 import Loader from "../loginForms/loader/Loader";
 import { useGetTransactionhistoryQuery,useDeleteTransactionhistoryMutation } from "../../redux/features/api/TransactionHistoryApi";
 import { toast } from "react-toastify";
 import DeleteModel from "../../components/DeleteModel";
 import { MdDelete } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
+import { BsSearch, BsX } from "react-icons/bs";
 
 
 const Transactionhistory = () => {
@@ -18,10 +19,10 @@ const Transactionhistory = () => {
   const [itemsPerPage, setItemsPerPage] = useState();
   const [deleteShow, setDeleteShow] = useState(false);
   const [idToDelete, setIdToDelete] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchInput, setSearchInput] = useState(""); 
   const [deleteTransactionhistoryApi] = useDeleteTransactionhistoryMutation();
-  const { data: getTransactionhistoryData, isLoading } = useGetTransactionhistoryQuery(
-    currentPage
-  );
+  const { data: getTransactionhistoryData, isLoading ,refetch} = useGetTransactionhistoryQuery({ page: currentPage, search: searchTerm });
 
   useEffect(() => {
     if (getTransactionhistoryData && getTransactionhistoryData.data) {
@@ -41,6 +42,16 @@ const Transactionhistory = () => {
     setDeleteShow(true);
   };
 
+
+  const handleClear = () => {
+    setSearchInput("");
+    setSearchTerm("");
+  };
+
+  const handleSearch = () => {
+    setSearchTerm(searchInput);
+    refetch({ page: currentPage, search: searchInput });
+  };
 
   const Transactionhistory = async () => {
     try {
@@ -136,6 +147,35 @@ const Transactionhistory = () => {
               </Col>
           </Row>
           <hr className="bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2" />
+          <Row className="d-flex  flex-lg-row flex-column flex-xxl-row flex-xl-row flex-sm-column flex-md-row">
+            <Col className="my-4 mx-2" xxl={3} xl={3} lg={3} sm={6} md={6}>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <BsSearch />
+                </span>
+                <input
+                  type="text"
+                  placeholder="Search history..."
+                  className="form-control"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+                {searchInput && (
+                  <span className="input-group-text" onClick={handleClear}>
+                    <BsX />
+                  </span>
+                )}
+              </div>
+            </Col>
+            <Col  className="d-flex flex-column text-center my-4"
+            xxl={2}
+            xl={2}
+            lg={2}
+            sm={3}
+            md={3}>
+              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSearch} className="">Search</Button>
+            </Col>
+          </Row>
           <Row className="justify-content-center">
             <Col xs={12} lg={12} xl={12} xxl={12} md={12} className="table-responsive">
               <BasicTable
