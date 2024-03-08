@@ -57,6 +57,12 @@ const GroupNotification = () => {
   };
 
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+  
   const deleteGroupNotification = async () => {
     try {
       const response = await deleteGroupNotificationApi(idToDelete);
@@ -110,8 +116,16 @@ const GroupNotification = () => {
       },
     },
     {
-      Header: "Created At",
-      accessor: "createdAt",
+      Header: "Created Date",
+      accessor: "createdAt.date",
+      width: "auto",
+      minWidth: 100,
+    },
+    {
+      Header: "Created Time",
+      accessor: "createdAt.time",
+      width: "auto",
+      minWidth: 100,
     },
     {
       Header: "ACTIONS",
@@ -164,6 +178,7 @@ const GroupNotification = () => {
                   className="form-control"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
+                  onKeyPress={handleKeyPress}
                 />
                 {searchInput && (
                   <span className="input-group-text" onClick={handleClear}>

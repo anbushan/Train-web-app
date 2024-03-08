@@ -49,6 +49,12 @@ const Feedback = () => {
     refetch({ page: currentPage, search: searchInput });
   };
 
+  
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
   const deleteFeedback = async () => {
     try {
       const response = await deleteFeedbackApi(idToDelete);
@@ -127,6 +133,7 @@ const Feedback = () => {
                   className="form-control"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
+                  onKeyPress={handleKeyPress}
                 />
                 {searchInput && (
                   <span className="input-group-text" onClick={handleClear}>

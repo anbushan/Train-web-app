@@ -61,19 +61,19 @@ const News = () => {
 
   const handleSubmit = async () => {
     if (!lang && !category) {
-      toast.error("Please select both language and category .", {
+      toast.error("Please select both language and category.", {
         autoClose: 2000,
       });
       return;
     }
 
     if (!lang) {
-      toast.error("Please select a language .", { autoClose: 2000 });
+      toast.error("Please select a language.", { autoClose: 2000 });
       return;
     }
 
     if (!category) {
-      toast.error("Please select a category .", { autoClose: 2000 });
+      toast.error("Please select a category.", { autoClose: 2000 });
       return;
     }
 
@@ -91,6 +91,7 @@ const News = () => {
         toast.success(response?.data?.message, { autoClose: 1000 });
         setLang("");
         setCategory("");
+        window.location.reload(); 
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         setLang("");
@@ -101,10 +102,22 @@ const News = () => {
     }
   };
 
+  const handleFormSubmit = async (e) => {
+    e.preventDefault(); 
+    await handleSubmit();
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSubmit(); 
+    }
+  };
+
   const COLUMNS = [
     {
       Header: "ID",
-      accessor:"s_no",
+      accessor: "s_no",
     },
     {
       Header: "Category",
@@ -167,7 +180,7 @@ const News = () => {
             <hr className="bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2" />
             <Row className="mb-3">
               <Col>
-                <Form>
+              <Form onSubmit={handleFormSubmit} onKeyPress={handleKeyPress}>
                   <Row className="mb-4 mt-4">
                     <Col xs={12} md={4} lg={3}>
                       <Form.Group controlId="language">
@@ -228,8 +241,7 @@ const News = () => {
                           marginTop: "30px",
                           position: "relative",
                         }}
-                        type="button"
-                        onClick={handleSubmit}
+                        type="submit"
                         disabled={refreshLoading}
                       >
                         <MdRefresh
@@ -248,7 +260,7 @@ const News = () => {
                 </Form>
               </Col>
             </Row>
-          
+
             <Row className="justify-content-center">
               <Col
                 xs={12}
@@ -265,7 +277,6 @@ const News = () => {
                   totalPages={totalPages}
                   setCurrentPage={setCurrentPage}
                   itemsPerPage={itemsPerPage}
-                  
                 />
               </Col>
             </Row>

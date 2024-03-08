@@ -52,6 +52,12 @@ const GeneralNotification = () => {
     setSearchTerm(searchInput);
     refetch({ page: currentPage, search: searchInput });
   };
+  
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   const deleteNotification = async () => {
     try {
@@ -97,8 +103,14 @@ const GeneralNotification = () => {
       },
     },
     {
-      Header: "Created At",
-      accessor: "createdAt",
+      Header: "Created Date",
+      accessor: "createdAt.date",
+      width: "auto",
+      minWidth: 100,
+    },
+    {
+      Header: "Created Time",
+      accessor: "createdAt.time",
       width: "auto",
       minWidth: 100,
     },
@@ -147,6 +159,7 @@ const GeneralNotification = () => {
                   className="form-control"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
+                  onKeyPress={handleKeyPress}
                 />
                 {searchInput && (
                   <span className="input-group-text" onClick={handleClear}>

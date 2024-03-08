@@ -50,6 +50,11 @@ const Issue = () => {
     refetch({ page: currentPage, search: searchInput });
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   const deleteIssue = async () => {
     try {
@@ -83,6 +88,10 @@ const Issue = () => {
     {
       Header: "Image",
       accessor: "image",
+      Cell: (props) => {
+        const imageUrl = props.value; 
+        return <img src={imageUrl} alt="img" style={{ maxWidth: '50px', maxHeight: '50px' }} />;
+      },
     },
     {
       Header: "Comments",
@@ -141,6 +150,7 @@ const Issue = () => {
                   className="form-control"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
+                  onKeyPress={handleKeyPress}
                 />
                 {searchInput && (
                   <span className="input-group-text" onClick={handleClear}>

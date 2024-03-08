@@ -10,12 +10,15 @@ import {
   useDeleteWithdrawrequestMutation,
   useEditWithdrawrequestMutation,
   useGetNumberQuery,
+  useGetFilterQuery,
+  useAddFilterMutation 
 } from "../../redux/features/api/WithdrawRequestApi";
 import { useAddIndividualNotificationMutation } from "../../redux/features/api/IndividualNotificationApi";
 import { toast } from "react-toastify";
 import Loader from "../../pages/loginForms/loader/Loader";
 import { useParams, useNavigate } from "react-router-dom";
 import { BsSearch, BsX } from "react-icons/bs";
+import Select from 'react-select';
 
 const Withdrawrequest = () => {
   const [editShow, setEditShow] = useState(false);
@@ -38,13 +41,18 @@ const Withdrawrequest = () => {
   const [body, setBody] = useState("");
   const [file, setFile] = useState(null); 
   const [numberOptions, setNumberOptions] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState(null);
+  const [filterOptions, setFilterOptions] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
   const [itemsPerPage, setItemsPerPage] = useState();
   const { data: getWithdrawrequestData, isLoading ,refetch} = useGetWithdrawrequestQuery({ page: currentPage, search: searchTerm,id:id});
   const { data: NumberData } = useGetNumberQuery();
+  const { data: filterData } = useGetFilterQuery();
+  const [addFilter] = useAddFilterMutation(); 
 
   useEffect(() => {
+   
     if (getWithdrawrequestData && getWithdrawrequestData.data) {
       setData(getWithdrawrequestData.data);
       setTotalPages(getWithdrawrequestData.pagination.totalPages);
@@ -58,6 +66,37 @@ const Withdrawrequest = () => {
     }
   }, [NumberData]);
 
+  useEffect(() => {
+    if (filterData && filterData.data) {
+      const options = filterData.data.map(option => ({
+        value: option, 
+        label: option, 
+      }));
+      setFilterOptions(options);
+    }
+  }, [filterData]);
+  
+
+  const handleFilterChange = async (selectedOption) => {
+    try {
+      setSelectedFilter(selectedOption);
+      console.log("Selected Option:", selectedOption);
+  
+      // Make API call to add filter
+      const response = await addFilter({ status: selectedOption.value });
+      console.log("API Response:", response);
+  
+      if (response?.data) {
+        setData(response.data.data);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  
+
+  
+
   const handleCancel = () => {
     navigate("/admin/withdraw-request");
   };
@@ -69,6 +108,13 @@ const Withdrawrequest = () => {
   const deleteHandleShow = (id) => {
     setIdToDelete(id);
     setDeleteShow(true);
+  };
+
+  
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   const deleteWithdrawrequest = async () => {
@@ -227,50 +273,61 @@ const Withdrawrequest = () => {
     <div>
       {!isLoading ? (
         <>
-          <Container fluid className="mt-3">
-            <Row>
-              <Col className="d-flex flex-row justify-content-between mt-1">
-                <h4 className="fw-bold" onClick={handleCancel}>
-                  Withdraw Request
-                </h4>
-                <Button
-                  style={{ backgroundColor: "#db6300", border: "none" }}
-                  className="p-2"
-                  onClick={() => setSendRequestShow(true)}
-                >
-                  <IoIosSend size={20} /> Individual Notification
-                </Button>
-              </Col>
-            </Row>
-            <hr className="mt-3 bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2 "/>
-            <Row className="d-flex  flex-lg-row flex-column flex-xxl-row flex-xl-row flex-sm-column flex-md-row">
-            <Col className="my-4 mx-2" xxl={3} xl={3} lg={3} sm={6} md={6}>
-              <div className="input-group">
-                <span className="input-group-text">
-                  <BsSearch />
-                </span>
-                <input
-                  type="text"
-                  placeholder="Search Station..."
-                  className="form-control"
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
+               <Container fluid className="mt-3">
+        <Row>
+          <Col className="d-flex flex-row justify-content-between mt-1">
+            <h4 className="fw-bold" onClick={handleCancel}>
+              Withdraw Request
+            </h4>
+            <Button
+              style={{ backgroundColor: "#db6300", border: "none" }}
+              className="p-2"
+              onClick={() => setSendRequestShow(true)}
+            >
+              <IoIosSend size={20} /><span className="d-none d-md-inline"> Individual Notification</span>
+            </Button>
+          </Col>
+        </Row>
+        <hr className="mt-3 bg-primary ml-xxl-n2 ml-xl-n2 ml-lg-n2 "/>
+        <Row className="d-flex  flex-lg-row flex-column flex-xxl-row flex-xl-row flex-sm-column flex-md-row">
+          
+          <Col className="my-4 mx-2" xxl={3} xl={3} lg={3} sm={6} md={6}>
+          <Select
+                  options={filterOptions}
+                  value={selectedFilter}
+                  onChange={handleFilterChange}
+                  placeholder="Select Filter"
                 />
-                {searchInput && (
-                  <span className="input-group-text" onClick={handleClear}>
-                    <BsX />
-                  </span>
-                )}
-              </div>
-            </Col>
-            <Col  className="d-flex flex-column text-center my-4"
+          </Col>
+          <Col className="my-4 mx-2" xxl={3} xl={3} lg={3} sm={6} md={6}>
+            <div className="input-group">
+              <span className="input-group-text">
+                <BsSearch />
+              </span>
+              <input
+                type="text"
+                placeholder="Search Station..."
+                className="form-control"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+              />
+              {searchInput && (
+                <span className="input-group-text" onClick={handleClear}>
+                  <BsX />
+                </span>
+              )}
+            </div>
+          </Col>
+          <Col  className="d-flex flex-column text-center my-4"
             xxl={2}
             xl={2}
             lg={2}
             sm={3}
             md={3}>
-              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSearch} className="">Search</Button>
-            </Col>
+            <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSearch} className="">Search</Button>
+          </Col>
+
           </Row>
             <Row>
               <BasicTable

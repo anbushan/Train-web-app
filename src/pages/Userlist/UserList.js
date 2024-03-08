@@ -26,7 +26,6 @@ const UserList = () => {
 
     }
   }, [getUserlistData, currentPage]);
-console.log(itemsPerPage);
 
   const handleSearch = () => {
     setSearchTerm(searchInput);
@@ -36,6 +35,12 @@ console.log(itemsPerPage);
   const handleClear = () => {
     setSearchInput("");
     setSearchTerm("");
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   const COLUMNS = [
@@ -83,6 +88,7 @@ console.log(itemsPerPage);
                   className="form-control"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
+                  onKeyPress={handleKeyPress} 
                 />
                 {searchInput && (
                   <span className="input-group-text" onClick={handleClear}>

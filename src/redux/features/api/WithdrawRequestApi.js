@@ -25,7 +25,30 @@ export const WithdrawrequestApi = createApi({
         },
       }),
       providesTags: ["WITHDRAWREQUEST"],
-    }),     
+    }),    
+    
+    getFilter: build.query({
+      query: () => ({
+        url: `/admin/filterCategory`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }),
+      providesTags: ["WITHDRAWREQUEST"],
+    }),  
+
+    addFilter: build.mutation({
+      query: (data) => ({
+        url: `/admin/filterResult`,
+        method: "POST",
+        body: data,
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }),
+      invalidatesTags: ["WITHDRAWREQUEST"],
+    }),
 
     editWithdrawrequest: build.mutation({
       query: ({ id, data }) => ({
@@ -51,5 +74,6 @@ export const WithdrawrequestApi = createApi({
   }),
 });
 
-export const { useGetWithdrawrequestQuery, useGetNumberQuery,useDeleteWithdrawrequestMutation,useEditWithdrawrequestMutation
+export const { useGetWithdrawrequestQuery, useGetNumberQuery,useGetFilterQuery
+  ,useDeleteWithdrawrequestMutation,useEditWithdrawrequestMutation,useAddFilterMutation
 } = WithdrawrequestApi;

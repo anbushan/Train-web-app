@@ -53,6 +53,12 @@ const Train = () => {
     setSearchTerm("");
   };
 
+  
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
   const deleteTrain = async () => {
     try {
       const response = await deleteTrainApi(idToDelete);
@@ -140,6 +146,7 @@ const Train = () => {
                   className="form-control"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
+                  onKeyPress={handleKeyPress} 
                 />
                 {searchInput && (
                   <span className="input-group-text" onClick={handleClear} >
@@ -154,7 +161,9 @@ const Train = () => {
             lg={2}
             sm={3}
             md={3}>
-              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSearch} className="">Search</Button>
+              <Button style={{ backgroundColor: "#db6300", border: "none" }}
+               onClick={handleSearch}
+               className="">Search</Button>
             </Col>
           </Row>
 

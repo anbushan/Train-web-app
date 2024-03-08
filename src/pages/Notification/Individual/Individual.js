@@ -59,6 +59,13 @@ const IndividualNotification = () => {
     refetch({ page: currentPage, search: searchInput });
   };
 
+  
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   const handleSendRequest = async () => {
     try {
       const response = await addIndividualNotification({
@@ -70,8 +77,8 @@ const IndividualNotification = () => {
 
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
-        navigate("/admin/individual");
         setSendRequestShow(false);
+        navigate("/admin/individual");
         setNumber("")
         setTitle("")
         setBody("")
@@ -120,6 +127,18 @@ const IndividualNotification = () => {
         return <img src={imageUrl} alt="img" style={{ maxWidth: '50px', maxHeight: '50px' }} />;
       },
     },
+    {
+      Header: "Created Date",
+      accessor: "createdAt.date",
+      width: "auto",
+      minWidth: 100,
+    },
+    {
+      Header: "Created Time",
+      accessor: "createdAt.time",
+      width: "auto",
+      minWidth: 100,
+    },
   ];
   
   return (
@@ -134,6 +153,7 @@ const IndividualNotification = () => {
                     style={{ backgroundColor: "#db6300", border: "none" }}
                     className="p-2 m-1"
                     onClick={() => setSendRequestShow(true)}
+                   
                   >
                     <IoIosSend size={20} /><span className="d-none d-md-inline"> Individual Notification</span>
                   </Button>
@@ -152,6 +172,7 @@ const IndividualNotification = () => {
                   className="form-control"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
+                  onKeyPress={handleKeyPress}
                 />
                 {searchInput && (
                   <span className="input-group-text" onClick={handleClear}>

@@ -48,6 +48,12 @@ const Station = () => {
     setSearchTerm("");
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   const handleSearch = () => {
     setSearchTerm(searchInput);
     refetch({ page: currentPage, search: searchInput });
@@ -143,6 +149,7 @@ const Station = () => {
                   className="form-control"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
+                  onKeyPress={handleKeyPress}
                 />
                 {searchInput && (
                   <span className="input-group-text" onClick={handleClear}>
