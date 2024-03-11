@@ -8,7 +8,7 @@ import BasicButton from "../../components/BasicButton";
 import TextInput from "../../components/TextInput";
 import { useEditStationMutation,useGetStationByIdQuery } from "../../redux/features/api/StationApi";
 import { toast } from "react-toastify";
-import { useTranslation } from "react-i18next";
+
 
 const EditStation = () => {
  
@@ -34,7 +34,7 @@ const EditStation = () => {
   const Id = id.startsWith(":") ? id.slice(1) : id;
  const [EditStationData, { isLoading }] = useEditStationMutation();
   const { data: editStation } = useGetStationByIdQuery(Id);
-  const { t } = useTranslation();
+
 
 console.log(id);
   const navigate = useNavigate();
@@ -152,59 +152,64 @@ console.log(editStation);
                     <h4 onClick={handleCancel}>
                       <AiOutlineArrowLeft />
                     </h4>
-                    <h4>{t("Edit Station")}</h4>
+                    <h4>"Edit Station"</h4>
                   </Col>
                   <Col className="d-sm-none d-none d-md-none d-lg-flex d-xxl-flex d-xl-flex flex-row justify-content-end align-items-center">
                     <BasicButton
                       className="m-1"
                       variant="secondary"
                       onClick={handleCancel}
-                      label={t("Cancel")}
+                      label="Cancel"
                     />
                     <BasicButton
                       className="m-1"
-                      label={t("Update")}
+                      label="Update"
                       type="button"
                       isLoading={isLoading}
                       loaderVariant="info"
-                      disabled={
-                        isSubmitting ||
-                        !stationCode ||
-                        !stationName ||
-                        !city ||
-                        !state ||
-
-                        !tamilStationName ||
-                        !tamilCity ||
-                        !tamilState ||
-                        !teluguStationName ||
-                        !teluguCity ||
-                        !teluguState ||
-                        !kannadaStationName ||
-                        !kannadaCity ||
-                        !kannadaState ||
-                        !hindiStationName ||
-                        !hindiCity ||
-                        !hindiState ||
+                      disabled={isSubmitting}
+                      onClick={
+                        stationCode === "" ||
+                        stationName === "" ||
+                        city === "" ||
+                        state === "" ||
+                        tamilStationName === "" ||
+                        tamilCity === "" ||
+                        tamilState === "" ||
+                        teluguStationName === "" ||
+                        teluguCity === "" ||
+                        teluguState === "" ||
+                        kannadaStationName === "" ||
+                        kannadaCity === "" ||
+                        kannadaState === "" ||
+                        hindiStationName === "" ||
+                        hindiCity === "" ||
+                        hindiState === "" ||
                         (touched.stationCode && errors.stationCode) ||
                         (touched.stationName && errors.stationName) ||
                         (touched.city && errors.city) ||
-                        (touched.state && errors.state)||
-
+                        (touched.state && errors.state) ||
                         (touched.tamilStationName && errors.tamilStationName) ||
                         (touched.tamilCity && errors.tamilCity) ||
-                        (touched.tamilState && errors.tamilState)||
-                        (touched.teluguStationName && errors.teluguStationName) ||
+                        (touched.tamilState && errors.tamilState) ||
+                        (touched.teluguStationName &&
+                          errors.teluguStationName) ||
                         (touched.teluguCity && errors.teluguCity) ||
-                        (touched.teluguState && errors.teluguState)||
+                        (touched.teluguState && errors.teluguState) ||
                         (touched.kannadaStationName && errors.kannadaStationName) ||
                         (touched.kannadaCity && errors.kannadaCity) ||
-                        (touched.kannadaState && errors.kannadaState)||
-                        (touched.hindiStationName && errors.hindiStationName) ||
+                        (touched.kannadaState && errors.kannadaState) ||
+                        (touched.hindiStationName &&
+                          errors.hindiStationName) ||
                         (touched.hindiCity && errors.hindiCity) ||
-                        (touched.hindiState && errors.hindiState)
+                        (touched.hindiState && errors.hindiState) 
+
+           
+                          ? handleSubmit
+                          : handleEditData
                       }
-                      onClick={handleSubmit}
+                    
+                     
                     />
                   </Col>
                 </Row>
@@ -821,43 +826,48 @@ console.log(editStation);
                      loaderVariant="info"
                      disabled={
                       isSubmitting ||
-                      !stationCode ||
-                      !stationName ||
-                      !city ||
-                      !state ||
-
-                      !tamilStationName ||
-                      !tamilCity ||
-                      !tamilState ||
-                      !teluguStationName ||
-                      !teluguCity ||
-                      !teluguState ||
-                      !kannadaStationName ||
-                      !kannadaCity ||
-                      !kannadaState ||
-                      !hindiStationName ||
-                      !hindiCity ||
-                      !hindiState ||
+                      stationCode === "" ||
+                      stationName === "" ||
+                      city === "" ||
+                      state === "" ||
+                      tamilStationName === "" ||
+                      tamilCity === "" ||
+                      tamilState === "" ||
+                      teluguStationName === "" ||
+                      teluguCity === "" ||
+                      teluguState === "" ||
+                      kannadaStationName === "" ||
+                      kannadaCity === "" ||
+                      kannadaState === "" ||
+                      hindiStationName === "" ||
+                      hindiCity === "" ||
+                      hindiState === "" ||
                       (touched.stationCode && errors.stationCode) ||
                       (touched.stationName && errors.stationName) ||
                       (touched.city && errors.city) ||
-                      (touched.state && errors.state)||
-
+                      (touched.state && errors.state) ||
                       (touched.tamilStationName && errors.tamilStationName) ||
                       (touched.tamilCity && errors.tamilCity) ||
-                      (touched.tamilState && errors.tamilState)||
-                      (touched.teluguStationName && errors.teluguStationName) ||
+                      (touched.tamilState && errors.tamilState) ||
+                      (touched.teluguStationName &&
+                        errors.teluguStationName) ||
                       (touched.teluguCity && errors.teluguCity) ||
-                      (touched.teluguState && errors.teluguState)||
+                      (touched.teluguState && errors.teluguState) ||
                       (touched.kannadaStationName && errors.kannadaStationName) ||
                       (touched.kannadaCity && errors.kannadaCity) ||
-                      (touched.kannadaState && errors.kannadaState)||
-                      (touched.hindiStationName && errors.hindiStationName) ||
+                      (touched.kannadaState && errors.kannadaState) ||
+                      (touched.hindiStationName &&
+                        errors.hindiStationName) ||
                       (touched.hindiCity && errors.hindiCity) ||
-                      (touched.hindiState && errors.hindiState)                   
-                     }
-                     onClick={handleSubmit}
-                   />
+                      (touched.hindiState && errors.hindiState) 
+
+         
+                        ? handleSubmit
+                        : handleEditData
+                    }
+                  
+                   
+                  />
                   </Col>
                 </Row>
               </Form>

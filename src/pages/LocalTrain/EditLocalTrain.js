@@ -173,26 +173,25 @@ const EditTrain = () => {
                       type="button"
                       isLoading={isLoading}
                       loaderVariant="info"
-                      disabled={
-                        isSubmitting ||
-                        !trainNo ||
-                        !trainName ||  
-                        !type ||
-                        !zone ||  
-                        !updatedOn ||
-                        !from ||           
-                        !departure ||
-                        !to ||  
-                        !arrival ||
-                        !duration ||  
-                        !distance ||
-                        !speed ||  
-                        !halts ||
-                        !sClasses ||    
-                        !sRunsOn ||
-                        !trainID ||           
-
-                        (touched.trainNo && errors.trainNo) ||
+                      disabled={isSubmitting}
+                      onClick={
+                       trainNo  === "" ||
+                       trainName  === "" || 
+                       type === "" ||
+                       zone  === "" ||
+                       updatedOn  === "" ||
+                       from  === "" ||     
+                       departure === "" ||
+                       to === "" ||
+                       arrival  === "" ||
+                       duration === "" ||
+                       distance  === "" ||
+                       speed === "" ||
+                       halts  === "" ||
+                       sClasses === "" || 
+                       sRunsOn === "" ||
+                       trainID  === "" ||          
+                       (touched.trainNo && errors.trainNo) ||
                         (touched.trainName && errors.trainName) ||
                         (touched.type && errors.type) ||
                         (touched.zone && errors.zone) ||
@@ -208,9 +207,12 @@ const EditTrain = () => {
                         (touched.duration && errors.duration) ||
                         (touched.sRunsOn && errors.sRunsOn) ||
                         (touched.trainID && errors.trainID)   
-                      }
-                      onClick={handleSubmit}
-                    />
+                        ? handleSubmit
+                        : handleEditData
+                    }
+              
+                   
+                  />
                             
                           </Col>  
                          </Row>            
@@ -760,44 +762,46 @@ const EditTrain = () => {
                      type="button"
                      isLoading={isLoading}
                      loaderVariant="info"
-                     disabled={
-                        isSubmitting ||
-                        !trainNo ||
-                        !trainName ||  
-                        !type ||
-                        !zone ||  
-                        !updatedOn ||
-                        !from ||           
-                        !departure ||
-                        !to ||  
-                        !arrival ||
-                        !duration ||  
-                        !distance ||
-                        !speed ||  
-                        !halts ||
-                        !sClasses ||    
-                        !sRunsOn ||
-                        !trainID ||           
-
-                        (touched.trainNo && errors.trainNo) ||
-                        (touched.trainName && errors.trainName) ||
-                        (touched.type && errors.type) ||
-                        (touched.zone && errors.zone) ||
-                        (touched.updatedOn && errors.updatedOn) ||
-                        (touched.from && errors.from) ||   
-                        (touched.departure && errors.departure) ||
-                        (touched.to && errors.to) ||
-                        (touched.arrival && errors.arrival) ||
-                        (touched.duration && errors.duration) ||
-                        (touched.distance && errors.distance) ||
-                        (touched.duration && errors.duration) ||
-                        (touched.halts && errors.halts) ||
-                        (touched.duration && errors.duration) ||
-                        (touched.sRunsOn && errors.sRunsOn) ||
-                        (touched.trainID && errors.trainID)                            
-                     }
-                     onClick={handleSubmit}
-                   />
+                     disabled={isSubmitting}
+                     onClick={
+                      trainNo  === "" ||
+                      trainName  === "" || 
+                      type === "" ||
+                      zone  === "" ||
+                      updatedOn  === "" ||
+                      from  === "" ||     
+                      departure === "" ||
+                      to === "" ||
+                      arrival  === "" ||
+                      duration === "" ||
+                      distance  === "" ||
+                      speed === "" ||
+                      halts  === "" ||
+                      sClasses === "" || 
+                      sRunsOn === "" ||
+                      trainID  === "" ||          
+                      (touched.trainNo && errors.trainNo) ||
+                       (touched.trainName && errors.trainName) ||
+                       (touched.type && errors.type) ||
+                       (touched.zone && errors.zone) ||
+                       (touched.updatedOn && errors.updatedOn) ||
+                       (touched.from && errors.from) ||   
+                       (touched.departure && errors.departure) ||
+                       (touched.to && errors.to) ||
+                       (touched.arrival && errors.arrival) ||
+                       (touched.duration && errors.duration) ||
+                       (touched.distance && errors.distance) ||
+                       (touched.duration && errors.duration) ||
+                       (touched.halts && errors.halts) ||
+                       (touched.duration && errors.duration) ||
+                       (touched.sRunsOn && errors.sRunsOn) ||
+                       (touched.trainID && errors.trainID)   
+                       ? handleSubmit
+                       : handleEditData
+                   }
+             
+                  
+                 />
                   </Col>
                 </Row>
               </Form>

@@ -96,9 +96,9 @@ const AddGeneralNotification = () => {
                       loaderVariant="info"
                       disabled={isSubmitting}
                       onClick={
-                        title === "" ||
-                        body === "" ||
-                        image === "" ||
+                        title === ''||
+                        (body=== '')||
+                        image === ''||
                         (touched.title && errors.title) ||
                         (touched.body && errors.body) ||
                         (touched.image && errors.image)
@@ -199,9 +199,9 @@ const AddGeneralNotification = () => {
                       loaderVariant="info"
                       disabled={isSubmitting}
                       onClick={
-                        title === "" ||
-                        body === "" ||
-                        image === "" ||
+                        title === ''||
+                        (body=== '')||
+                        image === ''||
                         (touched.title && errors.title) ||
                         (touched.body && errors.body) ||
                         (touched.image && errors.image)

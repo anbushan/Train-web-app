@@ -168,38 +168,40 @@ console.log(day);
                       type="button"
                       isLoading={isLoading}
                       loaderVariant="info"
-                      disabled={
-                        isSubmitting ||
-                        !route ||
-                        !day ||  
-                        !source ||
-                        !destination ||  
-                        !via ||
-                        !firsttrain ||          
-                        !lasttrain ||
-                        !timing1 ||  
-                        !timing1frequency ||
-                        !timing2 ||  
-                        !timing2frequency ||
-                        !timing3 ||  
-                        !timing3frequency ||             
-                        (touched.route && errors.route) ||
-                        (touched.day && errors.day) ||
-                        (touched.source && errors.source) ||
-                        (touched.destination && errors.destination) ||
-                        (touched.via && errors.via) ||
-                        (touched.firsttrain && errors.firsttrain) ||
-                        (touched.lasttrain && errors.lasttrain) ||
-                        (touched.timing1 && errors.timing1) ||
-                        (touched.timing1frequency && errors.timing1frequency) ||
-                        (touched.timing2 && errors.timing2) ||
-                        (touched.timing2frequency && errors.timing2frequency)||  
-                        (touched.timing3 && errors.timing3) || 
-                        (touched.timing3frequency && errors.timing3frequency)                
-                      }
-                      onClick={handleSubmit}
-                    />
-                            
+                      disabled={isSubmitting}
+                      onClick={
+                        route === "" ||
+                        day === "" ||
+                        source === "" ||
+                        destination === "" || 
+                        via === "" ||
+                        firsttrain === "" ||          
+                        lasttrain === "" ||
+                        timing1 === "" || 
+                        timing1frequency === "" ||
+                        timing2 === "" ||  
+                        timing2frequency === "" ||
+                        timing3 === "" || 
+                        timing3frequency === "" ||             
+                         (touched.route && errors.route) ||
+                         (touched.day && errors.day) ||
+                         (touched.source && errors.source) ||
+                         (touched.destination && errors.destination) ||
+                         (touched.via && errors.via) ||
+                         (touched.firsttrain && errors.firsttrain) ||
+                         (touched.lasttrain && errors.lasttrain) ||
+                         (touched.timing1 && errors.timing1) ||
+                         (touched.timing1frequency && errors.timing1frequency) ||
+                         (touched.timing2 && errors.timing2) ||
+                         (touched.timing2frequency && errors.timing2frequency)||  
+                         (touched.timing3 && errors.timing3) || 
+                         (touched.timing3frequency && errors.timing3frequency)                                           
+                         ? handleSubmit
+                         : handleEditData
+                     }
+                    
+                    
+                   />  
                           </Col>  
                          </Row>            
                               
@@ -661,21 +663,21 @@ console.log(day);
                      type="button"
                      isLoading={isLoading}
                      loaderVariant="info"
-                     disabled={
-                      isSubmitting ||
-                      !route ||
-                        !day ||  
-                        !source ||
-                        !destination ||  
-                        !via ||
-                        !firsttrain ||          
-                        !lasttrain ||
-                        !timing1 ||  
-                        !timing1frequency ||
-                        !timing2 ||  
-                        !timing2frequency ||
-                        !timing3 ||  
-                        !timing3frequency ||             
+                     disabled={isSubmitting}
+                     onClick={
+                       route === "" ||
+                       day === "" ||
+                       source === "" ||
+                       destination === "" || 
+                       via === "" ||
+                       firsttrain === "" ||          
+                       lasttrain === "" ||
+                       timing1 === "" || 
+                       timing1frequency === "" ||
+                       timing2 === "" ||  
+                       timing2frequency === "" ||
+                       timing3 === "" || 
+                       timing3frequency === "" ||             
                         (touched.route && errors.route) ||
                         (touched.day && errors.day) ||
                         (touched.source && errors.source) ||
@@ -689,9 +691,12 @@ console.log(day);
                         (touched.timing2frequency && errors.timing2frequency)||  
                         (touched.timing3 && errors.timing3) || 
                         (touched.timing3frequency && errors.timing3frequency)                                           
-                     }
-                     onClick={handleSubmit}
-                   />
+                        ? handleSubmit
+                        : handleEditData
+                    }
+                   
+                   
+                  />
                   </Col>
                 </Row>
               </Form>
