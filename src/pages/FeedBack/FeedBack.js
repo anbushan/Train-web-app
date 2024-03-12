@@ -98,7 +98,7 @@ const Feedback = () => {
       accessor: "updatedAt",
     },
     {
-      Header: "Actions",
+      Header: "ACTIONS",
       accessor: "action",
       Cell: (props) => {
         const rowIdx = props.row.original._id;

@@ -19,7 +19,7 @@ const Login = () => {
 
   const initialValues = {
     email: "",
-    loginPassword: "",
+    password: "",
   };
 
   const showPassword = () => {
@@ -153,13 +153,13 @@ const Login = () => {
                     <Row className="d-flex flex-row justify-between align-items-center">
                       <Col className="d-flex flex-row justify-content-end align-items-center">
                         <Form.Control
-                          name="loginPassword"
+                          name="password"
                           type="password"
                           size="md"
                           id="password"
                           placeholder="Enter your password"
                           className={`position-relative form-control ${
-                            touched.loginPassword && errors.loginPassword
+                            touched.password && errors.password
                               ? "border-danger"
                               : ""
                           }`}
@@ -187,8 +187,8 @@ const Login = () => {
                         </div>
                       </Col>
                     </Row>
-                    {touched.loginPassword && errors.loginPassword ? (
-                      <p className="text-danger">{errors.loginPassword}</p>
+                    {touched.password && errors.password ? (
+                      <p className="text-danger">{errors.password}</p>
                     ) : (
                       ""
                     )}

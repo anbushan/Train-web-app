@@ -350,7 +350,7 @@ const AddLocalTrain = () => {
                     >
                       <TextInput
                         label="First Train"
-                        type=""
+                        type="time"
                         name="firsttrain"
                         className={`form-control ${
                           touched.firsttrain && errors.firsttrain ? "is-invalid" : ""
@@ -379,7 +379,7 @@ const AddLocalTrain = () => {
                     >
                       <TextInput
                         label="Last train "
-                        type=""
+                        type="time"
                         name="lasttrain"
                         className={`form-control ${
                           touched.lasttrain && errors.lasttrain

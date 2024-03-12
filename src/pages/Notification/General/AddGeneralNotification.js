@@ -157,7 +157,10 @@ const AddGeneralNotification = () => {
                         }
                       />
                     </Col>
-                    <Col className="m-2" lg="6" xxl="6" xl="12" md="12" sm="12">
+                   
+                  </Col>
+                  <Col className="m-1 p-4 d-flex flex-wrap flex-column shadow rounded">
+                  <Col className="m-2" lg="6" xxl="6" xl="12" md="12" sm="12">
                       <TextInput
                         label="Image"
                         type="file" 
@@ -179,6 +182,7 @@ const AddGeneralNotification = () => {
                         }
                       />
                     </Col>
+
                   </Col>
                 </Row>
                 <Row className="d-sm-flex d-flex d-md-flex d-lg-none d-xxl-none d-xl-none flex-row justify-content-between align-items-center mt-3">

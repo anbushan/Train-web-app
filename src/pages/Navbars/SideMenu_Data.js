@@ -44,7 +44,7 @@ export const sidebarItems = [
   },
   {
     "id": 13,
-    "label": "Local Train",
+    "label": "Local Trains",
     "parent_id": null,
     "icon":<FaTrainTram   size={20}/>,
     "order_index": 8,
@@ -52,7 +52,7 @@ export const sidebarItems = [
   },
   {
     "id": 13,
-    "label": "Metro Train",
+    "label": "Metro Trains",
     "parent_id": null,
     "icon":<PiTrainRegionalFill   size={20}/>,
     "order_index": 8,
@@ -60,7 +60,7 @@ export const sidebarItems = [
   },
   {
     "id": 4,
-    "label": "Station",
+    "label": "Stations",
     "parent_id": null,
     "icon":<GiRailway  size={20}/>,
     "order_index": 4,

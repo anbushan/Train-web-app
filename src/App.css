@@ -92,6 +92,20 @@
   }
 }
 .link-unstyled {
-  text-decoration: none; /* Remove underline */
-  color: inherit; /* Inherit text color */
+  text-decoration: none; 
+  color: inherit; 
+}
+
+
+.pagination {
+  user-select: none; 
+}
+
+.time-input {
+  display: flex;
+}
+
+.am-pm {
+  margin-left: 5px;
+  align-self: center;
 }

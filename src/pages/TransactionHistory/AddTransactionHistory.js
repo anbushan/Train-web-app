@@ -158,7 +158,7 @@ const AddTrain = () => {
                     >
                       <TextInput
                         label="phone Number"
-                        type="number"
+                        type=""
                         name="phoneNumber"
                         className={`form-control ${
                           touched.phoneNumber && errors.phoneNumber ? "is-invalid" : ""

@@ -40,7 +40,7 @@ const ReactSidebar = ({ sidebarItems, onClick }) => {
               className='fs-15 text-bolder'
               active={isActive}
               rootStyles={{
-                backgroundColor: isActive ? '#f5f4f2' : '#313947',
+                backgroundColor: isActive ? '#d4d7d9' : '#313947',
                 color: isActive ? 'black' : 'white',
                 ':hover': {
                   color: 'black',
@@ -66,7 +66,7 @@ const ReactSidebar = ({ sidebarItems, onClick }) => {
           color: 'white',
           fontWeight: 'bolder',
           width: '100%',
-          maxHeight: 'calc(100vh - 4rem)', // Adjusted maximum height
+          maxHeight: 'calc(100vh - 4rem)', 
           borderColor: '#313947',
         }}
       >

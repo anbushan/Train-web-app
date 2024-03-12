@@ -67,7 +67,7 @@ const Train = () => {
       if (response?.data) {
         toast.success(response?.data?.message, { autoClose: 1000 });
         console.log(response);
-      
+        window.location.reload();
       } else {
         toast.error(response?.error?.data.error, { autoClose: 1000 });
         console.log("else part");
@@ -128,7 +128,7 @@ const Train = () => {
           <Row className="">
             <Header
               ONCLICK={handleNavigateAddForm}
-              HEADING= "Train"
+              HEADING= "Trains"
               BUTTON_NAME= "Add Train"
             
             />

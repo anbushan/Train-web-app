@@ -132,7 +132,7 @@ const Station = () => {
           <Row>
             <Header
               ONCLICK={handleNavigateAddForm}
-              HEADING="Station"
+              HEADING="Stations"
               BUTTON_NAME="Add Station"
             />
             <hr className="mt-3" />

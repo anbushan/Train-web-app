@@ -190,7 +190,7 @@ const Train = () => {
           <Row className="">
             <Header
               ONCLICK={handleNavigateAddForm}
-              HEADING="Metro Train"
+              HEADING="Metro Trains"
               BUTTON_NAME="Add Metro Train"
             />
             <hr className="mt-3" />

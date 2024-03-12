@@ -48,7 +48,7 @@ const BasicTable = (props) => {
             responsive={true}
             style={{ width: "100%" }}
           >
-            <thead>
+           <thead>
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
                   {headerGroup.headers.map((column) => (
@@ -62,17 +62,18 @@ const BasicTable = (props) => {
                         justifyContent: "center",
                         alignItems: "center",
                       }}
+                      onClick={(e) => {
+                        // Check if the click was not on the sort icon and if the column is not "ACTIONS"
+                        if (!e.target.classList.contains('fa-sort') && column.render("Header") !== "ACTIONS") {
+                          // Change sorting on a single tap
+                          column.toggleSortBy(!column.isSortedDesc);
+                        }
+                      }}
                     >
                       {column.render("Header") === "ACTIONS" ? (
                         <>{column.render("Header")}</>
                       ) : (
-                        <div
-                          onClick={(e) => {
-                            if (!e.target.classList.contains('fa-sort')) {
-                              column.toggleSortBy();
-                            }
-                          }}
-                        >
+                        <div>
                           {column.render("Header")}
                           <FaSort className="mx-2" />
                         </div>
