@@ -44,34 +44,41 @@ const BasicTable = (props) => {
             responsive={true}
             style={{ width: "100%" }}
           >
-            <thead>
-  {headerGroups.map((headerGroup) => (
-    <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-      {headerGroup.headers.map((column) => (
-        <th
-          {...column.getHeaderProps(column.getSortByToggleProps())}
-          key={column.id}
-          className="text-center text-dark" 
-          style={{
-            width: `${column.width}px`,
-            whiteSpace: "nowrap",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {column.render("Header") === "ACTIONS" ? (
-            <>{column.render("Header")}</>
-          ) : (
-            <>
-              {column.render("Header")}
-              <FaSort className="mx-2" />
-            </>
-          )}
-        </th>
-      ))}
-    </tr>
-  ))}
-</thead>
+          <thead>
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
+                  {headerGroup.headers.map((column) => (
+                    <th
+                      {...column.getHeaderProps()}
+                      key={column.id}
+                      className="text-center text-dark"
+                      style={{
+                        width: `${column.width}px`,
+                        whiteSpace: "nowrap",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                      onClick={(e) => {
+                        // Check if the click was not on the sort icon and if the column is not "ACTIONS"
+                        if (!e.target.classList.contains('fa-sort') && column.render("Header") !== "ACTIONS") {
+                          // Change sorting on a single tap
+                          column.toggleSortBy(!column.isSortedDesc);
+                        }
+                      }}
+                    >
+                      {column.render("Header") === "ACTIONS" ? (
+                        <>{column.render("Header")}</>
+                      ) : (
+                        <div>
+                          {column.render("Header")}
+                          <FaSort className="mx-2" />
+                        </div>
+                      )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
             <tbody {...getTableBodyProps()}>
               {page.length > 0 ? (
                 page.map((row) => {
