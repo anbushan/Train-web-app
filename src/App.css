@@ -109,3 +109,49 @@
   margin-left: 5px;
   align-self: center;
 }
+
+.mt-10{
+  margin-top: 100px;
+}
+
+@media (max-width: 576px) { /* Adjust breakpoint as needed */
+  .Heading p {
+    font-size: 15px !important; /* !important used for specificity */
+  }
+}
+
+
+.lead{
+  font-size: 26px !important ;
+    font-weight: 300  !important;
+    font-family:"'Rubik', sans-serif" !important;
+  color:#3b64b8 !important ;
+}
+@media (max-width: 576px) { 
+  .Heading p {
+    font-size: 15px !important; 
+  }
+}
+@media (max-width: 468px) {
+  .information {
+    margin-bottom: -25px !important;
+  }
+}
+
+.responsive-title {
+  font-size: 45px; /* Default font size */
+}
+
+@media (max-width: 768px) {
+  .responsive-title {
+      font-size: 36px; /* Adjust font size for smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .responsive-title {
+      font-size: 24px; /* Further adjust font size for extra small screens */
+  }
+}
+
+
