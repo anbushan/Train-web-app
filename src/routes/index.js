@@ -5,6 +5,7 @@ import GuestGuard from "../guards/GuestGuard";
 import AuthGuard from "../guards/AuthGuard";
 
 
+
 const Loadable = (Component) => (props) => {
   return (
     <Suspense fallback={<Loader />}>
@@ -15,6 +16,9 @@ const Loadable = (Component) => (props) => {
 
 export default function Router() {
   return useRoutes([
+
+
+    
     {
       path: "/",
       children: [
@@ -22,7 +26,23 @@ export default function Router() {
           path: "/",
           element: (
             <GuestGuard>
+              <TrainsOnWheels />
+            </GuestGuard>
+          ),
+        },
+        {
+          path: "/login",
+          element: (
+            <GuestGuard>
               <Login />
+            </GuestGuard>
+          ),
+        },
+        {
+          path: "/privacy-policy",
+          element: (
+            <GuestGuard>
+              <PrivacyPolicy />
             </GuestGuard>
           ),
         },
@@ -358,6 +378,11 @@ const MetroTrain = Loadable(lazy(()=>import("../pages/MetroTrain/MetroTrain")));
 
 const AddMetroTrain = Loadable(lazy(()=>import("../pages/MetroTrain/AddMetroTrain")));
 const EditMetroTrain = Loadable(lazy(()=>import("../pages/MetroTrain/EditMetroTrain")));
+
+const TrainsOnWheels = Loadable(lazy(()=>import("../pages/TrainWebsite/TrainsOnWheels/TrainsOnWheels")));
+
+const PrivacyPolicy = Loadable(lazy(()=>import("../pages/TrainWebsite/PrivacyPolicy")));
+
 
 
 
