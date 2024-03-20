@@ -236,7 +236,7 @@ const News = () => {
                     <Col xs={12} md={4} lg={3} className=" d-flex flex-column ">
                       <Button
                         style={{
-                          backgroundColor: "#db6300",
+                          backgroundColor: "#0077B2",
                           border: "none",
                           marginTop: "30px",
                           position: "relative",

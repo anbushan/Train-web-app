@@ -103,7 +103,7 @@ const UserList = () => {
             lg={2}
             sm={3}
             md={3}>
-              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSearch} className="">Search</Button>
+              <Button style={{ backgroundColor: "#0077B2", border: "none" }} onClick={handleSearch} className="">Search</Button>
             </Col>
           </Row>
 

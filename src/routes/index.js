@@ -46,6 +46,14 @@ export default function Router() {
             </GuestGuard>
           ),
         },
+        {
+          path: "/terms&-condition",
+          element: (
+            <GuestGuard>
+              <TermsCondition />
+            </GuestGuard>
+          ),
+        },
        
       ],
     },
@@ -382,6 +390,8 @@ const EditMetroTrain = Loadable(lazy(()=>import("../pages/MetroTrain/EditMetroTr
 const TrainsOnWheels = Loadable(lazy(()=>import("../pages/TrainWebsite/TrainsOnWheels/TrainsOnWheels")));
 
 const PrivacyPolicy = Loadable(lazy(()=>import("../pages/TrainWebsite/PrivacyPolicy")));
+const TermsCondition = Loadable(lazy(()=>import("../pages/TrainWebsite/TermsCondition")));
+
 
 
 

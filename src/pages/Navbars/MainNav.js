@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MainLogo from "../../assets/images/MainLogo.png";
+import MainLogo from "../../assets/images/logo5.png";
 import "./MainNav.css";
 import { Col, Container, Dropdown, Offcanvas, Row } from "react-bootstrap";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -32,7 +32,7 @@ const MainNav = () => {
           position: "sticky",
           top: "0",
           zIndex: 1000,
-          backgroundColor: "#db6300",
+          backgroundColor: "#0077B2",
         }}
       >
         <Row className="d-flex flex-row flex-wrap-wrap justify-content-around align-items-center p-2">
@@ -48,7 +48,7 @@ const MainNav = () => {
             className="d-lg-flex d-none d-sm-none flex-row flex-wrap-wrap justify-content-between align-items-center"
             style={{ marginRight: "100px" }}
           >
-            <img src={MainLogo} width={40} className="pointer" alt="..."></img>
+            <img src={MainLogo} width={30} className="pointer" alt="..."></img>
           </Col>
         </Row>
 
@@ -124,11 +124,12 @@ const MainNav = () => {
       {/* Conditionally render Offcanvas for large screens */}
       <Row className="d-none d-lg-flex d-xl-flex d-xxl-flex">
         <Offcanvas scroll={false} show={show} onHide={handleClose}>
-          <Offcanvas.Header style={{ backgroundColor: "#db6300" }} closeButton>
+          <Offcanvas.Header style={{ backgroundColor: "#0077B2" }} closeButton>
             <Offcanvas.Title
               className="custom-title"
               style={{
                 fontSize: "16px",
+                color:"white",
               }}
             >
               <img
@@ -137,10 +138,10 @@ const MainNav = () => {
                 className="rounded-circle p-2"
                 alt="..."
               />
-              Trains On Time
+              Trains On Wheels
             </Offcanvas.Title>
           </Offcanvas.Header>
-          <Offcanvas.Body style={{ backgroundColor: "#313947" }}>
+          <Offcanvas.Body style={{ backgroundColor: " #FFFFFF" }}>
             <ReactSidebar onClick={handleClose} sidebarItems={sidebarItems} />
           </Offcanvas.Body>
         </Offcanvas>

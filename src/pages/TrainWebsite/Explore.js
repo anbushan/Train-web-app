@@ -16,7 +16,7 @@ const Explore = () => {
                         New to the City of Dreams? We’ve got your back!
                     </p>
                     <p style={{ fontFamily: "'Poppins', sans-serif" }}>
-                        Use Trains on Time your guide partner and explore all the beautiful places. Find out the best destinations in the city and do not miss out on all the fun it has to offer.
+                        Use Trains on wheels your guide partner and explore all the beautiful places. Find out the best destinations in the city and do not miss out on all the fun it has to offer.
                     </p>
                     <ul className="list-unstyled pb-3 ">
                         <li className="mt-3">

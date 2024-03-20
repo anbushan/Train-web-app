@@ -157,14 +157,14 @@ const BasicTable = (props) => {
                 containerClassName="pagination"
                 previousLabel={
                   <IconContext.Provider
-                    value={{ color: "#db6300", size: "28px" }}
+                    value={{ color: "#0077B2", size: "28px" }}
                   >
                     <AiFillLeftCircle />
                   </IconContext.Provider>
                 }
                 nextLabel={
                   <IconContext.Provider
-                    value={{ color: "#db6300", size: "28px" }}
+                    value={{ color: "#0077B2", size: "28px" }}
                   >
                     <AiFillRightCircle />
                   </IconContext.Provider>

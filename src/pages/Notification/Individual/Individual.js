@@ -150,7 +150,7 @@ const IndividualNotification = () => {
                 <h4 className="fw-bold "> Individual Notification</h4>
                 <div>
                   <Button
-                    style={{ backgroundColor: "#db6300", border: "none" }}
+                    style={{ backgroundColor: "#0077B2", border: "none" }}
                     className="p-2 m-1"
                     onClick={() => setSendRequestShow(true)}
                    
@@ -187,7 +187,7 @@ const IndividualNotification = () => {
             lg={2}
             sm={3}
             md={3}>
-              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSearch} className="">Search</Button>
+              <Button style={{ backgroundColor: "#0077B2", border: "none" }} onClick={handleSearch} className="">Search</Button>
             </Col>
           </Row>
           </Row>
@@ -262,7 +262,7 @@ const IndividualNotification = () => {
                 Cancel
               </Button>
               <Button
-                style={{ backgroundColor: "#db6300", border: "none" }}
+                style={{ backgroundColor: "#0077B2", border: "none" }}
                 onClick={handleSendRequest}
               >
                 Send

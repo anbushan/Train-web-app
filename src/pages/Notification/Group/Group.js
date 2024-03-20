@@ -202,14 +202,14 @@ const Group = () => {
                 <h4 className="fw-bold " onClick={handleCancel}><AiOutlineArrowLeft /> Group</h4>
                 <div>
                   <Button
-                    style={{ backgroundColor: "#db6300", border: "none" }}
+                    style={{ backgroundColor: "#0077B2", border: "none" }}
                     className="p-2 m-1"
                     onClick={() => setShowModal(true)}
                   >
                     <IoIosSend size={20} /><span className="d-none d-md-inline"> Send Notification</span>
                   </Button>
                   <Button
-                    style={{ backgroundColor: "#db6300", border: "none" }}
+                    style={{ backgroundColor: "#0077B2", border: "none" }}
                     className="p-2 m-1"
                     onClick={handleShow}
                   >
@@ -246,7 +246,7 @@ const Group = () => {
             lg={2}
             sm={3}
             md={3}>
-              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSearch} className="">Search</Button>
+              <Button style={{ backgroundColor: "#0077B2", border: "none" }} onClick={handleSearch} className="">Search</Button>
             </Col>
           </Row>
             <Row className="justify-content-center">
@@ -308,7 +308,7 @@ const Group = () => {
               <Button variant="secondary" onClick={() => setShowModal(false)}>
                 Cancel
               </Button>
-              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSendRequest}>
+              <Button style={{ backgroundColor: "#0077B2", border: "none" }} onClick={handleSendRequest}>
                 Send
               </Button>
             </Modal.Footer>
@@ -343,7 +343,7 @@ const Group = () => {
                 Cancel
               </Button>
               <Button
-                style={{ backgroundColor: "#db6300", border: "none" }}
+                style={{ backgroundColor: "#0077B2", border: "none" }}
                 variant="primary"
                 onClick={CreateGroup}
               >

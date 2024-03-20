@@ -143,7 +143,7 @@ const Transactionhistory = () => {
                 <h4 className="fw-bold "> Transaction History</h4>
                 <div>
                   <Button
-                    style={{ backgroundColor: "#db6300", border: "none" }}
+                    style={{ backgroundColor: "#0077B2", border: "none" }}
                     className="p-2 m-1"
                     onClick={handleNavigateAddForm}
                   >
@@ -180,7 +180,7 @@ const Transactionhistory = () => {
             lg={2}
             sm={3}
             md={3}>
-              <Button style={{ backgroundColor: "#db6300", border: "none" }} onClick={handleSearch} className="">Search</Button>
+              <Button style={{ backgroundColor: "#0077B2", border: "none" }} onClick={handleSearch} className="">Search</Button>
             </Col>
           </Row>
           <Row className="justify-content-center">
