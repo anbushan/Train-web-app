@@ -288,7 +288,7 @@ const Setting = () => {
                 <Col className="d-flex flex-row justify-content-between mt-5">
                   <h4
                     className="fw-bold"
-                    style={{ color: "#db6300", border: "none" }}
+                    style={{ color: "#0077B2", border: "none" }}
                   >
                     {sectionIndex === 0
                       ? "BANNER IMAGES:"
@@ -365,7 +365,7 @@ const Setting = () => {
             Close
           </Button>
           <Button
-            style={{ backgroundColor: "#db6300", border: "none" }}
+            style={{ backgroundColor: "#0077B2", border: "none" }}
             onClick={handleCarouselUpload}
           >
             Upload
@@ -386,7 +386,7 @@ const Setting = () => {
             Close
           </Button>
           <Button
-            style={{ backgroundColor: "#db6300", border: "none" }}
+            style={{ backgroundColor: "#0077B2", border: "none" }}
             onClick={handleUpdateImage}
           >
             Update
@@ -409,7 +409,7 @@ const Setting = () => {
             Close
           </Button>
           <Button
-            style={{ backgroundColor: "#db6300", border: "none" }}
+            style={{ backgroundColor: "#0077B2", border: "none" }}
             onClick={handleCarouselUpdate}
           >
             Update
