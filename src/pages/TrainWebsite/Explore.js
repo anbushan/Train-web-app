@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col} from 'react-bootstrap';
 
 const Explore = () => {
     return (
@@ -11,7 +11,7 @@ const Explore = () => {
     </h2>
 </Col>
 
-                <Col md={5} className="pt-1 text-center mt-5">
+                <Col md={5} className="pt-1 text-center mt-5 font">
                     <p className="font-weight-bold" style={{ fontFamily: "'Poppins', sans-serif" }}>
                         New to the City of Dreams? We’ve got your back!
                     </p>
@@ -20,16 +20,16 @@ const Explore = () => {
                     </p>
                     <ul className="list-unstyled pb-3 ">
                         <li className="mt-3">
-                            <a href="#" style={{ textDecoration: 'none', transition: 'all 0.2s', color: '#004085', fontFamily: "'Poppins', sans-serif" }}>Famous places in India</a>
+                            <p  style={{ textDecoration: 'none', transition: 'all 0.2s', color: '#004085', fontFamily: "'Poppins', sans-serif" }}>Famous places in India</p>
                         </li>
                         <li className="mt-3">
-                            <a href="#" style={{ textDecoration: 'none', transition: 'all 0.2s', color: '#004085', fontFamily: "'Poppins', sans-serif" }}>Top tourist destinations India</a>
+                            <p style={{ textDecoration: 'none', transition: 'all 0.2s', color: '#004085', fontFamily: "'Poppins', sans-serif" }}>Top tourist destinations India</p>
                         </li>
                         <li className="mt-3">
-                            <a href="#" style={{ textDecoration: 'none', transition: 'all 0.2s', color: '#004085', fontFamily: "'Poppins', sans-serif" }}>Famous food items in India</a>
+                            <p style={{ textDecoration: 'none', transition: 'all 0.2s', color: '#004085', fontFamily: "'Poppins', sans-serif" }}>Famous food items in India</p>
                         </li>
                         <li className="mt-3">
-                            <a href="#" style={{ textDecoration: 'none', transition: 'all 0.2s', color: '#004085', fontFamily: "'Poppins', sans-serif" }}>Top Festivals in India</a>
+                            <p  style={{ textDecoration: 'none', transition: 'all 0.2s', color: '#004085', fontFamily: "'Poppins', sans-serif" }}>Top Festivals in India</p>
                         </li>
                     </ul>
                     {/* <Button href="#" className="btn btn-primary" style={{

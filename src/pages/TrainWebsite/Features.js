@@ -19,29 +19,29 @@ const Features = () => {
     // };
     return (
         <div>
-            <section className='mt-5 information'style={{ marginBottom: '-125px' }} >
+            <section className='mt-5 information'style={{ marginBottom: '-125px'}} >
                 <img src={train} className="img-fluid shadow d-none d-md-block justify-content-center" alt="TrainsOnWheel section-3" />
             </section>
             <Container className="mt-n2 pb-5 mt-5" >
                 <Row className="justify-content-center">
                     <Col md={4} className="mt-2 d-flex justify-content-center"  >
-                        <div className="bg-white shadow rounded p-3 text-center">
-                            <p className="lead">Travel Train Express</p>
-                            <p className="text-muted">Find the superfast high-speed  A to B routes for Express trains</p>
+                        <div className="bg-white shadow rounded p-4 text-center">
+                            <p className="lead fontfamily">Travel Train Express</p>
+                            <p style={{ fontSize: "clamp(14px, 2vw, 20px)" }} className="text-muted fontfamily">Find the superfast high-speed  A to B routes for Express trains</p>
                             {/* <Button href="#" className="mt-3 btn btn-cta" style={buttonStyle}>Trains Express</Button> */}
                         </div>
                     </Col>
                     <Col md={4} className="mt-2 d-flex justify-content-center">
-                        <div className="bg-white shadow rounded p-3 text-center">
-                            <p className='lead'>Live Train Announcements</p>
-                            <p className="text-muted">View the official announcements related to local trains, metro trains, origin, and destination Live train status.</p>
+                        <div className="bg-white shadow rounded p-4 text-center">
+                            <p className='lead fontfamily'>Live Train Announcements</p>
+                            <p style={{ fontSize: "clamp(14px, 2vw, 20px)" }} className="text-muted fontfamily">View the official announcements related to local trains, metro trains, origin, and destination Live train status.</p>
                             {/* <Button href="#" className="mt-3 btn btn-cta" style={buttonStyle}>Train Announcement</Button> */}
                         </div>
                     </Col>
                     <Col md={4} className="mt-2 d-flex justify-content-center">
-                        <div className="bg-white shadow rounded p-3 text-center">
-                            <p className="lead">Commuter News</p>
-                            <p className="text-muted">Get the latest news, updates, and more from the railways directly on the Train wheels app</p>
+                        <div className="bg-white shadow rounded p-4 text-center">
+                            <p className="lead fontfamily">Commuter News</p>
+                            <p style={{ fontSize: "clamp(14px, 2vw, 20px)"}} className="text-muted fontfamily">Get the latest news, updates, and more from the railways directly on the Train wheels app</p>
                             {/* <Button href="#" className="mt-3 btn btn-cta" style={buttonStyle}>View News</Button> */}
                         </div>
                     </Col>

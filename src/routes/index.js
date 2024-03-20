@@ -307,6 +307,14 @@ export default function Router() {
                 </AuthGuard>
               ),
             },
+            {
+              path: "/admin/ratings",
+              element: (
+                <AuthGuard>
+                  <Ratings/>
+                </AuthGuard>
+              ),
+            },
           ]
         },
       
@@ -386,6 +394,8 @@ const MetroTrain = Loadable(lazy(()=>import("../pages/MetroTrain/MetroTrain")));
 
 const AddMetroTrain = Loadable(lazy(()=>import("../pages/MetroTrain/AddMetroTrain")));
 const EditMetroTrain = Loadable(lazy(()=>import("../pages/MetroTrain/EditMetroTrain")));
+const Ratings = Loadable(lazy(()=>import("../pages/Rating/Ratings")));
+
 
 const TrainsOnWheels = Loadable(lazy(()=>import("../pages/TrainWebsite/TrainsOnWheels/TrainsOnWheels")));
 

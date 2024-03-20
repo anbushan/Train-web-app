@@ -40,7 +40,7 @@ const PrivacyPolicy = () => {
         <Col xs={12} md={8} className="text-start mt-2">
           <h5>How We Use Collected Information</h5>
           <p>
-            Driftmark Technology may collect and use Users' personal information
+            Driftmark Technology may collect and use User's personal information
             for the following purposes:
           </p>
           <ul>
@@ -74,7 +74,7 @@ const PrivacyPolicy = () => {
         <Col xs={12} md={8} className="text-start mt-2">
           <h5>Sharing Your Personal Information</h5>
           <p>
-            We do not sell, trade, or rent Users' personal identification
+            We do not sell, trade, or rent User's personal identification
             information to others. We may share generic aggregated demographic
             information not linked to any personal identification information
             regarding visitors and users with our business partners, trusted
@@ -83,9 +83,9 @@ const PrivacyPolicy = () => {
         </Col>
 
         <Col xs={12} md={8} className="text-start mt-2">
-          <h5>Compliance with Children's Online Privacy Protection Act</h5>
+          <h5>Compliance with Children Online Privacy Protection Act</h5>
           <p>
-            Our app doesn’t against with Children’s online privacy protection
+            Our app doesn’t against with Children online privacy protection
             act.
           </p>
         </Col>

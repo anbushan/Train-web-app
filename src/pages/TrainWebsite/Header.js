@@ -1,12 +1,17 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import HeaderImage from "../../assets/images/bg.png"; 
+import HeaderImage from "../../assets/images/bg3.png"; 
 import MobileImage from "../../assets/images/Mobile.png";
-import logo from "../../assets/images/logo1.png";
+import logo from "../../assets/images/logo5.png";
 import playstore from "../../assets/images/pngplaystore-removebg-preview.png";
-
+import mixpanel from 'mixpanel-browser';
 
 const WebsiteHeader = () => {
+
+    const handleClick = () => {
+     
+      mixpanel.track('Download app');
+    };
   return (
     <div className="">
       <Container
@@ -61,10 +66,12 @@ const WebsiteHeader = () => {
                   fontSize: "20px",
                   fontFamily: "Poppins, sans-serif",
                   color: "white",
+                  fontWeight:"bold",
                 }}
               >
                 "Happy Journey"
                 <img
+                 onClick={handleClick}
                   src={playstore}
                   alt="TrainsOnWheel playstore"
                   srcSet=""

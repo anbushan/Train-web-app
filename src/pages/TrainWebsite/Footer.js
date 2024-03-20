@@ -27,7 +27,7 @@ const Footer = () => {
             </h4>
             <p
               className="my-2 mx-5 "
-              style={{ fontSize: "15px", fontFamily: "Poppins, sans-serif" }}
+              style={{ fontSize: "20px", fontFamily: "Poppins, sans-serif" }}
             >
               We'll get you where you want to go. From live train updates to
               seat availability, PNR status, train between status, our
@@ -57,13 +57,13 @@ const Footer = () => {
               QUICK LINKS
             </h4>
            
-            <p  style={{ fontSize: "15px", fontFamily: "Poppins, sans-serif" }}>
+            <p  style={{ fontSize: "20px", fontFamily: "Poppins, sans-serif" }}>
               About
             </p>
-            <p   style={{ fontSize: "15px", fontFamily: "Poppins, sans-serif" }}>
+            <p   style={{ fontSize: "20px", fontFamily: "Poppins, sans-serif" }}>
               FAQ
             </p>
-            <p  style={{ fontSize: "15px", fontFamily: "Poppins, sans-serif" }}>
+            <p  style={{ fontSize: "20px", fontFamily: "Poppins, sans-serif" }}>
             <Link
         style={{ textDecoration: "none", color: "white" }}
         to="/privacy-policy"
@@ -71,10 +71,10 @@ const Footer = () => {
         privacy policy
       </Link>
             </p>
-            <p   style={{ fontSize: "15px", fontFamily: "Poppins, sans-serif" }}>
+            <p   style={{ fontSize: "20px", fontFamily: "Poppins, sans-serif" }}>
               Help
             </p>
-            <p   style={{ fontSize: "15px", fontFamily: "Poppins, sans-serif" }}>
+            <p   style={{ fontSize: "20px", fontFamily: "Poppins, sans-serif" }}>
            
             <Link
         style={{ textDecoration: "none", color: "white" }}
@@ -93,13 +93,13 @@ const Footer = () => {
             >
               CONTACT INFO
             </h4>
-            <p style={{ fontSize: "15px", fontFamily: "Poppins, sans-serif" }}>
+            <p style={{ fontSize: "20px", fontFamily: "Poppins, sans-serif" }}>
               <FaLocationDot /> Kadirimangalam Tirupathur
             </p>
-            <p style={{ fontSize: "15px", fontFamily: "Poppins, sans-serif" }}>
+            <p style={{ fontSize: "20px", fontFamily: "Poppins, sans-serif" }}>
               <FaPhoneAlt /> <a href="tel:+916381475573">+91 6381475573</a>
             </p>
-            <p style={{ fontSize: "15px", fontFamily: "Poppins, sans-serif" }}>
+            <p style={{ fontSize: "20px", fontFamily: "Poppins, sans-serif" }}>
               <IoMail />{" "}
               <a href="mailto:trainsontime@email.com">trainsontime@email.com</a>
             </p>
@@ -110,7 +110,7 @@ const Footer = () => {
           <Col xs={12} sm={4} className="text-center">
             <p
               className="mt-3"
-              style={{ fontSize: "15px", fontFamily: "Poppins, sans-serif" }}
+              style={{ fontSize: "20px", fontFamily: "Poppins, sans-serif" }}
             >
               Copyrights © 2024 Trains on Wheels. All Rights Reserved 2024
             </p>

@@ -15,6 +15,7 @@ import { IoPersonCircleSharp } from "react-icons/io5";
 import { FaRegNewspaper } from "react-icons/fa";
 import { PiTrainRegionalFill } from "react-icons/pi";
 import { FaTrainTram } from "react-icons/fa6";
+import { IoIosStar } from "react-icons/io";
 
 
 
@@ -133,6 +134,14 @@ export const sidebarItems = [
     "icon":<AiOutlineIssuesClose   size={20}/>,
     "order_index": 8,
     "url": "/admin/issue",
+  },
+  {
+    "id": 12,
+    "label": "Ratings",
+    "parent_id": null,
+    "icon":<IoIosStar   size={20}/>,
+    "order_index": 8,
+    "url": "/admin/ratings",
   },
   {
     "id": 13,

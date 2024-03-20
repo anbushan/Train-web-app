@@ -174,7 +174,7 @@ const BasicTable = (props) => {
             <Col className="d-flex d-sm-flex d-md-flex d-xxl-none d-xl-none d-lg-none justify-content-end align-items-center">
               <Button
                 // variant="warning"/
-                style={{ backgroundColor: "#db6300", border: "none" }}
+                style={{ backgroundColor: "#0077B2", border: "none" }}
                 onClick={() => props.setCurrentPage(props.currentPage - 1)}
                 disabled={props.currentPage === 1}
                 className="m-2"
@@ -183,7 +183,7 @@ const BasicTable = (props) => {
               </Button>
               <Button
                 // variant="warning"
-                style={{ backgroundColor: "#db6300", border: "none" }}
+                style={{ backgroundColor: "#0077B2", border: "none" }}
                 onClick={() => {
                   props.setCurrentPage(props.currentPage + 1);
                 }}
