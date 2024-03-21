@@ -9,7 +9,7 @@ const TravelInformation = () => {
         <Container>
           <div className='text-center'>
             <div className='choose'>
-              <h1>Why choose us</h1>
+              <h1 style={{ fontSize: "clamp(24px, 5vw, 45px)", fontFamily: "Poppins, sans-serif", color: "black" }}>Why choose us</h1>
               <p></p>
             </div>
           </div>
@@ -23,28 +23,28 @@ const TravelInformation = () => {
                   </picture>
                 </div>
                 <div className='chooseTxt at1'>
-                  <h3 style={{ color: '#000', fontWeight: '700', fontSize: '18px' }}>TRAINS ON WHEELS</h3>
-                  <p>A complete solution for all your IRCTC and Metro train needs! </p>
+                  <h3 style={{ color: '#000', fontWeight: '700', fontSize: '25px' }}>TRAINS ON WHEELS</h3>
+                  <p className='fonts text-center'>A complete solution for all your IRCTC and Metro train needs! </p>
                 </div>
                 <div className='chooseTxt at2'>
-                  <h3 style={{ color: '#000', fontWeight: '700', fontSize: '18px' }}>LIVE TRAIN</h3>
-                  <p>Get the IRCTC live train running information.</p>
+                  <h3 style={{ color: '#000', fontWeight: '700', fontSize: '25px' }}>LIVE TRAIN</h3>
+                  <p className='fonts'>Get the IRCTC live train running information.</p>
                 </div>
                 <div className='chooseTxt at3'>
-                  <h3 style={{ color: '#000', fontWeight: '700', fontSize: '18px' }}>SEAT AVAILABILITY</h3>
-                  <p>Check IRCTC train ticket and  upcoming station  seat availability here </p>
+                  <h3 style={{ color: '#000', fontWeight: '700', fontSize: '25px' }}>SEAT AVAILABILITY</h3>
+                  <p className='fonts'>Check IRCTC train ticket and  upcoming station  seat availability here </p>
                 </div>
                 <div className='chooseTxt at4'>
-                  <h3 style={{ color: '#000', fontWeight: '700', fontSize: '18px' }}>PNR STATUS</h3>
-                  <p>PNR status check to know whether IRCTC train seat is confirmed or not.</p>
+                  <h3 style={{ color: '#000', fontWeight: '700', fontSize: '25px' }}>PNR STATUS</h3>
+                  <p className='fonts'>PNR status check to know whether IRCTC train seat is confirmed or not.</p>
                 </div>
                 <div className='chooseTxt at5'>
-                  <h3 style={{ color: '#000', fontWeight: '700', fontSize: '18px' }}>REFERRAL AMOUNT</h3>
-                  <p>Easily earn even your travel when you referred to friends & family.</p>
+                  <h3 style={{ color: '#000', fontWeight: '700', fontSize: '25px' }}>REFERRAL AMOUNT</h3>
+                  <p className='fonts'>Easily earn even your travel when you referred to friends & family.</p>
                 </div>
                 <div className='chooseTxt at6'>
-                  <h3 style={{ color: '#000', fontWeight: '700', fontSize: '18px' }}>NOTIFICATION</h3>
-                  <p>A complete solution for all your IRCTC and Metro train needs! </p>
+                  <h3 style={{ color: '#000', fontWeight: '700', fontSize: '25px' }}>NOTIFICATION</h3>
+                  <p className='fonts'>A complete solution for all your IRCTC and Metro train needs! </p>
                 </div>
               </div>
             </Col>
