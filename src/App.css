@@ -161,3 +161,118 @@
 .font{
   font-size: 20px;
 }
+
+
+
+.sidebar-container {
+  height: 100vh;
+  overflow: hidden;
+  position: relative; 
+}
+
+.menu-container {
+  max-height: calc(100vh - 4rem); 
+  overflow-y: auto; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+.menu-container::-webkit-scrollbar {
+  display: none;
+}
+
+
+.custom-timepicker input {
+ 
+  height:10px; 
+  background-color: white;/* Adjust the width as per your requirement */
+}
+
+
+h1,h2,h3,p,span{
+  font-family: Poppins, sans-serif !important;
+}
+.chooseTxt.at1 {
+  top: 4%;
+  left: -50%;
+  text-align: center;
+}
+.chooseTxt.at2 {
+  top: 33%;
+    left: -50%;
+    text-align: center;
+}
+.chooseTxt.at3 {
+  top: 68%;
+    left: -50%;
+    text-align: center;
+}
+.chooseTxt.at4 {
+  top: -3%;
+    right:-45%;
+    text-align: center;
+}
+.chooseTxt.at5 {
+  top: 33%;
+  right: -52%;
+  text-align: center;
+}
+.chooseTxt.at6 {
+  top: 68%;
+  right: -46%;
+  text-align: center;
+}
+.chooseTxt {
+  position: absolute;
+  max-width: 300px;
+}
+.chooseBox {
+  margin: 150px -20px 0px 0px;
+  position: relative;
+}
+.choose p {
+  margin-top: 2px;
+  margin-bottom: -7rem;
+}
+@media (max-width: 1024px){
+  h3, .h3 {
+  font-size: calc(1.3rem + -0.4vw) !important;
+}
+.chooseTxt.at1 {
+  background-image: url('./assets/images/trainC.png')
+}
+.chooseTxt.at2 {
+ background-image: url("./assets/images/locaC.png");
+}
+.chooseTxt.at3 {
+background-image: url("./assets/images/seatC.png");
+}
+.chooseTxt.at4 {
+background-image: url("./assets/images/pnrC.png");
+}
+.chooseTxt.at5 {
+background-image: url("./assets/images/rupeeC.png");
+}
+.chooseTxt.at6 {
+background-image: url("./assets/images/notifC.png");
+}
+}
+  @media (max-width: 1024px){
+    .chooseTxt {
+        background-position: left center;
+        background-repeat: no-repeat;
+        background-size: 110px;
+        padding-left: 120px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+    }
+    @media (max-width: 1024px){
+      .chooseTxt {
+          position: relative;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          text-align: left !important;
+          max-width: 100%;
+      }}
