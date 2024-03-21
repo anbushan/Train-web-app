@@ -3,7 +3,9 @@ import { Col, Container, Row } from "react-bootstrap";
 import HeaderImage from "../../assets/images/bg3.png"; 
 import MobileImage from "../../assets/images/Mobile.png";
 import logo from "../../assets/images/logo5.png";
-import playstore from "../../assets/images/pngplaystore-removebg-preview.png";
+import playstore from "../../assets/images/play-store-badge-en.png";
+import appstore from "../../assets/images/app-store-badge-en.png";
+
 import mixpanel from 'mixpanel-browser';
 
 const WebsiteHeader = () => {
@@ -61,23 +63,34 @@ const WebsiteHeader = () => {
                 your travel.
               </p>
               <p
-                className="my-2 mx-5"
-                style={{
-                  fontSize: "20px",
-                  fontFamily: "Poppins, sans-serif",
-                  color: "white",
-                  fontWeight:"bold",
-                }}
-              >
-                "Happy Journey"
-                <img
-                 onClick={handleClick}
-                  src={playstore}
-                  alt="TrainsOnWheel playstore"
-                  srcSet=""
-                  style={{ width: "40%", height: "auto" }}
-                />
-              </p>
+  className="my-2 mx-5"
+  style={{
+    fontSize: "20px",
+    fontFamily: "Poppins, sans-serif",
+    color: "white",
+    fontWeight: "bold",
+  }}
+>
+  "Happy Journey"
+  <Row className="justify-content-center align-items-center mt-3">
+
+  <img
+    onClick={handleClick}
+    src={playstore}
+    alt="TrainsOnWheel playstore"
+    srcSet=""
+    style={{ maxWidth: "30%", height: "auto" }}
+  />
+  <img
+    onClick={handleClick}
+    src={appstore}
+    alt="TrainsOnWheel appstore"
+    srcSet=""
+    style={{ maxWidth: "30%", height: "auto" }}
+  />
+  </Row>
+</p>
+
             </Col>
             <Col
               lg={6}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import download from '../../assets/images/carC.png'
-import map from '../../assets/images/maps.png'
+import map from '../../assets/images/appwork.png'
 import service from '../../assets/images/service.png'
 
 
