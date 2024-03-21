@@ -37,7 +37,7 @@ const PopularRoutes = () => {
             <Carousel.Item>
               <Row className="justify-content-center py-3 text-center">
               <Col xs={6} sm={4} md={2} className="mt-3">
-                  <Card className="border-0">
+                  <Card className="border-0" style={{backgroundColor:"whitesmoke"}}>
                     <Card.Img src={bangalore} alt="TrainsOnWheel Bangalore" style={{ maxWidth: '100%', height: 'auto' }} />
                     <Card.Body>
                       <Card.Title  style={{ fontSize: "clamp(14px, 2vw, 20px)", fontFamily: "Poppins, sans-serif", color: "black" }} className="text-center text-nowrap ">BANGALORE</Card.Title>
@@ -45,7 +45,7 @@ const PopularRoutes = () => {
                   </Card>
                 </Col>
                 <Col xs={6} sm={4} md={2} className="mt-3">
-                  <Card className="border-0">
+                  <Card className="border-0" style={{backgroundColor:"whitesmoke"}}>
                     <Card.Img src={kolkata} alt="TrainsOnWheel kolkata" style={{ maxWidth: '100%', height: 'auto' }} />
                     <Card.Body>
                       <Card.Title  style={{ fontSize: "clamp(14px, 2vw, 20px)", fontFamily: "Poppins, sans-serif", color: "black" }} className="text-center text-nowrap">KOLKATA</Card.Title>
@@ -53,7 +53,7 @@ const PopularRoutes = () => {
                   </Card>
                 </Col>
                 <Col xs={6} sm={4} md={2} className="mt-3">
-                  <Card className="border-0">
+                  <Card className="border-0" style={{backgroundColor:"whitesmoke"}}>
                     <Card.Img src={chennai} alt="TrainsOnWheel chennai" style={{ maxWidth: '100%', height: 'auto' }} />
                     <Card.Body>
                       <Card.Title  style={{ fontSize: "clamp(14px, 2vw, 20px)", fontFamily: "Poppins, sans-serif", color: "black" }} className="text-center text-nowrap">CHENNAI</Card.Title>
@@ -61,7 +61,7 @@ const PopularRoutes = () => {
                   </Card>
                 </Col>
                 <Col xs={6} sm={4} md={2} className="mt-3">
-                  <Card className="border-0">
+                  <Card className="border-0" style={{backgroundColor:"whitesmoke"}}>
                     <Card.Img src={hyderabad} alt="TrainsOnWheel hyderabad" style={{ maxWidth: '100%', height: 'auto' }} />
                     <Card.Body>
                       <Card.Title  style={{ fontSize: "clamp(14px, 2vw, 20px)", fontFamily: "Poppins, sans-serif", color: "black" }} className="text-center text-nowrap">HYDERABAD</Card.Title>
@@ -69,7 +69,7 @@ const PopularRoutes = () => {
                   </Card>
                 </Col>
                 <Col xs={6} sm={4} md={2} className="mt-3">
-                  <Card className="border-0">
+                  <Card className="border-0" style={{backgroundColor:"whitesmoke"}}>
                     <Card.Img src={ahmedabad} alt="TrainsOnWheel ahmedabad" style={{ maxWidth: '100%', height: 'auto' }} />
                     <Card.Body>
                       <Card.Title style={{ fontSize: "clamp(14px, 2vw, 20px)", fontFamily: "Poppins, sans-serif", color: "black" }} className="text-center text-nowrap">AHMEDABAD</Card.Title>
@@ -82,7 +82,7 @@ const PopularRoutes = () => {
             <Carousel.Item>
               <Row className="justify-content-center py-3">
               <Col xs={6} sm={4} md={2} className="mt-3">
-                  <Card className="border-0">
+                  <Card className="border-0"style={{backgroundColor:"whitesmoke"}}>
                     <Card.Img src={delhi} alt="TrainsOnWheel delhi" style={{ maxWidth: '100%', height: 'auto' }} />
                     <Card.Body>
                       <Card.Title  style={{ fontSize: "clamp(14px, 2vw, 20px)", fontFamily: "Poppins, sans-serif", color: "black" }} className="text-center text-nowrap">DELHI</Card.Title>
@@ -90,7 +90,7 @@ const PopularRoutes = () => {
                   </Card>
                 </Col>
                 <Col xs={6} sm={4} md={2} className="mt-3">
-                  <Card className="border-0">
+                  <Card className="border-0"style={{backgroundColor:"whitesmoke"}}>
                     <Card.Img src={mumbai} alt="TrainsOnWheel mumbai" style={{ maxWidth: '100%', height: 'auto' }} />
                     <Card.Body>
                       <Card.Title  style={{ fontSize: "clamp(14px, 2vw, 20px)", fontFamily: "Poppins, sans-serif", color: "black" }} className="text-center text-nowrap">MUMBAI</Card.Title>
@@ -98,7 +98,7 @@ const PopularRoutes = () => {
                   </Card>
                 </Col>
                 <Col xs={6} sm={4} md={2} className="mt-3">
-                  <Card className="border-0">
+                  <Card className="border-0"style={{backgroundColor:"whitesmoke"}}>
                     <Card.Img src={pune} alt="TrainsOnWheel pune" style={{ maxWidth: '100%', height: 'auto' }} />
                     <Card.Body>
                       <Card.Title  style={{ fontSize: "clamp(14px, 2vw, 20px)", fontFamily: "Poppins, sans-serif", color: "black" }} className="text-center text-nowrap">PUNE</Card.Title>
@@ -106,7 +106,7 @@ const PopularRoutes = () => {
                   </Card>
                 </Col>
                 <Col xs={6} sm={4} md={2} className="mt-3">
-                  <Card className="border-0">
+                  <Card className="border-0"style={{backgroundColor:"whitesmoke"}}>
                     <Card.Img src={nagpur} alt="TrainsOnWheel nagpur" style={{ maxWidth: '100%', height: 'auto' }} />
                     <Card.Body>
                       <Card.Title  style={{ fontSize: "clamp(14px, 2vw, 20px)", fontFamily: "Poppins, sans-serif", color: "black" }} className="text-center text-nowrap">NAGPUR</Card.Title>
@@ -114,7 +114,7 @@ const PopularRoutes = () => {
                   </Card>
                 </Col>
                 <Col xs={6} sm={4} md={2} className="mt-3">
-                  <Card className="border-0">
+                  <Card className="border-0"style={{backgroundColor:"whitesmoke"}}>
                     <Card.Img src={noida} alt="TrainsOnWheel noida" style={{ maxWidth: '100%', height: 'auto' }} />
                     <Card.Body>
                       <Card.Title  style={{ fontSize: "clamp(14px, 2vw, 20px)", fontFamily: "Poppins, sans-serif", color: "black" }} className="text-center text-nowrap">NOIDA</Card.Title>

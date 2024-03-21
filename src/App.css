@@ -279,3 +279,7 @@ background-image: url("./assets/images/notifC.png");
           text-align: left !important;
           max-width: 100%;
       }}
+
+      .color{
+        background-color: whitesmoke;
+      }

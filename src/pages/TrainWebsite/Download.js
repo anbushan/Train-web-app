@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import train from "../../assets/images/train image.png"
+import train from "../../assets/images/train download.png"
 import playstore from "../../assets/images/play-store-badge-en.png"
 import appstore from "../../assets/images/app-store-badge-en.png"
 
