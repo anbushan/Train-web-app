@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col} from 'react-bootstrap';
-import train from "../../assets/images/metroo.png"
+import train from "../../assets/images/rail.png"
 const Features = () => {
     // const buttonStyle = {
     //     boxShadow: '0 6px 10px 0 rgba(0,0,0,0.1)',
