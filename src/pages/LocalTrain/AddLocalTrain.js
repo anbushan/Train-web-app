@@ -399,7 +399,7 @@ const AddLocalTrain = () => {
                     >
                       <TextInput
                         label="Departure "
-                        type=""
+                        type="time"
                         name="departure"
                         className={`form-control ${
                           touched.departure && errors.departure
@@ -462,7 +462,7 @@ const AddLocalTrain = () => {
                     >
                       <TextInput
                         label="Arrival"
-                        type=""
+                        type="time"
                         name="arrival"
                         className={`form-control ${
                           touched.arrival && errors.arrival ? "is-invalid" : ""
